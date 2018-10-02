@@ -13,7 +13,6 @@ plotly
 '''
 
 import requests
-from subprocess import call
 import sys
 import os
 from io import BytesIO
@@ -22,6 +21,7 @@ import networkx as nx
 from gensim.models import Word2Vec
 import numpy as np
 from pathway_reader import kgml_converter
+from structural_processor import node2vec_processor
 import config
 import argparse
 
@@ -46,31 +46,7 @@ OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-
 
 nx_G = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
 
-# load node2vec as python 3 module
-NODE2VEC_PATH = 'node2vec.py'
-if not os.path.exists(NODE2VEC_PATH):
-    call(['git', 'clone', 'https://github.com/aditya-grover/node2vec'])
-    try:
-        with open('node2vec/src/' + NODE2VEC_PATH) as f, open(NODE2VEC_PATH, 'w') as q:
-            for line in f.readlines():
-                if 'print' in line:
-                    line = line.replace('print', 'print(')[:-1] + ')\n'
-                q.write(line)
-    except Exception as e:
-        os.remove(NODE2VEC_PATH)
-        raise e
-
-import node2vec
-
-# generate model
-G = node2vec.Graph(nx_G, is_directed=args.is_directed, p=args.p, q=args.q)
-G.preprocess_transition_probs()
-walks_sim = G.simulate_walks(num_walks=10, walk_length=80)
-walks = [list(map(str, walk)) for walk in walks_sim]
-# size=dimension, window=context_size, workers=num_of_parallel_workers, iter=num_epochs_in_sgd
-model = Word2Vec(walks, size=128, window=10, min_count=0, sg=1, workers=4, iter=1)
-WORD2VEC_PATH = OUT_FILENAME + '-word2vec.csv'
-model.wv.save_word2vec_format(WORD2VEC_PATH)
+node2vec_features = node2vec_processor.process(nx_G)
 
 # load tsne
 TSNE_PATH = 'tsne.py'
