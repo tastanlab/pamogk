@@ -15,15 +15,15 @@ plotly
 import requests
 import sys
 import os
-from io import BytesIO
-from zipfile import ZipFile
 import networkx as nx
-from gensim.models import Word2Vec
 import numpy as np
 from pathway_reader import kgml_converter
 from structural_processor import node2vec_processor
 import config
 import argparse
+from lib import tsne
+
+sys.path.append(config.root_dir)
 
 # import plotly.offline as py
 import plotly.plotly as py
@@ -46,29 +46,7 @@ OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-
 
 nx_G = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
 
-node2vec_features = node2vec_processor.process(nx_G)
-
-# load tsne
-TSNE_PATH = 'tsne.py'
-if not os.path.exists(TSNE_PATH):
-    r = requests.get('https://lvdmaaten.github.io/tsne/code/tsne_python.zip')
-    if r.status_code == 200:
-        zipfile = ZipFile(BytesIO(r.content))
-        print('Files in zip:\n\t', '\n\t'.join([fn for fn in zipfile.namelist() if fn[:8] != '__MACOSX']), sep='')
-        try:
-            with open(TSNE_PATH, 'w') as f:
-                for line in zipfile.open('tsne_python/' + TSNE_PATH).readlines():
-                    lstr = line.decode('utf-8')
-                    # remove demo parts
-                    if '__main__' in lstr:
-                        break
-                    if 'pylab' not in lstr:
-                        f.write(lstr)
-        except Exception as e:
-            os.remove(TSNE_PATH)
-            raise e
-
-import tsne
+node2vec_features = node2vec_processor.process(pathway_id, nx_G, args)
 
 # visualize node2vec nodes
 X = [list(map(float, line.strip().split(' '))) for line in open(WORD2VEC_PATH).readlines()[1:]]
