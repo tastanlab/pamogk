@@ -67,19 +67,26 @@ def prune_KGML(pathway, remove_compounds=True):
           new_relations: new relations added in place of removed compounds
     '''
 
-    #% remove empty entries and corresponding relations and pathways and
-    # remove empty relations and corresponding entries and pathways
-    relations = [r for r in pathway.relations]
+    # copy relations as list and entries as dict
     entries = dict([(e.id, e) for e in pathway.entries.values()])
+    relations = [r for r in pathway.relations]
     new_relations = []
 
-    #% prune orthologs, groups, other, map in entries
+    # replace groups with their components and relations between components
+    for e in [e for e in entries.values() if e.type == 'group']:
+        comp_eids = [comp.id for comp in list(e.components)]
+        for e1_id in comp_eids:
+            for e2_id in comp_eids:
+                if can_add_relation(e1_id, e2_id, relations, new_relations):
+                    new_relations.append((e1_id, e2_id))
+
+    # prune orthologs, groups, other, map in entries
     # if any "other" type of entry is included, relations that has
     # these entries are removed from the relations
-    group_filter = ['ortholog', 'group', 'other', 'map']
-    relations = [r for r in relations if r.entry1.type not in group_filter and r.entry2.type not in group_filter]
+    type_filter = ['ortholog', 'group', 'other', 'map']
+    relations = [r for r in relations if r.entry1.type not in type_filter and r.entry2.type not in type_filter]
     # remove orthologs, groups, and others from entries
-    for e in [e for e in entries.values() if e.type in group_filter]:
+    for e in [e for e in entries.values() if e.type in type_filter]:
         del entries[e.id]
 
     #% prune compounds in entries
@@ -88,18 +95,17 @@ def prune_KGML(pathway, remove_compounds=True):
 
     # for every compound
     for cid in [e.id for e in entries.values() if e.type == 'compound']:
-        # step 2: find indexes of compounds in relations as source and
+        # find indexes of compounds in relations as source and
         # derive the related ids from it
-        # print(i)
         source_ids = set([r.entry1.id for r in relations if r.entry2.id == cid])
         source_set = source_ids & gene_ids; #take just genes, ignore others
 
-        # step 3: find indexes of compounds in relations as destination
+        # find indexes of compounds in relations as destination
         # and derive the related ids from it
         dest_ids = set([r.entry2.id for r in relations if r.entry1.id == cid])
         dest_set = dest_ids & gene_ids; #take just genes, ignore others
 
-        # step 4: create the relation among source and destination if
+        # create the relation among source and destination if
         # it is not self-relation and if the relation does not already
         # exist in the relations
         tmp_new_relations = []

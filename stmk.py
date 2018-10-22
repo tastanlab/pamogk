@@ -17,10 +17,11 @@ import sys
 import os
 import networkx as nx
 import numpy as np
-from pathway_reader import kgml_converter
-from structural_processor import node2vec_processor
 import config
 import argparse
+from pathway_reader import kgml_converter
+from structural_processor import node2vec_processor
+from synthetic_experiments import cell_survival_group
 from lib import tsne
 
 sys.path.append(config.root_dir)
@@ -29,29 +30,69 @@ sys.path.append(config.root_dir)
 import plotly.plotly as py
 import plotly.graph_objs as go
 
-parser = argparse.ArgumentParser(description='Insert keywords from csv to account')
+parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('pathways', metavar='pathway-id', type=str, nargs='+', help='pathway ID list', default=['hsa04151'])
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
 parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
+parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float, help='Node2Vec feature space size', default=128)
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed', default=False)
 
 args = parser.parse_args()
-print(args)
+print('Running args:', args)
+
+# To fallback to python debug console
+# import pdb; pdb.set_trace()
 
 # get pathway id from arguments if given
 pathway_id = args.pathways[0]
 
 OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-run={}'.format(pathway_id, args.p, args.q, args.rid))
 
-nx_G = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
+# read kgml in format of network
+num_pat = 1000
+nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
+patients = cell_survival_group.generate_patients(G=nx_G, num_pat=num_pat, surv_dist=0.5, mut_dist=0.1)
 
-node2vec_features = node2vec_processor.process(pathway_id, nx_G, args)
+# run node2vec to get feature representations
+entity_ids, X = node2vec_processor.process(pathway_id, nx_G, args)
+hnames = np.array([nx_G.node[int(eid)]['hname'] for eid in entity_ids])
+
+gene_vectors = {}
+for (eid, gene_vec) in zip(entity_ids, X):
+    gene_vectors[eid] = gene_vec
+
+# calculate P (average mutataion point) vector
+for p in patients:
+    genes = np.array([gene_vectors[str(n)] for n in p['mutated_nodes']])
+    p['P'] = np.average(genes, axis=0)
+
+from sklearn.cluster import k_means_
+from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
+from sklearn.preprocessing import StandardScaler
+
+# Manually override euclidean
+def euc_dist(X, Y = None, *args, **kwargs):
+    return pairwise_distances(X, Y, metric = 'linear', n_jobs = 10)
+k_means_.euclidean_distances = euc_dist
+from sklearn.svm import SVC
+
+hit = 0
+pids = [p['pid'] for p in patients]
+for pid in pids:
+    test_p = [p for p in patients if p['pid'] == pid][0]
+    train_p = [p for p in patients if p['pid'] != pid]
+
+    linear_svc = SVC(kernel='linear')
+    linear_svc.fit([p['P'] for p in train_p], [p['sick'] for p in train_p])
+    is_hit = linear_svc.predict([test_p['P']]) == [test_p['sick']]
+    print('%3d: %s' % (pid, is_hit), linear_svc.predict([test_p['P']]), test_p['pid'], test_p['sick'])
+    hit += is_hit
+print('Accuracy:', hit/len(pids))
+
+sys.exit(0)
 
 # visualize node2vec nodes
-X = [list(map(float, line.strip().split(' '))) for line in open(WORD2VEC_PATH).readlines()[1:]]
-hnames = np.array([nx_G.node[r[0]]['hname'] for r in X])
-X = np.array([r[1:] for r in X])
 # run tsne
 Y = tsne.tsne(X=X, no_dims=2, initial_dims=50, perplexity=30.0)
 # np.savetxt(pathway_id + '-tsne-hnames.csv', hnames)

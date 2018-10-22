@@ -30,7 +30,7 @@ def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None
     # validate data dir
     if not os.path.exists(config.data_dir): os.makedirs(config.data_dir)
     # convert kgml data to networkx graph
-    nodes = [(eid, {'name': entries[eid].name, 'hname': entries[eid].graphics[0].name}) for eid in entries]
+    nodes = [(eid, {'name': entries[eid].name, 'hname': entries[eid].graphics[0].name, 'eid': eid }) for eid in entries]
     edges = [(r.entry1.id, r.entry2.id, {'weight': 1}) for r in relations]
     nx_G = nx.Graph()
     nx_G.add_nodes_from(nodes)
@@ -44,6 +44,6 @@ def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None
 
     print('Finished conversion to networkx graph pathway:', pathway_id)
     if is_directed:
-        return nx_G
+        return nx_G, entries, relations
     else:
-        return nx_G.to_undirected()
+        return nx_G.to_undirected(), entries, relations
