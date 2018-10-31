@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-Usage: python3 read-kgml.py hsa04151
+Usage: python3 stmk.py hsa04151
 
 Packages required:
 requests
@@ -15,14 +15,18 @@ plotly
 import requests
 import sys
 import os
+import math
 import networkx as nx
 import numpy as np
 import config
 import argparse
-from pathway_reader import kgml_converter
+# from pathway_reader import kgml_converter
+from pathway_reader import cx_pathway_reader
+from pathway_reader import network_plotter
 from structural_processor import node2vec_processor
 from synthetic_experiments import cell_survival_group
 from lib import tsne
+from sklearn.svm import SVC
 
 sys.path.append(config.root_dir)
 
@@ -37,6 +41,9 @@ parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, hel
 parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float, help='Node2Vec feature space size', default=128)
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed', default=False)
+parser.add_argument('--num-pat', dest='num_pat', type=int, help='Number of Patients for Synthetic Experiments', default=1000)
+parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Surviving patient percentage in range [0, 1]', default=0.9)
+parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
 
 args = parser.parse_args()
 print('Running args:', args)
@@ -50,9 +57,13 @@ pathway_id = args.pathways[0]
 OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-run={}'.format(pathway_id, args.p, args.q, args.rid))
 
 # read kgml in format of network
-num_pat = 1000
-nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
-patients = cell_survival_group.generate_patients(G=nx_G, num_pat=num_pat, surv_dist=0.5, mut_dist=0.1)
+# nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
+nx_G = cx_pathway_reader.read_pathways('8bbf39aa-6193-11e5-8ac5-06603eb7f303')
+# import pdb; pdb.set_trace()
+network_plotter.plot(nx_G)
+
+sys.exit(0)
+patients = cell_survival_group.generate_patients(G=nx_G, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
 
 # run node2vec to get feature representations
 entity_ids, X = node2vec_processor.process(pathway_id, nx_G, args)
@@ -67,16 +78,6 @@ for p in patients:
     genes = np.array([gene_vectors[str(n)] for n in p['mutated_nodes']])
     p['P'] = np.average(genes, axis=0)
 
-from sklearn.cluster import k_means_
-from sklearn.metrics.pairwise import cosine_similarity, pairwise_distances
-from sklearn.preprocessing import StandardScaler
-
-# Manually override euclidean
-def euc_dist(X, Y = None, *args, **kwargs):
-    return pairwise_distances(X, Y, metric = 'linear', n_jobs = 10)
-k_means_.euclidean_distances = euc_dist
-from sklearn.svm import SVC
-
 hit = 0
 pids = [p['pid'] for p in patients]
 for pid in pids:
@@ -86,9 +87,25 @@ for pid in pids:
     linear_svc = SVC(kernel='linear')
     linear_svc.fit([p['P'] for p in train_p], [p['sick'] for p in train_p])
     is_hit = linear_svc.predict([test_p['P']]) == [test_p['sick']]
-    print('%3d: %s' % (pid, is_hit), linear_svc.predict([test_p['P']]), test_p['pid'], test_p['sick'])
-    hit += is_hit
-print('Accuracy:', hit/len(pids))
+    # print('%3d: %s' % (pid, is_hit), linear_svc.predict([test_p['P']]), test_p['pid'], test_p['sick'])
+    hit += is_hit[0]
+print('Accuracy Leave-One-Out accuracy=%.2lf' % (hit/len(pids)))
+
+hit = 0
+pids = [p['pid'] for p in patients]
+lpid = len(pids)
+K = 10
+S = math.ceil(lpid/K)
+for i in range(0, lpid, S):
+    test_p = patients[i:i+S]
+    train_p = patients[:i] + patients[i+S:]
+
+    linear_svc = SVC(kernel='linear')
+    linear_svc.fit([p['P'] for p in train_p], [p['sick'] for p in train_p])
+    is_hit = linear_svc.predict([p['P'] for p in test_p]) == [p['sick'] for p in test_p]
+    # print('%3d: %s' % (i, is_hit))
+    hit += np.sum(is_hit)
+print('Accuracy K-fold with K=%d accuracy=%.2lf' % (K, hit/len(pids)))
 
 sys.exit(0)
 

@@ -18,11 +18,13 @@ def generate_patients(G, num_pat, surv_dist, mut_dist=0.2, psm=0.9, has_cycle=Fa
     for i in range(num_pat):
         sick = i >= num_surv
         patient = { 'pid': i, 'mutated_nodes': [] }
-        patient['pid'] = i
         patient['sick'] = sick
         _psm = psm if sick else 1 - psm
         patient['mutated_nodes'] = calc_mutated_nodes(G, mut_dist, _psm, has_cycle, has_survival)
         patients.append(patient)
+    random.shuffle(patients)
+    for i in range(num_pat):
+        patients[i]['pid'] = i
     return patients
 '''
 This is for hsa04151, for others we don't have same structure
