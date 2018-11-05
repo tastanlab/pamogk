@@ -10,6 +10,9 @@ hsa_04151 = {
     'start_nodes': [43, 86, 78, 91, 104, 84],
 }
 
+'''
+NOTE: THIS SHOULD BE USED WITH KEGG PATHWAYS
+'''
 
 def generate_patients(G, num_pat, surv_dist, mut_dist=0.2, psm=0.9, has_cycle=False, has_survival=True):
     print('Generating %d patients with %2d%% survival rate:' % (num_pat, surv_dist * 100))

@@ -13,9 +13,15 @@ def get_pathway_map():
     PATHWAY_LIST_PATH = os.path.join(config.data_dir, 'nci_pathway_list.json')
 
     if not os.path.exists(PATHWAY_LIST_PATH):
-        r = requests.get('{}/user/{}/showcase'.format(HOST, NCI_USER_ID))
-        if r.status_code != 200:
-            raise Exception('Failed to get pathway list:', r.reason)
+        try:
+            url = '{}/user/{}/showcase'.format(HOST, NCI_USER_ID)
+            print('Pathway map not found fetching from', url)
+            r = requests.get(url)
+            if r.status_code != 200:
+                raise Exception('Failed to get pathway list:', r.reason)
+        except requests.exceptions.ConnectionError as e:
+            print('Could not connect to {} server. Please make sure you are connected to a network authorized to access {}'.format(HOST, HOST))
+            raise Exception('Failed to connect to host={}'.format(HOST))
 
         with open(PATHWAY_LIST_PATH, 'w') as f:
             f.write(r.text)
@@ -33,7 +39,19 @@ def _get_pathway_child(pathway_data, key):
             return d[key]
     return None
 
-def read_pathways(pathway_id):
+def read_pathways():
+    pathway_map = get_pathway_map()
+    pw_map = {}
+    pw_ids = pathway_map.keys()
+    for (ind, pw_id) in enumerate(pw_ids):
+        print('Processing pathway %3d/%d' % (ind, len(pw_ids)), end='\t')
+        pw_data = read_single_pathway(pw_id, reading_all=True)
+        pw_map[pw_id] = pw_data
+    print()
+    return pw_map
+
+def read_single_pathway(pathway_id, reading_all=False):
+    pend = '\r' if reading_all else '\n'
     pathway_map = get_pathway_map()
     if pathway_id not in pathway_map:
         raise Exception('Pathway not found in pathway list')
@@ -41,16 +59,21 @@ def read_pathways(pathway_id):
     PATHWAY_PATH = os.path.join(config.data_dir, pathway_id + '.cx')
 
     if not os.path.exists(PATHWAY_PATH):
-        r = requests.get('{}/network/{}'.format(HOST, pathway_id))
+        url = '{}/network/{}'.format(HOST, pathway_id)
+        print('Pathway with pathway_id={} not found fetching from {}'.format(pathway_id, url), end=pend)
+        r = requests.get(url)
         if r.status_code != 200:
             raise Exception('Failed to get pathway: {}-{}'.format(r.status_code, r.reason))
 
         with open(PATHWAY_PATH, 'w') as f:
             f.write(r.text)
+    else:
+        print('Pathway with pathway_id={} retrieved from local path={}'.format(pathway_id, PATHWAY_PATH), end=pend)
 
     pathway_data = json.load(open(PATHWAY_PATH))
 
-    G = nx.Graph()
+    G = nx.Graph() # initialize empty graph
+
     # get node map
     node_list = _get_pathway_child(pathway_data, 'nodes')
     nodes = {}
@@ -71,13 +94,15 @@ def read_pathways(pathway_id):
         nid = coord['node']
         if nid not in attr_dict:
             attr_dict[nid] = {}
-        nodes[nid]['x'] = coord['x']
-        nodes[nid]['y'] = coord['y']
+        attr_dict[nid]['x'] = coord['x']
+        attr_dict[nid]['y'] = coord['y']
 
     # add nodes to graph
     for nid in nodes:
         n = nodes[nid]
-        G.add_node(nid, attr_dict=attr_dict[nid])
+        attrs = attr_dict[nid]
+        attrs['n'] = n['n']
+        G.add_node(nid, **attrs)
 
     # get edge map
     edge_list = _get_pathway_child(pathway_data, 'edges')
@@ -100,5 +125,4 @@ def read_pathways(pathway_id):
         attrs['i'] = e['i']
         G.add_edge(e['s'], e['t'], **attrs)
 
-    import pdb; pdb.set_trace()
     return G

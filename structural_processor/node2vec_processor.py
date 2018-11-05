@@ -21,6 +21,11 @@ def process(pathway_id, nx_G, args):
     FPATH = os.path.join(config.data_dir, FNAME)
     model.wv.save_word2vec_format(FPATH)
     # wv has:
-    #   * index2entity: array of result index to node id map
-    #   * vectors: array of result vectors
-    return model.wv.index2entity, model.wv.vectors
+    #   * index2entity: array of result index to node id map size N
+    #   * vectors: array of result vectors size N x v2v_size
+    # so convert them to map G (gene vector map)
+    gene_vectors = {}
+    for (eid, gene_vec) in zip(model.wv.index2entity, model.wv.vectors):
+        gene_vectors[int(eid)] = gene_vec
+
+    return gene_vectors

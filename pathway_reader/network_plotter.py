@@ -1,21 +1,34 @@
 import plotly.offline as pyoff
 import plotly.plotly as py
 import plotly.graph_objs as go
+import os
+import config
 
-def plot(nx_G):
-    colors = list(set(nx_G[n]['type'] for n in nx_G.nodes()))
+def plot(nx_G, title, auto_open=False):
+    # import pdb; pdb.set_trace()
+    nodes = [nx_G.nodes[n] for n in nx_G.nodes()]
+    marker = None
+    types = [n['type'] for n in nodes if 'type' in n]
+    # if all nodes have type show color depending on type
+    if len(types) == len(nodes):
+        types = list(set(types))
+        print('Type set for plot:', types)
+        marker = go.scatter.Marker(
+            color=[types.index(n['type']) for n in nodes],
+            colorscale='Viridis',
+            showscale=True)
     fig = go.Figure(
         data = [
             go.Scatter(
-            x=[nx_G[n]['x'] for n in nx_G.nodes()],
-            y=[nx_G[n]['y'] for n in nx_G.nodes()],
+            x=[n['x'] for n in nodes],
+            y=[n['y'] for n in nodes],
             mode='markers+text',
-            text=[nx_G[n]['n'] for n in nx_G.values()],
+            text=[n['n'] + '-' + n['type'] for n in nodes],
             textposition='bottom center',
-            marker=go.scatter.Marker(color=[colors.index(n['type']) for n in nx_G.nodes()], colorscale='Viridis', showscale=True))
+            marker=marker)
         ],
         layout = go.Layout(
-            title= 'TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid),
+            title=title,
             hovermode= 'closest',
             xaxis= dict(
                 ticklen= 5,
@@ -30,4 +43,6 @@ def plot(nx_G):
             width=1200,
             height=900,
         ))
-    pyoff.plot(fig)
+    pyoff.plot(fig,
+        filename=os.path.join(config.data_dir, title + '.html'),
+         auto_open=auto_open)

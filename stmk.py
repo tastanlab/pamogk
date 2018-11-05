@@ -24,7 +24,7 @@ import argparse
 from pathway_reader import cx_pathway_reader
 from pathway_reader import network_plotter
 from structural_processor import node2vec_processor
-from synthetic_experiments import cell_survival_group
+from synthetic_experiments import cell_survival_group_kegg
 from lib import tsne
 from sklearn.svm import SVC
 
@@ -53,65 +53,36 @@ print('Running args:', args)
 
 # get pathway id from arguments if given
 pathway_id = args.pathways[0]
+pathway_id = '8bbf39aa-6193-11e5-8ac5-06603eb7f303'
 
 OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-run={}'.format(pathway_id, args.p, args.q, args.rid))
 
 # read kgml in format of network
 # nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
-nx_G = cx_pathway_reader.read_pathways('8bbf39aa-6193-11e5-8ac5-06603eb7f303')
-# import pdb; pdb.set_trace()
-network_plotter.plot(nx_G)
+all_pws = cx_pathway_reader.read_pathways()
+import pdb; pdb.set_trace()
 
 sys.exit(0)
-patients = cell_survival_group.generate_patients(G=nx_G, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
+nx_G = cx_pathway_reader.read_single_pathway(pathway_id)
+network_plotter.plot(nx_G, title='Pathway Graph for {}'.format(pathway_id))
+# network_plotter.plot(nx_G, title='TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid))
 
 # run node2vec to get feature representations
-entity_ids, X = node2vec_processor.process(pathway_id, nx_G, args)
-hnames = np.array([nx_G.node[int(eid)]['hname'] for eid in entity_ids])
+gene_vectors = node2vec_processor.process(pathway_id, nx_G, args)
+hnames = np.array([nx_G.node[int(eid)]['hname'] for eid in gene_vectors])
 
-gene_vectors = {}
-for (eid, gene_vec) in zip(entity_ids, X):
-    gene_vectors[eid] = gene_vec
+'''
+patients = cell_survival_group_kegg.generate_patients(G=nx_G, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
 
-# calculate P (average mutataion point) vector
-for p in patients:
-    genes = np.array([gene_vectors[str(n)] for n in p['mutated_nodes']])
-    p['P'] = np.average(genes, axis=0)
-
-hit = 0
-pids = [p['pid'] for p in patients]
-for pid in pids:
-    test_p = [p for p in patients if p['pid'] == pid][0]
-    train_p = [p for p in patients if p['pid'] != pid]
-
-    linear_svc = SVC(kernel='linear')
-    linear_svc.fit([p['P'] for p in train_p], [p['sick'] for p in train_p])
-    is_hit = linear_svc.predict([test_p['P']]) == [test_p['sick']]
-    # print('%3d: %s' % (pid, is_hit), linear_svc.predict([test_p['P']]), test_p['pid'], test_p['sick'])
-    hit += is_hit[0]
-print('Accuracy Leave-One-Out accuracy=%.2lf' % (hit/len(pids)))
-
-hit = 0
-pids = [p['pid'] for p in patients]
-lpid = len(pids)
-K = 10
-S = math.ceil(lpid/K)
-for i in range(0, lpid, S):
-    test_p = patients[i:i+S]
-    train_p = patients[:i] + patients[i+S:]
-
-    linear_svc = SVC(kernel='linear')
-    linear_svc.fit([p['P'] for p in train_p], [p['sick'] for p in train_p])
-    is_hit = linear_svc.predict([p['P'] for p in test_p]) == [p['sick'] for p in test_p]
-    # print('%3d: %s' % (i, is_hit))
-    hit += np.sum(is_hit)
-print('Accuracy K-fold with K=%d accuracy=%.2lf' % (K, hit/len(pids)))
+center_product_kernel.calculate_S_and_P(patients, gene_vectors)
+center_product_kernel.test_accr(patients)
 
 sys.exit(0)
+'''
 
 # visualize node2vec nodes
 # run tsne
-Y = tsne.tsne(X=X, no_dims=2, initial_dims=50, perplexity=30.0)
+Y = tsne.tsne(X=gene_vectors.values(), no_dims=2, initial_dims=50, perplexity=30.0)
 # np.savetxt(pathway_id + '-tsne-hnames.csv', hnames)
 TSNE_OUT_PATH = OUT_FILENAME + '-tsne.csv'
 np.savetxt(TSNE_OUT_PATH, X)
