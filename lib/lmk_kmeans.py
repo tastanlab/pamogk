@@ -141,8 +141,7 @@ if __name__ == '__main__':
 
             # Output a solution
             xx = [0.] * numvar
-            task.getxx(mosek.soltype.itr,
-                       xx)
+            task.getxx(mosek.soltype.itr, xx)
 
             if solsta == mosek.solsta.optimal or solsta == mosek.solsta.near_optimal:
                 print("Optimal solution: %s" % xx)
