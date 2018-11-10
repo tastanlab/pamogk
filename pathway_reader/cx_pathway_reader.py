@@ -44,7 +44,7 @@ def read_pathways():
     pw_map = {}
     pw_ids = pathway_map.keys()
     for (ind, pw_id) in enumerate(pw_ids):
-        print('Processing pathway %3d/%d' % (ind, len(pw_ids)), end='\t')
+        print('Processing pathway %3d/%d' % (ind + 1, len(pw_ids)), end='\t')
         pw_data = read_single_pathway(pw_id, reading_all=True)
         pw_map[pw_id] = pw_data
     print()

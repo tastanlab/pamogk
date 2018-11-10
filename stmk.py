@@ -27,6 +27,7 @@ from structural_processor import node2vec_processor
 from synthetic_experiments import cell_survival_group_kegg
 from lib import tsne
 from sklearn.svm import SVC
+from gene_mapper import uniprot_mapper
 
 sys.path.append(config.root_dir)
 
@@ -59,8 +60,9 @@ OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-
 
 # read kgml in format of network
 # nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
-all_pws = cx_pathway_reader.read_pathways()
-import pdb; pdb.set_trace()
+# all_pws = cx_pathway_reader.read_pathways()
+uniprot_mapper.get_uniprot_to_entrez_map()
+# import pdb; pdb.set_trace()
 
 sys.exit(0)
 nx_G = cx_pathway_reader.read_single_pathway(pathway_id)
