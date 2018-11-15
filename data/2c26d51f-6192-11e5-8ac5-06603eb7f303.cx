@@ -1,0 +1,866 @@
+[{"numberVerification":[{"longNumber":281474976710655}]},{"metaData":[{"name":"provenanceHistory","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"@context","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodes","elementCount":15,"idCounter":14,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edges","elementCount":40,"idCounter":75,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"networkAttributes","elementCount":8,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodeAttributes","elementCount":29,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edgeAttributes","elementCount":44,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"cartesianLayout","elementCount":15,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"visualProperties","elementCount":3,"consistencyGroup":2,"properties":[]},{"name":"ndexStatus","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]}]},
+{"@context":[{
+  "pubmed" : "http://identifiers.org/pubmed/",
+  "cas" : "http://identifiers.org/cas/",
+  "chebi" : "http://identifiers.org/chebi/CHEBI:",
+  "hprd" : "http://identifiers.org/hprd/",
+  "uniprot knowledgebase" : "http://identifiers.org/uniprot/",
+  "KEGG Compound" : "http://identifiers.org/kegg.compound/"
+}]},
+ {"ndexStatus":[{"externalId":"2c26d51f-6192-11e5-8ac5-06603eb7f303","creationTime":1442971613853,"modificationTime":1525290655155,"visibility":"PUBLIC","published":false,"nodeCount":15,"edgeCount":40,"owner":"nci-pid","ndexServerURI":"http://public.ndexbio.org","readOnly":false}]}, {"provenanceHistory":[{"entity":{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442971613853,"endedAtTime":1442971613853,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/ErbB receptor signaling network.sif"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1443031023997,"endedAtTime":1443031023997,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031127798,"endedAtTime":1443031127798,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031306803,"endedAtTime":1443031306803,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281932174,"endedAtTime":1482281932174,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1482281932188,"endedAtTime":1482281932188,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"36"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"}]},{"uri":"http://public.ndexbio.org/v2/network/2c26d51f-6192-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/2c26d51f-6192-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442971613853,"endedAtTime":1442971613853,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/ErbB receptor signaling network.sif"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1443031023997,"endedAtTime":1443031023997,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031127798,"endedAtTime":1443031127798,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031306803,"endedAtTime":1443031306803,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"82"},{"name":"node count","value":"16"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281932174,"endedAtTime":1482281932174,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1482281932188,"endedAtTime":1482281932188,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"36"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1497388102082,"endedAtTime":1497388102082,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"36"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1497567216278,"endedAtTime":1497567216278,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"40"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1498849507299,"endedAtTime":1498849507299,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"40"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499115768039,"endedAtTime":1499115768039,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"40"},{"name":"node count","value":"15"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499371116826,"endedAtTime":1499371116826,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"},{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"},{"name":"description","value":"<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]}],"startedAtTime":1523381241328,"endedAtTime":1523381241328,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1523390832343,"endedAtTime":1523390832343,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1523391569421,"endedAtTime":1523391569421,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}],"startedAtTime":1525290655156,"endedAtTime":1525290655156,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"ErbB receptor signaling network"}]}}]}, {"nodes":[{
+  "@id" : 0,
+  "n" : "HBEGF",
+  "r" : "uniprot knowledgebase:B2R821"
+}, {
+  "@id" : 1,
+  "n" : "EGFR",
+  "r" : "uniprot knowledgebase:O00688"
+}, {
+  "@id" : 2,
+  "n" : "ERBB2",
+  "r" : "uniprot knowledgebase:B2RZG3"
+}, {
+  "@id" : 3,
+  "n" : "AREG",
+  "r" : "uniprot knowledgebase:P15514"
+}, {
+  "@id" : 4,
+  "n" : "ERBB4",
+  "r" : "uniprot knowledgebase:B7ZLD7"
+}, {
+  "@id" : 5,
+  "n" : "NRG4",
+  "r" : "uniprot knowledgebase:A6NIE8"
+}, {
+  "@id" : 6,
+  "n" : "TGFA",
+  "r" : "uniprot knowledgebase:A8K286"
+}, {
+  "@id" : 7,
+  "n" : "ERBB3",
+  "r" : "uniprot knowledgebase:A8K6L6"
+}, {
+  "@id" : 8,
+  "n" : "EGF",
+  "r" : "uniprot knowledgebase:B4DRK7"
+}, {
+  "@id" : 9,
+  "n" : "NRG3",
+  "r" : "uniprot knowledgebase:A4D7U1"
+}, {
+  "@id" : 10,
+  "n" : "NRG2",
+  "r" : "uniprot knowledgebase:O14511"
+}, {
+  "@id" : 11,
+  "n" : "NRG1",
+  "r" : "uniprot knowledgebase:A5YAK4"
+}, {
+  "@id" : 12,
+  "n" : "BTC",
+  "r" : "uniprot knowledgebase:P35070"
+}, {
+  "@id" : 13,
+  "n" : "HSP90AA1",
+  "r" : "uniprot knowledgebase:A8K500"
+}, {
+  "@id" : 14,
+  "n" : "EREG",
+  "r" : "uniprot knowledgebase:B2RC66"
+}]},
+ {"edges":[{
+  "@id" : 22,
+  "s" : 1,
+  "t" : 0,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 14,
+  "s" : 1,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 18,
+  "s" : 1,
+  "t" : 4,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 27,
+  "s" : 1,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 29,
+  "s" : 1,
+  "t" : 6,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 16,
+  "s" : 1,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 12,
+  "s" : 1,
+  "t" : 8,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 25,
+  "s" : 1,
+  "t" : 11,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 24,
+  "s" : 1,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 20,
+  "s" : 1,
+  "t" : 14,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 42,
+  "s" : 2,
+  "t" : 0,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 38,
+  "s" : 2,
+  "t" : 4,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 50,
+  "s" : 2,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 52,
+  "s" : 2,
+  "t" : 6,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 36,
+  "s" : 2,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 48,
+  "s" : 2,
+  "t" : 10,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 46,
+  "s" : 2,
+  "t" : 11,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 44,
+  "s" : 2,
+  "t" : 13,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 40,
+  "s" : 2,
+  "t" : 14,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 0,
+  "s" : 3,
+  "t" : 1,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 2,
+  "s" : 3,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 4,
+  "s" : 3,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 65,
+  "s" : 4,
+  "t" : 0,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 73,
+  "s" : 4,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 71,
+  "s" : 4,
+  "t" : 9,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 69,
+  "s" : 4,
+  "t" : 10,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 67,
+  "s" : 4,
+  "t" : 11,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 63,
+  "s" : 4,
+  "t" : 14,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 61,
+  "s" : 7,
+  "t" : 6,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 59,
+  "s" : 7,
+  "t" : 10,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 57,
+  "s" : 7,
+  "t" : 11,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 56,
+  "s" : 7,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 54,
+  "s" : 7,
+  "t" : 14,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 31,
+  "s" : 8,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 35,
+  "s" : 8,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 33,
+  "s" : 8,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 6,
+  "s" : 12,
+  "t" : 1,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 8,
+  "s" : 12,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 10,
+  "s" : 12,
+  "t" : 4,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 75,
+  "s" : 13,
+  "t" : 11,
+  "i" : "neighbor-of"
+}]},
+ {"networkAttributes":[{
+  "n" : "name",
+  "v" : "ErbB receptor signaling network"
+}, {
+  "n" : "reference",
+  "v" : ""
+}, {
+  "n" : "author",
+  "v" : "Mhairi Skinner"
+}, {
+  "n" : "reviewers",
+  "v" : "Julian Downward, Ami Citri, Benjamin Margolis, Alan Wells"
+}, {
+  "n" : "labels",
+  "v" : "ErbB_network_pathway"
+}, {
+  "n" : "version",
+  "v" : "APR-2018"
+}, {
+  "n" : "organism",
+  "v" : "human"
+}, {
+  "n" : "description",
+  "v" : "<i>ErbB receptor signaling network</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."
+}]},
+ {"nodeAttributes":[{
+  "po" : 0,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 0,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q99075" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 1,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 1,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O00732", "uniprot knowledgebase:P00533", "uniprot knowledgebase:P06268", "uniprot knowledgebase:Q14225", "uniprot knowledgebase:Q68GS5", "uniprot knowledgebase:Q92795", "uniprot knowledgebase:Q9BZS2", "uniprot knowledgebase:Q9GZX1", "uniprot knowledgebase:Q9H2C9", "uniprot knowledgebase:Q9H3C9", "uniprot knowledgebase:Q9UMD7", "uniprot knowledgebase:Q9UMD8", "uniprot knowledgebase:Q9UMG5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 2,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 2,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DHN3", "uniprot knowledgebase:P04626", "uniprot knowledgebase:Q14256", "uniprot knowledgebase:Q6LDV1", "uniprot knowledgebase:Q9UMK4", "uniprot knowledgebase:X5D2V5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 3,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 3,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5U026" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 4,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 4,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7ZLE2", "uniprot knowledgebase:B7ZLE3", "uniprot knowledgebase:Q15303", "uniprot knowledgebase:Q2M1W1", "uniprot knowledgebase:Q59EW4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 5,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 5,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q8WWG1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 6,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 6,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P01135", "uniprot knowledgebase:Q15577", "uniprot knowledgebase:Q53SK7", "uniprot knowledgebase:Q9BS56", "uniprot knowledgebase:Q9UEI3", "uniprot knowledgebase:Q9UKM1", "uniprot knowledgebase:Q9UKM2", "uniprot knowledgebase:Q9UKM3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 7,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 7,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DIK7", "uniprot knowledgebase:B4DV32", "uniprot knowledgebase:E9PDT8", "uniprot knowledgebase:P21860", "uniprot knowledgebase:Q9BUD7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 8,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:E7EVD2", "uniprot knowledgebase:E9PBF0", "uniprot knowledgebase:P01133", "uniprot knowledgebase:Q52LZ6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 9,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P56975", "uniprot knowledgebase:Q0PEH2", "uniprot knowledgebase:Q5VYH3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 11,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 11,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A5YAK5", "uniprot knowledgebase:A8K1L2", "uniprot knowledgebase:B7Z4Z3", "uniprot knowledgebase:E9PHH4", "uniprot knowledgebase:O14667", "uniprot knowledgebase:P98202", "uniprot knowledgebase:Q02297", "uniprot knowledgebase:Q02298", "uniprot knowledgebase:Q02299", "uniprot knowledgebase:Q07110", "uniprot knowledgebase:Q07111", "uniprot knowledgebase:Q12779", "uniprot knowledgebase:Q12780", "uniprot knowledgebase:Q12781", "uniprot knowledgebase:Q12782", "uniprot knowledgebase:Q12783", "uniprot knowledgebase:Q12784", "uniprot knowledgebase:Q15491", "uniprot knowledgebase:Q7RTV9", "uniprot knowledgebase:Q7RTW0", "uniprot knowledgebase:Q7RTW1", "uniprot knowledgebase:Q7RTW2", "uniprot knowledgebase:Q8NFN1", "uniprot knowledgebase:Q8NFN2", "uniprot knowledgebase:Q8NFN3", "uniprot knowledgebase:Q9UPE3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 12,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 12,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q96F48" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 13,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 13,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B3KPJ9", "uniprot knowledgebase:P07900", "uniprot knowledgebase:Q2PP14", "uniprot knowledgebase:Q5CAQ6", "uniprot knowledgebase:Q5CAQ7", "uniprot knowledgebase:Q9BVQ5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 14,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 14,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O14944", "uniprot knowledgebase:Q6FH69" ],
+  "d" : "list_of_string"
+}]},
+ {"edgeAttributes":[{
+  "po" : 22,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 14,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 18,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 27,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 29,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 16,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 12,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 25,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 24,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 24,
+  "n" : "citation",
+  "v" : [ "pubmed:15568014", "pubmed:1706616", "pubmed:3261240", "pubmed:7509075", "pubmed:9130710" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 20,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 42,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 38,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 50,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 52,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 36,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 48,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 46,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 44,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 40,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 0,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 2,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 4,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 65,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 73,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 71,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 69,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 67,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 63,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 61,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 59,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 57,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 56,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 56,
+  "n" : "citation",
+  "v" : [ "pubmed:11071886", "pubmed:15568014" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 54,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 31,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "citation",
+  "v" : [ "pubmed:15568014", "pubmed:1706616", "pubmed:3261240", "pubmed:7509075", "pubmed:9130710" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 33,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 6,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 8,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 10,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 75,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 75,
+  "n" : "citation",
+  "v" : [ "pubmed:11071886", "pubmed:15568014" ],
+  "d" : "list_of_string"
+}]},
+ {"cartesianLayout":[{
+  "node" : 0,
+  "x" : 286.9248638210883,
+  "y" : 295.66852596159106
+}, {
+  "node" : 1,
+  "x" : 135.83976786584492,
+  "y" : 270.51297121053506
+}, {
+  "node" : 2,
+  "x" : 165.22411630039508,
+  "y" : 304.55246566638925
+}, {
+  "node" : 3,
+  "x" : 25.46039199402655,
+  "y" : 230.55908266304905
+}, {
+  "node" : 4,
+  "x" : 356.47647014058856,
+  "y" : 231.21298338036826
+}, {
+  "node" : 5,
+  "x" : 233.98319373472847,
+  "y" : 147.77665068641687
+}, {
+  "node" : 6,
+  "x" : -1.8684457392586065,
+  "y" : 299.50824901869044
+}, {
+  "node" : 7,
+  "x" : 90.71374048105955,
+  "y" : 355.83837550476653
+}, {
+  "node" : 8,
+  "x" : 80.31313849557255,
+  "y" : 462.34740363759624
+}, {
+  "node" : 9,
+  "x" : 485.1171171027461,
+  "y" : 195.78365992740135
+}, {
+  "node" : 10,
+  "x" : 255.33553825516742,
+  "y" : 376.37740095704595
+}, {
+  "node" : 11,
+  "x" : 249.72851474534187,
+  "y" : 559.7758565095479
+}, {
+  "node" : 12,
+  "x" : 265.5649748629053,
+  "y" : 207.08445277553065
+}, {
+  "node" : 13,
+  "x" : 42.92292739390429,
+  "y" : 584.4521975305502
+}, {
+  "node" : 14,
+  "x" : 159.73166632990342,
+  "y" : 185.06783859481018
+}]},
+ {"visualProperties":[{
+  "properties_of" : "network",
+  "properties" : {
+    "NETWORK_DEPTH" : "0.0",
+    "NETWORK_WIDTH" : "550.0",
+    "NETWORK_EDGE_SELECTION" : "true",
+    "NETWORK_BACKGROUND_PAINT" : "#CCCCCC",
+    "NETWORK_CENTER_X_LOCATION" : "0.0",
+    "NETWORK_HEIGHT" : "400.0",
+    "NETWORK_CENTER_Z_LOCATION" : "0.0",
+    "NETWORK_SCALE_FACTOR" : "1.0",
+    "NETWORK_CENTER_Y_LOCATION" : "0.0",
+    "NETWORK_NODE_SELECTION" : "true",
+    "NETWORK_SIZE" : "550.0"
+  }
+}, {
+  "properties_of" : "nodes:default",
+  "dependencies" : {
+    "nodeCustomGraphicsSizeSync" : "true",
+    "nodeSizeLocked" : "true"
+  },
+  "mappings" : {
+    "NODE_TOOLTIP" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=Other,K=1=Small Molecule,V=1=Small Molecule,K=2=SmallMolecule,V=2=Small Molecule,K=3=Protein,V=3=Protein",
+      "type" : "DISCRETE"
+    },
+    "NODE_LABEL" : {
+      "definition" : "COL=name,T=string",
+      "type" : "PASSTHROUGH"
+    },
+    "NODE_FILL_COLOR" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=#99CCFF,K=1=Small Molecule,V=1=#FF9900,K=2=SmallMolecule,V=2=#FF9900",
+      "type" : "DISCRETE"
+    },
+    "NODE_SHAPE" : {
+      "definition" : "COL=type,T=string,K=0=Small Molecule,V=0=OCTAGON,K=1=SmallMolecule,V=1=OCTAGON,K=2=Protein,V=2=ELLIPSE",
+      "type" : "DISCRETE"
+    },
+    "NODE_SIZE" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=25.0,K=1=Small Molecule,V=1=25.0,K=2=SmallMolecule,V=2=25.0,K=3=Protein,V=3=35.0",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "NODE_FILL_COLOR" : "#00CCCC",
+    "NODE_NESTED_NETWORK_IMAGE_VISIBLE" : "true",
+    "NODE_LABEL_TRANSPARENCY" : "255",
+    "NODE_CUSTOMPAINT_1" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_1, name=Node Custom Paint 1)",
+    "NODE_BORDER_WIDTH" : "2.5",
+    "NODE_CUSTOMPAINT_3" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_3, name=Node Custom Paint 3)",
+    "NODE_CUSTOMPAINT_2" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_2, name=Node Custom Paint 2)",
+    "NODE_CUSTOMPAINT_5" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_5, name=Node Custom Paint 5)",
+    "NODE_CUSTOMPAINT_4" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_4, name=Node Custom Paint 4)",
+    "NODE_CUSTOMPAINT_7" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_7, name=Node Custom Paint 7)",
+    "NODE_CUSTOMPAINT_6" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_6, name=Node Custom Paint 6)",
+    "NODE_CUSTOMPAINT_9" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_9, name=Node Custom Paint 9)",
+    "NODE_CUSTOMPAINT_8" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_8, name=Node Custom Paint 8)",
+    "NODE_CUSTOMGRAPHICS_2" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "COMPOUND_NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_SELECTED" : "false",
+    "NODE_CUSTOMGRAPHICS_POSITION_9" : "C,C,c,0.00,0.00",
+    "NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_CUSTOMGRAPHICS_SIZE_9" : "50.0",
+    "NODE_BORDER_TRANSPARENCY" : "255",
+    "NODE_CUSTOMGRAPHICS_SIZE_8" : "50.0",
+    "NODE_SIZE" : "35.0",
+    "NODE_SELECTED_PAINT" : "#FF0000",
+    "NODE_CUSTOMGRAPHICS_SIZE_1" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_2" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_3" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_4" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_5" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_6" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_7" : "50.0",
+    "COMPOUND_NODE_PADDING" : "10.0",
+    "NODE_BORDER_PAINT" : "#FFFFFF",
+    "NODE_LABEL_FONT_FACE" : "Eras Medium ITC,plain,12",
+    "NODE_CUSTOMGRAPHICS_POSITION_2" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_3" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_1" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_6" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_7" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_4" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_5" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_8" : "C,C,c,0.00,0.00",
+    "NODE_WIDTH" : "75.0",
+    "NODE_X_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_8" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_DEPTH" : "0.0",
+    "NODE_LABEL_WIDTH" : "200.0",
+    "NODE_LABEL_FONT_SIZE" : "12",
+    "NODE_CUSTOMGRAPHICS_9" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_Y_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_5" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_4" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_BORDER_STROKE" : "SOLID",
+    "NODE_CUSTOMGRAPHICS_6" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_1" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_3" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_LABEL_COLOR" : "#000000",
+    "NODE_HEIGHT" : "35.0",
+    "NODE_Z_LOCATION" : "0.0",
+    "NODE_PAINT" : "#1E90FF",
+    "NODE_TRANSPARENCY" : "255",
+    "NODE_LABEL_POSITION" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_7" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_VISIBLE" : "true"
+  }
+}, {
+  "properties_of" : "edges:default",
+  "dependencies" : {
+    "arrowColorMatchesEdge" : "true"
+  },
+  "mappings" : {
+    "EDGE_UNSELECTED_PAINT" : {
+      "definition" : "COL=interaction,T=string,K=0=interacts-with,V=0=#999999,K=1=chemical-affects,V=1=#FF9900,K=2=controls-state-change-of,V=2=#0099FF,K=3=controls-transport-of,V=3=#009933,K=4=consumption-controled-by,V=4=#990099,K=5=reacts-with,V=5=#999999,K=6=neighbor-of,V=6=#999999,K=7=controls-expression-of,V=7=#0099FF,K=8=controls-phosphorylation-of,V=8=#0099FF,K=9=controls-transport-of-chemical,V=9=#009933,K=10=interacts with,V=10=#999999,K=11=used-to-produce,V=11=#990099,K=12=controls-production-of,V=12=#990099,K=13=in-complex-with,V=13=#999999,K=14=catalysis-precedes,V=14=#000000",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TARGET_ARROW_SHAPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=true,V=0=DELTA",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TOOLTIP" : {
+      "definition" : "COL=interaction,T=string,K=0=chemical-affects,V=0=chemical affects,K=1=interacts-with,V=1=interacts with,K=2=controls-state-change-of,V=2=controls state change of,K=3=consumption-controled-by,V=3=consumption controlled by,K=4=controls-transport-of,V=4=controls transport of,K=5=reacts-with,V=5=reacts with,K=6=neighbor-of,V=6=neighbor of,K=7=controls-expression-of,V=7=controls expression of,K=8=controls-phosphorylation-of,V=8=controls phosphorilation of,K=9=controls-transport-of-chemical,V=9=controls transport of chemical,K=10=interacts with,V=10=interacts with,K=11=used-to-produce,V=11=used to produce,K=12=controls-production-of,V=12=controls production of,K=13=in-complex-with,V=13=in complex with,K=14=catalysis-precedes,V=14=catalysis precedes",
+      "type" : "DISCRETE"
+    },
+    "EDGE_LINE_TYPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=false,V=0=LONG_DASH,K=1=true,V=1=SOLID",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "EDGE_PAINT" : "#323232",
+    "EDGE_TARGET_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_CURVED" : "true",
+    "EDGE_TARGET_ARROW_SELECTED_PAINT" : "#FF0000",
+    "EDGE_STROKE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_LABEL_FONT_FACE" : "Dialog.plain,plain,10",
+    "EDGE_LINE_TYPE" : "LONG_DASH",
+    "EDGE_TARGET_ARROW_SHAPE" : "NONE",
+    "EDGE_LABEL_COLOR" : "#000000",
+    "EDGE_SELECTED" : "false",
+    "EDGE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_VISIBLE" : "true",
+    "EDGE_LABEL_FONT_SIZE" : "10",
+    "EDGE_SOURCE_ARROW_SHAPE" : "NONE",
+    "EDGE_WIDTH" : "2.0",
+    "EDGE_STROKE_UNSELECTED_PAINT" : "#848484",
+    "EDGE_LABEL_TRANSPARENCY" : "255",
+    "EDGE_LABEL_WIDTH" : "200.0",
+    "EDGE_UNSELECTED_PAINT" : "#404040",
+    "EDGE_SOURCE_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_TRANSPARENCY" : "255",
+    "EDGE_SOURCE_ARROW_SELECTED_PAINT" : "#FF0000"
+  }
+}]},
+{"status":[{"error":"","success":true}]}]

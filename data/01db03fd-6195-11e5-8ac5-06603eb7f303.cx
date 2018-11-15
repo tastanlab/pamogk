@@ -1,0 +1,904 @@
+[{"numberVerification":[{"longNumber":281474976710655}]},{"metaData":[{"name":"provenanceHistory","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"@context","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodes","elementCount":14,"idCounter":13,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edges","elementCount":38,"idCounter":47,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"networkAttributes","elementCount":8,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodeAttributes","elementCount":23,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edgeAttributes","elementCount":61,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"cartesianLayout","elementCount":14,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"visualProperties","elementCount":3,"consistencyGroup":2,"properties":[]},{"name":"ndexStatus","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]}]},
+{"@context":[{
+  "pubmed" : "http://identifiers.org/pubmed/",
+  "cas" : "http://identifiers.org/cas/",
+  "chebi" : "http://identifiers.org/chebi/CHEBI:",
+  "hprd" : "http://identifiers.org/hprd/",
+  "uniprot knowledgebase" : "http://identifiers.org/uniprot/",
+  "KEGG Compound" : "http://identifiers.org/kegg.compound/"
+}]},
+ {"ndexStatus":[{"externalId":"01db03fd-6195-11e5-8ac5-06603eb7f303","creationTime":1442972831382,"modificationTime":1525290258026,"visibility":"PUBLIC","published":false,"nodeCount":14,"edgeCount":38,"owner":"nci-pid","ndexServerURI":"http://public.ndexbio.org","readOnly":false}]}, {"provenanceHistory":[{"entity":{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972831382,"endedAtTime":1442972831382,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/Rapid glucocorticoid signaling.sif"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1443031016042,"endedAtTime":1443031016042,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031135641,"endedAtTime":1443031135641,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031298831,"endedAtTime":1443031298831,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281943587,"endedAtTime":1482281943587,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1482281943604,"endedAtTime":1482281943604,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"16"},{"name":"node count","value":"10"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]},{"uri":"http://public.ndexbio.org/v2/network/01db03fd-6195-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/01db03fd-6195-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972831382,"endedAtTime":1442972831382,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/Rapid glucocorticoid signaling.sif"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1443031016042,"endedAtTime":1443031016042,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031135641,"endedAtTime":1443031135641,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031298831,"endedAtTime":1443031298831,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"15"},{"name":"node count","value":"8"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281943587,"endedAtTime":1482281943587,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1482281943604,"endedAtTime":1482281943604,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"16"},{"name":"node count","value":"10"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1497388040262,"endedAtTime":1497388040262,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"16"},{"name":"node count","value":"10"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1497567364427,"endedAtTime":1497567364427,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"38"},{"name":"node count","value":"14"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1498849795897,"endedAtTime":1498849795897,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"38"},{"name":"node count","value":"14"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499116742362,"endedAtTime":1499116742362,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"38"},{"name":"node count","value":"14"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499371115983,"endedAtTime":1499371115983,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"},{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"},{"name":"description","value":"<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]}],"startedAtTime":1523381653062,"endedAtTime":1523381653062,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1523390452890,"endedAtTime":1523390452890,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1523391409145,"endedAtTime":1523391409145,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}],"startedAtTime":1525290258027,"endedAtTime":1525290258027,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Rapid glucocorticoid signaling"}]}}]}, {"nodes":[{
+  "@id" : 0,
+  "n" : "GNG2",
+  "r" : "uniprot knowledgebase:P59768"
+}, {
+  "@id" : 1,
+  "n" : "MAPK8",
+  "r" : "uniprot knowledgebase:B5BTZ5"
+}, {
+  "@id" : 2,
+  "n" : "MTG1",
+  "r" : "uniprot knowledgebase:Q5VWX8"
+}, {
+  "@id" : 3,
+  "n" : "MAPK11",
+  "r" : "uniprot knowledgebase:A8K730"
+}, {
+  "@id" : 4,
+  "n" : "MAPK14",
+  "r" : "uniprot knowledgebase:A6ZJ92"
+}, {
+  "@id" : 5,
+  "n" : "MAPK9",
+  "r" : "uniprot knowledgebase:A8K0S3"
+}, {
+  "@id" : 6,
+  "n" : "GDP",
+  "r" : "cas:146-91-8"
+}, {
+  "@id" : 7,
+  "n" : "GNAS",
+  "r" : "uniprot knowledgebase:A2A2S4"
+}, {
+  "@id" : 8,
+  "n" : "Gs family",
+  "r" : "Gs family"
+}, {
+  "@id" : 9,
+  "n" : "GNB1",
+  "r" : "uniprot knowledgebase:B1AJZ7"
+}, {
+  "@id" : 10,
+  "n" : "p38alpha-beta",
+  "r" : "p38alpha-beta"
+}, {
+  "@id" : 11,
+  "n" : "JNK1-2",
+  "r" : "JNK1-2"
+}, {
+  "@id" : 12,
+  "n" : "cortisol",
+  "r" : "CHEBI:17650"
+}, {
+  "@id" : 13,
+  "n" : "GNAL",
+  "r" : "uniprot knowledgebase:B7ZA26"
+}]},
+ {"edges":[{
+  "@id" : 29,
+  "s" : 0,
+  "t" : 8,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 31,
+  "s" : 0,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 27,
+  "s" : 0,
+  "t" : 13,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 44,
+  "s" : 1,
+  "t" : 5,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 46,
+  "s" : 3,
+  "t" : 10,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 45,
+  "s" : 3,
+  "t" : 4,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 47,
+  "s" : 4,
+  "t" : 10,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 34,
+  "s" : 6,
+  "t" : 0,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 33,
+  "s" : 6,
+  "t" : 9,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 35,
+  "s" : 6,
+  "t" : 13,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 36,
+  "s" : 6,
+  "t" : 8,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 32,
+  "s" : 6,
+  "t" : 7,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 2,
+  "s" : 7,
+  "t" : 0,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 0,
+  "s" : 7,
+  "t" : 9,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 6,
+  "s" : 7,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 4,
+  "s" : 7,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 5,
+  "s" : 7,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 40,
+  "s" : 8,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 20,
+  "s" : 9,
+  "t" : 0,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 24,
+  "s" : 9,
+  "t" : 8,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 26,
+  "s" : 9,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 22,
+  "s" : 9,
+  "t" : 13,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 42,
+  "s" : 11,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 43,
+  "s" : 11,
+  "t" : 5,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 10,
+  "s" : 12,
+  "t" : 0,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 14,
+  "s" : 12,
+  "t" : 1,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 18,
+  "s" : 12,
+  "t" : 2,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 16,
+  "s" : 12,
+  "t" : 3,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 17,
+  "s" : 12,
+  "t" : 4,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 15,
+  "s" : 12,
+  "t" : 5,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 8,
+  "s" : 12,
+  "t" : 7,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 12,
+  "s" : 12,
+  "t" : 8,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 9,
+  "s" : 12,
+  "t" : 9,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 19,
+  "s" : 12,
+  "t" : 10,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 13,
+  "s" : 12,
+  "t" : 11,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 11,
+  "s" : 12,
+  "t" : 13,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 37,
+  "s" : 13,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 38,
+  "s" : 13,
+  "t" : 2,
+  "i" : "in-complex-with"
+}]},
+ {"networkAttributes":[{
+  "n" : "name",
+  "v" : "Rapid glucocorticoid signaling"
+}, {
+  "n" : "reference",
+  "v" : ""
+}, {
+  "n" : "author",
+  "v" : "Kira Anthony"
+}, {
+  "n" : "reviewers",
+  "v" : "Michael J. Garabedian, Eduardo Arzt"
+}, {
+  "n" : "labels",
+  "v" : "rapid_gr_pathway"
+}, {
+  "n" : "version",
+  "v" : "APR-2018"
+}, {
+  "n" : "organism",
+  "v" : "human"
+}, {
+  "n" : "description",
+  "v" : "<i>Rapid glucocorticoid signaling</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."
+}]},
+ {"nodeAttributes":[{
+  "po" : 0,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 0,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5JPE2", "uniprot knowledgebase:Q6P9A9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 1,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 1,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7ZLV4", "uniprot knowledgebase:D3DX88", "uniprot knowledgebase:D3DX92", "uniprot knowledgebase:P45983", "uniprot knowledgebase:Q15709", "uniprot knowledgebase:Q15712", "uniprot knowledgebase:Q15713", "uniprot knowledgebase:Q308M2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 2,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 2,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q6PIY9", "uniprot knowledgebase:Q8IYJ4", "uniprot knowledgebase:Q8NC48", "uniprot knowledgebase:Q9BT17", "uniprot knowledgebase:Q9BVU8" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 3,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 3,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B0LPG1", "uniprot knowledgebase:B7Z630", "uniprot knowledgebase:E7ETQ1", "uniprot knowledgebase:L7RT27", "uniprot knowledgebase:O00284", "uniprot knowledgebase:O15472", "uniprot knowledgebase:Q15759", "uniprot knowledgebase:Q2XNF2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 4,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 4,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8K6P4", "uniprot knowledgebase:B0LPH0", "uniprot knowledgebase:B5TY32", "uniprot knowledgebase:O60776", "uniprot knowledgebase:Q13083", "uniprot knowledgebase:Q14084", "uniprot knowledgebase:Q16539", "uniprot knowledgebase:Q8TDX0" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 5,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 5,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B5BU66", "uniprot knowledgebase:B5M0B4", "uniprot knowledgebase:D3DWQ8", "uniprot knowledgebase:D3DWQ9", "uniprot knowledgebase:P45984", "uniprot knowledgebase:Q15708", "uniprot knowledgebase:Q15710", "uniprot knowledgebase:Q15711", "uniprot knowledgebase:Q8N5C5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 6,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 7,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 7,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P84996" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 9,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 9,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P04697", "uniprot knowledgebase:P04901", "uniprot knowledgebase:P62873", "uniprot knowledgebase:Q1RMY8" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 11,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 12,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 13,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 13,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P38405", "uniprot knowledgebase:Q86XU3" ],
+  "d" : "list_of_string"
+}]},
+ {"edgeAttributes":[{
+  "po" : 29,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 31,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 31,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 27,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 44,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 44,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 46,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 46,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 45,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 45,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 47,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 47,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 34,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 33,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 36,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 32,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 2,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 0,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 6,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 4,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 4,
+  "n" : "citation",
+  "v" : [ "pubmed:12832507", "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 5,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 5,
+  "n" : "citation",
+  "v" : [ "pubmed:12832507", "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 40,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 20,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 24,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 26,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 26,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 22,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 42,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 42,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 43,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 43,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 10,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 14,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 14,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 18,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 18,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 16,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 16,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 17,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 17,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 15,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 15,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 8,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 12,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 12,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 9,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 19,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 19,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 13,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 13,
+  "n" : "citation",
+  "v" : [ "pubmed:11257496", "pubmed:15846779" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 11,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 11,
+  "n" : "citation",
+  "v" : [ "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 37,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 37,
+  "n" : "citation",
+  "v" : [ "pubmed:12832507", "pubmed:16775153" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 38,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}]},
+ {"cartesianLayout":[{
+  "node" : 0,
+  "x" : 232.0004512974825,
+  "y" : 60.56863289935299
+}, {
+  "node" : 1,
+  "x" : 468.7722773442675,
+  "y" : 412.36845129230386
+}, {
+  "node" : 2,
+  "x" : 325.6250494077933,
+  "y" : 130.56484167673855
+}, {
+  "node" : 3,
+  "x" : 563.1959048415101,
+  "y" : 118.7509733078454
+}, {
+  "node" : 4,
+  "x" : 548.8724883155927,
+  "y" : 210.05949243208408
+}, {
+  "node" : 5,
+  "x" : 297.9267033871208,
+  "y" : 434.7186698689474
+}, {
+  "node" : 6,
+  "x" : -18.74490576933516,
+  "y" : 181.6775856200765
+}, {
+  "node" : 7,
+  "x" : 232.09449793638092,
+  "y" : 176.30983009540026
+}, {
+  "node" : 8,
+  "x" : 159.53862443138854,
+  "y" : 29.015597160860832
+}, {
+  "node" : 9,
+  "x" : 188.42836107146366,
+  "y" : 264.1683532141059
+}, {
+  "node" : 10,
+  "x" : 501.3720477119321,
+  "y" : 45.59072798640962
+}, {
+  "node" : 11,
+  "x" : 463.85571258271574,
+  "y" : 303.9089367632343
+}, {
+  "node" : 12,
+  "x" : 137.05489210377647,
+  "y" : 201.3342887489728
+}, {
+  "node" : 13,
+  "x" : 118.67955104177899,
+  "y" : 113.81417704231725
+}]},
+ {"visualProperties":[{
+  "properties_of" : "network",
+  "properties" : {
+    "NETWORK_DEPTH" : "0.0",
+    "NETWORK_WIDTH" : "550.0",
+    "NETWORK_EDGE_SELECTION" : "true",
+    "NETWORK_BACKGROUND_PAINT" : "#CCCCCC",
+    "NETWORK_CENTER_X_LOCATION" : "0.0",
+    "NETWORK_HEIGHT" : "400.0",
+    "NETWORK_CENTER_Z_LOCATION" : "0.0",
+    "NETWORK_SCALE_FACTOR" : "1.0",
+    "NETWORK_CENTER_Y_LOCATION" : "0.0",
+    "NETWORK_NODE_SELECTION" : "true",
+    "NETWORK_SIZE" : "550.0"
+  }
+}, {
+  "properties_of" : "nodes:default",
+  "dependencies" : {
+    "nodeCustomGraphicsSizeSync" : "true",
+    "nodeSizeLocked" : "true"
+  },
+  "mappings" : {
+    "NODE_TOOLTIP" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=Other,K=1=Small Molecule,V=1=Small Molecule,K=2=SmallMolecule,V=2=Small Molecule,K=3=Protein,V=3=Protein",
+      "type" : "DISCRETE"
+    },
+    "NODE_LABEL" : {
+      "definition" : "COL=name,T=string",
+      "type" : "PASSTHROUGH"
+    },
+    "NODE_FILL_COLOR" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=#99CCFF,K=1=Small Molecule,V=1=#FF9900,K=2=SmallMolecule,V=2=#FF9900",
+      "type" : "DISCRETE"
+    },
+    "NODE_SHAPE" : {
+      "definition" : "COL=type,T=string,K=0=Small Molecule,V=0=OCTAGON,K=1=SmallMolecule,V=1=OCTAGON,K=2=Protein,V=2=ELLIPSE",
+      "type" : "DISCRETE"
+    },
+    "NODE_SIZE" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=25.0,K=1=Small Molecule,V=1=25.0,K=2=SmallMolecule,V=2=25.0,K=3=Protein,V=3=35.0",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "NODE_FILL_COLOR" : "#00CCCC",
+    "NODE_NESTED_NETWORK_IMAGE_VISIBLE" : "true",
+    "NODE_LABEL_TRANSPARENCY" : "255",
+    "NODE_CUSTOMPAINT_1" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_1, name=Node Custom Paint 1)",
+    "NODE_BORDER_WIDTH" : "2.5",
+    "NODE_CUSTOMPAINT_3" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_3, name=Node Custom Paint 3)",
+    "NODE_CUSTOMPAINT_2" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_2, name=Node Custom Paint 2)",
+    "NODE_CUSTOMPAINT_5" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_5, name=Node Custom Paint 5)",
+    "NODE_CUSTOMPAINT_4" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_4, name=Node Custom Paint 4)",
+    "NODE_CUSTOMPAINT_7" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_7, name=Node Custom Paint 7)",
+    "NODE_CUSTOMPAINT_6" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_6, name=Node Custom Paint 6)",
+    "NODE_CUSTOMPAINT_9" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_9, name=Node Custom Paint 9)",
+    "NODE_CUSTOMPAINT_8" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_8, name=Node Custom Paint 8)",
+    "NODE_CUSTOMGRAPHICS_2" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "COMPOUND_NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_SELECTED" : "false",
+    "NODE_CUSTOMGRAPHICS_POSITION_9" : "C,C,c,0.00,0.00",
+    "NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_CUSTOMGRAPHICS_SIZE_9" : "50.0",
+    "NODE_BORDER_TRANSPARENCY" : "255",
+    "NODE_CUSTOMGRAPHICS_SIZE_8" : "50.0",
+    "NODE_SIZE" : "35.0",
+    "NODE_SELECTED_PAINT" : "#FF0000",
+    "NODE_CUSTOMGRAPHICS_SIZE_1" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_2" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_3" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_4" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_5" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_6" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_7" : "50.0",
+    "COMPOUND_NODE_PADDING" : "10.0",
+    "NODE_BORDER_PAINT" : "#FFFFFF",
+    "NODE_LABEL_FONT_FACE" : "Eras Medium ITC,plain,12",
+    "NODE_CUSTOMGRAPHICS_POSITION_2" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_3" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_1" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_6" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_7" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_4" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_5" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_8" : "C,C,c,0.00,0.00",
+    "NODE_WIDTH" : "75.0",
+    "NODE_X_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_8" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_DEPTH" : "0.0",
+    "NODE_LABEL_WIDTH" : "200.0",
+    "NODE_LABEL_FONT_SIZE" : "12",
+    "NODE_CUSTOMGRAPHICS_9" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_Y_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_5" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_4" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_BORDER_STROKE" : "SOLID",
+    "NODE_CUSTOMGRAPHICS_6" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_1" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_3" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_LABEL_COLOR" : "#000000",
+    "NODE_HEIGHT" : "35.0",
+    "NODE_Z_LOCATION" : "0.0",
+    "NODE_PAINT" : "#1E90FF",
+    "NODE_TRANSPARENCY" : "255",
+    "NODE_LABEL_POSITION" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_7" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_VISIBLE" : "true"
+  }
+}, {
+  "properties_of" : "edges:default",
+  "dependencies" : {
+    "arrowColorMatchesEdge" : "true"
+  },
+  "mappings" : {
+    "EDGE_UNSELECTED_PAINT" : {
+      "definition" : "COL=interaction,T=string,K=0=interacts-with,V=0=#999999,K=1=chemical-affects,V=1=#FF9900,K=2=controls-state-change-of,V=2=#0099FF,K=3=controls-transport-of,V=3=#009933,K=4=consumption-controled-by,V=4=#990099,K=5=reacts-with,V=5=#999999,K=6=neighbor-of,V=6=#999999,K=7=controls-expression-of,V=7=#0099FF,K=8=controls-phosphorylation-of,V=8=#0099FF,K=9=controls-transport-of-chemical,V=9=#009933,K=10=interacts with,V=10=#999999,K=11=used-to-produce,V=11=#990099,K=12=controls-production-of,V=12=#990099,K=13=in-complex-with,V=13=#999999,K=14=catalysis-precedes,V=14=#000000",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TARGET_ARROW_SHAPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=true,V=0=DELTA",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TOOLTIP" : {
+      "definition" : "COL=interaction,T=string,K=0=chemical-affects,V=0=chemical affects,K=1=interacts-with,V=1=interacts with,K=2=controls-state-change-of,V=2=controls state change of,K=3=consumption-controled-by,V=3=consumption controlled by,K=4=controls-transport-of,V=4=controls transport of,K=5=reacts-with,V=5=reacts with,K=6=neighbor-of,V=6=neighbor of,K=7=controls-expression-of,V=7=controls expression of,K=8=controls-phosphorylation-of,V=8=controls phosphorilation of,K=9=controls-transport-of-chemical,V=9=controls transport of chemical,K=10=interacts with,V=10=interacts with,K=11=used-to-produce,V=11=used to produce,K=12=controls-production-of,V=12=controls production of,K=13=in-complex-with,V=13=in complex with,K=14=catalysis-precedes,V=14=catalysis precedes",
+      "type" : "DISCRETE"
+    },
+    "EDGE_LINE_TYPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=false,V=0=LONG_DASH,K=1=true,V=1=SOLID",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "EDGE_PAINT" : "#323232",
+    "EDGE_TARGET_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_CURVED" : "true",
+    "EDGE_TARGET_ARROW_SELECTED_PAINT" : "#FF0000",
+    "EDGE_STROKE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_LABEL_FONT_FACE" : "Dialog.plain,plain,10",
+    "EDGE_LINE_TYPE" : "LONG_DASH",
+    "EDGE_TARGET_ARROW_SHAPE" : "NONE",
+    "EDGE_LABEL_COLOR" : "#000000",
+    "EDGE_SELECTED" : "false",
+    "EDGE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_VISIBLE" : "true",
+    "EDGE_LABEL_FONT_SIZE" : "10",
+    "EDGE_SOURCE_ARROW_SHAPE" : "NONE",
+    "EDGE_WIDTH" : "2.0",
+    "EDGE_STROKE_UNSELECTED_PAINT" : "#848484",
+    "EDGE_LABEL_TRANSPARENCY" : "255",
+    "EDGE_LABEL_WIDTH" : "200.0",
+    "EDGE_UNSELECTED_PAINT" : "#404040",
+    "EDGE_SOURCE_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_TRANSPARENCY" : "255",
+    "EDGE_SOURCE_ARROW_SELECTED_PAINT" : "#FF0000"
+  }
+}]},
+{"status":[{"error":"","success":true}]}]

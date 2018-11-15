@@ -1,0 +1,3754 @@
+[{"numberVerification":[{"longNumber":281474976710655}]},{"metaData":[{"name":"provenanceHistory","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"@context","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodes","elementCount":59,"idCounter":58,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edges","elementCount":181,"idCounter":285,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"networkAttributes","elementCount":8,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodeAttributes","elementCount":115,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edgeAttributes","elementCount":333,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"cartesianLayout","elementCount":59,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"visualProperties","elementCount":3,"consistencyGroup":2,"properties":[]},{"name":"ndexStatus","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]}]},
+{"@context":[{
+  "pubmed" : "http://identifiers.org/pubmed/",
+  "cas" : "http://identifiers.org/cas/",
+  "chebi" : "http://identifiers.org/chebi/CHEBI:",
+  "hprd" : "http://identifiers.org/hprd/",
+  "uniprot knowledgebase" : "http://identifiers.org/uniprot/",
+  "KEGG Compound" : "http://identifiers.org/kegg.compound/"
+}]},
+ {"ndexStatus":[{"externalId":"a0de862d-6194-11e5-8ac5-06603eb7f303","creationTime":1442972668666,"modificationTime":1525290294826,"visibility":"PUBLIC","published":false,"nodeCount":59,"edgeCount":181,"owner":"nci-pid","ndexServerURI":"http://public.ndexbio.org","readOnly":false}]}, {"provenanceHistory":[{"entity":{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972668666,"endedAtTime":1442972668666,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/p53 pathway.sif"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1443031017844,"endedAtTime":1443031017844,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031133950,"endedAtTime":1443031133950,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031300518,"endedAtTime":1443031300518,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1448046834397,"endedAtTime":1448046834397,"eventType":"Set Network Properties","properties":[{"name":"user","value":"Rudi Pillich"},{"name":"account name","value":"rudipillich"},{"name":"species","value":"homo sapiens"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1448046939434,"endedAtTime":1448046939434,"eventType":"Set Network Properties","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281941286,"endedAtTime":1482281941286,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1482281941318,"endedAtTime":1482281941318,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"90"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1497388050360,"endedAtTime":1497388050360,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[]},{"uri":"http://public.ndexbio.org/v2/network/a0de862d-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/a0de862d-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972668666,"endedAtTime":1442972668666,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/p53 pathway.sif"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1443031017844,"endedAtTime":1443031017844,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031133950,"endedAtTime":1443031133950,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031300518,"endedAtTime":1443031300518,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1448046834397,"endedAtTime":1448046834397,"eventType":"Set Network Properties","properties":[{"name":"user","value":"Rudi Pillich"},{"name":"account name","value":"rudipillich"},{"name":"species","value":"homo sapiens"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1448046939434,"endedAtTime":1448046939434,"eventType":"Set Network Properties","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"244"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281941286,"endedAtTime":1482281941286,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1482281941318,"endedAtTime":1482281941318,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"90"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1497391986179,"endedAtTime":1497391986179,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"90"},{"name":"node count","value":"57"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1497567269161,"endedAtTime":1497567269161,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"158"},{"name":"node count","value":"59"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1498849627796,"endedAtTime":1498849627796,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"158"},{"name":"node count","value":"59"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499116013419,"endedAtTime":1499116013419,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"158"},{"name":"node count","value":"59"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499371116153,"endedAtTime":1499371116153,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"},{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]},"properties":[{"name":"dc:title","value":"p53 pathway"},{"name":"description","value":"<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]}],"startedAtTime":1523381620410,"endedAtTime":1523381620410,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1523390485013,"endedAtTime":1523390485013,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1523391440432,"endedAtTime":1523391440432,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"p53 pathway"}]}],"startedAtTime":1525290294827,"endedAtTime":1525290294827,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"p53 pathway"}]}}]}, {"nodes":[{
+  "@id" : 0,
+  "n" : "PRKCD",
+  "r" : "uniprot knowledgebase:B0KZ81"
+}, {
+  "@id" : 1,
+  "n" : "MAPK14",
+  "r" : "uniprot knowledgebase:A6ZJ92"
+}, {
+  "@id" : 2,
+  "n" : "CSNK1D",
+  "r" : "uniprot knowledgebase:A2I2P2"
+}, {
+  "@id" : 3,
+  "n" : "GSK3B",
+  "r" : "uniprot knowledgebase:D3DN89"
+}, {
+  "@id" : 4,
+  "n" : "TRIM28",
+  "r" : "uniprot knowledgebase:O00677"
+}, {
+  "@id" : 5,
+  "n" : "RPL5",
+  "r" : "uniprot knowledgebase:P46777"
+}, {
+  "@id" : 6,
+  "n" : "TTC5",
+  "r" : "uniprot knowledgebase:A8MQ18"
+}, {
+  "@id" : 7,
+  "n" : "AKT1",
+  "r" : "uniprot knowledgebase:B2RAM5"
+}, {
+  "@id" : 8,
+  "n" : "TP53",
+  "r" : "uniprot knowledgebase:P04637"
+}, {
+  "@id" : 9,
+  "n" : "ATR",
+  "r" : "uniprot knowledgebase:Q13535"
+}, {
+  "@id" : 10,
+  "n" : "CHEK1",
+  "r" : "uniprot knowledgebase:A8K934"
+}, {
+  "@id" : 11,
+  "n" : "CDK2",
+  "r" : "uniprot knowledgebase:A8K7C6"
+}, {
+  "@id" : 12,
+  "n" : "E4F1",
+  "r" : "uniprot knowledgebase:A8K2R4"
+}, {
+  "@id" : 13,
+  "n" : "KAT8",
+  "r" : "uniprot knowledgebase:A8K4Z1"
+}, {
+  "@id" : 14,
+  "n" : "SMYD2",
+  "r" : "uniprot knowledgebase:B2R9P9"
+}, {
+  "@id" : 15,
+  "n" : "HUWE1",
+  "r" : "uniprot knowledgebase:O15029"
+}, {
+  "@id" : 16,
+  "n" : "MAPK9",
+  "r" : "uniprot knowledgebase:A8K0S3"
+}, {
+  "@id" : 17,
+  "n" : "SKP2",
+  "r" : "uniprot knowledgebase:A8K5E0"
+}, {
+  "@id" : 18,
+  "n" : "SETD7",
+  "r" : "uniprot knowledgebase:B5WWL3"
+}, {
+  "@id" : 19,
+  "n" : "KAT5",
+  "r" : "uniprot knowledgebase:B4E3C7"
+}, {
+  "@id" : 20,
+  "n" : "MAPK8",
+  "r" : "uniprot knowledgebase:B5BTZ5"
+}, {
+  "@id" : 21,
+  "n" : "RPL11",
+  "r" : "uniprot knowledgebase:P25121"
+}, {
+  "@id" : 22,
+  "n" : "CHEK2",
+  "r" : "uniprot knowledgebase:A8K3Y9"
+}, {
+  "@id" : 23,
+  "n" : "FBXO11",
+  "r" : "uniprot knowledgebase:A1L491"
+}, {
+  "@id" : 24,
+  "n" : "CREBBP",
+  "r" : "uniprot knowledgebase:D3DUC9"
+}, {
+  "@id" : 25,
+  "n" : "EP300",
+  "r" : "uniprot knowledgebase:B1AKC2"
+}, {
+  "@id" : 26,
+  "n" : "TP53AIP1",
+  "r" : "uniprot knowledgebase:Q6NT40"
+}, {
+  "@id" : 27,
+  "n" : "-",
+  "r" : "uniprot knowledgebase:A8K9D0"
+}, {
+  "@id" : 28,
+  "n" : "CSE1L",
+  "r" : "uniprot knowledgebase:A3RLL6"
+}, {
+  "@id" : 29,
+  "n" : "DYRK2",
+  "r" : "uniprot knowledgebase:B2R9V9"
+}, {
+  "@id" : 30,
+  "n" : "CSNK1G2",
+  "r" : "uniprot knowledgebase:B5BU42"
+}, {
+  "@id" : 31,
+  "n" : "MDM2",
+  "r" : "uniprot knowledgebase:A6NL51"
+}, {
+  "@id" : 32,
+  "n" : "HIPK2",
+  "r" : "uniprot knowledgebase:Q75MR7"
+}, {
+  "@id" : 33,
+  "n" : "PPP1R13L",
+  "r" : "uniprot knowledgebase:Q2PNZ9"
+}, {
+  "@id" : 34,
+  "n" : "CK1 family",
+  "r" : "CK1 family"
+}, {
+  "@id" : 35,
+  "n" : "CSNK1E",
+  "r" : "uniprot knowledgebase:P49674"
+}, {
+  "@id" : 36,
+  "n" : "PPM1D",
+  "r" : "uniprot knowledgebase:O15297"
+}, {
+  "@id" : 37,
+  "n" : "CSNK1G3",
+  "r" : "uniprot knowledgebase:A8K040"
+}, {
+  "@id" : 38,
+  "n" : "CSNK1A1",
+  "r" : "uniprot knowledgebase:D3DQG0"
+}, {
+  "@id" : 39,
+  "n" : "USP7",
+  "r" : "uniprot knowledgebase:A6NMY8"
+}, {
+  "@id" : 40,
+  "n" : "YY1",
+  "r" : "uniprot knowledgebase:P25490"
+}, {
+  "@id" : 41,
+  "n" : "UBE2D1",
+  "r" : "uniprot knowledgebase:A6NLF6"
+}, {
+  "@id" : 42,
+  "n" : "Cbp/p300",
+  "r" : "Cbp/p300"
+}, {
+  "@id" : 43,
+  "n" : "CCNG1",
+  "r" : "uniprot knowledgebase:B2R7B2"
+}, {
+  "@id" : 44,
+  "n" : "PRMT5",
+  "r" : "uniprot knowledgebase:A8MTP3"
+}, {
+  "@id" : 45,
+  "n" : "CCNA2",
+  "r" : "uniprot knowledgebase:A8K7B6"
+}, {
+  "@id" : 46,
+  "n" : "KAT2B",
+  "r" : "uniprot knowledgebase:Q6NSK1"
+}, {
+  "@id" : 47,
+  "n" : "ATM",
+  "r" : "uniprot knowledgebase:B2RNX5"
+}, {
+  "@id" : 48,
+  "n" : "NEDD8",
+  "r" : "uniprot knowledgebase:Q15843"
+}, {
+  "@id" : 49,
+  "n" : "DAXX",
+  "r" : "uniprot knowledgebase:B4E1I3"
+}, {
+  "@id" : 50,
+  "n" : "RPL23",
+  "r" : "uniprot knowledgebase:P23131"
+}, {
+  "@id" : 51,
+  "n" : "RASSF1",
+  "r" : "uniprot knowledgebase:B7ZLL1"
+}, {
+  "@id" : 52,
+  "n" : "PPP2CA",
+  "r" : "uniprot knowledgebase:P05323"
+}, {
+  "@id" : 53,
+  "n" : "MDM4",
+  "r" : "uniprot knowledgebase:O15151"
+}, {
+  "@id" : 54,
+  "n" : "PIN1",
+  "r" : "uniprot knowledgebase:A8K4V9"
+}, {
+  "@id" : 55,
+  "n" : "ABL1",
+  "r" : "uniprot knowledgebase:A3KFJ3"
+}, {
+  "@id" : 56,
+  "n" : "PTPA",
+  "r" : "uniprot knowledgebase:A2A347"
+}, {
+  "@id" : 57,
+  "n" : "CDKN2A",
+  "r" : "uniprot knowledgebase:D3DRK2"
+}, {
+  "@id" : 58,
+  "n" : "CSNK1G1",
+  "r" : "uniprot knowledgebase:Q5JPH1"
+}]},
+ {"edges":[{
+  "@id" : 200,
+  "s" : 0,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 199,
+  "s" : 0,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 236,
+  "s" : 1,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 178,
+  "s" : 2,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 175,
+  "s" : 2,
+  "t" : 58,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 174,
+  "s" : 2,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 177,
+  "s" : 2,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 176,
+  "s" : 2,
+  "t" : 30,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 140,
+  "s" : 3,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 142,
+  "s" : 3,
+  "t" : 8,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 275,
+  "s" : 4,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 277,
+  "s" : 6,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 6,
+  "s" : 7,
+  "t" : 41,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 7,
+  "s" : 7,
+  "t" : 41,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 3,
+  "s" : 7,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 247,
+  "s" : 8,
+  "t" : 4,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 250,
+  "s" : 8,
+  "t" : 6,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 253,
+  "s" : 8,
+  "t" : 39,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 251,
+  "s" : 8,
+  "t" : 40,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 246,
+  "s" : 8,
+  "t" : 14,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 245,
+  "s" : 8,
+  "t" : 17,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 243,
+  "s" : 8,
+  "t" : 18,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 241,
+  "s" : 8,
+  "t" : 54,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 248,
+  "s" : 8,
+  "t" : 26,
+  "i" : "controls-expression-of"
+}, {
+  "@id" : 244,
+  "s" : 8,
+  "t" : 27,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 254,
+  "s" : 8,
+  "t" : 28,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 38,
+  "s" : 9,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 35,
+  "s" : 9,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 85,
+  "s" : 10,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 84,
+  "s" : 10,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 78,
+  "s" : 11,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 79,
+  "s" : 11,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 77,
+  "s" : 11,
+  "t" : 16,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 76,
+  "s" : 11,
+  "t" : 20,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 83,
+  "s" : 11,
+  "t" : 56,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 82,
+  "s" : 11,
+  "t" : 52,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 73,
+  "s" : 11,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 125,
+  "s" : 12,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 126,
+  "s" : 12,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 164,
+  "s" : 13,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 165,
+  "s" : 13,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 274,
+  "s" : 14,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 233,
+  "s" : 16,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 232,
+  "s" : 16,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 273,
+  "s" : 17,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 271,
+  "s" : 18,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 162,
+  "s" : 19,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 163,
+  "s" : 19,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 161,
+  "s" : 19,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 227,
+  "s" : 20,
+  "t" : 16,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 228,
+  "s" : 20,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 229,
+  "s" : 20,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 265,
+  "s" : 21,
+  "t" : 50,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 267,
+  "s" : 21,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 91,
+  "s" : 22,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 88,
+  "s" : 22,
+  "t" : 53,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 136,
+  "s" : 23,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 137,
+  "s" : 23,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 138,
+  "s" : 23,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 139,
+  "s" : 23,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 135,
+  "s" : 23,
+  "t" : 31,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 45,
+  "s" : 24,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 46,
+  "s" : 24,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 49,
+  "s" : 24,
+  "t" : 41,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 41,
+  "s" : 24,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 47,
+  "s" : 24,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 42,
+  "s" : 24,
+  "t" : 25,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 43,
+  "s" : 24,
+  "t" : 31,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 129,
+  "s" : 25,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 130,
+  "s" : 25,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 131,
+  "s" : 25,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 133,
+  "s" : 25,
+  "t" : 41,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 127,
+  "s" : 25,
+  "t" : 31,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 272,
+  "s" : 27,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 285,
+  "s" : 28,
+  "t" : 26,
+  "i" : "controls-expression-of"
+}, {
+  "@id" : 118,
+  "s" : 29,
+  "t" : 32,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 119,
+  "s" : 29,
+  "t" : 33,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 122,
+  "s" : 29,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 120,
+  "s" : 29,
+  "t" : 0,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 121,
+  "s" : 29,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 193,
+  "s" : 30,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 192,
+  "s" : 30,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 219,
+  "s" : 31,
+  "t" : 4,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 217,
+  "s" : 31,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 225,
+  "s" : 31,
+  "t" : 39,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 207,
+  "s" : 31,
+  "t" : 8,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 223,
+  "s" : 31,
+  "t" : 41,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 204,
+  "s" : 31,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 205,
+  "s" : 31,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 221,
+  "s" : 31,
+  "t" : 40,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 215,
+  "s" : 31,
+  "t" : 50,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 212,
+  "s" : 31,
+  "t" : 51,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 203,
+  "s" : 31,
+  "t" : 53,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 213,
+  "s" : 31,
+  "t" : 21,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 145,
+  "s" : 32,
+  "t" : 0,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 144,
+  "s" : 32,
+  "t" : 33,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 147,
+  "s" : 32,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 146,
+  "s" : 32,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 150,
+  "s" : 33,
+  "t" : 0,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 151,
+  "s" : 33,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 152,
+  "s" : 33,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 95,
+  "s" : 34,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 96,
+  "s" : 34,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 99,
+  "s" : 34,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 94,
+  "s" : 34,
+  "t" : 38,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 100,
+  "s" : 34,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 97,
+  "s" : 34,
+  "t" : 58,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 98,
+  "s" : 34,
+  "t" : 30,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 184,
+  "s" : 35,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 181,
+  "s" : 35,
+  "t" : 58,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 183,
+  "s" : 35,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 182,
+  "s" : 35,
+  "t" : 30,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 259,
+  "s" : 36,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 196,
+  "s" : 37,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 166,
+  "s" : 38,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 167,
+  "s" : 38,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 170,
+  "s" : 38,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 171,
+  "s" : 38,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 168,
+  "s" : 38,
+  "t" : 58,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 169,
+  "s" : 38,
+  "t" : 30,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 284,
+  "s" : 39,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 283,
+  "s" : 39,
+  "t" : 31,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 278,
+  "s" : 40,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 279,
+  "s" : 40,
+  "t" : 41,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 282,
+  "s" : 41,
+  "t" : 8,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 106,
+  "s" : 42,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 107,
+  "s" : 42,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 103,
+  "s" : 42,
+  "t" : 25,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 108,
+  "s" : 42,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 110,
+  "s" : 42,
+  "t" : 41,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 104,
+  "s" : 42,
+  "t" : 31,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 71,
+  "s" : 43,
+  "t" : 56,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 65,
+  "s" : 43,
+  "t" : 11,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 69,
+  "s" : 43,
+  "t" : 52,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 66,
+  "s" : 43,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 8,
+  "s" : 44,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 9,
+  "s" : 44,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 10,
+  "s" : 44,
+  "t" : 6,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 59,
+  "s" : 45,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 51,
+  "s" : 45,
+  "t" : 43,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 60,
+  "s" : 45,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 52,
+  "s" : 45,
+  "t" : 11,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 58,
+  "s" : 45,
+  "t" : 16,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 57,
+  "s" : 45,
+  "t" : 20,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 64,
+  "s" : 45,
+  "t" : 56,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 63,
+  "s" : 45,
+  "t" : 52,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 54,
+  "s" : 45,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 157,
+  "s" : 46,
+  "t" : 8,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 158,
+  "s" : 46,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 160,
+  "s" : 46,
+  "t" : 39,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 159,
+  "s" : 46,
+  "t" : 51,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 155,
+  "s" : 46,
+  "t" : 31,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 156,
+  "s" : 46,
+  "t" : 31,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 30,
+  "s" : 47,
+  "t" : 36,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 33,
+  "s" : 47,
+  "t" : 6,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 31,
+  "s" : 47,
+  "t" : 6,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 27,
+  "s" : 47,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 16,
+  "s" : 47,
+  "t" : 9,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 24,
+  "s" : 47,
+  "t" : 53,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 17,
+  "s" : 47,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 19,
+  "s" : 47,
+  "t" : 29,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 21,
+  "s" : 47,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 239,
+  "s" : 48,
+  "t" : 8,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 116,
+  "s" : 49,
+  "t" : 39,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 115,
+  "s" : 49,
+  "t" : 51,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 112,
+  "s" : 49,
+  "t" : 46,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 113,
+  "s" : 49,
+  "t" : 31,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 114,
+  "s" : 49,
+  "t" : 31,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 269,
+  "s" : 50,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 264,
+  "s" : 51,
+  "t" : 39,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 263,
+  "s" : 51,
+  "t" : 31,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 257,
+  "s" : 52,
+  "t" : 56,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 255,
+  "s" : 52,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 226,
+  "s" : 53,
+  "t" : 31,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 0,
+  "s" : 55,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 261,
+  "s" : 56,
+  "t" : 31,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 14,
+  "s" : 57,
+  "t" : 31,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 12,
+  "s" : 57,
+  "t" : 15,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 189,
+  "s" : 58,
+  "t" : 8,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 188,
+  "s" : 58,
+  "t" : 37,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 187,
+  "s" : 58,
+  "t" : 30,
+  "i" : "neighbor-of"
+}]},
+ {"networkAttributes":[{
+  "n" : "name",
+  "v" : "p53 pathway"
+}, {
+  "n" : "reference",
+  "v" : ""
+}, {
+  "n" : "author",
+  "v" : "Kira Anthony"
+}, {
+  "n" : "reviewers",
+  "v" : "Andreas Villunger, Jean-Christophe Marine"
+}, {
+  "n" : "labels",
+  "v" : "p53regulationpathway"
+}, {
+  "n" : "version",
+  "v" : "APR-2018"
+}, {
+  "n" : "organism",
+  "v" : "human"
+}, {
+  "n" : "description",
+  "v" : "<i>p53 pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."
+}]},
+ {"nodeAttributes":[{
+  "po" : 0,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 0,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B2R834", "uniprot knowledgebase:Q05655", "uniprot knowledgebase:Q15144", "uniprot knowledgebase:Q86XJ6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 1,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 1,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8K6P4", "uniprot knowledgebase:B0LPH0", "uniprot knowledgebase:B5TY32", "uniprot knowledgebase:O60776", "uniprot knowledgebase:Q13083", "uniprot knowledgebase:Q14084", "uniprot knowledgebase:Q16539", "uniprot knowledgebase:Q8TDX0" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 2,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 2,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P48730", "uniprot knowledgebase:Q96KZ6", "uniprot knowledgebase:Q9BTN5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 3,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 3,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P49841", "uniprot knowledgebase:Q9BWH3", "uniprot knowledgebase:Q9UL47" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 4,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 4,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q13263", "uniprot knowledgebase:Q7Z632", "uniprot knowledgebase:Q93040", "uniprot knowledgebase:Q96IM1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 5,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 5,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q32LZ3", "uniprot knowledgebase:Q53HH6", "uniprot knowledgebase:Q9H3F4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 6,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 6,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q8N0Z6", "uniprot knowledgebase:Q96HF9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 7,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 7,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7Z5R1", "uniprot knowledgebase:P31749", "uniprot knowledgebase:Q9BWB6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 8,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q15086", "uniprot knowledgebase:Q15087", "uniprot knowledgebase:Q15088", "uniprot knowledgebase:Q16535", "uniprot knowledgebase:Q16807", "uniprot knowledgebase:Q16808", "uniprot knowledgebase:Q16809", "uniprot knowledgebase:Q16810", "uniprot knowledgebase:Q16811", "uniprot knowledgebase:Q16848", "uniprot knowledgebase:Q2XN98", "uniprot knowledgebase:Q3LRW1", "uniprot knowledgebase:Q3LRW2", "uniprot knowledgebase:Q3LRW3", "uniprot knowledgebase:Q3LRW4", "uniprot knowledgebase:Q3LRW5", "uniprot knowledgebase:Q86UG1", "uniprot knowledgebase:Q8J016", "uniprot knowledgebase:Q99659", "uniprot knowledgebase:Q9BTM4", "uniprot knowledgebase:Q9HAQ8", "uniprot knowledgebase:Q9NP68", "uniprot knowledgebase:Q9NPJ2", "uniprot knowledgebase:Q9NZD0", "uniprot knowledgebase:Q9UBI2", "uniprot knowledgebase:Q9UQ61" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 9,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q59HB2", "uniprot knowledgebase:Q7KYL3", "uniprot knowledgebase:Q93051", "uniprot knowledgebase:Q9BXK4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 10,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DDD0", "uniprot knowledgebase:B4DSK3", "uniprot knowledgebase:B5BTY6", "uniprot knowledgebase:F5H7S4", "uniprot knowledgebase:H2BI51", "uniprot knowledgebase:O14757" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 11,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 11,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O75100", "uniprot knowledgebase:P24941" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 12,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 12,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O00146", "uniprot knowledgebase:Q66K89" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 13,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 13,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:G5E9P2", "uniprot knowledgebase:Q659G0", "uniprot knowledgebase:Q7LC17", "uniprot knowledgebase:Q8IY59", "uniprot knowledgebase:Q8WYB4", "uniprot knowledgebase:Q8WZ14", "uniprot knowledgebase:Q9H7Z6", "uniprot knowledgebase:Q9HAC5", "uniprot knowledgebase:Q9NR35" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 14,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 14,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:I6L9H7", "uniprot knowledgebase:Q4V765", "uniprot knowledgebase:Q5VSH9", "uniprot knowledgebase:Q96AI4", "uniprot knowledgebase:Q9NRG4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 15,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 15,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q4G2Z2", "uniprot knowledgebase:Q5H961", "uniprot knowledgebase:Q6P4D0", "uniprot knowledgebase:Q7Z6Z7", "uniprot knowledgebase:Q8NG67", "uniprot knowledgebase:Q9BUI0", "uniprot knowledgebase:Q9HCJ4", "uniprot knowledgebase:Q9NSL6", "uniprot knowledgebase:Q9P0A9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 16,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 16,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B5BU66", "uniprot knowledgebase:B5M0B4", "uniprot knowledgebase:D3DWQ8", "uniprot knowledgebase:D3DWQ9", "uniprot knowledgebase:P45984", "uniprot knowledgebase:Q15708", "uniprot knowledgebase:Q15710", "uniprot knowledgebase:Q15711", "uniprot knowledgebase:Q8N5C5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 17,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 17,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DJT4", "uniprot knowledgebase:Q13309", "uniprot knowledgebase:Q8TDZ0", "uniprot knowledgebase:Q8TDZ1", "uniprot knowledgebase:Q9BV69" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 18,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 18,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q0VAH3", "uniprot knowledgebase:Q4W5A9", "uniprot knowledgebase:Q8WTS6", "uniprot knowledgebase:Q9C0E6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 19,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 19,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:C9JL99", "uniprot knowledgebase:O95624", "uniprot knowledgebase:Q13430", "uniprot knowledgebase:Q17RW5", "uniprot knowledgebase:Q561W3", "uniprot knowledgebase:Q6GSE8", "uniprot knowledgebase:Q92993", "uniprot knowledgebase:Q9BWK7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 20,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 20,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7ZLV4", "uniprot knowledgebase:D3DX88", "uniprot knowledgebase:D3DX92", "uniprot knowledgebase:P45983", "uniprot knowledgebase:Q15709", "uniprot knowledgebase:Q15712", "uniprot knowledgebase:Q15713", "uniprot knowledgebase:Q308M2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 21,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 21,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P39026", "uniprot knowledgebase:P62913", "uniprot knowledgebase:Q8TDH2", "uniprot knowledgebase:Q9Y674" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 22,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 22,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7ZBF3", "uniprot knowledgebase:B7ZBF4", "uniprot knowledgebase:B7ZBF5", "uniprot knowledgebase:O96017", "uniprot knowledgebase:Q6QA03", "uniprot knowledgebase:Q6QA04", "uniprot knowledgebase:Q6QA05", "uniprot knowledgebase:Q6QA06", "uniprot knowledgebase:Q6QA07", "uniprot knowledgebase:Q6QA08", "uniprot knowledgebase:Q6QA10", "uniprot knowledgebase:Q6QA11", "uniprot knowledgebase:Q6QA12", "uniprot knowledgebase:Q6QA13", "uniprot knowledgebase:Q9HBS5", "uniprot knowledgebase:Q9HCQ8", "uniprot knowledgebase:Q9UGF0", "uniprot knowledgebase:Q9UGF1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 23,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 23,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q52ZP1", "uniprot knowledgebase:Q53EP7", "uniprot knowledgebase:Q53RT5", "uniprot knowledgebase:Q86XK2", "uniprot knowledgebase:Q8IXG3", "uniprot knowledgebase:Q96E90", "uniprot knowledgebase:Q9H6V8", "uniprot knowledgebase:Q9H9L1", "uniprot knowledgebase:Q9NR14", "uniprot knowledgebase:Q9UFK1", "uniprot knowledgebase:Q9UHI1", "uniprot knowledgebase:Q9UKC2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 24,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 24,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O00147", "uniprot knowledgebase:Q16376", "uniprot knowledgebase:Q4LE28", "uniprot knowledgebase:Q92793" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 25,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 25,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q09472" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 26,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 26,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q7Z6F7", "uniprot knowledgebase:Q9HCN0", "uniprot knowledgebase:Q9HCN1", "uniprot knowledgebase:Q9HCN2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 27,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 27,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q86W83", "uniprot knowledgebase:Q8TD09", "uniprot knowledgebase:Q9NQR1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 28,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 28,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B2R5T4", "uniprot knowledgebase:E1P5Y0", "uniprot knowledgebase:F8W904", "uniprot knowledgebase:O75432", "uniprot knowledgebase:P55060", "uniprot knowledgebase:Q32M40", "uniprot knowledgebase:Q9H5B7", "uniprot knowledgebase:Q9NTS0", "uniprot knowledgebase:Q9UP98", "uniprot knowledgebase:Q9UP99", "uniprot knowledgebase:Q9UPA0" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 29,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 29,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q92630", "uniprot knowledgebase:Q9BRB5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 30,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 30,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O00704", "uniprot knowledgebase:P78368", "uniprot knowledgebase:Q8WUB1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 31,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 31,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8K2S6", "uniprot knowledgebase:Q00987", "uniprot knowledgebase:Q13226", "uniprot knowledgebase:Q13297", "uniprot knowledgebase:Q13298", "uniprot knowledgebase:Q13299", "uniprot knowledgebase:Q13300", "uniprot knowledgebase:Q13301", "uniprot knowledgebase:Q53XW0", "uniprot knowledgebase:Q71TW9", "uniprot knowledgebase:Q8WYJ1", "uniprot knowledgebase:Q8WYJ2", "uniprot knowledgebase:Q9UGI3", "uniprot knowledgebase:Q9UMT8" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 32,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 32,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q8WWI4", "uniprot knowledgebase:Q9H2X6", "uniprot knowledgebase:Q9H2Y1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 33,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 33,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5DU71", "uniprot knowledgebase:Q5I1X4", "uniprot knowledgebase:Q6P1R7", "uniprot knowledgebase:Q6PKF8", "uniprot knowledgebase:Q8WUF5", "uniprot knowledgebase:Q9Y290" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 34,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 35,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 36,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 36,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q53XP4", "uniprot knowledgebase:Q6P991", "uniprot knowledgebase:Q8IVR6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 37,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 37,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DSH2", "uniprot knowledgebase:B7Z9Q4", "uniprot knowledgebase:E7EVD0", "uniprot knowledgebase:Q86WZ7", "uniprot knowledgebase:Q9Y6M3", "uniprot knowledgebase:Q9Y6M4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 38,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 38,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DQG1", "uniprot knowledgebase:P48729", "uniprot knowledgebase:Q4JJA0", "uniprot knowledgebase:Q5U046", "uniprot knowledgebase:Q5U047", "uniprot knowledgebase:Q6FGA2", "uniprot knowledgebase:Q71TU5", "uniprot knowledgebase:Q96HD2", "uniprot knowledgebase:Q9UDK3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 39,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 39,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7Z815", "uniprot knowledgebase:H0Y3G8", "uniprot knowledgebase:Q93009" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 40,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 40,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q14935" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 41,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 41,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8K786", "uniprot knowledgebase:P51668" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 42,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 43,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 43,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DLW7", "uniprot knowledgebase:D3DQK7", "uniprot knowledgebase:P51959", "uniprot knowledgebase:Q15757", "uniprot knowledgebase:Q96L32" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 44,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 44,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8MZ91", "uniprot knowledgebase:B4DX49", "uniprot knowledgebase:B4DY30", "uniprot knowledgebase:B5BU10", "uniprot knowledgebase:D3DS33", "uniprot knowledgebase:E2QRE7", "uniprot knowledgebase:O14744", "uniprot knowledgebase:Q6IBR1", "uniprot knowledgebase:Q9UKH1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 45,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 45,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P20248", "uniprot knowledgebase:Q2M3U6", "uniprot knowledgebase:Q4W5P4", "uniprot knowledgebase:Q6LER8" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 46,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 46,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q92831" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 47,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 47,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O15429", "uniprot knowledgebase:Q12758", "uniprot knowledgebase:Q13315", "uniprot knowledgebase:Q16551", "uniprot knowledgebase:Q93007", "uniprot knowledgebase:Q9NP02", "uniprot knowledgebase:Q9UCX7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 48,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 48,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q3SXN8", "uniprot knowledgebase:Q6LES6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 49,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 49,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:F5ANJ6", "uniprot knowledgebase:F5ANJ7", "uniprot knowledgebase:F5H082", "uniprot knowledgebase:O14747", "uniprot knowledgebase:O15141", "uniprot knowledgebase:O15208", "uniprot knowledgebase:Q5STK9", "uniprot knowledgebase:Q9BWI3", "uniprot knowledgebase:Q9UER7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 50,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 50,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P24048", "uniprot knowledgebase:P62829", "uniprot knowledgebase:Q29246", "uniprot knowledgebase:Q3SWV7", "uniprot knowledgebase:Q6P5S1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 51,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 51,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O14571", "uniprot knowledgebase:O60539", "uniprot knowledgebase:O60710", "uniprot knowledgebase:Q0VGC6", "uniprot knowledgebase:Q5TZT2", "uniprot knowledgebase:Q9HB04", "uniprot knowledgebase:Q9HB18", "uniprot knowledgebase:Q9NS22", "uniprot knowledgebase:Q9NS23", "uniprot knowledgebase:Q9UND4", "uniprot knowledgebase:Q9UND5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 52,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 52,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P13197", "uniprot knowledgebase:P67775" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 53,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 53,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q2M2Y2", "uniprot knowledgebase:Q32SL2", "uniprot knowledgebase:Q6GS18", "uniprot knowledgebase:Q8IV83" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 54,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 54,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q13526", "uniprot knowledgebase:Q53X75" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 55,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 55,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P00519", "uniprot knowledgebase:Q13869", "uniprot knowledgebase:Q13870", "uniprot knowledgebase:Q16133", "uniprot knowledgebase:Q17R61", "uniprot knowledgebase:Q45F09" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 56,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 56,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A9IZU4", "uniprot knowledgebase:B4DXM4", "uniprot knowledgebase:Q15257", "uniprot knowledgebase:Q15258", "uniprot knowledgebase:Q53GZ3", "uniprot knowledgebase:Q5TZQ2", "uniprot knowledgebase:Q9BUK1", "uniprot knowledgebase:Q9NNZ7", "uniprot knowledgebase:Q9NNZ8", "uniprot knowledgebase:Q9NNZ9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 57,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 57,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q13195", "uniprot knowledgebase:Q13399", "uniprot knowledgebase:Q16360", "uniprot knowledgebase:Q7KZR9", "uniprot knowledgebase:Q8N726" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 58,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 58,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q96AE9", "uniprot knowledgebase:Q9HCP0", "uniprot knowledgebase:Q9HCP1" ],
+  "d" : "list_of_string"
+}]},
+ {"edgeAttributes":[{
+  "po" : 200,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 200,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 199,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 199,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 236,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 236,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 178,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 178,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 175,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 175,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 174,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 174,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 177,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 177,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 176,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 176,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 140,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 140,
+  "n" : "citation",
+  "v" : [ "pubmed:14744935" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 142,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 142,
+  "n" : "citation",
+  "v" : [ "pubmed:14744935" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 275,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 275,
+  "n" : "citation",
+  "v" : [ "pubmed:16107876" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 277,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 277,
+  "n" : "citation",
+  "v" : [ "pubmed:19011621" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 6,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 6,
+  "n" : "citation",
+  "v" : [ "pubmed:11504915", "pubmed:11715018" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 7,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 7,
+  "n" : "citation",
+  "v" : [ "pubmed:11504915", "pubmed:11715018" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 3,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 3,
+  "n" : "citation",
+  "v" : [ "pubmed:11504915", "pubmed:11715018" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 247,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 247,
+  "n" : "citation",
+  "v" : [ "pubmed:16107876" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 250,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 250,
+  "n" : "citation",
+  "v" : [ "pubmed:19011621" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 253,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 253,
+  "n" : "citation",
+  "v" : [ "pubmed:17268548" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 251,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 251,
+  "n" : "citation",
+  "v" : [ "pubmed:14671306", "pubmed:15210108", "pubmed:9153395", "pubmed:9153396", "pubmed:9450543" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 246,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 246,
+  "n" : "citation",
+  "v" : [ "pubmed:17108971" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 245,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 245,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 243,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 243,
+  "n" : "citation",
+  "v" : [ "pubmed:15525938", "pubmed:17646389" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 241,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 248,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 248,
+  "n" : "citation",
+  "v" : [ "pubmed:11030628", "pubmed:17719542" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 244,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 244,
+  "n" : "citation",
+  "v" : [ "pubmed:17707234" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 254,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 254,
+  "n" : "citation",
+  "v" : [ "pubmed:11030628", "pubmed:17719542" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 38,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 38,
+  "n" : "citation",
+  "v" : [ "pubmed:9363941", "pubmed:9733514", "pubmed:9733515" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 35,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "citation",
+  "v" : [ "pubmed:14654783" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 85,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 85,
+  "n" : "citation",
+  "v" : [ "pubmed:10673501" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 84,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 84,
+  "n" : "citation",
+  "v" : [ "pubmed:10673501" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 78,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 78,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 79,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 79,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 77,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 77,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 76,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 76,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 83,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 83,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 82,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 82,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 73,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 73,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 125,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 125,
+  "n" : "citation",
+  "v" : [ "pubmed:17110336", "pubmed:9288740" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 126,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 126,
+  "n" : "citation",
+  "v" : [ "pubmed:17110336", "pubmed:9288740" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 164,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 164,
+  "n" : "citation",
+  "v" : [ "pubmed:17189186", "pubmed:17189187", "pubmed:17534149" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 165,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 165,
+  "n" : "citation",
+  "v" : [ "pubmed:17189186", "pubmed:17189187", "pubmed:17534149" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 274,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 274,
+  "n" : "citation",
+  "v" : [ "pubmed:17108971" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 233,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 233,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 232,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 232,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 273,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 273,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 271,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 271,
+  "n" : "citation",
+  "v" : [ "pubmed:15525938", "pubmed:17646389" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 162,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 162,
+  "n" : "citation",
+  "v" : [ "pubmed:17189186", "pubmed:17189187", "pubmed:17534149" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 163,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 163,
+  "n" : "citation",
+  "v" : [ "pubmed:17189186", "pubmed:17189187", "pubmed:17534149" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 161,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 161,
+  "n" : "citation",
+  "v" : [ "pubmed:17189186", "pubmed:17189187", "pubmed:17534149" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 227,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 227,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 228,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 228,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 229,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 229,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 265,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 267,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 91,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 91,
+  "n" : "citation",
+  "v" : [ "pubmed:10673501" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 88,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 88,
+  "n" : "citation",
+  "v" : [ "pubmed:16163388" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 136,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 136,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 137,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 137,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 138,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 138,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 139,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 139,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 135,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 135,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 45,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 45,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 46,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 46,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 49,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 41,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 41,
+  "n" : "citation",
+  "v" : [ "pubmed:11046142", "pubmed:11504915", "pubmed:11715018", "pubmed:14671306", "pubmed:18243116", "pubmed:18485870", "pubmed:19357310", "pubmed:19597489", "pubmed:9153395" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 47,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 42,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 42,
+  "n" : "citation",
+  "v" : [ "pubmed:11046142", "pubmed:11504915", "pubmed:11715018", "pubmed:14671306", "pubmed:18243116", "pubmed:18485870", "pubmed:19357310", "pubmed:19597489", "pubmed:9153395" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 43,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 129,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 129,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 130,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 130,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 131,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 133,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 127,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 272,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 272,
+  "n" : "citation",
+  "v" : [ "pubmed:17707234" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 285,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 285,
+  "n" : "citation",
+  "v" : [ "pubmed:11030628", "pubmed:17719542" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 118,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 118,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 119,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 119,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 122,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 122,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 120,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 120,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 121,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 121,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 193,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 193,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 192,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 192,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 219,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 217,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 225,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 225,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 207,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 207,
+  "n" : "citation",
+  "v" : [ "pubmed:10734067", "pubmed:11340074", "pubmed:11713287", "pubmed:14654783", "pubmed:14671306" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 223,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 204,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 204,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 205,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 205,
+  "n" : "citation",
+  "v" : [ "pubmed:15242646", "pubmed:17098746" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 221,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 215,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 212,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 212,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 203,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 203,
+  "n" : "citation",
+  "v" : [ "pubmed:11606419", "pubmed:15029243" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 213,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 145,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 145,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 144,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 144,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 147,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 147,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 146,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 146,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 150,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 150,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 151,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 151,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 152,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 152,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11740489", "pubmed:11780126", "pubmed:16377624", "pubmed:17349958", "pubmed:17906639" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 95,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 95,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 96,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 96,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 99,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 99,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 94,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 94,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 100,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 100,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 97,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 97,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 98,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 98,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 184,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 184,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 181,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 181,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 183,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 183,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 182,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 182,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 259,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 259,
+  "n" : "citation",
+  "v" : [ "pubmed:10611322", "pubmed:11331603", "pubmed:17936559" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 196,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 196,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 166,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 166,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 167,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 167,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 170,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 170,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 171,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 171,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 168,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 168,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 169,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 169,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 284,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 284,
+  "n" : "citation",
+  "v" : [ "pubmed:17268548" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 283,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 283,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 278,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 278,
+  "n" : "citation",
+  "v" : [ "pubmed:14671306", "pubmed:15210108", "pubmed:9153395", "pubmed:9153396", "pubmed:9450543" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 279,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 282,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 282,
+  "n" : "citation",
+  "v" : [ "pubmed:10734067", "pubmed:11340074", "pubmed:11713287", "pubmed:14654783", "pubmed:14671306" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 106,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 106,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 107,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 107,
+  "n" : "citation",
+  "v" : [ "pubmed:18485870" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 103,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 103,
+  "n" : "citation",
+  "v" : [ "pubmed:11046142", "pubmed:11504915", "pubmed:11715018", "pubmed:14671306", "pubmed:18243116", "pubmed:18485870", "pubmed:19357310", "pubmed:19597489", "pubmed:9153395" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 108,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 110,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 104,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 71,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 65,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 65,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 69,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 66,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 66,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 8,
+  "n" : "citation",
+  "v" : [ "pubmed:19011621" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 9,
+  "n" : "citation",
+  "v" : [ "pubmed:19011621" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 59,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 59,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 51,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 51,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 60,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 60,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 52,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 58,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 58,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 57,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 57,
+  "n" : "citation",
+  "v" : [ "pubmed:10581258", "pubmed:11078726", "pubmed:11283254" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 64,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 64,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 63,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 63,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 54,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 54,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 157,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 157,
+  "n" : "citation",
+  "v" : [ "pubmed:17110336", "pubmed:9744860", "pubmed:9891054" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 158,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 158,
+  "n" : "citation",
+  "v" : [ "pubmed:17110336", "pubmed:9744860", "pubmed:9891054" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 160,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 160,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 159,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 159,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 155,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 155,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 156,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 156,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 30,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 30,
+  "n" : "citation",
+  "v" : [ "pubmed:10611322", "pubmed:11331603", "pubmed:17936559" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 33,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 33,
+  "n" : "citation",
+  "v" : [ "pubmed:15448695" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 31,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 31,
+  "n" : "citation",
+  "v" : [ "pubmed:15448695" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 27,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 27,
+  "n" : "citation",
+  "v" : [ "pubmed:9363941", "pubmed:9733514", "pubmed:9733515" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 16,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 16,
+  "n" : "citation",
+  "v" : [ "pubmed:9363941", "pubmed:9733514", "pubmed:9733515" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 24,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 24,
+  "n" : "citation",
+  "v" : [ "pubmed:16163388" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 17,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 17,
+  "n" : "citation",
+  "v" : [ "pubmed:16163388" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 19,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 19,
+  "n" : "citation",
+  "v" : [ "pubmed:17349958" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 21,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 21,
+  "n" : "citation",
+  "v" : [ "pubmed:10611322", "pubmed:11331603", "pubmed:17936559" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 239,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 116,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 115,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 115,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 112,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 112,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 113,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 113,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 114,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 114,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 269,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 264,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 264,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 263,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 263,
+  "n" : "citation",
+  "v" : [ "pubmed:16845383", "pubmed:17293853", "pubmed:18566590" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 257,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 255,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 255,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 226,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 226,
+  "n" : "citation",
+  "v" : [ "pubmed:11606419", "pubmed:15029243" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 0,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 0,
+  "n" : "citation",
+  "v" : [ "pubmed:12110584" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 261,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 261,
+  "n" : "citation",
+  "v" : [ "pubmed:11359766", "pubmed:11983168" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 14,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 12,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 189,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 189,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 188,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 188,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 187,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 187,
+  "n" : "citation",
+  "v" : [ "pubmed:10606744", "pubmed:10734067" ],
+  "d" : "list_of_string"
+}]},
+ {"cartesianLayout":[{
+  "node" : 0,
+  "x" : -435.0576676479978,
+  "y" : 460.8881854832729
+}, {
+  "node" : 1,
+  "x" : -362.5699655243133,
+  "y" : 298.18469059926207
+}, {
+  "node" : 2,
+  "x" : -264.9538545272096,
+  "y" : 776.3076994351293
+}, {
+  "node" : 3,
+  "x" : -41.003974113043,
+  "y" : 372.5280774398469
+}, {
+  "node" : 4,
+  "x" : 159.07595504882178,
+  "y" : 350.8090526582063
+}, {
+  "node" : 5,
+  "x" : 535.2168939551134,
+  "y" : -167.74779076862393
+}, {
+  "node" : 6,
+  "x" : -127.81070912818552,
+  "y" : 239.08277359772768
+}, {
+  "node" : 7,
+  "x" : 240.2691335565152,
+  "y" : 351.0589245236814
+}, {
+  "node" : 8,
+  "x" : 39.74830864999219,
+  "y" : 449.2429261196938
+}, {
+  "node" : 9,
+  "x" : -83.57308750612154,
+  "y" : 31.93351091991691
+}, {
+  "node" : 10,
+  "x" : 33.08311580332797,
+  "y" : 325.223655252742
+}, {
+  "node" : 11,
+  "x" : 36.86392186137315,
+  "y" : 184.26382000781646
+}, {
+  "node" : 12,
+  "x" : 13.979278668769636,
+  "y" : 397.3072871664926
+}, {
+  "node" : 13,
+  "x" : -82.42149973850204,
+  "y" : 482.67222521961213
+}, {
+  "node" : 14,
+  "x" : -18.526606112389633,
+  "y" : 449.15289908932544
+}, {
+  "node" : 15,
+  "x" : 505.08647456459363,
+  "y" : -444.5484187483422
+}, {
+  "node" : 16,
+  "x" : -316.325816559012,
+  "y" : 222.36315009956297
+}, {
+  "node" : 17,
+  "x" : 291.878569682749,
+  "y" : 721.5486390318498
+}, {
+  "node" : 18,
+  "x" : 81.10728409614717,
+  "y" : 424.042389798389
+}, {
+  "node" : 19,
+  "x" : -136.4329923990068,
+  "y" : 439.55479814182195
+}, {
+  "node" : 20,
+  "x" : -295.68901945145944,
+  "y" : 362.69768523146155
+}, {
+  "node" : 21,
+  "x" : 549.0040139928174,
+  "y" : -100.14200591062792
+}, {
+  "node" : 22,
+  "x" : 135.42281798330234,
+  "y" : 93.70835840895028
+}, {
+  "node" : 23,
+  "x" : 468.43250420534645,
+  "y" : 331.1633794525237
+}, {
+  "node" : 24,
+  "x" : 408.82701234388526,
+  "y" : 572.5556910984914
+}, {
+  "node" : 25,
+  "x" : 396.6001874431692,
+  "y" : 457.508157770795
+}, {
+  "node" : 26,
+  "x" : 595.9009717620479,
+  "y" : 402.7935346817176
+}, {
+  "node" : 27,
+  "x" : -69.21258351047805,
+  "y" : 412.39535639981295
+}, {
+  "node" : 28,
+  "x" : 223.29697560345707,
+  "y" : 433.7628180974044
+}, {
+  "node" : 29,
+  "x" : -551.3026763582347,
+  "y" : 188.80326691049927
+}, {
+  "node" : 30,
+  "x" : -193.54160420448056,
+  "y" : 700.5823036494616
+}, {
+  "node" : 31,
+  "x" : 302.33784033660993,
+  "y" : 61.270567857343494
+}, {
+  "node" : 32,
+  "x" : -473.3676733969394,
+  "y" : 338.64519664645377
+}, {
+  "node" : 33,
+  "x" : -500.61581635284466,
+  "y" : 423.90771043605395
+}, {
+  "node" : 34,
+  "x" : -170.63472536369628,
+  "y" : 783.0754169580297
+}, {
+  "node" : 35,
+  "x" : -272.2061119956592,
+  "y" : 651.0443425582354
+}, {
+  "node" : 36,
+  "x" : 108.54898546068543,
+  "y" : 264.86742752466114
+}, {
+  "node" : 37,
+  "x" : -344.202145556112,
+  "y" : 596.1933806463555
+}, {
+  "node" : 38,
+  "x" : -394.72314307497544,
+  "y" : 658.4242086543945
+}, {
+  "node" : 39,
+  "x" : -237.75178436610904,
+  "y" : 123.02851451171001
+}, {
+  "node" : 40,
+  "x" : 298.25364065468887,
+  "y" : 592.4951091457563
+}, {
+  "node" : 41,
+  "x" : 501.2569448729216,
+  "y" : 465.4900892748759
+}, {
+  "node" : 42,
+  "x" : 345.9064856152707,
+  "y" : 522.4178313195804
+}, {
+  "node" : 43,
+  "x" : 271.46239037231146,
+  "y" : 149.04696655124414
+}, {
+  "node" : 44,
+  "x" : -126.03087731795074,
+  "y" : 365.12593456816103
+}, {
+  "node" : 45,
+  "x" : -29.286178808529392,
+  "y" : 191.95975330821403
+}, {
+  "node" : 46,
+  "x" : -168.89443972287435,
+  "y" : 82.00019550896009
+}, {
+  "node" : 47,
+  "x" : 0.44896494026940026,
+  "y" : 94.65943525067419
+}, {
+  "node" : 48,
+  "x" : 754.8759510950903,
+  "y" : 378.93965184491304
+}, {
+  "node" : 49,
+  "x" : -151.43894935279536,
+  "y" : -75.20371387350784
+}, {
+  "node" : 50,
+  "x" : 465.97932172695107,
+  "y" : -168.26604128224247
+}, {
+  "node" : 51,
+  "x" : -258.11177822378295,
+  "y" : -11.921463000552343
+}, {
+  "node" : 52,
+  "x" : 368.1202794121846,
+  "y" : 163.91630158371484
+}, {
+  "node" : 53,
+  "x" : 169.57614951816242,
+  "y" : -89.61772191308553
+}, {
+  "node" : 54,
+  "x" : 75.55583267315579,
+  "y" : 642.5424207826753
+}, {
+  "node" : 55,
+  "x" : 120.93950476724498,
+  "y" : 320.36022404248916
+}, {
+  "node" : 56,
+  "x" : 345.96848103593834,
+  "y" : 248.40611479733937
+}, {
+  "node" : 57,
+  "x" : 431.2418885475706,
+  "y" : -280.0778071925325
+}, {
+  "node" : 58,
+  "x" : -338.1478794399762,
+  "y" : 727.0041368712866
+}]},
+ {"visualProperties":[{
+  "properties_of" : "network",
+  "properties" : {
+    "NETWORK_DEPTH" : "0.0",
+    "NETWORK_WIDTH" : "550.0",
+    "NETWORK_EDGE_SELECTION" : "true",
+    "NETWORK_BACKGROUND_PAINT" : "#CCCCCC",
+    "NETWORK_CENTER_X_LOCATION" : "0.0",
+    "NETWORK_HEIGHT" : "400.0",
+    "NETWORK_CENTER_Z_LOCATION" : "0.0",
+    "NETWORK_SCALE_FACTOR" : "1.0",
+    "NETWORK_CENTER_Y_LOCATION" : "0.0",
+    "NETWORK_NODE_SELECTION" : "true",
+    "NETWORK_SIZE" : "550.0"
+  }
+}, {
+  "properties_of" : "nodes:default",
+  "dependencies" : {
+    "nodeCustomGraphicsSizeSync" : "true",
+    "nodeSizeLocked" : "true"
+  },
+  "mappings" : {
+    "NODE_TOOLTIP" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=Other,K=1=Small Molecule,V=1=Small Molecule,K=2=SmallMolecule,V=2=Small Molecule,K=3=Protein,V=3=Protein",
+      "type" : "DISCRETE"
+    },
+    "NODE_LABEL" : {
+      "definition" : "COL=name,T=string",
+      "type" : "PASSTHROUGH"
+    },
+    "NODE_FILL_COLOR" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=#99CCFF,K=1=Small Molecule,V=1=#FF9900,K=2=SmallMolecule,V=2=#FF9900",
+      "type" : "DISCRETE"
+    },
+    "NODE_SHAPE" : {
+      "definition" : "COL=type,T=string,K=0=Small Molecule,V=0=OCTAGON,K=1=SmallMolecule,V=1=OCTAGON,K=2=Protein,V=2=ELLIPSE",
+      "type" : "DISCRETE"
+    },
+    "NODE_SIZE" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=25.0,K=1=Small Molecule,V=1=25.0,K=2=SmallMolecule,V=2=25.0,K=3=Protein,V=3=35.0",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "NODE_FILL_COLOR" : "#00CCCC",
+    "NODE_NESTED_NETWORK_IMAGE_VISIBLE" : "true",
+    "NODE_LABEL_TRANSPARENCY" : "255",
+    "NODE_CUSTOMPAINT_1" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_1, name=Node Custom Paint 1)",
+    "NODE_BORDER_WIDTH" : "2.5",
+    "NODE_CUSTOMPAINT_3" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_3, name=Node Custom Paint 3)",
+    "NODE_CUSTOMPAINT_2" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_2, name=Node Custom Paint 2)",
+    "NODE_CUSTOMPAINT_5" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_5, name=Node Custom Paint 5)",
+    "NODE_CUSTOMPAINT_4" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_4, name=Node Custom Paint 4)",
+    "NODE_CUSTOMPAINT_7" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_7, name=Node Custom Paint 7)",
+    "NODE_CUSTOMPAINT_6" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_6, name=Node Custom Paint 6)",
+    "NODE_CUSTOMPAINT_9" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_9, name=Node Custom Paint 9)",
+    "NODE_CUSTOMPAINT_8" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_8, name=Node Custom Paint 8)",
+    "NODE_CUSTOMGRAPHICS_2" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "COMPOUND_NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_SELECTED" : "false",
+    "NODE_CUSTOMGRAPHICS_POSITION_9" : "C,C,c,0.00,0.00",
+    "NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_CUSTOMGRAPHICS_SIZE_9" : "50.0",
+    "NODE_BORDER_TRANSPARENCY" : "255",
+    "NODE_CUSTOMGRAPHICS_SIZE_8" : "50.0",
+    "NODE_SIZE" : "35.0",
+    "NODE_SELECTED_PAINT" : "#FF0000",
+    "NODE_CUSTOMGRAPHICS_SIZE_1" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_2" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_3" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_4" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_5" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_6" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_7" : "50.0",
+    "COMPOUND_NODE_PADDING" : "10.0",
+    "NODE_BORDER_PAINT" : "#FFFFFF",
+    "NODE_LABEL_FONT_FACE" : "Eras Medium ITC,plain,12",
+    "NODE_CUSTOMGRAPHICS_POSITION_2" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_3" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_1" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_6" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_7" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_4" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_5" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_8" : "C,C,c,0.00,0.00",
+    "NODE_WIDTH" : "75.0",
+    "NODE_X_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_8" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_DEPTH" : "0.0",
+    "NODE_LABEL_WIDTH" : "200.0",
+    "NODE_LABEL_FONT_SIZE" : "12",
+    "NODE_CUSTOMGRAPHICS_9" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_Y_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_5" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_4" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_BORDER_STROKE" : "SOLID",
+    "NODE_CUSTOMGRAPHICS_6" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_1" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_3" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_LABEL_COLOR" : "#000000",
+    "NODE_HEIGHT" : "35.0",
+    "NODE_Z_LOCATION" : "0.0",
+    "NODE_PAINT" : "#1E90FF",
+    "NODE_TRANSPARENCY" : "255",
+    "NODE_LABEL_POSITION" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_7" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_VISIBLE" : "true"
+  }
+}, {
+  "properties_of" : "edges:default",
+  "dependencies" : {
+    "arrowColorMatchesEdge" : "true"
+  },
+  "mappings" : {
+    "EDGE_UNSELECTED_PAINT" : {
+      "definition" : "COL=interaction,T=string,K=0=interacts-with,V=0=#999999,K=1=chemical-affects,V=1=#FF9900,K=2=controls-state-change-of,V=2=#0099FF,K=3=controls-transport-of,V=3=#009933,K=4=consumption-controled-by,V=4=#990099,K=5=reacts-with,V=5=#999999,K=6=neighbor-of,V=6=#999999,K=7=controls-expression-of,V=7=#0099FF,K=8=controls-phosphorylation-of,V=8=#0099FF,K=9=controls-transport-of-chemical,V=9=#009933,K=10=interacts with,V=10=#999999,K=11=used-to-produce,V=11=#990099,K=12=controls-production-of,V=12=#990099,K=13=in-complex-with,V=13=#999999,K=14=catalysis-precedes,V=14=#000000",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TARGET_ARROW_SHAPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=true,V=0=DELTA",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TOOLTIP" : {
+      "definition" : "COL=interaction,T=string,K=0=chemical-affects,V=0=chemical affects,K=1=interacts-with,V=1=interacts with,K=2=controls-state-change-of,V=2=controls state change of,K=3=consumption-controled-by,V=3=consumption controlled by,K=4=controls-transport-of,V=4=controls transport of,K=5=reacts-with,V=5=reacts with,K=6=neighbor-of,V=6=neighbor of,K=7=controls-expression-of,V=7=controls expression of,K=8=controls-phosphorylation-of,V=8=controls phosphorilation of,K=9=controls-transport-of-chemical,V=9=controls transport of chemical,K=10=interacts with,V=10=interacts with,K=11=used-to-produce,V=11=used to produce,K=12=controls-production-of,V=12=controls production of,K=13=in-complex-with,V=13=in complex with,K=14=catalysis-precedes,V=14=catalysis precedes",
+      "type" : "DISCRETE"
+    },
+    "EDGE_LINE_TYPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=false,V=0=LONG_DASH,K=1=true,V=1=SOLID",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "EDGE_PAINT" : "#323232",
+    "EDGE_TARGET_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_CURVED" : "true",
+    "EDGE_TARGET_ARROW_SELECTED_PAINT" : "#FF0000",
+    "EDGE_STROKE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_LABEL_FONT_FACE" : "Dialog.plain,plain,10",
+    "EDGE_LINE_TYPE" : "LONG_DASH",
+    "EDGE_TARGET_ARROW_SHAPE" : "NONE",
+    "EDGE_LABEL_COLOR" : "#000000",
+    "EDGE_SELECTED" : "false",
+    "EDGE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_VISIBLE" : "true",
+    "EDGE_LABEL_FONT_SIZE" : "10",
+    "EDGE_SOURCE_ARROW_SHAPE" : "NONE",
+    "EDGE_WIDTH" : "2.0",
+    "EDGE_STROKE_UNSELECTED_PAINT" : "#848484",
+    "EDGE_LABEL_TRANSPARENCY" : "255",
+    "EDGE_LABEL_WIDTH" : "200.0",
+    "EDGE_UNSELECTED_PAINT" : "#404040",
+    "EDGE_SOURCE_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_TRANSPARENCY" : "255",
+    "EDGE_SOURCE_ARROW_SELECTED_PAINT" : "#FF0000"
+  }
+}]},
+{"status":[{"error":"","success":true}]}]

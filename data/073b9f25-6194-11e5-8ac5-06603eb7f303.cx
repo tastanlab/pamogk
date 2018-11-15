@@ -1,0 +1,5343 @@
+[{"numberVerification":[{"longNumber":281474976710655}]},{"metaData":[{"name":"provenanceHistory","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"@context","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodes","elementCount":56,"idCounter":55,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edges","elementCount":313,"idCounter":467,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"networkAttributes","elementCount":8,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"nodeAttributes","elementCount":102,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"edgeAttributes","elementCount":536,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"cartesianLayout","elementCount":56,"version":"1.0","consistencyGroup":2,"properties":[]},{"name":"visualProperties","elementCount":3,"consistencyGroup":2,"properties":[]},{"name":"ndexStatus","elementCount":1,"version":"1.0","consistencyGroup":2,"properties":[]}]},
+{"@context":[{
+  "pubmed" : "http://identifiers.org/pubmed/",
+  "cas" : "http://identifiers.org/cas/",
+  "chebi" : "http://identifiers.org/chebi/CHEBI:",
+  "hprd" : "http://identifiers.org/hprd/",
+  "uniprot knowledgebase" : "http://identifiers.org/uniprot/",
+  "KEGG Compound" : "http://identifiers.org/kegg.compound/"
+}]},
+ {"ndexStatus":[{"externalId":"073b9f25-6194-11e5-8ac5-06603eb7f303","creationTime":1442972410907,"modificationTime":1525290580498,"visibility":"PUBLIC","published":false,"nodeCount":56,"edgeCount":313,"owner":"nci-pid","ndexServerURI":"http://public.ndexbio.org","readOnly":false}]}, {"provenanceHistory":[{"entity":{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972410907,"endedAtTime":1442972410907,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/Insulin Pathway.sif"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1443031020214,"endedAtTime":1443031020214,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031131561,"endedAtTime":1443031131561,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031302958,"endedAtTime":1443031302958,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281937973,"endedAtTime":1482281937973,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1482281938000,"endedAtTime":1482281938000,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"173"},{"name":"node count","value":"48"},{"name":"dc:title","value":"Insulin Pathway"}]},{"uri":"http://public.ndexbio.org/v2/network/073b9f25-6194-11e5-8ac5-06603eb7f303/summary","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":[{"uri":"http://public.ndexbio.org/network/073b9f25-6194-11e5-8ac5-06603eb7f303","creationEvent":{"inputs":null,"startedAtTime":1442972410907,"endedAtTime":1442972410907,"eventType":"File Upload","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"filename","value":"pidv7-ebs/Insulin Pathway.sif"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1443031020214,"endedAtTime":1443031020214,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"}]}],"startedAtTime":1443031131561,"endedAtTime":1443031131561,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"},{"name":"version","value":"07-MAR-2014"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]}],"startedAtTime":1443031302958,"endedAtTime":1443031302958,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"account name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"422"},{"name":"node count","value":"54"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"This network belongs to the NCI-Nature curated Pathway Interaction Database (PID) and was obtained from Pathway Commons (PC2v.7)"},{"name":"version","value":"07-MAR-2014"}]},{"uri":null,"creationEvent":{"inputs":null,"startedAtTime":1482281937973,"endedAtTime":1482281937973,"eventType":"Created by NDEx EBS network converter","properties":null},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1482281938000,"endedAtTime":1482281938000,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"173"},{"name":"node count","value":"48"},{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1497388069838,"endedAtTime":1497388069838,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"173"},{"name":"node count","value":"48"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1497567249078,"endedAtTime":1497567249078,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"267"},{"name":"node count","value":"56"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1498849582438,"endedAtTime":1498849582438,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"267"},{"name":"node count","value":"56"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499115920755,"endedAtTime":1499115920755,"eventType":"CX network update","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"edge count","value":"267"},{"name":"node count","value":"56"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"27-Jul-2015"}]}],"startedAtTime":1499371116430,"endedAtTime":1499371116430,"eventType":"Update Network Profile","properties":[{"name":"user","value":"NCI - Pathway Interaction Database (PID)"},{"name":"user name","value":"nci-pid"},{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]},"properties":[{"name":"dc:title","value":"Insulin Pathway"},{"name":"description","value":"<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."},{"name":"version","value":"APR-2017"}]}],"startedAtTime":1523381324401,"endedAtTime":1523381324401,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1523390756917,"endedAtTime":1523390756917,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1523391492848,"endedAtTime":1523391492848,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}],"startedAtTime":1525290580499,"endedAtTime":1525290580499,"eventType":"CX network update","properties":[{"name":"user name","value":"nci-pid"}]},"properties":[{"name":"dc:title","value":"Insulin Pathway"}]}}]}, {"nodes":[{
+  "@id" : 0,
+  "n" : "CBL",
+  "r" : "uniprot knowledgebase:A3KMP8"
+}, {
+  "@id" : 1,
+  "n" : "RAPGEF1",
+  "r" : "uniprot knowledgebase:Q13905"
+}, {
+  "@id" : 2,
+  "n" : "SHC1",
+  "r" : "uniprot knowledgebase:B5BU19"
+}, {
+  "@id" : 3,
+  "n" : "EXOC8",
+  "r" : "uniprot knowledgebase:B3KU33"
+}, {
+  "@id" : 4,
+  "n" : "GRB10",
+  "r" : "uniprot knowledgebase:A4D258"
+}, {
+  "@id" : 5,
+  "n" : "INS",
+  "r" : "uniprot knowledgebase:P01308"
+}, {
+  "@id" : 6,
+  "n" : "INPP5D",
+  "r" : "uniprot knowledgebase:O00145"
+}, {
+  "@id" : 7,
+  "n" : "SOS1",
+  "r" : "uniprot knowledgebase:A8K2G3"
+}, {
+  "@id" : 8,
+  "n" : "EXOC1",
+  "r" : "uniprot knowledgebase:Q504V4"
+}, {
+  "@id" : 9,
+  "n" : "SH2B2",
+  "r" : "uniprot knowledgebase:A6ND74"
+}, {
+  "@id" : 10,
+  "n" : "FOXO3",
+  "r" : "uniprot knowledgebase:B4DVZ6"
+}, {
+  "@id" : 11,
+  "n" : "AKT1",
+  "r" : "uniprot knowledgebase:B2RAM5"
+}, {
+  "@id" : 12,
+  "n" : "IRS1",
+  "r" : "uniprot knowledgebase:P35568"
+}, {
+  "@id" : 13,
+  "n" : "RPS6KB1",
+  "r" : "uniprot knowledgebase:B2R779"
+}, {
+  "@id" : 14,
+  "n" : "PTPRA",
+  "r" : "uniprot knowledgebase:A8K2G8"
+}, {
+  "@id" : 15,
+  "n" : "H2O2",
+  "r" : "cas:7722-84-1"
+}, {
+  "@id" : 16,
+  "n" : "SCNN1A",
+  "r" : "uniprot knowledgebase:A5X2U9"
+}, {
+  "@id" : 17,
+  "n" : "EXOC6",
+  "r" : "uniprot knowledgebase:E9PHI3"
+}, {
+  "@id" : 18,
+  "n" : "NCK1",
+  "r" : "uniprot knowledgebase:B7Z751"
+}, {
+  "@id" : 19,
+  "n" : "PIK3CA",
+  "r" : "uniprot knowledgebase:P42336"
+}, {
+  "@id" : 20,
+  "n" : "EXOC2",
+  "r" : "uniprot knowledgebase:B2RBE6"
+}, {
+  "@id" : 21,
+  "n" : "EXOC3",
+  "r" : "uniprot knowledgebase:O60645"
+}, {
+  "@id" : 22,
+  "n" : "HRAS",
+  "r" : "uniprot knowledgebase:B5BUA0"
+}, {
+  "@id" : 23,
+  "n" : "PI-4-5-P2",
+  "r" : "cas:245126-95-8"
+}, {
+  "@id" : 24,
+  "n" : "PARD6A",
+  "r" : "uniprot knowledgebase:O14911"
+}, {
+  "@id" : 25,
+  "n" : "PI-3-4-P2",
+  "r" : "cas:165883-85-2"
+}, {
+  "@id" : 26,
+  "n" : "PTPN1",
+  "r" : "uniprot knowledgebase:P18031"
+}, {
+  "@id" : 27,
+  "n" : "AKT2",
+  "r" : "uniprot knowledgebase:B2RBD8"
+}, {
+  "@id" : 28,
+  "n" : "DOK1",
+  "r" : "uniprot knowledgebase:O43204"
+}, {
+  "@id" : 29,
+  "n" : "PTPN11",
+  "r" : "uniprot knowledgebase:A8K1D9"
+}, {
+  "@id" : 30,
+  "n" : "GRB14",
+  "r" : "uniprot knowledgebase:B7Z7F9"
+}, {
+  "@id" : 31,
+  "n" : "RASA1",
+  "r" : "uniprot knowledgebase:B2R6W3"
+}, {
+  "@id" : 32,
+  "n" : "GTP",
+  "r" : "cas:86-01-1"
+}, {
+  "@id" : 33,
+  "n" : "3',5'-cyclic AMP",
+  "r" : "CHEBI:17489"
+}, {
+  "@id" : 34,
+  "n" : "SORBS1",
+  "r" : "uniprot knowledgebase:A0AED4"
+}, {
+  "@id" : 35,
+  "n" : "PDPK1",
+  "r" : "uniprot knowledgebase:H0Y4Z0"
+}, {
+  "@id" : 36,
+  "n" : "PI-3-4-5-P3",
+  "r" : "cas:165689-82-7"
+}, {
+  "@id" : 37,
+  "n" : "EIF4EBP1",
+  "r" : "uniprot knowledgebase:B2R502"
+}, {
+  "@id" : 38,
+  "n" : "EXOC7",
+  "r" : "uniprot knowledgebase:B5MC69"
+}, {
+  "@id" : 39,
+  "n" : "GDP",
+  "r" : "cas:146-91-8"
+}, {
+  "@id" : 40,
+  "n" : "CRK",
+  "r" : "uniprot knowledgebase:A8MWE8"
+}, {
+  "@id" : 41,
+  "n" : "TRIP10",
+  "r" : "uniprot knowledgebase:B2R8A6"
+}, {
+  "@id" : 42,
+  "n" : "RHOQ",
+  "r" : "uniprot knowledgebase:D6W5A6"
+}, {
+  "@id" : 43,
+  "n" : "Atypical PKCs",
+  "r" : "Atypical PKCs"
+}, {
+  "@id" : 44,
+  "n" : "EXOC4",
+  "r" : "uniprot knowledgebase:E9PED2"
+}, {
+  "@id" : 45,
+  "n" : "PRKCI",
+  "r" : "uniprot knowledgebase:D3DNQ4"
+}, {
+  "@id" : 46,
+  "n" : "PIK3R1",
+  "r" : "uniprot knowledgebase:B3KT19"
+}, {
+  "@id" : 47,
+  "n" : "IRS3",
+  "r" : "IRS3"
+}, {
+  "@id" : 48,
+  "n" : "PRKCZ",
+  "r" : "uniprot knowledgebase:A8K4N0"
+}, {
+  "@id" : 49,
+  "n" : "CAV1",
+  "r" : "uniprot knowledgebase:Q03135"
+}, {
+  "@id" : 50,
+  "n" : "INSR",
+  "r" : "uniprot knowledgebase:P06213"
+}, {
+  "@id" : 51,
+  "n" : "SGK1",
+  "r" : "uniprot knowledgebase:B7UUP7"
+}, {
+  "@id" : 52,
+  "n" : "EXOC5",
+  "r" : "uniprot knowledgebase:B2R6C5"
+}, {
+  "@id" : 53,
+  "n" : "F2RL2",
+  "r" : "uniprot knowledgebase:B2R754"
+}, {
+  "@id" : 54,
+  "n" : "NCK2",
+  "r" : "uniprot knowledgebase:D3DVK1"
+}, {
+  "@id" : 55,
+  "n" : "GRB2",
+  "r" : "uniprot knowledgebase:P29354"
+}]},
+ {"edges":[{
+  "@id" : 31,
+  "s" : 0,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 37,
+  "s" : 0,
+  "t" : 1,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 41,
+  "s" : 0,
+  "t" : 34,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 29,
+  "s" : 0,
+  "t" : 40,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 39,
+  "s" : 0,
+  "t" : 9,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 35,
+  "s" : 0,
+  "t" : 42,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 36,
+  "s" : 0,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 432,
+  "s" : 1,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 434,
+  "s" : 1,
+  "t" : 9,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 433,
+  "s" : 1,
+  "t" : 42,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 436,
+  "s" : 1,
+  "t" : 34,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 448,
+  "s" : 2,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 452,
+  "s" : 2,
+  "t" : 6,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 454,
+  "s" : 2,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 449,
+  "s" : 2,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 451,
+  "s" : 2,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 446,
+  "s" : 2,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 145,
+  "s" : 3,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 168,
+  "s" : 4,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 166,
+  "s" : 4,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 170,
+  "s" : 4,
+  "t" : 7,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 164,
+  "s" : 4,
+  "t" : 50,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 163,
+  "s" : 4,
+  "t" : 55,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 161,
+  "s" : 4,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 288,
+  "s" : 5,
+  "t" : 0,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 326,
+  "s" : 5,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 328,
+  "s" : 5,
+  "t" : 6,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 331,
+  "s" : 5,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 323,
+  "s" : 5,
+  "t" : 9,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 281,
+  "s" : 5,
+  "t" : 11,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 279,
+  "s" : 5,
+  "t" : 11,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 294,
+  "s" : 5,
+  "t" : 12,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 302,
+  "s" : 5,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 317,
+  "s" : 5,
+  "t" : 14,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 293,
+  "s" : 5,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 309,
+  "s" : 5,
+  "t" : 19,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 310,
+  "s" : 5,
+  "t" : 19,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 318,
+  "s" : 5,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 319,
+  "s" : 5,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 313,
+  "s" : 5,
+  "t" : 26,
+  "i" : "controls-expression-of"
+}, {
+  "@id" : 314,
+  "s" : 5,
+  "t" : 26,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 315,
+  "s" : 5,
+  "t" : 26,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 282,
+  "s" : 5,
+  "t" : 27,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 284,
+  "s" : 5,
+  "t" : 27,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 290,
+  "s" : 5,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 311,
+  "s" : 5,
+  "t" : 29,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 292,
+  "s" : 5,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 333,
+  "s" : 5,
+  "t" : 34,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 334,
+  "s" : 5,
+  "t" : 34,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 307,
+  "s" : 5,
+  "t" : 35,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 285,
+  "s" : 5,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 298,
+  "s" : 5,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 299,
+  "s" : 5,
+  "t" : 45,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 305,
+  "s" : 5,
+  "t" : 46,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 306,
+  "s" : 5,
+  "t" : 46,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 296,
+  "s" : 5,
+  "t" : 47,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 300,
+  "s" : 5,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 301,
+  "s" : 5,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 286,
+  "s" : 5,
+  "t" : 49,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 320,
+  "s" : 5,
+  "t" : 51,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 303,
+  "s" : 5,
+  "t" : 54,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 456,
+  "s" : 6,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 457,
+  "s" : 6,
+  "t" : 25,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 458,
+  "s" : 6,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 459,
+  "s" : 6,
+  "t" : 7,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 462,
+  "s" : 7,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 464,
+  "s" : 7,
+  "t" : 26,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 460,
+  "s" : 7,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 465,
+  "s" : 7,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 463,
+  "s" : 7,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 94,
+  "s" : 8,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 92,
+  "s" : 8,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 96,
+  "s" : 8,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 86,
+  "s" : 8,
+  "t" : 44,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 90,
+  "s" : 8,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 82,
+  "s" : 8,
+  "t" : 20,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 84,
+  "s" : 8,
+  "t" : 21,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 88,
+  "s" : 8,
+  "t" : 52,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 442,
+  "s" : 9,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 443,
+  "s" : 9,
+  "t" : 42,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 444,
+  "s" : 9,
+  "t" : 34,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 3,
+  "s" : 11,
+  "t" : 10,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 1,
+  "s" : 11,
+  "t" : 37,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 9,
+  "s" : 11,
+  "t" : 13,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 11,
+  "s" : 11,
+  "t" : 13,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 337,
+  "s" : 12,
+  "t" : 0,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 339,
+  "s" : 12,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 359,
+  "s" : 12,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 366,
+  "s" : 12,
+  "t" : 34,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 367,
+  "s" : 12,
+  "t" : 34,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 354,
+  "s" : 12,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 355,
+  "s" : 12,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 361,
+  "s" : 12,
+  "t" : 6,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 364,
+  "s" : 12,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 356,
+  "s" : 12,
+  "t" : 9,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 342,
+  "s" : 12,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 345,
+  "s" : 12,
+  "t" : 46,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 346,
+  "s" : 12,
+  "t" : 46,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 340,
+  "s" : 12,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 335,
+  "s" : 12,
+  "t" : 49,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 347,
+  "s" : 12,
+  "t" : 19,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 348,
+  "s" : 12,
+  "t" : 19,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 343,
+  "s" : 12,
+  "t" : 54,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 352,
+  "s" : 12,
+  "t" : 26,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 341,
+  "s" : 12,
+  "t" : 47,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 349,
+  "s" : 12,
+  "t" : 29,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 377,
+  "s" : 13,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 417,
+  "s" : 14,
+  "t" : 50,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 419,
+  "s" : 14,
+  "t" : 50,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 420,
+  "s" : 14,
+  "t" : 5,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 220,
+  "s" : 15,
+  "t" : 26,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 438,
+  "s" : 16,
+  "t" : 51,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 141,
+  "s" : 17,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 139,
+  "s" : 17,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 137,
+  "s" : 17,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 378,
+  "s" : 18,
+  "t" : 31,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 408,
+  "s" : 19,
+  "t" : 36,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 409,
+  "s" : 19,
+  "t" : 6,
+  "i" : "catalysis-precedes"
+}, {
+  "@id" : 107,
+  "s" : 20,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 105,
+  "s" : 20,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 109,
+  "s" : 20,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 99,
+  "s" : 20,
+  "t" : 44,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 103,
+  "s" : 20,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 101,
+  "s" : 20,
+  "t" : 52,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 97,
+  "s" : 20,
+  "t" : 21,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 118,
+  "s" : 21,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 116,
+  "s" : 21,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 120,
+  "s" : 21,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 110,
+  "s" : 21,
+  "t" : 44,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 114,
+  "s" : 21,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 112,
+  "s" : 21,
+  "t" : 52,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 421,
+  "s" : 22,
+  "t" : 2,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 422,
+  "s" : 22,
+  "t" : 6,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 423,
+  "s" : 22,
+  "t" : 7,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 407,
+  "s" : 23,
+  "t" : 19,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 406,
+  "s" : 23,
+  "t" : 36,
+  "i" : "used-to-produce"
+}, {
+  "@id" : 405,
+  "s" : 23,
+  "t" : 46,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 386,
+  "s" : 24,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 410,
+  "s" : 26,
+  "t" : 50,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 412,
+  "s" : 26,
+  "t" : 50,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 415,
+  "s" : 26,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 414,
+  "s" : 26,
+  "t" : 14,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 76,
+  "s" : 28,
+  "t" : 18,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 78,
+  "s" : 28,
+  "t" : 31,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 188,
+  "s" : 30,
+  "t" : 51,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 171,
+  "s" : 30,
+  "t" : 11,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 173,
+  "s" : 30,
+  "t" : 11,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 180,
+  "s" : 30,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 177,
+  "s" : 30,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 182,
+  "s" : 30,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 183,
+  "s" : 30,
+  "t" : 45,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 184,
+  "s" : 30,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 185,
+  "s" : 30,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 178,
+  "s" : 30,
+  "t" : 50,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 186,
+  "s" : 30,
+  "t" : 35,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 176,
+  "s" : 30,
+  "t" : 27,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 174,
+  "s" : 30,
+  "t" : 27,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 213,
+  "s" : 32,
+  "t" : 41,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 219,
+  "s" : 32,
+  "t" : 42,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 212,
+  "s" : 32,
+  "t" : 43,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 214,
+  "s" : 32,
+  "t" : 45,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 215,
+  "s" : 32,
+  "t" : 48,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 216,
+  "s" : 32,
+  "t" : 53,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 218,
+  "s" : 32,
+  "t" : 22,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 217,
+  "s" : 32,
+  "t" : 24,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 43,
+  "s" : 33,
+  "t" : 51,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 466,
+  "s" : 34,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 467,
+  "s" : 34,
+  "t" : 42,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 387,
+  "s" : 35,
+  "t" : 11,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 389,
+  "s" : 35,
+  "t" : 11,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 393,
+  "s" : 35,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 394,
+  "s" : 35,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 395,
+  "s" : 35,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 396,
+  "s" : 35,
+  "t" : 51,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 392,
+  "s" : 35,
+  "t" : 27,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 390,
+  "s" : 35,
+  "t" : 27,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 402,
+  "s" : 36,
+  "t" : 35,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 401,
+  "s" : 36,
+  "t" : 5,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 404,
+  "s" : 36,
+  "t" : 6,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 400,
+  "s" : 36,
+  "t" : 50,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 403,
+  "s" : 36,
+  "t" : 25,
+  "i" : "used-to-produce"
+}, {
+  "@id" : 399,
+  "s" : 36,
+  "t" : 30,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 144,
+  "s" : 38,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 142,
+  "s" : 38,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 147,
+  "s" : 39,
+  "t" : 0,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 155,
+  "s" : 39,
+  "t" : 1,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 157,
+  "s" : 39,
+  "t" : 2,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 151,
+  "s" : 39,
+  "t" : 5,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 158,
+  "s" : 39,
+  "t" : 6,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 159,
+  "s" : 39,
+  "t" : 7,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 148,
+  "s" : 39,
+  "t" : 40,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 156,
+  "s" : 39,
+  "t" : 9,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 154,
+  "s" : 39,
+  "t" : 42,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 152,
+  "s" : 39,
+  "t" : 12,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 160,
+  "s" : 39,
+  "t" : 34,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 150,
+  "s" : 39,
+  "t" : 50,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 153,
+  "s" : 39,
+  "t" : 22,
+  "i" : "chemical-affects"
+}, {
+  "@id" : 149,
+  "s" : 39,
+  "t" : 55,
+  "i" : "consumption-controlled-by"
+}, {
+  "@id" : 63,
+  "s" : 40,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 66,
+  "s" : 40,
+  "t" : 1,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 64,
+  "s" : 40,
+  "t" : 42,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 65,
+  "s" : 40,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 70,
+  "s" : 40,
+  "t" : 34,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 68,
+  "s" : 40,
+  "t" : 9,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 52,
+  "s" : 41,
+  "t" : 3,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 51,
+  "s" : 41,
+  "t" : 38,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 45,
+  "s" : 41,
+  "t" : 8,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 61,
+  "s" : 41,
+  "t" : 42,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 44,
+  "s" : 41,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 48,
+  "s" : 41,
+  "t" : 44,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 53,
+  "s" : 41,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 54,
+  "s" : 41,
+  "t" : 45,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 56,
+  "s" : 41,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 55,
+  "s" : 41,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 50,
+  "s" : 41,
+  "t" : 17,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 46,
+  "s" : 41,
+  "t" : 20,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 47,
+  "s" : 41,
+  "t" : 21,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 59,
+  "s" : 41,
+  "t" : 24,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 60,
+  "s" : 41,
+  "t" : 24,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 49,
+  "s" : 41,
+  "t" : 52,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 57,
+  "s" : 41,
+  "t" : 53,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 58,
+  "s" : 41,
+  "t" : 53,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 429,
+  "s" : 42,
+  "t" : 1,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 431,
+  "s" : 42,
+  "t" : 34,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 430,
+  "s" : 42,
+  "t" : 9,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 424,
+  "s" : 42,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 425,
+  "s" : 42,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 426,
+  "s" : 42,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 427,
+  "s" : 42,
+  "t" : 53,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 428,
+  "s" : 42,
+  "t" : 24,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 24,
+  "s" : 43,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 21,
+  "s" : 43,
+  "t" : 5,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 18,
+  "s" : 43,
+  "t" : 41,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 25,
+  "s" : 43,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 22,
+  "s" : 43,
+  "t" : 45,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 23,
+  "s" : 43,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 20,
+  "s" : 43,
+  "t" : 50,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 19,
+  "s" : 43,
+  "t" : 30,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 123,
+  "s" : 44,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 129,
+  "s" : 44,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 127,
+  "s" : 44,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 121,
+  "s" : 44,
+  "t" : 52,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 125,
+  "s" : 44,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 372,
+  "s" : 45,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 374,
+  "s" : 45,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 373,
+  "s" : 45,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 380,
+  "s" : 46,
+  "t" : 19,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 379,
+  "s" : 46,
+  "t" : 36,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 382,
+  "s" : 46,
+  "t" : 6,
+  "i" : "catalysis-precedes"
+}, {
+  "@id" : 370,
+  "s" : 47,
+  "t" : 19,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 371,
+  "s" : 47,
+  "t" : 19,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 368,
+  "s" : 47,
+  "t" : 46,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 369,
+  "s" : 47,
+  "t" : 46,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 376,
+  "s" : 48,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 375,
+  "s" : 48,
+  "t" : 35,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 230,
+  "s" : 50,
+  "t" : 0,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 270,
+  "s" : 50,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 236,
+  "s" : 50,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 272,
+  "s" : 50,
+  "t" : 6,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 275,
+  "s" : 50,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 267,
+  "s" : 50,
+  "t" : 9,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 221,
+  "s" : 50,
+  "t" : 11,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 223,
+  "s" : 50,
+  "t" : 11,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 238,
+  "s" : 50,
+  "t" : 12,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 246,
+  "s" : 50,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 235,
+  "s" : 50,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 253,
+  "s" : 50,
+  "t" : 19,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 254,
+  "s" : 50,
+  "t" : 19,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 262,
+  "s" : 50,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 263,
+  "s" : 50,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 257,
+  "s" : 50,
+  "t" : 26,
+  "i" : "controls-expression-of"
+}, {
+  "@id" : 258,
+  "s" : 50,
+  "t" : 26,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 259,
+  "s" : 50,
+  "t" : 26,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 224,
+  "s" : 50,
+  "t" : 27,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 226,
+  "s" : 50,
+  "t" : 27,
+  "i" : "controls-transport-of"
+}, {
+  "@id" : 232,
+  "s" : 50,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 255,
+  "s" : 50,
+  "t" : 29,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 234,
+  "s" : 50,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 277,
+  "s" : 50,
+  "t" : 34,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 278,
+  "s" : 50,
+  "t" : 34,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 251,
+  "s" : 50,
+  "t" : 35,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 227,
+  "s" : 50,
+  "t" : 43,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 242,
+  "s" : 50,
+  "t" : 45,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 243,
+  "s" : 50,
+  "t" : 45,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 249,
+  "s" : 50,
+  "t" : 46,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 250,
+  "s" : 50,
+  "t" : 46,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 240,
+  "s" : 50,
+  "t" : 47,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 244,
+  "s" : 50,
+  "t" : 48,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 245,
+  "s" : 50,
+  "t" : 48,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 228,
+  "s" : 50,
+  "t" : 49,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 264,
+  "s" : 50,
+  "t" : 51,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 247,
+  "s" : 50,
+  "t" : 54,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 441,
+  "s" : 51,
+  "t" : 16,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 439,
+  "s" : 51,
+  "t" : 10,
+  "i" : "controls-phosphorylation-of"
+}, {
+  "@id" : 130,
+  "s" : 52,
+  "t" : 17,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 136,
+  "s" : 52,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 134,
+  "s" : 52,
+  "t" : 3,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 132,
+  "s" : 52,
+  "t" : 38,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 383,
+  "s" : 53,
+  "t" : 24,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 385,
+  "s" : 53,
+  "t" : 42,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 193,
+  "s" : 55,
+  "t" : 32,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 207,
+  "s" : 55,
+  "t" : 2,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 197,
+  "s" : 55,
+  "t" : 5,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 209,
+  "s" : 55,
+  "t" : 6,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 210,
+  "s" : 55,
+  "t" : 7,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 199,
+  "s" : 55,
+  "t" : 12,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 201,
+  "s" : 55,
+  "t" : 13,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 194,
+  "s" : 55,
+  "t" : 15,
+  "i" : "controls-production-of"
+}, {
+  "@id" : 195,
+  "s" : 55,
+  "t" : 50,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 205,
+  "s" : 55,
+  "t" : 22,
+  "i" : "controls-state-change-of"
+}, {
+  "@id" : 206,
+  "s" : 55,
+  "t" : 22,
+  "i" : "neighbor-of"
+}, {
+  "@id" : 203,
+  "s" : 55,
+  "t" : 26,
+  "i" : "in-complex-with"
+}, {
+  "@id" : 191,
+  "s" : 55,
+  "t" : 28,
+  "i" : "controls-phosphorylation-of"
+}]},
+ {"networkAttributes":[{
+  "n" : "name",
+  "v" : "Insulin Pathway"
+}, {
+  "n" : "reference",
+  "v" : ""
+}, {
+  "n" : "author",
+  "v" : "Shiva Krupa"
+}, {
+  "n" : "reviewers",
+  "v" : "Michael Pollak, Mike Czech"
+}, {
+  "n" : "labels",
+  "v" : "insulin_pathway"
+}, {
+  "n" : "version",
+  "v" : "APR-2018"
+}, {
+  "n" : "organism",
+  "v" : "human"
+}, {
+  "n" : "description",
+  "v" : "<i>Insulin Pathway</i> was derived from the latest BioPAX3 version of the Pathway Interaction Database (PID) curated by NCI/Nature. The BioPAX was first converted to Extended Binary SIF (EBS) by the PAXTools v5 utility. It was then processed to remove redundant edges, to add a 'directed flow' layout, and to add a graphic style using Cytoscape Visual Properties. This network can be found in searches using its original PID accession id, present in the 'labels' property."
+}]},
+ {"nodeAttributes":[{
+  "po" : 0,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 0,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P22681" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 1,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 1,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5JUE4", "uniprot knowledgebase:Q68DL3", "uniprot knowledgebase:Q8IV73" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 2,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 2,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DV78", "uniprot knowledgebase:O15290", "uniprot knowledgebase:P29353", "uniprot knowledgebase:Q5T180", "uniprot knowledgebase:Q5T183", "uniprot knowledgebase:Q5T184", "uniprot knowledgebase:Q5T185", "uniprot knowledgebase:Q5T186", "uniprot knowledgebase:Q8N4K5", "uniprot knowledgebase:Q96CL1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 3,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 3,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5TE82", "uniprot knowledgebase:Q8IYI6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 4,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 4,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A7VJ95", "uniprot knowledgebase:A8K0E6", "uniprot knowledgebase:D3DVM9", "uniprot knowledgebase:O00427", "uniprot knowledgebase:O00701", "uniprot knowledgebase:O75222", "uniprot knowledgebase:Q13322", "uniprot knowledgebase:Q92606", "uniprot knowledgebase:Q92907", "uniprot knowledgebase:Q92948" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 5,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 5,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5EEX2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 6,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 6,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q13544", "uniprot knowledgebase:Q13545", "uniprot knowledgebase:Q6P5A4", "uniprot knowledgebase:Q92656", "uniprot knowledgebase:Q92835", "uniprot knowledgebase:Q9UE80" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 7,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 7,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DXG2", "uniprot knowledgebase:Q07889" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 8,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 8,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q8WUE7", "uniprot knowledgebase:Q96T15", "uniprot knowledgebase:Q9NV70", "uniprot knowledgebase:Q9NZE4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 9,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O14492" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 10,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 10,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:E1P5E6", "uniprot knowledgebase:O15171", "uniprot knowledgebase:O43524", "uniprot knowledgebase:Q5T2I7", "uniprot knowledgebase:Q9BZ04" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 11,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 11,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7Z5R1", "uniprot knowledgebase:P31749", "uniprot knowledgebase:Q9BWB6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 12,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 13,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 13,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DLT4", "uniprot knowledgebase:B4DTG1", "uniprot knowledgebase:E7ESB8", "uniprot knowledgebase:F6UYM1", "uniprot knowledgebase:P23443", "uniprot knowledgebase:Q7Z721" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 14,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 14,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DVX5", "uniprot knowledgebase:P18433", "uniprot knowledgebase:Q14513", "uniprot knowledgebase:Q7Z2I2", "uniprot knowledgebase:Q96TD9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 15,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 16,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 16,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4E2Q5", "uniprot knowledgebase:C5HTZ0", "uniprot knowledgebase:O43271", "uniprot knowledgebase:P37088", "uniprot knowledgebase:Q6GSQ6", "uniprot knowledgebase:Q9UM64" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 17,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 17,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5VXH8", "uniprot knowledgebase:Q8TAG9", "uniprot knowledgebase:Q9NZ24" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 18,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 18,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DNE3", "uniprot knowledgebase:P16333" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 19,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 19,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q14CW1", "uniprot knowledgebase:Q99762" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 20,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 20,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5JPC8", "uniprot knowledgebase:Q96AN6", "uniprot knowledgebase:Q96KP1", "uniprot knowledgebase:Q9NUZ8", "uniprot knowledgebase:Q9UJM7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 21,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 21,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q6P2E8", "uniprot knowledgebase:Q8TEN6", "uniprot knowledgebase:Q8WUW0", "uniprot knowledgebase:Q96DI4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 22,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 22,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P01112", "uniprot knowledgebase:Q14080", "uniprot knowledgebase:Q6FHV9", "uniprot knowledgebase:Q9BR65", "uniprot knowledgebase:Q9UCE2" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 23,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 24,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 24,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q9NPB6", "uniprot knowledgebase:Q9NPJ7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 25,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 26,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 26,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q5TGD8", "uniprot knowledgebase:Q9BQV9", "uniprot knowledgebase:Q9NQQ4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 27,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 27,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P31751", "uniprot knowledgebase:Q05BV0", "uniprot knowledgebase:Q0VAN0", "uniprot knowledgebase:Q0VAN1", "uniprot knowledgebase:Q68GC0" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 28,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 28,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q53TY2", "uniprot knowledgebase:Q99704", "uniprot knowledgebase:Q9UHG6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 29,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 29,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q06124", "uniprot knowledgebase:Q96HD7" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 30,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 30,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q14449", "uniprot knowledgebase:Q7Z6I1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 31,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 31,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DTL2", "uniprot knowledgebase:P20936", "uniprot knowledgebase:Q68CU6", "uniprot knowledgebase:Q9UDI1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 32,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 33,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 34,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 34,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A6NEK3", "uniprot knowledgebase:A6NID8", "uniprot knowledgebase:A6NJS4", "uniprot knowledgebase:A7MD40", "uniprot knowledgebase:D3DR42", "uniprot knowledgebase:O43857", "uniprot knowledgebase:Q5T923", "uniprot knowledgebase:Q5T924", "uniprot knowledgebase:Q5T927", "uniprot knowledgebase:Q5T928", "uniprot knowledgebase:Q5T929", "uniprot knowledgebase:Q5T930", "uniprot knowledgebase:Q5T931", "uniprot knowledgebase:Q5T932", "uniprot knowledgebase:Q7LBE5", "uniprot knowledgebase:Q8IVK0", "uniprot knowledgebase:Q8IVQ4", "uniprot knowledgebase:Q96KF3", "uniprot knowledgebase:Q96KF4", "uniprot knowledgebase:Q9BX64", "uniprot knowledgebase:Q9BX65", "uniprot knowledgebase:Q9BX66", "uniprot knowledgebase:Q9P2Q0", "uniprot knowledgebase:Q9UFT2", "uniprot knowledgebase:Q9UHN7", "uniprot knowledgebase:Q9Y338" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 35,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 35,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O15530", "uniprot knowledgebase:Q59EH6", "uniprot knowledgebase:Q6FI20", "uniprot knowledgebase:Q8IV52", "uniprot knowledgebase:Q9BRD5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 36,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 37,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 37,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DSW8", "uniprot knowledgebase:Q13541", "uniprot knowledgebase:Q6IBN3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 38,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 38,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B8XXP2", "uniprot knowledgebase:Q8ND93", "uniprot knowledgebase:Q8WV91", "uniprot knowledgebase:Q96FF0", "uniprot knowledgebase:Q9H8C3", "uniprot knowledgebase:Q9H9X3", "uniprot knowledgebase:Q9HA32", "uniprot knowledgebase:Q9UPT5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 39,
+  "n" : "type",
+  "v" : "SmallMolecule"
+}, {
+  "po" : 40,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 40,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B0LPE8", "uniprot knowledgebase:D3DTH6", "uniprot knowledgebase:P46108", "uniprot knowledgebase:Q96GA9", "uniprot knowledgebase:Q96HJ0" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 41,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 41,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7WP22", "uniprot knowledgebase:D6W645", "uniprot knowledgebase:O15184", "uniprot knowledgebase:Q15642", "uniprot knowledgebase:Q53G22", "uniprot knowledgebase:Q5TZN1", "uniprot knowledgebase:Q6FI24", "uniprot knowledgebase:Q8NFL1", "uniprot knowledgebase:Q8TCY1", "uniprot knowledgebase:Q8TDX3", "uniprot knowledgebase:Q96RJ1" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 42,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 42,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P17081", "uniprot knowledgebase:Q0VGN1", "uniprot knowledgebase:Q52LS8", "uniprot knowledgebase:Q53SJ1", "uniprot knowledgebase:Q6NS39", "uniprot knowledgebase:Q6P146", "uniprot knowledgebase:Q7Z480" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 43,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 44,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 44,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q541U8", "uniprot knowledgebase:Q96A65", "uniprot knowledgebase:Q9C0G4", "uniprot knowledgebase:Q9H9K0", "uniprot knowledgebase:Q9P102" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 45,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 45,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P41743", "uniprot knowledgebase:Q8WW06" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 46,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 46,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:D3DWA0", "uniprot knowledgebase:E7EX19", "uniprot knowledgebase:P27986", "uniprot knowledgebase:Q15747", "uniprot knowledgebase:Q4VBZ7", "uniprot knowledgebase:Q53EM6", "uniprot knowledgebase:Q8IXA2", "uniprot knowledgebase:Q8N1C5" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 47,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 48,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 48,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:A8MU64", "uniprot knowledgebase:B7Z2J7", "uniprot knowledgebase:E9PCW2", "uniprot knowledgebase:Q05513", "uniprot knowledgebase:Q15207", "uniprot knowledgebase:Q5SYT5", "uniprot knowledgebase:Q969S4" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 49,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 49,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q9UGP1", "uniprot knowledgebase:Q9UNG1", "uniprot knowledgebase:Q9UQH6" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 50,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 50,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:Q17RW0", "uniprot knowledgebase:Q59H98", "uniprot knowledgebase:Q9UCB7", "uniprot knowledgebase:Q9UCB8", "uniprot knowledgebase:Q9UCB9" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 51,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 51,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B7UUP8", "uniprot knowledgebase:B7UUP9", "uniprot knowledgebase:B7Z5B2", "uniprot knowledgebase:E1P583", "uniprot knowledgebase:O00141", "uniprot knowledgebase:Q5TCN2", "uniprot knowledgebase:Q5TCN3", "uniprot knowledgebase:Q5TCN4", "uniprot knowledgebase:Q5VY65", "uniprot knowledgebase:Q9UN56" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 52,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 52,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O00471" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 53,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 53,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:B4DQ13", "uniprot knowledgebase:O00254", "uniprot knowledgebase:Q52M68", "uniprot knowledgebase:Q7Z3W3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 54,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 54,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:O43639", "uniprot knowledgebase:Q9BWN9", "uniprot knowledgebase:Q9UIC3" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 55,
+  "n" : "type",
+  "v" : "Protein"
+}, {
+  "po" : 55,
+  "n" : "alias",
+  "v" : [ "uniprot knowledgebase:P62993", "uniprot knowledgebase:Q14450", "uniprot knowledgebase:Q63057", "uniprot knowledgebase:Q63059" ],
+  "d" : "list_of_string"
+}]},
+ {"edgeAttributes":[{
+  "po" : 31,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 31,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 37,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 41,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 29,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 39,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 35,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 36,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 36,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 432,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 432,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 434,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 433,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 433,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 436,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 448,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 448,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 452,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 454,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 449,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 449,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 451,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 451,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 446,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 446,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 145,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 145,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 168,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 166,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 170,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 170,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 164,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 163,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 163,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 161,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 161,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 288,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 288,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 326,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 328,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 328,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 331,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 323,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 323,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 281,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 281,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 279,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 279,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 294,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 302,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 317,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 317,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 293,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 293,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 309,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 309,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 310,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 310,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 318,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 318,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 319,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 319,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 313,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 313,
+  "n" : "citation",
+  "v" : [ "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 314,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 314,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536", "pubmed:11864611", "pubmed:12802338", "pubmed:14966267", "pubmed:15192089", "pubmed:9624118" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 315,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 282,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 282,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 284,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 284,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 290,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 290,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 311,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 292,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 292,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 333,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 333,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 334,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 334,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 307,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 285,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 285,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 298,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 298,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 299,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 299,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 305,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 305,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 306,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 306,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 296,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 300,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 300,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 301,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 301,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 286,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 286,
+  "n" : "citation",
+  "v" : [ "pubmed:12036959", "pubmed:16388599" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 320,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 320,
+  "n" : "citation",
+  "v" : [ "pubmed:11096081" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 303,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 456,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 456,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 457,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 457,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:10606629", "pubmed:10764758", "pubmed:16038794", "pubmed:17135240", "pubmed:17638849", "pubmed:7556092", "pubmed:8643691", "pubmed:9111325", "pubmed:9824312", "pubmed:9891043" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 458,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 458,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 459,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 459,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 462,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 462,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 464,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 464,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536", "pubmed:11864611", "pubmed:12802338", "pubmed:14966267", "pubmed:15192089", "pubmed:9624118" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 460,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 460,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 465,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 465,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 463,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 463,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 94,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 92,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 96,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 96,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 86,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 90,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 82,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 84,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 88,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 442,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 442,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 443,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 443,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 444,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 3,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 3,
+  "n" : "citation",
+  "v" : [ "pubmed:11154281" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 1,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 1,
+  "n" : "citation",
+  "v" : [ "pubmed:10330191" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 9,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 9,
+  "n" : "citation",
+  "v" : [ "pubmed:10330191" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 11,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 11,
+  "n" : "citation",
+  "v" : [ "pubmed:10330191" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 337,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 337,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 339,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 339,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 359,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 366,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 366,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 367,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 367,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 354,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 354,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 355,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 355,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 361,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 361,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 364,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 356,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 356,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 342,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 345,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 345,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 346,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 346,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 340,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 340,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 335,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 335,
+  "n" : "citation",
+  "v" : [ "pubmed:12036959", "pubmed:16388599" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 347,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 347,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 348,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 348,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 343,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 352,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 341,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 341,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 349,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 377,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 417,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 417,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 419,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 419,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 420,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 420,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 220,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 220,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536", "pubmed:11864611", "pubmed:12802338", "pubmed:14966267", "pubmed:15192089", "pubmed:9624118" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 438,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 438,
+  "n" : "citation",
+  "v" : [ "pubmed:11832334" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 141,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 141,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 139,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 137,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 378,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 378,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 408,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 408,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10570282", "pubmed:10648629", "pubmed:10669418", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7982920", "pubmed:8052307", "pubmed:9029085", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 409,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 409,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10499514", "pubmed:10570282", "pubmed:10606629", "pubmed:10648629", "pubmed:10669418", "pubmed:10764758", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16038794", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:17135240", "pubmed:17638849", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7556092", "pubmed:7982920", "pubmed:8052307", "pubmed:8643691", "pubmed:9029085", "pubmed:9111325", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546", "pubmed:9824312", "pubmed:9891043" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 107,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 105,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 109,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 109,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 99,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 103,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 101,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 97,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 118,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 116,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 120,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 120,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 110,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 114,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 112,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 421,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 421,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 422,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 422,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 423,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 423,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 407,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 407,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10570282", "pubmed:10648629", "pubmed:10669418", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7982920", "pubmed:8052307", "pubmed:9029085", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 406,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 406,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10570282", "pubmed:10648629", "pubmed:10669418", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7982920", "pubmed:8052307", "pubmed:9029085", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 405,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 405,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10570282", "pubmed:10648629", "pubmed:10669418", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7982920", "pubmed:8052307", "pubmed:9029085", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 386,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 386,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 410,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 410,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 412,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 412,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 415,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 414,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 414,
+  "n" : "citation",
+  "v" : [ "pubmed:10066179", "pubmed:11579209", "pubmed:1321126", "pubmed:1599438", "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 76,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 78,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 188,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 188,
+  "n" : "citation",
+  "v" : [ "pubmed:11096081" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 171,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 171,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 173,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 173,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 180,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 177,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 177,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 182,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 182,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 183,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 183,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 184,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 184,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 185,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 185,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 178,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 186,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 176,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 176,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 174,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 174,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 213,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 219,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 212,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 212,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 214,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 214,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 215,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 215,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 216,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 216,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 218,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 217,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 217,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 43,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 43,
+  "n" : "citation",
+  "v" : [ "pubmed:11096081" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 466,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 466,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 467,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 467,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 387,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 387,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 389,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 389,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 393,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 393,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 394,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 394,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 395,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 395,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 396,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 396,
+  "n" : "citation",
+  "v" : [ "pubmed:11096081" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 392,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 392,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 390,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 390,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 402,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 402,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 401,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 401,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 404,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 404,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:10606629", "pubmed:10764758", "pubmed:16038794", "pubmed:17135240", "pubmed:17638849", "pubmed:7556092", "pubmed:8643691", "pubmed:9111325", "pubmed:9824312", "pubmed:9891043" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 400,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 400,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 403,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 403,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:10606629", "pubmed:10764758", "pubmed:16038794", "pubmed:17135240", "pubmed:17638849", "pubmed:7556092", "pubmed:8643691", "pubmed:9111325", "pubmed:9824312", "pubmed:9891043" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 399,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 399,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 144,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 144,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 142,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 147,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 147,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 155,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 155,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 157,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 157,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 151,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 151,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 158,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 158,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 159,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 159,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 148,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 148,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 156,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 156,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 154,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 152,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 152,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 160,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 160,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 150,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 150,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 153,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 149,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 149,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 63,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 63,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 66,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 64,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 64,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 65,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 65,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 70,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 68,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 52,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 52,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 51,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 51,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 45,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 45,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 61,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 44,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 44,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 48,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 48,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 53,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 53,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 54,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 54,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 56,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 56,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 55,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 55,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 50,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 50,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 46,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 46,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 47,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 47,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 59,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 59,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 60,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 60,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 49,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 49,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 57,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 57,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 58,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 58,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 429,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 429,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 431,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 431,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 430,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 430,
+  "n" : "citation",
+  "v" : [ "pubmed:11309621", "pubmed:11502760", "pubmed:11821390" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 424,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 424,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 425,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 425,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 426,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 426,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 427,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 427,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 428,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 428,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 24,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 24,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 21,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 21,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 18,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 18,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 25,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 25,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 22,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 22,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537", "pubmed:15787604", "pubmed:2123524", "pubmed:7581368", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 23,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 23,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537", "pubmed:15787604", "pubmed:2123524", "pubmed:7581368", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 20,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 20,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 19,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 19,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 123,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 129,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 129,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 127,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 121,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 125,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 372,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 372,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537", "pubmed:15787604", "pubmed:2123524", "pubmed:7581368", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 374,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 374,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 373,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 373,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 380,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 379,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 379,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10570282", "pubmed:10648629", "pubmed:10669418", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7982920", "pubmed:8052307", "pubmed:9029085", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 382,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 382,
+  "n" : "citation",
+  "v" : [ "pubmed:10383446", "pubmed:10499514", "pubmed:10570282", "pubmed:10606629", "pubmed:10648629", "pubmed:10669418", "pubmed:10764758", "pubmed:11029009", "pubmed:11136732", "pubmed:11438544", "pubmed:11546794", "pubmed:12077227", "pubmed:12421919", "pubmed:12431978", "pubmed:12682230", "pubmed:12750173", "pubmed:12951049", "pubmed:15994292", "pubmed:16033886", "pubmed:16038794", "pubmed:16456542", "pubmed:1652056", "pubmed:16787925", "pubmed:16798838", "pubmed:17135240", "pubmed:17638849", "pubmed:18033240", "pubmed:18662984", "pubmed:20153221", "pubmed:7556092", "pubmed:7982920", "pubmed:8052307", "pubmed:8643691", "pubmed:9029085", "pubmed:9111325", "pubmed:9307042", "pubmed:9593664", "pubmed:9722546", "pubmed:9824312", "pubmed:9891043" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 370,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 370,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 371,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 371,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 368,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 368,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 369,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 369,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 376,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 376,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 375,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 375,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 230,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 230,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 270,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 236,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 272,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 272,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 275,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 267,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 267,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 221,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 221,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 223,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 223,
+  "n" : "citation",
+  "v" : [ "pubmed:10766839", "pubmed:10982827", "pubmed:11241670", "pubmed:12147684", "pubmed:12181443", "pubmed:12393431", "pubmed:12525482", "pubmed:14557412", "pubmed:14666721", "pubmed:15928312", "pubmed:17308105", "pubmed:8524413", "pubmed:8617294", "pubmed:8978681", "pubmed:9065430", "pubmed:9108028", "pubmed:9109420", "pubmed:9162082" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 238,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 246,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 235,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 235,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 253,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 253,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 254,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 254,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 262,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 262,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 263,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 263,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 257,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 257,
+  "n" : "citation",
+  "v" : [ "pubmed:8244979" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 258,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 258,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536", "pubmed:11864611", "pubmed:12802338", "pubmed:14966267", "pubmed:15192089", "pubmed:9624118" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 259,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 224,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 224,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 226,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 226,
+  "n" : "citation",
+  "v" : [ "pubmed:12147684", "pubmed:8524413", "pubmed:8978681", "pubmed:9065430", "pubmed:9109420" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 232,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 232,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 255,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 234,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 234,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 277,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 277,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 278,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 278,
+  "n" : "citation",
+  "v" : [ "pubmed:11001060", "pubmed:11997497", "pubmed:14690593", "pubmed:9447983" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 251,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 227,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 227,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 242,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 242,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 243,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 243,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 249,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 249,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 250,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 250,
+  "n" : "citation",
+  "v" : [ "pubmed:10329736", "pubmed:10497192", "pubmed:10751417", "pubmed:11000521", "pubmed:11002419", "pubmed:11313948", "pubmed:11340169", "pubmed:11438544", "pubmed:11445578", "pubmed:11532940", "pubmed:11886862", "pubmed:11896055", "pubmed:12538620", "pubmed:12817007", "pubmed:1375946", "pubmed:1381348", "pubmed:15142256", "pubmed:15351743", "pubmed:15569713", "pubmed:16076871", "pubmed:16339173", "pubmed:16418218", "pubmed:1718989", "pubmed:17881575", "pubmed:7499247", "pubmed:7513258", "pubmed:8383963", "pubmed:8385105", "pubmed:8534912", "pubmed:8744948", "pubmed:9428518", "pubmed:9668053", "pubmed:9693375" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 240,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 244,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 244,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 245,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 245,
+  "n" : "citation",
+  "v" : [ "pubmed:15787604", "pubmed:8999972", "pubmed:9348199" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 228,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 228,
+  "n" : "citation",
+  "v" : [ "pubmed:12036959", "pubmed:16388599" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 264,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 264,
+  "n" : "citation",
+  "v" : [ "pubmed:11096081" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 247,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 441,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 441,
+  "n" : "citation",
+  "v" : [ "pubmed:11832334" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 439,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 439,
+  "n" : "citation",
+  "v" : [ "pubmed:11154281" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 130,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 136,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 136,
+  "n" : "citation",
+  "v" : [ "pubmed:12687004" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 134,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 132,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 383,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 385,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 385,
+  "n" : "citation",
+  "v" : [ "pubmed:14734537" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 193,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 193,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 207,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 197,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 209,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 209,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7685165", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603", "pubmed:8316835", "pubmed:8449939", "pubmed:8491186", "pubmed:9083103" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 210,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 199,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 201,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 194,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 194,
+  "n" : "citation",
+  "v" : [ "pubmed:11297536" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 195,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 205,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 205,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 206,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 206,
+  "n" : "citation",
+  "v" : [ "pubmed:10499514", "pubmed:11551902", "pubmed:12087092", "pubmed:12865436", "pubmed:15486046", "pubmed:16510594", "pubmed:7806540", "pubmed:7809106", "pubmed:7983051", "pubmed:8114695", "pubmed:8144662", "pubmed:8196603" ],
+  "d" : "list_of_string"
+}, {
+  "po" : 203,
+  "n" : "directed",
+  "v" : "false",
+  "d" : "boolean"
+}, {
+  "po" : 191,
+  "n" : "directed",
+  "v" : "true",
+  "d" : "boolean"
+}, {
+  "po" : 191,
+  "n" : "citation",
+  "v" : [ "pubmed:11551902" ],
+  "d" : "list_of_string"
+}]},
+ {"cartesianLayout":[{
+  "node" : 0,
+  "x" : 75.38105915470885,
+  "y" : 96.37490615218292
+}, {
+  "node" : 1,
+  "x" : -119.88824723602679,
+  "y" : 57.42648852037566
+}, {
+  "node" : 2,
+  "x" : 131.43618818199914,
+  "y" : 471.1220153395936
+}, {
+  "node" : 3,
+  "x" : 308.59211754706735,
+  "y" : -867.8228982246764
+}, {
+  "node" : 4,
+  "x" : -43.962095751680444,
+  "y" : 507.9610842331335
+}, {
+  "node" : 5,
+  "x" : 307.71940212891855,
+  "y" : 469.19517757604814
+}, {
+  "node" : 6,
+  "x" : 409.6374070039382,
+  "y" : 536.4578719077084
+}, {
+  "node" : 7,
+  "x" : 62.12132580324935,
+  "y" : 483.6720997860912
+}, {
+  "node" : 8,
+  "x" : 81.17361803181495,
+  "y" : -773.0930471234896
+}, {
+  "node" : 9,
+  "x" : 13.368953439143953,
+  "y" : 139.08527402331686
+}, {
+  "node" : 10,
+  "x" : 813.7712978715291,
+  "y" : 376.69894873239406
+}, {
+  "node" : 11,
+  "x" : 835.3750131705972,
+  "y" : 301.1556520761415
+}, {
+  "node" : 12,
+  "x" : 200.0693747186636,
+  "y" : 483.5896842853256
+}, {
+  "node" : 13,
+  "x" : 544.4665871063338,
+  "y" : 484.6904971246406
+}, {
+  "node" : 14,
+  "x" : -200.19310161660363,
+  "y" : 439.0766118047886
+}, {
+  "node" : 15,
+  "x" : 46.94427846471414,
+  "y" : 806.6540440461804
+}, {
+  "node" : 16,
+  "x" : 752.2886638153943,
+  "y" : 371.3436767783056
+}, {
+  "node" : 17,
+  "x" : 130.63234634939698,
+  "y" : -850.2631583415614
+}, {
+  "node" : 18,
+  "x" : 476.98492938668517,
+  "y" : 1089.8264525847142
+}, {
+  "node" : 19,
+  "x" : 275.02216717203817,
+  "y" : 819.2445381428796
+}, {
+  "node" : 20,
+  "x" : 306.0225632090877,
+  "y" : -733.495911358239
+}, {
+  "node" : 21,
+  "x" : 370.98813819084614,
+  "y" : -802.2507216889037
+}, {
+  "node" : 22,
+  "x" : 387.9723152762725,
+  "y" : 348.91476348616106
+}, {
+  "node" : 23,
+  "x" : 45.93406621274732,
+  "y" : 689.29910869695
+}, {
+  "node" : 24,
+  "x" : 650.0619618142185,
+  "y" : -78.94674284032531
+}, {
+  "node" : 25,
+  "x" : 693.4808602022849,
+  "y" : 454.27371453095975
+}, {
+  "node" : 26,
+  "x" : -118.02504812792937,
+  "y" : 656.8442002927496
+}, {
+  "node" : 27,
+  "x" : 825.2795960599343,
+  "y" : 503.55288615689307
+}, {
+  "node" : 28,
+  "x" : 447.22639281023044,
+  "y" : 841.832568681113
+}, {
+  "node" : 29,
+  "x" : 316.0381976550765,
+  "y" : 611.5335913577973
+}, {
+  "node" : 30,
+  "x" : 637.1873831869327,
+  "y" : 318.3054925770587
+}, {
+  "node" : 31,
+  "x" : 548.0059477526328,
+  "y" : 1069.208332909171
+}, {
+  "node" : 32,
+  "x" : 260.627946351898,
+  "y" : 122.49600828537427
+}, {
+  "node" : 33,
+  "x" : 131.8455913497998,
+  "y" : 356.8868032401412
+}, {
+  "node" : 34,
+  "x" : 131.26077299211136,
+  "y" : 55.453686111408246
+}, {
+  "node" : 35,
+  "x" : 676.4541642433854,
+  "y" : 252.7841305926843
+}, {
+  "node" : 36,
+  "x" : 533.4561678564962,
+  "y" : 647.4550873083278
+}, {
+  "node" : 37,
+  "x" : 898.4225871376824,
+  "y" : 373.92952892389985
+}, {
+  "node" : 38,
+  "x" : 146.6216542543559,
+  "y" : -708.3723086120613
+}, {
+  "node" : 39,
+  "x" : 77.297501805486,
+  "y" : 258.8466874955266
+}, {
+  "node" : 40,
+  "x" : -133.7137140457465,
+  "y" : 131.79649696374693
+}, {
+  "node" : 41,
+  "x" : 362.04005453496694,
+  "y" : -437.02029346998523
+}, {
+  "node" : 42,
+  "x" : 226.9110589544751,
+  "y" : -313.1125849590766
+}, {
+  "node" : 43,
+  "x" : 560.184781763983,
+  "y" : 93.57075024946502
+}, {
+  "node" : 44,
+  "x" : 217.90778438342141,
+  "y" : -883.851314076028
+}, {
+  "node" : 45,
+  "x" : 484.35463706626746,
+  "y" : 123.04405919011873
+}, {
+  "node" : 46,
+  "x" : 198.7176708805113,
+  "y" : 827.7387364658601
+}, {
+  "node" : 47,
+  "x" : -47.351984963619316,
+  "y" : 594.140646448734
+}, {
+  "node" : 48,
+  "x" : 490.4756711412696,
+  "y" : 63.49692221928103
+}, {
+  "node" : 49,
+  "x" : 674.3530803435832,
+  "y" : 575.9159403146348
+}, {
+  "node" : 50,
+  "x" : 314.43607444224745,
+  "y" : 439.6867350604133
+}, {
+  "node" : 51,
+  "x" : 513.2071301482398,
+  "y" : 356.0784572825731
+}, {
+  "node" : 52,
+  "x" : 218.8569408315316,
+  "y" : -774.6636546479018
+}, {
+  "node" : 53,
+  "x" : 569.202596395796,
+  "y" : -73.04252418513248
+}, {
+  "node" : 54,
+  "x" : 243.61170222894893,
+  "y" : 613.4006013204729
+}, {
+  "node" : 55,
+  "x" : 139.60238081148873,
+  "y" : 542.153534099534
+}]},
+ {"visualProperties":[{
+  "properties_of" : "network",
+  "properties" : {
+    "NETWORK_DEPTH" : "0.0",
+    "NETWORK_WIDTH" : "550.0",
+    "NETWORK_EDGE_SELECTION" : "true",
+    "NETWORK_BACKGROUND_PAINT" : "#CCCCCC",
+    "NETWORK_CENTER_X_LOCATION" : "0.0",
+    "NETWORK_HEIGHT" : "400.0",
+    "NETWORK_CENTER_Z_LOCATION" : "0.0",
+    "NETWORK_SCALE_FACTOR" : "1.0",
+    "NETWORK_CENTER_Y_LOCATION" : "0.0",
+    "NETWORK_NODE_SELECTION" : "true",
+    "NETWORK_SIZE" : "550.0"
+  }
+}, {
+  "properties_of" : "nodes:default",
+  "dependencies" : {
+    "nodeCustomGraphicsSizeSync" : "true",
+    "nodeSizeLocked" : "true"
+  },
+  "mappings" : {
+    "NODE_TOOLTIP" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=Other,K=1=Small Molecule,V=1=Small Molecule,K=2=SmallMolecule,V=2=Small Molecule,K=3=Protein,V=3=Protein",
+      "type" : "DISCRETE"
+    },
+    "NODE_LABEL" : {
+      "definition" : "COL=name,T=string",
+      "type" : "PASSTHROUGH"
+    },
+    "NODE_FILL_COLOR" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=#99CCFF,K=1=Small Molecule,V=1=#FF9900,K=2=SmallMolecule,V=2=#FF9900",
+      "type" : "DISCRETE"
+    },
+    "NODE_SHAPE" : {
+      "definition" : "COL=type,T=string,K=0=Small Molecule,V=0=OCTAGON,K=1=SmallMolecule,V=1=OCTAGON,K=2=Protein,V=2=ELLIPSE",
+      "type" : "DISCRETE"
+    },
+    "NODE_SIZE" : {
+      "definition" : "COL=type,T=string,K=0=,V=0=25.0,K=1=Small Molecule,V=1=25.0,K=2=SmallMolecule,V=2=25.0,K=3=Protein,V=3=35.0",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "NODE_FILL_COLOR" : "#00CCCC",
+    "NODE_NESTED_NETWORK_IMAGE_VISIBLE" : "true",
+    "NODE_LABEL_TRANSPARENCY" : "255",
+    "NODE_CUSTOMPAINT_1" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_1, name=Node Custom Paint 1)",
+    "NODE_BORDER_WIDTH" : "2.5",
+    "NODE_CUSTOMPAINT_3" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_3, name=Node Custom Paint 3)",
+    "NODE_CUSTOMPAINT_2" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_2, name=Node Custom Paint 2)",
+    "NODE_CUSTOMPAINT_5" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_5, name=Node Custom Paint 5)",
+    "NODE_CUSTOMPAINT_4" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_4, name=Node Custom Paint 4)",
+    "NODE_CUSTOMPAINT_7" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_7, name=Node Custom Paint 7)",
+    "NODE_CUSTOMPAINT_6" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_6, name=Node Custom Paint 6)",
+    "NODE_CUSTOMPAINT_9" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_9, name=Node Custom Paint 9)",
+    "NODE_CUSTOMPAINT_8" : "DefaultVisualizableVisualProperty(id=NODE_CUSTOMPAINT_8, name=Node Custom Paint 8)",
+    "NODE_CUSTOMGRAPHICS_2" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "COMPOUND_NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_SELECTED" : "false",
+    "NODE_CUSTOMGRAPHICS_POSITION_9" : "C,C,c,0.00,0.00",
+    "NODE_SHAPE" : "ROUND_RECTANGLE",
+    "NODE_CUSTOMGRAPHICS_SIZE_9" : "50.0",
+    "NODE_BORDER_TRANSPARENCY" : "255",
+    "NODE_CUSTOMGRAPHICS_SIZE_8" : "50.0",
+    "NODE_SIZE" : "35.0",
+    "NODE_SELECTED_PAINT" : "#FF0000",
+    "NODE_CUSTOMGRAPHICS_SIZE_1" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_2" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_3" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_4" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_5" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_6" : "50.0",
+    "NODE_CUSTOMGRAPHICS_SIZE_7" : "50.0",
+    "COMPOUND_NODE_PADDING" : "10.0",
+    "NODE_BORDER_PAINT" : "#FFFFFF",
+    "NODE_LABEL_FONT_FACE" : "Eras Medium ITC,plain,12",
+    "NODE_CUSTOMGRAPHICS_POSITION_2" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_3" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_1" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_6" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_7" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_4" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_5" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_POSITION_8" : "C,C,c,0.00,0.00",
+    "NODE_WIDTH" : "75.0",
+    "NODE_X_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_8" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_DEPTH" : "0.0",
+    "NODE_LABEL_WIDTH" : "200.0",
+    "NODE_LABEL_FONT_SIZE" : "12",
+    "NODE_CUSTOMGRAPHICS_9" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_Y_LOCATION" : "0.0",
+    "NODE_CUSTOMGRAPHICS_5" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_4" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_BORDER_STROKE" : "SOLID",
+    "NODE_CUSTOMGRAPHICS_6" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_1" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_CUSTOMGRAPHICS_3" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_LABEL_COLOR" : "#000000",
+    "NODE_HEIGHT" : "35.0",
+    "NODE_Z_LOCATION" : "0.0",
+    "NODE_PAINT" : "#1E90FF",
+    "NODE_TRANSPARENCY" : "255",
+    "NODE_LABEL_POSITION" : "C,C,c,0.00,0.00",
+    "NODE_CUSTOMGRAPHICS_7" : "org.cytoscape.ding.customgraphics.NullCustomGraphics,0,[ Remove Graphics ],",
+    "NODE_VISIBLE" : "true"
+  }
+}, {
+  "properties_of" : "edges:default",
+  "dependencies" : {
+    "arrowColorMatchesEdge" : "true"
+  },
+  "mappings" : {
+    "EDGE_UNSELECTED_PAINT" : {
+      "definition" : "COL=interaction,T=string,K=0=interacts-with,V=0=#999999,K=1=chemical-affects,V=1=#FF9900,K=2=controls-state-change-of,V=2=#0099FF,K=3=controls-transport-of,V=3=#009933,K=4=consumption-controled-by,V=4=#990099,K=5=reacts-with,V=5=#999999,K=6=neighbor-of,V=6=#999999,K=7=controls-expression-of,V=7=#0099FF,K=8=controls-phosphorylation-of,V=8=#0099FF,K=9=controls-transport-of-chemical,V=9=#009933,K=10=interacts with,V=10=#999999,K=11=used-to-produce,V=11=#990099,K=12=controls-production-of,V=12=#990099,K=13=in-complex-with,V=13=#999999,K=14=catalysis-precedes,V=14=#000000",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TARGET_ARROW_SHAPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=true,V=0=DELTA",
+      "type" : "DISCRETE"
+    },
+    "EDGE_TOOLTIP" : {
+      "definition" : "COL=interaction,T=string,K=0=chemical-affects,V=0=chemical affects,K=1=interacts-with,V=1=interacts with,K=2=controls-state-change-of,V=2=controls state change of,K=3=consumption-controled-by,V=3=consumption controlled by,K=4=controls-transport-of,V=4=controls transport of,K=5=reacts-with,V=5=reacts with,K=6=neighbor-of,V=6=neighbor of,K=7=controls-expression-of,V=7=controls expression of,K=8=controls-phosphorylation-of,V=8=controls phosphorilation of,K=9=controls-transport-of-chemical,V=9=controls transport of chemical,K=10=interacts with,V=10=interacts with,K=11=used-to-produce,V=11=used to produce,K=12=controls-production-of,V=12=controls production of,K=13=in-complex-with,V=13=in complex with,K=14=catalysis-precedes,V=14=catalysis precedes",
+      "type" : "DISCRETE"
+    },
+    "EDGE_LINE_TYPE" : {
+      "definition" : "COL=directed,T=boolean,K=0=false,V=0=LONG_DASH,K=1=true,V=1=SOLID",
+      "type" : "DISCRETE"
+    }
+  },
+  "properties" : {
+    "EDGE_PAINT" : "#323232",
+    "EDGE_TARGET_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_CURVED" : "true",
+    "EDGE_TARGET_ARROW_SELECTED_PAINT" : "#FF0000",
+    "EDGE_STROKE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_LABEL_FONT_FACE" : "Dialog.plain,plain,10",
+    "EDGE_LINE_TYPE" : "LONG_DASH",
+    "EDGE_TARGET_ARROW_SHAPE" : "NONE",
+    "EDGE_LABEL_COLOR" : "#000000",
+    "EDGE_SELECTED" : "false",
+    "EDGE_SELECTED_PAINT" : "#FF0000",
+    "EDGE_VISIBLE" : "true",
+    "EDGE_LABEL_FONT_SIZE" : "10",
+    "EDGE_SOURCE_ARROW_SHAPE" : "NONE",
+    "EDGE_WIDTH" : "2.0",
+    "EDGE_STROKE_UNSELECTED_PAINT" : "#848484",
+    "EDGE_LABEL_TRANSPARENCY" : "255",
+    "EDGE_LABEL_WIDTH" : "200.0",
+    "EDGE_UNSELECTED_PAINT" : "#404040",
+    "EDGE_SOURCE_ARROW_UNSELECTED_PAINT" : "#000000",
+    "EDGE_TRANSPARENCY" : "255",
+    "EDGE_SOURCE_ARROW_SELECTED_PAINT" : "#FF0000"
+  }
+}]},
+{"status":[{"error":"","success":true}]}]

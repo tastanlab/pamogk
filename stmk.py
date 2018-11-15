@@ -62,7 +62,7 @@ OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-
 # nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
 # all_pws = cx_pathway_reader.read_pathways()
 uniprot_mapper.get_uniprot_to_entrez_map()
-# import pdb; pdb.set_trace()
+import pdb; pdb.set_trace()
 
 sys.exit(0)
 nx_G = cx_pathway_reader.read_single_pathway(pathway_id)
