@@ -136,7 +136,7 @@ fig = go.Figure(
         width=1200,
         height=900,
     ))
-pyoff.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=False)
+pyoff.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=True)
 '''
 # save library to plotly cloud for online sharing
 py.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=False)
