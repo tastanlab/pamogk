@@ -31,7 +31,7 @@ from sklearn.svm import SVC
 from gene_mapper import uniprot_mapper
 import pdb
 
-# import plotly.offline as py
+import plotly.offline as pyoff
 import plotly.plotly as py
 import plotly.graph_objs as go
 
@@ -136,8 +136,9 @@ fig = go.Figure(
         width=1200,
         height=900,
     ))
-import plotly.offline as pyoff
 pyoff.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=False)
+'''
+# save library to plotly cloud for online sharing
 py.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=False)
 
 import traceback
@@ -149,3 +150,4 @@ for i in range(5):
         break
     except Exception as e:
         traceback.print_exc(e)
+'''
