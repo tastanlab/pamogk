@@ -1,6 +1,15 @@
+import sys
+import config
+sys.path.append(config.root_dir)
 import networkx as nx
 import numpy as np
-import scipy
+from pathway_reader import cx_pathway_reader
+from pathway_reader import network_plotter
+from structural_processor import node2vec_processor
+from synthetic_experiments import cell_survival_group_kegg
+from sklearn.manifold import TSNE
+from sklearn.svm import SVC
+from gene_mapper import uniprot_mapper
 
 class smspk:
 
@@ -36,7 +45,7 @@ class smspk:
                 tmp_sp_of_nodes = a_sp[1].keys()
                 for i in xrange(skip, len(tmp_sp_of_nodes)):
                     if node_types[a_sp[1][tmp_sp_of_nodes[i]][-1]] == 'Protein': # if the destination is gene/protein
-                        print("Shortest path: {}".format(a_sp[1][tmp_sp_of_nodes[i]]))
+                        print("Shortest path: ", a_sp[1][tmp_sp_of_nodes[i]])
                         ind = np.isin(nodes, a_sp[1][tmp_sp_of_nodes[i]])
                         tmp_md = mutations[:][:,ind]
                         tmp_km = np.matmul(tmp_md, np.transpose(tmp_md)) # calculate similarities of patients based on the current pathway
@@ -53,19 +62,16 @@ class smspk:
         # alpha: the smoothing parameter
         # epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
 
-        norm_adj_mat = np.matmul(adj_m, np.diag(1.0 / np.sum(adj_m, axis=0)))
+        norm_adj_mat = adj_m @ np.diag(1.0 / np.sum(adj_m, axis=0))
 
-        s_md = md
+        s_md = md[:]
         pre_s_md = md + epsilon + 1
 
         while np.linalg.norm(s_md - pre_s_md) > epsilon:
             pre_s_md = s_md
-            s_md = np.matmul(alpha * pre_s_md, norm_adj_mat) + (1 - alpha) * md
+            s_md = (alpha * pre_s_md) @ norm_adj_mat + (1 - alpha) * md
 
         return s_md
 
-
-
-
-
-#atadam
+if __name__ == '__main__':
+    main()

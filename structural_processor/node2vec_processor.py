@@ -9,7 +9,8 @@ def process(pathway_id, nx_G, args):
     Generates node2vec representation of genes for given pathway network
     '''
     # generate model
-    print('Calcuating node2vec with params:', args)
+    print('Calculating node2vec with params:', args)
+    for v1, v2 in nx_G.edges(): nx_G[v1][v2]['weight'] = 1
     G = node2vec.Graph(nx_G, is_directed=args.is_directed, p=args.p, q=args.q)
     G.preprocess_transition_probs()
     walks_sim = G.simulate_walks(num_walks=10, walk_length=80)

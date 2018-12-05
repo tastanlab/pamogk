@@ -32,39 +32,11 @@ def initialize_node2vec():
     else:
         print('node2vec: already exists skipping')
 
-def initialize_tsne():
-    print('tsne: checking')
-    # load tsne
-    TSNE_NAME = 'tsne.py'
-    TSNE_PATH = os.path.join(config.lib_dir, TSNE_NAME)
-    if not os.path.exists(TSNE_PATH):
-        r = requests.get('https://lvdmaaten.github.io/tsne/code/tsne_python.zip')
-        if r.status_code == 200:
-            zipfile = ZipFile(BytesIO(r.content))
-            print('Files in zip:\n\t', '\n\t'.join([fn for fn in zipfile.namelist() if fn[:8] != '__MACOSX']), sep='')
-            try:
-                with open(TSNE_PATH, 'w') as f:
-                    for line in zipfile.open('tsne_python/' + TSNE_NAME).readlines():
-                        lstr = line.decode('utf-8')
-                        # remove demo parts
-                        if '__main__' in lstr:
-                            break
-                        if 'pylab' not in lstr:
-                            f.write(lstr)
-                    f.write('# accessed:' + str(datetime.datetime.now()))
-                print('tsne: installed')
-            except Exception as e:
-                os.remove(TSNE_PATH)
-                raise e
-    else:
-        print('tsne: already exists skipping')
-
 if not os.path.exists(config.lib_dir):
     print('libs_dir: creating')
     os.makedirs(config.lib_dir)
 
 initialize_node2vec()
-initialize_tsne()
 
 # load requirements from file
 with open('requirements.txt') as f:

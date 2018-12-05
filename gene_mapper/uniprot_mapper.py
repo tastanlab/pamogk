@@ -2,6 +2,8 @@
 import requests
 import config
 import numpy as np
+import os
+import pdb
 from pathway_reader import cx_pathway_reader
 
 def get_all_nodes(all_pws_map):
@@ -43,7 +45,7 @@ def fetch_uniprot_mapping(alias_list, fr='ACC,Id', to='P_ENTREZGENEID'):
     print(r1.text)
     r2 = requests.get('https://www.uniprot.org/mapping/%s.not' % MAPPING_ID)
     print(r2.text)
-    import pdb; pdb.set_trace()
+    # pdb.set_trace()
 
 def fetch_uniprot_to_entrez(alias_list):
     uniprot_alias_list = [a[1] for a in [a.split('uniprot knowledgebase:')for a in alias_list] if len(a) > 1]
