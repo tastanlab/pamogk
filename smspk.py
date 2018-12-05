@@ -45,6 +45,7 @@ class smspk:
                 tmp_sp_of_nodes = a_sp[1].keys()
                 for i in xrange(skip, len(tmp_sp_of_nodes)):
                     if node_types[a_sp[1][tmp_sp_of_nodes[i]][-1]] == 'Protein': # if the destination is gene/protein
+                        print("Shortest path: ", a_sp[1][tmp_sp_of_nodes[i]])
                         ind = np.isin(nodes, a_sp[1][tmp_sp_of_nodes[i]])
                         tmp_md = mutations[:][:,ind]
                         tmp_km = np.matmul(tmp_md, np.transpose(tmp_md)) # calculate similarities of patients based on the current pathway
