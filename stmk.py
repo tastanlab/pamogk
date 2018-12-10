@@ -32,7 +32,7 @@ from gene_mapper import uniprot_mapper
 import pdb
 
 import plotly.offline as pyoff
-import plotly.plotly as py
+#import plotly.plotly as py
 import plotly.graph_objs as go
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
