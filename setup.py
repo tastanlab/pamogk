@@ -42,7 +42,7 @@ initialize_node2vec()
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-with open('README.txt') as f:
+with open('README.md') as f:
     long_description = f.read()
 
 setup(
