@@ -11,11 +11,11 @@ class smspk:
 		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
 
 		# extract labels of nodes of graphs -- ASSUMPTION: all graphs have the same nodes
-		nodes = nx.get_node_attributes(data[0], 'label').keys()
+		nodes = list(nx.get_node_attributes(data[0], 'label').keys())
 		mutations = np.empty([len(data), len(nodes)])
-		for i in xrange(len(data)):
+		for i in range(len(data)):
 			tmp = nx.get_node_attributes(data[i], 'label')
-			for j in xrange(len(nodes)):
+			for j in range(len(nodes)):
 				mutations[i,j] = tmp[nodes[j]]
 
 		# extract the adjacency matrix on the order of nodes we have
@@ -33,8 +33,8 @@ class smspk:
 		skip = 1 # it is used to indicate how many nodes from the beginning will be skipped in the shortest path list -- we do not want to process the same shortest paths again
 		for a_sp in all_sp:
 			if node_types[a_sp[0]] == 'Protein': # if the source is gene/protein
-				tmp_sp_of_nodes = a_sp[1].keys()
-				for i in xrange(skip, len(tmp_sp_of_nodes)):
+				tmp_sp_of_nodes = list(a_sp[1].keys())
+				for i in range(skip, len(tmp_sp_of_nodes)):
 					if node_types[a_sp[1][tmp_sp_of_nodes[i]][-1]] == 'Protein': # if the destination is gene/protein
 						# print("Shortest path: {}".format(a_sp[1][tmp_sp_of_nodes[i]]))
 						ind = np.isin(nodes, a_sp[1][tmp_sp_of_nodes[i]])
@@ -106,7 +106,7 @@ def main():
 	km = smspk.kernel([mg, mg2], alpha)
 
 	# display the resulting kernel matrix
-	print("Kernel matrix calculated by smspk with alpha {}:".format(alpha))
+	print(("Kernel matrix calculated by smspk with alpha {}:".format(alpha)))
 	print(km)
 
 
