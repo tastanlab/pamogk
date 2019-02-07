@@ -15,11 +15,11 @@ def get_all_nodes(all_pws_map):
 
 def get_alias_set(all_pws_map):
     all_nodes = get_all_nodes(all_pws_map)
-    return np.hstack([n['alias'] for n in all_nodes if 'alias' in n])
+    return np.unique(np.hstack([n['alias'] for n in all_nodes if 'alias' in n]))
 
 def get_non_alias_set(all_pws_map):
     all_nodes = get_all_nodes(all_pws_map)
-    return np.hstack([n['n'] for n in all_nodes if 'alias' not in n])
+    return np.unique(np.hstack([n['n'] for n in all_nodes if 'alias' not in n]))
 
 def fetch_uniprot_mapping(alias_list, fr='ACC,ID', to='P_ENTREZGENEID'):
     print('Reqeusting mapping for', len(alias_list), 'genes')
