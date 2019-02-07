@@ -5,6 +5,7 @@ import requests
 import os
 import json
 import networkx as nx
+import pdb
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
@@ -102,6 +103,9 @@ def read_single_pathway(pathway_id, reading_all=False):
         n = nodes[nid]
         attrs = attr_dict[nid]
         attrs['n'] = n['n']
+        if 'r' in n:
+            if 'alias' not in attrs: attrs['alias'] = [n['r']]
+            else: attrs['alias'].append(n['r'])
         G.add_node(nid, **attrs)
 
     # get edge map
@@ -126,3 +130,7 @@ def read_single_pathway(pathway_id, reading_all=False):
         G.add_edge(e['s'], e['t'], **attrs)
 
     return G
+
+if __name__ == '__main__':
+    G = read_pathways()
+    pdb.set_trace()
