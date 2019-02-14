@@ -14,7 +14,7 @@ from gene_mapper import uniprot_mapper as um
 
 ### Real Data ###
 # process RNA-seq expression data
-[gene_exp, genes_map] = rp.process("/home/aburak/Projects/smSPK/research_codes/data/kidney_files/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt")
+[gene_exp, genes_map] = rp.process("data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt")
 # pdb.set_trace()
 
 # get the dictionary of gene id mappers
