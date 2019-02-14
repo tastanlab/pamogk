@@ -1,14 +1,16 @@
 import networkx as nx
 import numpy as np
 import scipy
+import pdb
 
 class smspk:
 
 	@staticmethod
-	def kernel(data, alpha, epsilon=10**-6):
+	def kernel(data, alpha, epsilon=10**-6, normalization=False):
 		# data: a list of networkx graphs
 		# alpha: the smoothing parameter
 		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
+		# normalization: normalize the kernel matrix such that the diagonal is 1 -- default value is False
 
 		# extract labels of nodes of graphs -- ASSUMPTION: all graphs have the same nodes
 		nodes = list(nx.get_node_attributes(data[0], 'label').keys())
@@ -43,6 +45,10 @@ class smspk:
 						km += tmp_km # update the main kernel matrix
 			skip += 1
 
+		# normalize the kernel matrix if normalization is true
+		if normalization == True:
+			km = smspk.normalize_kernel_matrix(km)
+
 		return km
 
 
@@ -52,7 +58,6 @@ class smspk:
 		# adj_m: the adjacency matrix of the pathway
 		# alpha: the smoothing parameter
 		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
-
 		norm_adj_mat = np.matmul(adj_m, np.diag(1.0 / np.sum(adj_m, axis=0)))
 
 		s_md = md
@@ -63,6 +68,12 @@ class smspk:
 			s_md = np.matmul(alpha * pre_s_md, norm_adj_mat) + (1 - alpha) * md
 
 		return s_md
+
+	@staticmethod
+	def normalize_kernel_matrix(km):
+		D = np.diag(1 / np.sqrt(np.diag(km)))
+		norm_km = np.matmul(np.matmul(D, km), D) # K_ij / sqrt(K_ii * K_jj)
+		return np.nan_to_num(norm_km) # replace NaN with 0
 
 def main():
 	# Create a networkx graph object
