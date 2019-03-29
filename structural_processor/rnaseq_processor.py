@@ -10,30 +10,30 @@ def process(fn):
 	Outputs
 		gene_expressions: a dataframe indicating the over- (1) and under-expressed (-1) genes where
 			genes with entrez gene id are on rows and patient ids are on columns
-		gene_names: a dataframe indicating the name of the genes of entrez gene ids
+		gene_name_map: a dataframe indicating the name of the genes of entrez gene ids
 	'''
 
-	data = pd.read_csv(fn, sep="\t")
-	#data = data.set_index(["Gene Name", "Entrez Gene ID"])
-	#data = data.set_index("Entrez Gene ID")
-	data[["gene_name", "entrez_gene_id"]] = data['#probe'].str.split('|', n=1, expand=True)
-	data = data.set_index(["entrez_gene_id"])
-	data = data.drop(columns=["#probe"])
+	data = pd.read_csv(fn, sep='\t')
+	#data = data.set_index(['Gene Name', 'Entrez Gene ID'])
+	#data = data.set_index('Entrez Gene ID')
+	data[['gene_name', 'entrez_gene_id']] = data['#probe'].str.split('|', n=1, expand=True)
+	data = data.set_index(['entrez_gene_id'])
+	data = data.drop(columns=['#probe'])
 
 	# IF THERE ARE ADDITIONAL PROBLEMS TO BE CONSIDERED, PREPROCESS THE DATA ACCORDINGLY
-	# drop genes with name "?"
-	tmp = data.index[data["gene_name"] == "?"]
+	# drop genes with name '?'
+	tmp = data.index[data['gene_name'] == '?']
 	data = data.drop(tmp)
 
 	# sort the dataframe based on both gene name and patient id
 	data = data.sort_index(axis=1)
-	data = data.sort_values("gene_name")
+	data = data.sort_values('gene_name')
 
-	gene_names = data["gene_name"]
-	data = data.drop(columns=["gene_name"])
+	gene_name_map = data['gene_name']
+	data = data.drop(columns=['gene_name'])
 
 	# delete patients with non-solid tumor
-	tmp = [row[3][0:2] == '01' for row in data.columns.str.split("-").tolist()]
+	tmp = [row[3][0:2] == '01' for row in data.columns.str.split('-').tolist()]
 	ind = [i for i,x in enumerate(tmp) if x==False] # find the indices of non-solid tumors
 	data = data.drop(columns=data.columns[ind]) # drop them from the data frame
 
@@ -54,4 +54,4 @@ def process(fn):
 	gene_expression[z_scores > threshold] = 1
 	gene_expression[z_scores < (-1 * threshold)] = -1
 
-	return gene_expression, gene_names
+	return gene_expression, gene_name_map

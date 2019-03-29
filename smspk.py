@@ -60,21 +60,21 @@ class smspk:
 		# adj_m: the adjacency matrix of the pathway
 		# alpha: the smoothing parameter
 		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
-		norm_adj_mat = np.matmul(adj_m, np.diag(1.0 / np.sum(adj_m, axis=0)))
+		norm_adj_mat = adj_m @ np.diag(1.0 / np.sum(adj_m, axis=0))
 
 		s_md = md
 		pre_s_md = md + epsilon + 1
 
 		while np.linalg.norm(s_md - pre_s_md) > epsilon:
 			pre_s_md = s_md
-			s_md = np.matmul(alpha * pre_s_md, norm_adj_mat) + (1 - alpha) * md
+			s_md = ((alpha * pre_s_md) @ norm_adj_mat) + (1 - alpha) * md
 
 		return s_md
 
 	@staticmethod
 	def normalize_kernel_matrix(km):
 		D = np.diag(1 / np.sqrt(np.diag(km)))
-		norm_km = np.matmul(np.matmul(D, km), D) # K_ij / sqrt(K_ii * K_jj)
+		norm_km = D @ km @ D # K_ij / sqrt(K_ii * K_jj)
 		return np.nan_to_num(norm_km) # replace NaN with 0
 
 def main():

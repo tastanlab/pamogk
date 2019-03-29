@@ -127,8 +127,18 @@ def streamprinter(text):
     sys.stdout.flush()
 
 
+if __name__ == '__main__':
+    try:
+        main()
+    except mosek.MosekException as e:
+        print("ERROR: %s" % str(e.errno))
+        if e.msg is not None:
+            import traceback
+            traceback.print_exc()
+            print("\t%s" % e.msg)
+        sys.exit(1)
+
 def main():
-    '''
     v1, v2, v3 = views.getLinearKernel()
     Kmm = np.stack((v1, v2, v3))
 
@@ -136,25 +146,3 @@ def main():
     parameters["iteration_count"] = 10
     parameters["cluster_count"] = 3
     lmkkmeans_train(Kmm, parameters)
-    :return:
-    '''
-
-
-
-# call the main function
-'''
-try:
-    main()
-except mosek.MosekException as e:
-    print("ERROR: %s" % str(e.errno))
-    if e.msg is not None:
-        import traceback
-        traceback.print_exc()
-        print("\t%s" % e.msg)
-    sys.exit(1)
-except:
-    import traceback
-    traceback.print_exc()
-    sys.exit(1)
-'''
-
