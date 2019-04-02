@@ -29,8 +29,8 @@ all_ent_ids = gene_exp.index.values # gene entrez ids
 GE = gene_exp.values
 
 found_ent_ids = [eid in ent2uni for eid in all_ent_ids]
-ent_ids = [eid for eid in all_ent_ids if eid in ent2uni]
-uni_ids = [ent2uni[eid] for eid in ent_ids]
+ent_ids = np.array([eid for eid in all_ent_ids if eid in ent2uni])
+uni_ids = np.array([ent2uni[eid] for eid in ent_ids])
 
 print('uni_ids:', len(uni_ids))
 print('miss_ent_ids:', len(all_ent_ids) - sum(found_ent_ids))
@@ -97,7 +97,8 @@ print('Over-expressed genes will be used to calculate kernel matrices...')
 OEPP = clone_pathway_map(pathways, pat_ids) # over expressed pathways of patients
 for pid, pat_pw_list in OEPP.items():
 	print('Checking patient:', pid)
-	label_mapper.map_label_on_pathways(pat_pw_list, GE[:, pid].flatten())
+	pdb.set_trace()
+	label_mapper.map_label_on_pathways(pat_pw_list, GE[..., pat_ids == pid].flatten())
 
 # calculate kernel matrices
 a_patient_key = list(OEPP.keys())[0] # to get the size of pathways
@@ -117,7 +118,7 @@ UEPP = clone_pathway_map(pathways, pat_ids) # under expressed pathways of patien
 for pid, pat_pw_list in OEPP.items():
 	print('Checking patient under-epxressed:', pid)
 	tmp = gene_exp.index[gene_exp[pid] == -1]
-	UEPP[pid] = label_mapper.map_label_on_pathways(pat_pw_list, GE[tmp, 'uniprot_id'].tolist())
+	label_mapper.map_label_on_pathways(pat_pw_list, GE[..., pat_ids == pid].flatten())
 
 # calculate kernel matrices
 a_patient_key = list(UEPP.keys())[0] # to get the size of pathways
