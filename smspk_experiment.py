@@ -15,6 +15,7 @@ from pathway_reader import cx_pathway_reader as cx_pw
 from gene_mapper import uniprot_mapper as um
 import time
 import json
+from lib.sutils import *
 
 ### Real Data ###
 # process RNA-seq expression data
@@ -40,7 +41,7 @@ GE = GE[found_ent_ids]
 # pdb.set_trace()
 
 # get all pathways
-pathways = cx_pw.read_pathways()
+all_pw_map = cx_pw.read_pathways()
 
 ### Synthetic Data ###
 # # synthetic gene expression data
@@ -69,19 +70,86 @@ pathways = cx_pw.read_pathways()
 # # nx.set_node_attributes(mg2, {0:['uniprot:F'], 1:['uniprot:B'], 2:['uniprot:G'], 3:['uniprot:D'], 4:['uniprot:E']}, 'alias')
 # nx.set_node_attributes(mg2, {'F':'Protein', 'B':'Protein', 'G':'Calcium', 'D':'Protein', 'E':'Calcium'}, 'type')
 # nx.set_node_attributes(mg2, {'F':['uniprot:F'], 'B':['uniprot:B'], 'G':['uniprot:G'], 'D':['uniprot:D'], 'E':['uniprot:E']}, 'alias')
-# pathways = {'pw1': mg, 'pw2': mg2}
+# pw_map = {'pw1': mg, 'pw2': mg2}
 
-class timeit(object):
-    def __init__(self, f):
-        self.f = f
 
-    def __call__(self, *args, **kwargs):
-        print("Started:", self.f.__name__)
-        t = time.time()
-        res = self.f(*args, **kwargs)
-        print("Finished:", self.f.__name__, " elapsed:", int(time.time() - t))
-        return res
+@timeit
+def generate_pat_map(patient_ids, pw_map):
+    '''Generates a patient id to pathway to gene mapping
 
+    Parameters
+    ----------
+    patient_ids: list of int
+        List of patient ids showing which columns of gene expression date are
+        the patients
+    pw_map: map of cx pathway id to networx graph
+        Holds the mapping for all pathways belonging to cx pathway graphs
+    '''
+    return dict((pid, dict((k, {}) for k in pw_map.keys())) for pid in patient_ids)
+
+
+# pdb.set_trace()
+###############################################################################
+# experiment variables
+smoothing_alpha = 0
+a_smspk = smspk.smspk()
+###############################################################################
+# over-expressed genes
+print('Over-expressed genes will be used to calculate kernel matrices...')
+pat_map = generate_pat_map(pat_ids, all_pw_map) # over expressed patient to pathway to node map
+for pid, pw_map in pat_map.items():
+    print('Checking patient:', pid)
+    gene_ind = (GE[..., pat_ids == pid] == 1).flatten() # over expressed genes
+    genes = uni_ids[gene_ind] # get uniprot gene ids from indices
+    label_mapper.mark_label_on_pathways(pid, pw_map, all_pw_map, genes)
+OEPP = pat_map
+pdb.set_trace()
+
+# calculate kernel matrices
+a_patient_key = list(OEPP.keys())[0] # to get the size of pathways
+over_exp_kms = np.zeros((len(OEPP[a_patient_key]), len(OEPP), len(OEPP)))
+ind = 0
+for pw_key in OEPP[a_patient_key].keys(): # for each pathway
+    tmp = [OEPP[ptnt_key][pw_key] for ptnt_key in OEPP.keys()] # list of the same pathway of all patients
+    over_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
+    ind += 1
+
+del OEPP
+
+###############################################################################
+# under-expressed genes
+print('Under-expressed genes will be used to calculate kernel matrices...')
+pat_map = generate_pat_map(pat_ids, all_pw_map) # under expressed pathways of patients
+for pid in pat_ids:
+    print('Checking patient under-epxressed:', pid)
+    pat_map[pid] = {}
+    tmp = gene_exp.index[gene_exp[pid] == -1]
+    label_mapper.extract_label_on_pathways(pat_map[pid], GE[..., pat_ids == pid].flatten())
+UEPP = pat_map
+
+# calculate kernel matrices
+a_patient_key = list(UEPP.keys())[0] # to get the size of pathways
+under_exp_kms = np.zeros((len(UEPP[a_patient_key]), len(UEPP), len(UEPP)))
+ind = 0
+smoothing_alpha = 0
+for pw_key in UEPP[a_patient_key].keys(): # for each pathway
+    tmp = [UEPP[ptnt_key][pw_key] for ptnt_key in UEPP.keys()] # list of the same pathway of all patients
+    under_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
+    ind += 1
+
+###############################################################################
+
+
+def plot_hm(data):
+    plt.imshow(data, cmap='hot', interpolation='nearest')
+    plt.show()
+
+# pdb.set_trace()
+print('End!')
+
+
+
+'''
 @timeit
 def clone_pathway_map(pathways, cols):
 	return dict((c, dict((k, v.copy()) for k, v in pathways.items())) for c in cols)
@@ -141,7 +209,7 @@ def plot_hm(data):
 print('End!')
 
 
-
+'''
 
 
 

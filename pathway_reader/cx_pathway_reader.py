@@ -6,12 +6,18 @@ import os
 import json
 import networkx as nx
 import pdb
+from lib.sutils import *
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
 
+DATA_ROOT = os.path.join(config.data_dir, 'cx')
+if not os.path.exists(DATA_ROOT):
+    print('Could not find cx data dir. Creating dir:', DATA_ROOT)
+    os.makedirs(DATA_ROOT)
+
 def get_pathway_map():
-    PATHWAY_LIST_PATH = os.path.join(config.data_dir, 'nci_pathway_list.json')
+    PATHWAY_LIST_PATH = os.path.join(DATA_ROOT, 'nci_pathway_list.json')
 
     if not os.path.exists(PATHWAY_LIST_PATH):
         try:
@@ -40,6 +46,7 @@ def _get_pathway_child(pathway_data, key):
             return d[key]
     return None
 
+@timeit
 def read_pathways():
     pathway_map = get_pathway_map()
     pw_map = {}
@@ -57,7 +64,7 @@ def read_single_pathway(pathway_id, reading_all=False):
     if pathway_id not in pathway_map:
         raise Exception('Pathway not found in pathway list')
 
-    PATHWAY_PATH = os.path.join(config.data_dir, pathway_id + '.cx')
+    PATHWAY_PATH = os.path.join(DATA_ROOT, pathway_id + '.cx')
 
     if not os.path.exists(PATHWAY_PATH):
         url = '{}/network/{}'.format(HOST, pathway_id)
@@ -106,6 +113,10 @@ def read_single_pathway(pathway_id, reading_all=False):
         if 'r' in n:
             if 'alias' not in attrs: attrs['alias'] = [n['r']]
             else: attrs['alias'].append(n['r'])
+        if 'alias' in attrs: # create attribute for ids only
+            attrs['uniprot_ids'] = [a.split(':') for a in attrs['alias']]
+            attrs['uniprot_ids'] = [s[1] for s in attrs['uniprot_ids'] if len(s) > 1 and len(s[1]) > 0]
+        attrs['label'] = {}
         G.add_node(nid, **attrs)
 
     # get edge map

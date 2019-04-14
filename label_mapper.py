@@ -2,19 +2,25 @@ import numpy as np
 import networkx as nx
 import pdb
 
-def map_label_on_pathways(pw_list, gene_label_list, label=1):
-	'''
-	Inputs
-		pw_list: a list of networkx instances of pathways
-		gene_id: uniprot id of the gene
-		label: the label which will be assigned to found genes in pathways - default value is 1
+def mark_label_on_pathways(pid, pat_map, pw_map, gene_id_list, label=1):
+	'''Marks given genes to the pathways
 
-	Outputs:
-		pw_list: a list of modified (i.e. label of gene is mapped to corresponding nodes) networkx instances of pathways
+	Parameters
+	----------
+	pid: int
+		patient id
+	pw_map: map of networkx graphs of pathways
+		patient label mapping
+	pat_map: dict
+		for a single patient; pathway to gene mapping
+	gene_id_list: list of list of string
+		uniprot gene id list of genes
+	label: int
+		the label which will be assigned to found genes in pathways - default value is 1
 	'''
-	gene_label_dict = {}
-
-	for pw in pw_list.values(): # for each pathway
-		pdb.set_trace()
-		alias_list = [a.split(':')[1] for a in nx.get_node_attributes(pw, 'alias')]
-		nx.set_node_attributes(pw, [label if a in gene_label_list else 0 for a in alias_list], 'label')
+	gene_ids = [uid for a in gene_id_list for uid in a]
+	for pw in pw_map.values(): # for each pathway
+		for n in pw.nodes():
+			nd = pw.nodes[n]
+			if np.any([g in nd['uniprot_ids'] for g in gene_ids]):
+				nd['label'][pid] = label

@@ -19,9 +19,15 @@ from Bio.KEGG.KGML.KGML_pathway import Relation
 
 HOST='http://rest.kegg.jp'
 
+DATA_ROOT = os.path.join(config.data_dir, 'kegg')
+
+if not os.path.exists(DATA_ROOT):
+    print('Could not find kegg data dir. Creating dir:', DATA_ROOT)
+    os.makedirs(DATA_ROOT)
+
 def get_all_pathways(force=False):
     list_url = HOST + '/list/pathway/hsa'
-    path = os.path.join(config.data_dir, 'kegg-all-pathways.txt')
+    path = os.path.join(DATA_ROOT, 'kegg-all-pathways.txt')
     if force or not os.path.exists(path):
         r = requests.get(list_url)
         if not r.status_code == 200:
@@ -41,12 +47,12 @@ def get_all_pathways(force=False):
 def get_pathway_KGML(pathway_id='hsa04151'):
     print('Reading pathway:', pathway_id)
     pw_url = HOST + '/get/' + pathway_id + '/kgml'
-    if not os.path.exists(config.data_dir):
-        print('Could not find data dir. Creating dir:', config.data_dir)
-        os.makedirs(config.data_dir)
+    if not os.path.exists(DATA_ROOT):
+        print('Could not find data dir. Creating dir:', DATA_ROOT)
+        os.makedirs(DATA_ROOT)
 
     # get pathway data if not exists
-    path = os.path.join(config.data_dir, pathway_id + '.kgml')
+    path = os.path.join(DATA_ROOT, pathway_id + '.kgml')
     if not os.path.exists(path):
         print('Could not find hsa file getting from kegg:', pw_url)
         r = requests.get(pw_url)

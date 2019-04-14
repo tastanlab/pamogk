@@ -8,11 +8,18 @@ import pdb
 class smspk:
 
 	@staticmethod
-	def kernel(data, alpha, epsilon=10**-6, normalization=False):
-		# data: a list of networkx graphs
-		# alpha: the smoothing parameter
-		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
-		# normalization: normalize the kernel matrix such that the diagonal is 1 -- default value is False
+	def kernel(data, alpha, epsilon=1e-6, normalization=False):
+		'''
+		Parameters
+		----------
+		data: list of networkx graphs
+		alpha: float
+			the smoothing parameter
+		epsilon: {1e-6} float
+			smoothing converges if the change is lower than epsilon
+		normalization: {False} bool
+			normalize the kernel matrix such that the diagonal is 1
+		'''
 
 		# extract labels of nodes of graphs -- ASSUMPTION: all graphs have the same nodes
 		nodes = list(nx.get_node_attributes(data[0], 'label').keys())
@@ -48,18 +55,23 @@ class smspk:
 			skip += 1
 
 		# normalize the kernel matrix if normalization is true
-		if normalization == True:
-			km = smspk.normalize_kernel_matrix(km)
+		if normalization == True: km = smspk.normalize_kernel_matrix(km)
 
 		return km
 
 
 	@staticmethod
 	def smooth(md, adj_m, alpha, epsilon=10**-6):
-		# md: a numpy array of genes of patients indicating which one is mutated or not
-		# adj_m: the adjacency matrix of the pathway
-		# alpha: the smoothing parameter
-		# epsilon: smoothing converges if the change is lower than epsilon -- default value is 10^-6
+		'''
+		md: numpy array
+			a numpy array of genes of patients indicating which one is mutated or not
+		adj_m: numpy array
+			the adjacency matrix of the pathway
+		alpha: float
+			the smoothing parameter
+		epsilon: {1e-6} float
+			smoothing converges if the change is lower than epsilon
+		'''
 		norm_adj_mat = adj_m @ np.diag(1.0 / np.sum(adj_m, axis=0))
 
 		s_md = md
@@ -126,6 +138,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
-
-#atadam
