@@ -12,9 +12,7 @@ HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
 
 DATA_ROOT = os.path.join(config.data_dir, 'cx')
-if not os.path.exists(DATA_ROOT):
-    print('Could not find cx data dir. Creating dir:', DATA_ROOT)
-    os.makedirs(DATA_ROOT)
+safe_create_dir(DATA_ROOT)
 
 def get_pathway_map():
     PATHWAY_LIST_PATH = os.path.join(DATA_ROOT, 'nci_pathway_list.json')
@@ -52,7 +50,7 @@ def read_pathways():
     pw_map = {}
     pw_ids = pathway_map.keys()
     for (ind, pw_id) in enumerate(pw_ids):
-        print('Processing pathway %3d/%d' % (ind + 1, len(pw_ids)), end='\t')
+        print('Processing pathway {:3}/{}'.format(ind + 1, len(pw_ids)), end='\t')
         pw_data = read_single_pathway(pw_id, reading_all=True)
         pw_map[pw_id] = pw_data
     print()
@@ -106,6 +104,7 @@ def read_single_pathway(pathway_id, reading_all=False):
         attr_dict[nid]['y'] = coord['y']
 
     # add nodes to graph
+    # NOTE networkx graphs only allow alphanumeric characters as attribute names no - or _
     for nid in nodes:
         n = nodes[nid]
         attrs = attr_dict[nid]
@@ -114,9 +113,8 @@ def read_single_pathway(pathway_id, reading_all=False):
             if 'alias' not in attrs: attrs['alias'] = [n['r']]
             else: attrs['alias'].append(n['r'])
         if 'alias' in attrs: # create attribute for ids only
-            attrs['uniprot_ids'] = [a.split(':') for a in attrs['alias']]
-            attrs['uniprot_ids'] = [s[1] for s in attrs['uniprot_ids'] if len(s) > 1 and len(s[1]) > 0]
-        attrs['label'] = {}
+            tmp = [a.split(':') for a in attrs['alias']]
+            attrs['uniprot-ids'] = [s[1] for s in tmp if len(s) > 1 and len(s[1]) > 0]
         G.add_node(nid, **attrs)
 
     # get edge map

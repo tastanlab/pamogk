@@ -15,6 +15,8 @@ from pathway_reader import cx_pathway_reader as cx_pw
 from gene_mapper import uniprot_mapper as um
 import time
 import json
+import os
+import config
 from lib.sutils import *
 
 ### Real Data ###
@@ -89,55 +91,84 @@ def generate_pat_map(patient_ids, pw_map):
 
 
 # pdb.set_trace()
-###############################################################################
+@timeit
+def label_patient_genes(all_pw_map, pat_ids, GE, label=1):
+    '''Labels all patients with matching level of expression
+
+    Parameters
+    ----------
+    all_pw_map: :obj:`list` of :obj:`networkx.classes.graph.Graph`
+        a dictionary of all pathways we are using
+    pat_ids: :obj:`list` of :obj:`str`
+        list of patient ids
+    GE: :obj:`numpy.ndarray`
+        Gene expression data array in shape of genes by patients
+    label: int, optional
+        label that will be used for marking patients
+    '''
+    graph_dir = os.path.join(config.data_dir, 'smspk')
+    safe_create_dir(graph_dir)
+    graph_file = 'smspk-over-under-expressed-label={}'.format(label)
+    graph_path = os.path.join(graph_dir, graph_file);
+
+    get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(graph_path, pw_id)
+
+    num_pw = len(all_pw_map)
+
+    @timeit
+    def restore_pathways():
+        for ind, pw_id in enumerate(all_pw_map.keys()):
+            path = get_pw_path(pw_id)
+            print('Loading over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            all_pw_map[pw_id] = nx.read_gpickle(path)
+        print()
+        return all_pw_map
+
+    def save_pathways():
+        for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
+            path = get_pw_path(pw_id)
+            print('Saving over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            nx.write_gpickle(pw, path)
+        print()
+        return all_pw_map
+
+    # check if we already stored all over/under expression pathway data if so restore them
+    if np.all([os.path.exists(get_pw_path(pw_id)) for pw_id in all_pw_map]):
+        return restore_pathways()
+
+    num_pat = pat_ids.shape[0]
+    # if there are missing ones calculate all of them
+    print('Over and under expressed patient pathway labeling')
+    for ind, pid in enumerate(pat_ids):
+        print('Checking patient for over-expressed  {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+        gene_ind = (GE[..., pat_ids == pid] == 1).flatten() # over expressed genes
+        genes = uni_ids[gene_ind] # get uniprot gene ids from indices
+        label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, label)
+
+        print('Checking patient for under-expressed {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+        gene_ind = (GE[..., pat_ids == pid] == -1).flatten() # under expressed genes
+        genes = uni_ids[gene_ind] # get uniprot gene ids from indices
+        label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, label)
+
+    return save_pathways()
+
+label_patient_genes(all_pw_map, pat_ids, GE)
+
 # experiment variables
 smoothing_alpha = 0
 a_smspk = smspk.smspk()
-###############################################################################
-# over-expressed genes
-print('Over-expressed genes will be used to calculate kernel matrices...')
-pat_map = generate_pat_map(pat_ids, all_pw_map) # over expressed patient to pathway to node map
-for pid, pw_map in pat_map.items():
-    print('Checking patient:', pid)
-    gene_ind = (GE[..., pat_ids == pid] == 1).flatten() # over expressed genes
-    genes = uni_ids[gene_ind] # get uniprot gene ids from indices
-    label_mapper.mark_label_on_pathways(pid, pw_map, all_pw_map, genes)
-OEPP = pat_map
-pdb.set_trace()
 
-# calculate kernel matrices
-a_patient_key = list(OEPP.keys())[0] # to get the size of pathways
-over_exp_kms = np.zeros((len(OEPP[a_patient_key]), len(OEPP), len(OEPP)))
-ind = 0
-for pw_key in OEPP[a_patient_key].keys(): # for each pathway
-    tmp = [OEPP[ptnt_key][pw_key] for ptnt_key in OEPP.keys()] # list of the same pathway of all patients
-    over_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-    ind += 1
+num_pat = pat_ids.shape[0]
+num_pw = len(all_pw_map)
+# calculate kernel matrices for over expressed genes
+over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
+for ind, (pw_id, pw) in enumerate(all_pw_map.items()): # for each pathway
+    over_exp_kms[ind] = a_smspk.kernel(pat_ids, pw, smoothing_alpha, label_key='label-oe', normalization=True)
 
-del OEPP
-
-###############################################################################
-# under-expressed genes
-print('Under-expressed genes will be used to calculate kernel matrices...')
-pat_map = generate_pat_map(pat_ids, all_pw_map) # under expressed pathways of patients
-for pid in pat_ids:
-    print('Checking patient under-epxressed:', pid)
-    pat_map[pid] = {}
-    tmp = gene_exp.index[gene_exp[pid] == -1]
-    label_mapper.extract_label_on_pathways(pat_map[pid], GE[..., pat_ids == pid].flatten())
-UEPP = pat_map
-
-# calculate kernel matrices
-a_patient_key = list(UEPP.keys())[0] # to get the size of pathways
-under_exp_kms = np.zeros((len(UEPP[a_patient_key]), len(UEPP), len(UEPP)))
-ind = 0
-smoothing_alpha = 0
-for pw_key in UEPP[a_patient_key].keys(): # for each pathway
-    tmp = [UEPP[ptnt_key][pw_key] for ptnt_key in UEPP.keys()] # list of the same pathway of all patients
-    under_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-    ind += 1
-
-###############################################################################
+# calculate kernel matrices for under expressed genes
+under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
+for ind, (pw_id, pw) in enumerate(all_pw_map.items()): # for each pathway
+    under_exp_kms[ind] = a_smspk.kernel(pat_ids, pw, smoothing_alpha,label_key='label-ue', normalization=True)
 
 
 def plot_hm(data):
@@ -146,74 +177,3 @@ def plot_hm(data):
 
 # pdb.set_trace()
 print('End!')
-
-
-
-'''
-@timeit
-def clone_pathway_map(pathways, cols):
-	return dict((c, dict((k, v.copy()) for k, v in pathways.items())) for c in cols)
-
-# pdb.set_trace()
-###############################################################################
-# experiment variables
-smoothing_alpha = 0
-a_smspk = smspk.smspk()
-###############################################################################
-# over-expressed genes
-print('Over-expressed genes will be used to calculate kernel matrices...')
-OEPP = clone_pathway_map(pathways, pat_ids) # over expressed pathways of patients
-for pid, pat_pw_list in OEPP.items():
-	print('Checking patient:', pid)
-	pdb.set_trace()
-	label_mapper.map_label_on_pathways(pat_pw_list, GE[..., pat_ids == pid].flatten())
-
-# calculate kernel matrices
-a_patient_key = list(OEPP.keys())[0] # to get the size of pathways
-over_exp_kms = np.zeros((len(OEPP[a_patient_key]), len(OEPP), len(OEPP)))
-ind = 0
-for pw_key in OEPP[a_patient_key].keys(): # for each pathway
-	tmp = [OEPP[ptnt_key][pw_key] for ptnt_key in OEPP.keys()] # list of the same pathway of all patients
-	over_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-	ind += 1
-
-del OEPP
-
-###############################################################################
-# under-expressed genes
-print('Under-expressed genes will be used to calculate kernel matrices...')
-UEPP = clone_pathway_map(pathways, pat_ids) # under expressed pathways of patients
-for pid, pat_pw_list in OEPP.items():
-	print('Checking patient under-epxressed:', pid)
-	tmp = gene_exp.index[gene_exp[pid] == -1]
-	label_mapper.map_label_on_pathways(pat_pw_list, GE[..., pat_ids == pid].flatten())
-
-# calculate kernel matrices
-a_patient_key = list(UEPP.keys())[0] # to get the size of pathways
-under_exp_kms = np.zeros((len(UEPP[a_patient_key]), len(UEPP), len(UEPP)))
-ind = 0
-smoothing_alpha = 0
-for pw_key in UEPP[a_patient_key].keys(): # for each pathway
-	tmp = [UEPP[ptnt_key][pw_key] for ptnt_key in UEPP.keys()] # list of the same pathway of all patients
-	under_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-	ind += 1
-
-###############################################################################
-
-
-def plot_hm(data):
-	plt.imshow(data, cmap='hot', interpolation='nearest')
-	plt.show()
-
-# pdb.set_trace()
-print('End!')
-
-
-'''
-
-
-
-
-
-
-# atadam

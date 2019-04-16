@@ -16,15 +16,15 @@ import requests
 import config
 from Bio.KEGG.KGML import KGML_parser
 from Bio.KEGG.KGML.KGML_pathway import Relation
+from lib.sutils import *
 
 HOST='http://rest.kegg.jp'
 
 DATA_ROOT = os.path.join(config.data_dir, 'kegg')
 
-if not os.path.exists(DATA_ROOT):
-    print('Could not find kegg data dir. Creating dir:', DATA_ROOT)
-    os.makedirs(DATA_ROOT)
+safe_create_dir(DATA_ROOT)
 
+@timeit
 def get_all_pathways(force=False):
     list_url = HOST + '/list/pathway/hsa'
     path = os.path.join(DATA_ROOT, 'kegg-all-pathways.txt')
@@ -47,9 +47,6 @@ def get_all_pathways(force=False):
 def get_pathway_KGML(pathway_id='hsa04151'):
     print('Reading pathway:', pathway_id)
     pw_url = HOST + '/get/' + pathway_id + '/kgml'
-    if not os.path.exists(DATA_ROOT):
-        print('Could not find data dir. Creating dir:', DATA_ROOT)
-        os.makedirs(DATA_ROOT)
 
     # get pathway data if not exists
     path = os.path.join(DATA_ROOT, pathway_id + '.kgml')

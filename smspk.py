@@ -4,55 +4,66 @@ import networkx as nx
 import numpy as np
 import scipy
 import pdb
+np.seterr(all='warn')
 
 class smspk:
 
 	@staticmethod
-	def kernel(data, alpha, epsilon=1e-6, normalization=False):
+	def kernel(pat_ids, pathway, alpha, label_key, epsilon=1e-6, normalization=False):
 		'''
 		Parameters
 		----------
-		data: list of networkx graphs
+		pat_ids:
+			list of patient ids
+		pathway:
+			pathway networkx graph
 		alpha: float
 			the smoothing parameter
+		label_key: str
+			label attribute key showing patient to label mapping. Should be filled in experiment
 		epsilon: {1e-6} float
 			smoothing converges if the change is lower than epsilon
 		normalization: {False} bool
 			normalize the kernel matrix such that the diagonal is 1
 		'''
 
-		# extract labels of nodes of graphs -- ASSUMPTION: all graphs have the same nodes
-		nodes = list(nx.get_node_attributes(data[0], 'label').keys())
-		mutations = np.empty([len(data), len(nodes)])
-		for i in range(len(data)):
-			tmp = nx.get_node_attributes(data[i], 'label')
-			for j in range(len(nodes)):
-				mutations[i,j] = tmp[nodes[j]]
+		num_pat = pat_ids.shape[0]
+		pat_ind = {}
+		for ind, pid in enumerate(pat_ids): pat_ind[pid] = ind
+		# extract labels of nodes of graphs
+		mutations = np.empty([num_pat, len(pathway.nodes)])
+		for nid in pathway.nodes:
+			nd = pathway.nodes[nid]
+			for pid, lb in nd[label_key].items():
+				mutations[pat_ind[pid], nid]
 
 		# extract the adjacency matrix on the order of nodes we have
-		adj_mat = nx.to_numpy_array(data[0], nodelist=nodes)
+		adj_mat = nx.to_numpy_array(pathway, nodelist=pathway.nodes)
 
 		# smooth the mutations through the pathway
 		mutations = smspk.smooth(mutations, adj_mat, alpha, epsilon)
+		# get all pairs shortest paths
+		all_pairs_sp = nx.all_pairs_shortest_path(pathway)
 
-		# find shortest paths between all pairs of nodes which are genes
-		all_sp = nx.all_pairs_shortest_path(data[0])
-		node_types = nx.get_node_attributes(data[0], 'type')
-
-		km = np.zeros((len(data), len(data)))
+		km = np.zeros((num_pat, num_pat))
 		# print km
-		skip = 1 # it is used to indicate how many nodes from the beginning will be skipped in the shortest path list -- we do not want to process the same shortest paths again
-		for a_sp in all_sp:
-			if node_types[a_sp[0]] == 'Protein': # if the source is gene/protein
-				tmp_sp_of_nodes = list(a_sp[1].keys())
-				for i in range(skip, len(tmp_sp_of_nodes)):
-					if node_types[a_sp[1][tmp_sp_of_nodes[i]][-1]] == 'Protein': # if the destination is gene/protein
-						# print("Shortest path: {}".format(a_sp[1][tmp_sp_of_nodes[i]]))
-						ind = np.isin(nodes, a_sp[1][tmp_sp_of_nodes[i]])
-						tmp_md = mutations[:][:,ind]
-						tmp_km = np.matmul(tmp_md, np.transpose(tmp_md)) # calculate similarities of patients based on the current pathway
-						km += tmp_km # update the main kernel matrix
-			skip += 1
+		checked=[]
+		for src, dsp in all_pairs_sp: # iterate all pairs shortest paths
+			# add source node to checked nodes so we won't check it again in destinations
+			checked.append(src)
+			# skip if the source is not gene/protein
+			if pathway.nodes[src]['type'] != 'Protein': continue
+			# otherwise
+			for dst, sp in dsp.items():
+				# if destination already checked skip
+				if dst in checked: continue
+				# if the destination is not gene/protein skip
+				if pathway.nodes[sp[-1]]['type'] != 'Protein': continue
+				ind = np.isin(pathway.nodes, sp)
+				tmp_md = mutations[:,ind]
+				# calculate similarities of patients based on the current pathway
+				tmp_km = tmp_md @ np.transpose(tmp_md)
+				km += tmp_km # update the main kernel matrix
 
 		# normalize the kernel matrix if normalization is true
 		if normalization == True: km = smspk.normalize_kernel_matrix(km)
@@ -128,7 +139,7 @@ def main():
 	alpha = 0.1
 
 	# calculate the kernel using smspk
-	km = smspk.kernel([mg, mg2], alpha)
+	km = smspk.kernel([mg, mg2], alpha, label_key='label')
 
 	# display the resulting kernel matrix
 	print(("Kernel matrix calculated by smspk with alpha {}:".format(alpha)))
