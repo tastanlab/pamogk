@@ -1,44 +1,49 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import numpy as np
 import networkx as nx
-import pandas as pd
 import copy
 import pdb
 from operator import itemgetter
 import operator
 import matplotlib.pyplot as plt
 import smspk
+import pandas as pd
 import label_mapper
-import rnaseq_processor as rp
+from structural_processor import rnaseq_processor as rp
 from pathway_reader import cx_pathway_reader as cx_pw
 from gene_mapper import uniprot_mapper as um
+import time
+import json
+import os
+import config
+from lib.sutils import *
 
 ### Real Data ###
 # process RNA-seq expression data
-[gene_exp, genes_map] = rp.process("data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt")
-# pdb.set_trace()
+gene_exp, gene_name_map = rp.process('data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 
 # get the dictionary of gene id mappers
-[uni2ent, ent2uni] = um.jsonToDict()
+[uni2ent, ent2uni] = um.json_to_dict()
 
 # convert entrez gene id to uniprot id
-tmp = gene_exp.index.tolist()
-uni_of_rna = [None] * len(tmp)
-for i in range(len(tmp)):
-	if tmp[i] in ent2uni:
-		uni_of_rna[i] = ent2uni[tmp[i]]
-# pdb.set_trace()
-none_ind = np.where(np.array(uni_of_rna) == None)[0]
-print("Number of genes whose uniprot id is not found: ", len(none_ind))
+pat_ids = gene_exp.columns.values # patient TCGA ids
+all_ent_ids = gene_exp.index.values # gene entrez ids
+GE = gene_exp.values
+
+found_ent_ids = [eid in ent2uni for eid in all_ent_ids]
+ent_ids = np.array([eid for eid in all_ent_ids if eid in ent2uni])
+uni_ids = np.array([ent2uni[eid] for eid in ent_ids])
+
+print('uni_ids:', len(uni_ids))
+print('miss_ent_ids:', len(all_ent_ids) - sum(found_ent_ids))
 
 # prune genes whose uniprot id is not found
-gene_exp = gene_exp.drop(gene_exp.index[none_ind])
-pruned_uni_of_rna = itemgetter(*(set(range(len(uni_of_rna))).difference(set(none_ind))))(uni_of_rna)
-
-gene_exp["uniprot_id"] = pruned_uni_of_rna
-print(len(pruned_uni_of_rna))
+GE = GE[found_ent_ids]
+# pdb.set_trace()
 
 # get all pathways
-pathways = cx_pw.read_pathways()
+all_pw_map = cx_pw.read_pathways()
 
 ### Synthetic Data ###
 # # synthetic gene expression data
@@ -67,68 +72,108 @@ pathways = cx_pw.read_pathways()
 # # nx.set_node_attributes(mg2, {0:['uniprot:F'], 1:['uniprot:B'], 2:['uniprot:G'], 3:['uniprot:D'], 4:['uniprot:E']}, 'alias')
 # nx.set_node_attributes(mg2, {'F':'Protein', 'B':'Protein', 'G':'Calcium', 'D':'Protein', 'E':'Calcium'}, 'type')
 # nx.set_node_attributes(mg2, {'F':['uniprot:F'], 'B':['uniprot:B'], 'G':['uniprot:G'], 'D':['uniprot:D'], 'E':['uniprot:E']}, 'alias')
-# pathways = {"pw1": mg, "pw2": mg2}
+# pw_map = {'pw1': mg, 'pw2': mg2}
+
+
+@timeit
+def generate_pat_map(patient_ids, pw_map):
+    '''Generates a patient id to pathway to gene mapping
+
+    Parameters
+    ----------
+    patient_ids: list of int
+        List of patient ids showing which columns of gene expression date are
+        the patients
+    pw_map: map of cx pathway id to networx graph
+        Holds the mapping for all pathways belonging to cx pathway graphs
+    '''
+    return dict((pid, dict((k, {}) for k in pw_map.keys())) for pid in patient_ids)
+
 
 # pdb.set_trace()
-###############################################################################
+@timeit
+def label_patient_genes(all_pw_map, pat_ids, GE, label=1):
+    '''Labels all patients with matching level of expression
+
+    Parameters
+    ----------
+    all_pw_map: :obj:`list` of :obj:`networkx.classes.graph.Graph`
+        a dictionary of all pathways we are using
+    pat_ids: :obj:`list` of :obj:`str`
+        list of patient ids
+    GE: :obj:`numpy.ndarray`
+        Gene expression data array in shape of genes by patients
+    label: int, optional
+        label that will be used for marking patients
+    '''
+    graph_dir = os.path.join(config.data_dir, 'smspk')
+    safe_create_dir(graph_dir)
+    graph_file = 'smspk-over-under-expressed-label={}'.format(label)
+    graph_path = os.path.join(graph_dir, graph_file);
+
+    get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(graph_path, pw_id)
+
+    num_pw = len(all_pw_map)
+
+    @timeit
+    def restore_pathways():
+        for ind, pw_id in enumerate(all_pw_map.keys()):
+            path = get_pw_path(pw_id)
+            print('Loading over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            all_pw_map[pw_id] = nx.read_gpickle(path)
+        print()
+        return all_pw_map
+
+    def save_pathways():
+        for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
+            path = get_pw_path(pw_id)
+            print('Saving over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            nx.write_gpickle(pw, path)
+        print()
+        return all_pw_map
+
+    # check if we already stored all over/under expression pathway data if so restore them
+    if np.all([os.path.exists(get_pw_path(pw_id)) for pw_id in all_pw_map]):
+        return restore_pathways()
+
+    num_pat = pat_ids.shape[0]
+    # if there are missing ones calculate all of them
+    print('Over and under expressed patient pathway labeling')
+    for ind, pid in enumerate(pat_ids):
+        print('Checking patient for over-expressed  {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+        gene_ind = (GE[..., pat_ids == pid] == 1).flatten() # over expressed genes
+        genes = uni_ids[gene_ind] # get uniprot gene ids from indices
+        label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, label)
+
+        print('Checking patient for under-expressed {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+        gene_ind = (GE[..., pat_ids == pid] == -1).flatten() # under expressed genes
+        genes = uni_ids[gene_ind] # get uniprot gene ids from indices
+        label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, label)
+
+    return save_pathways()
+
+label_patient_genes(all_pw_map, pat_ids, GE)
+
 # experiment variables
 smoothing_alpha = 0
 a_smspk = smspk.smspk()
-###############################################################################
-# over-expressed genes
-print("Over-expressed genes will be used to calculate kernel matrices...")
-over_exp_pathways_of_patients = dict(zip(gene_exp.columns[0:-1], [copy.deepcopy(pathways) for i in range(len(gene_exp.columns)-1)]))
-for i in over_exp_pathways_of_patients.keys():
-	print(i)
-	tmp = gene_exp.index[gene_exp[i] == 1]
-	over_exp_pathways_of_patients[i] = label_mapper.map_label_on_pathways(over_exp_pathways_of_patients[i], gene_exp.loc[tmp,"uniprot_id"].tolist())
 
-# calculate kernel matrices
-a_patient_key = list(over_exp_pathways_of_patients.keys())[0] # to get the size of pathways
-over_exp_kms = np.zeros((len(over_exp_pathways_of_patients[a_patient_key]), len(over_exp_pathways_of_patients), len(over_exp_pathways_of_patients)))
-ind = 0
-for pw_key in over_exp_pathways_of_patients[a_patient_key].keys(): # for each pathway
-	tmp = [over_exp_pathways_of_patients[ptnt_key][pw_key] for ptnt_key in over_exp_pathways_of_patients.keys()] # list of the same pathway of all patients
-	over_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-	ind += 1
+num_pat = pat_ids.shape[0]
+num_pw = len(all_pw_map)
+# calculate kernel matrices for over expressed genes
+over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
+for ind, (pw_id, pw) in enumerate(all_pw_map.items()): # for each pathway
+    over_exp_kms[ind] = a_smspk.kernel(pat_ids, pw, smoothing_alpha, label_key='label-oe', normalization=True)
 
-del over_exp_pathways_of_patients
-
-###############################################################################
-# under-expressed genes
-print("Under-expressed genes will be used to calculate kernel matrices...")
-under_exp_pathways_of_patients = dict(zip(gene_exp.columns[0:-1], [copy.deepcopy(pathways) for i in range(len(gene_exp.columns)-1)]))
-for i in under_exp_pathways_of_patients.keys():
-	print(i)
-	tmp = gene_exp.index[gene_exp[i] == -1]
-	under_exp_pathways_of_patients[i] = label_mapper.map_label_on_pathways(under_exp_pathways_of_patients[i], gene_exp.loc[tmp,"uniprot_id"].tolist())
-
-# calculate kernel matrices
-a_patient_key = list(under_exp_pathways_of_patients.keys())[0] # to get the size of pathways
-under_exp_kms = np.zeros((len(under_exp_pathways_of_patients[a_patient_key]), len(under_exp_pathways_of_patients), len(under_exp_pathways_of_patients)))
-ind = 0
-smoothing_alpha = 0
-for pw_key in under_exp_pathways_of_patients[a_patient_key].keys(): # for each pathway
-	tmp = [under_exp_pathways_of_patients[ptnt_key][pw_key] for ptnt_key in under_exp_pathways_of_patients.keys()] # list of the same pathway of all patients
-	under_exp_kms[ind] = a_smspk.kernel(tmp, smoothing_alpha, normalization=True)
-	ind += 1
-
-###############################################################################
+# calculate kernel matrices for under expressed genes
+under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
+for ind, (pw_id, pw) in enumerate(all_pw_map.items()): # for each pathway
+    under_exp_kms[ind] = a_smspk.kernel(pat_ids, pw, smoothing_alpha,label_key='label-ue', normalization=True)
 
 
 def plot_hm(data):
-	plt.imshow(data, cmap='hot', interpolation='nearest')
-	plt.show()
+    plt.imshow(data, cmap='hot', interpolation='nearest')
+    plt.show()
 
 # pdb.set_trace()
-print("End!")
-
-
-
-
-
-
-
-
-
-# atadam
+print('End!')

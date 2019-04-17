@@ -16,17 +16,40 @@ import requests
 import config
 from Bio.KEGG.KGML import KGML_parser
 from Bio.KEGG.KGML.KGML_pathway import Relation
+from lib.sutils import *
+
+HOST='http://rest.kegg.jp'
+
+DATA_ROOT = os.path.join(config.data_dir, 'kegg')
+
+safe_create_dir(DATA_ROOT)
+
+@timeit
+def get_all_pathways(force=False):
+    list_url = HOST + '/list/pathway/hsa'
+    path = os.path.join(DATA_ROOT, 'kegg-all-pathways.txt')
+    if force or not os.path.exists(path):
+        r = requests.get(list_url)
+        if not r.status_code == 200:
+            print('Failed to get pathway:', path, r.text)
+            sys.exit(-1)
+        with open(path, 'w') as f:
+            f.write(r.text)
+            print('Saved KGML file at:', path)
+
+    with open(path) as f:
+        lines = [l for l in f.readlines() if l.strip() != '']
+        all_pathways = [l.split('\t')[0] for l in lines]
+    print('Number of pathways:', len(all_pathways))
+    return all_pathways
+
 
 def get_pathway_KGML(pathway_id='hsa04151'):
     print('Reading pathway:', pathway_id)
-    list_url = 'http://rest.kegg.jp/list/pathway/hsa'
-    pw_url = 'http://rest.kegg.jp/get/' + pathway_id + '/kgml'
-    if not os.path.exists(config.data_dir):
-        print('Could not find data dir. Creating dir:', config.data_dir)
-        os.makedirs(config.data_dir)
+    pw_url = HOST + '/get/' + pathway_id + '/kgml'
 
     # get pathway data if not exists
-    path = os.path.join(config.data_dir, pathway_id + '.kgml')
+    path = os.path.join(DATA_ROOT, pathway_id + '.kgml')
     if not os.path.exists(path):
         print('Could not find hsa file getting from kegg:', pw_url)
         r = requests.get(pw_url)
@@ -153,7 +176,8 @@ def can_add_relation(s, d, relations, new_relations):
     return True
 
 if __name__ == '__main__':
-    entries, relations = get_pathway_KGML()
-    for r in relations:
-        print(r)
-    print(len(entries.keys()), len(relations))
+    all_pathways = get_all_pathways()
+    for pathway_id in all_pathways:
+        print(pathway_id)
+        entries, relations = get_pathway_KGML(pathway_id)
+        print(pathway_id, len(entries.keys()), len(relations), '\n')
