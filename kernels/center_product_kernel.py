@@ -1,5 +1,6 @@
 import numpy as np
-
+from sklearn.svm import SVC
+import math
 
 def calculate_S_and_P(patients, gene_vectors):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector
@@ -8,7 +9,7 @@ def calculate_S_and_P(patients, gene_vectors):
         p['S'] = genes
         p['P'] = np.average(genes, axis=0)
 
-def test_accr():
+def test_accr(patients):
     hit = 0
     pids = [p['pid'] for p in patients]
     for pid in pids:

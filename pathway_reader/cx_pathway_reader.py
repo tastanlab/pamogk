@@ -131,6 +131,22 @@ def read_single_pathway(pathway_id, reading_all=False):
 
     return G
 
+def getPathwaysWithGene(pathways, genes):
+    acceptedPathways = []
+    for p in pathways:
+        PATHWAY_PATH = os.path.join(config.data_dir, p + '.cx')
+        pathway_data = json.load(open(PATHWAY_PATH))
+        nodesInPathway = _get_pathway_child(pathway_data, 'nodes')
+        for node in nodesInPathway:
+            uniprotId = node["r"]
+            if len(uniprotId.split(":"))>1:
+                uniprotId = uniprotId.split(":")[1]
+            if uniprotId in genes:
+                acceptedPathways.append(p)
+                break
+
+    return acceptedPathways
+
 if __name__ == '__main__':
     G = read_pathways()
     pdb.set_trace()
