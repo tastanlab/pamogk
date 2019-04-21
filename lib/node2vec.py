@@ -4,11 +4,12 @@ import random
 
 
 class Graph():
-	def __init__(self, nx_G, is_directed, p, q):
+	def __init__(self, nx_G, is_directed, p, q, debug=False):
 		self.G = nx_G
 		self.is_directed = is_directed
 		self.p = p
 		self.q = q
+		self.debug = debug
 
 	def node2vec_walk(self, walk_length, start_node):
 		'''
@@ -28,7 +29,7 @@ class Graph():
 					walk.append(cur_nbrs[alias_draw(alias_nodes[cur][0], alias_nodes[cur][1])])
 				else:
 					prev = walk[-2]
-					next = cur_nbrs[alias_draw(alias_edges[(prev, cur)][0], 
+					next = cur_nbrs[alias_draw(alias_edges[(prev, cur)][0],
 						alias_edges[(prev, cur)][1])]
 					walk.append(next)
 			else:
@@ -43,9 +44,9 @@ class Graph():
 		G = self.G
 		walks = []
 		nodes = list(G.nodes())
-		print( 'Walk iteration:')
+		if self.debug: print( 'Walk iteration:')
 		for walk_iter in range(num_walks):
-			print( str(walk_iter+1), '/', str(num_walks))
+			if self.debug: print( str(walk_iter+1), '/', str(num_walks))
 			random.shuffle(nodes)
 			for node in nodes:
 				walks.append(self.node2vec_walk(walk_length=walk_length, start_node=node))

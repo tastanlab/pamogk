@@ -4,7 +4,7 @@ import heapq
 from sklearn.cluster import KMeans
 
 
-def lmkkmeans_train(Km, parameters):
+def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
     N = Km.shape[1]
     P = Km.shape[0]
     Theta = np.zeros((N, P))
@@ -12,12 +12,12 @@ def lmkkmeans_train(Km, parameters):
         for j in range(P):
             Theta[i][j] = 1 / P
     K_Theta = calculate_localized_kernel_theta(Km, Theta)
-    objective = np.zeros((parameters["iteration_count"], 1))
+    objective = np.zeros((iteration_count, 1))
 
-    for iter in range(parameters["iteration_count"]):
+    for iter in range(iteration_count):
         # print("running iteration "+str(iter)+"...\n" )
         temp, H = np.linalg.eig(K_Theta)
-        maxIndexes = heapq.nlargest(parameters["cluster_count"], range(len(temp)), temp.take)
+        maxIndexes = heapq.nlargest(cluster_count, range(len(temp)), temp.take)
         H = H[:, maxIndexes]
         HHT = np.matmul(H, np.conjugate(H.transpose()))
 
@@ -33,9 +33,9 @@ def lmkkmeans_train(Km, parameters):
         objective[iter] = np.trace(np.matmul(np.matmul(np.conjugate(H.transpose()), K_Theta), H)) - np.trace(K_Theta)
         print()
 
-    tempH = (np.matlib.repmat(np.sqrt((np.power(H, 2)).sum(axis=1)), parameters["cluster_count"], 1)).transpose()
+    tempH = (np.matlib.repmat(np.sqrt((np.power(H, 2)).sum(axis=1)), cluster_count, 1)).transpose()
     H_normalized = np.divide(H, tempH)
-    clustering = KMeans(n_clusters=parameters["cluster_count"], max_iter=1000, ).fit(H_normalized)
+    clustering = KMeans(n_clusters=cluster_count, max_iter=1000, ).fit(H_normalized)
     return clustering, objective, Theta
 
 
@@ -142,7 +142,4 @@ def main():
     v1, v2, v3 = views.getLinearKernel()
     Kmm = np.stack((v1, v2, v3))
 
-    parameters = {}
-    parameters["iteration_count"] = 10
-    parameters["cluster_count"] = 3
-    lmkkmeans_train(Kmm, parameters)
+    lmkkmeans_train(Kmm, cluster_count=3, iteration_count=10)

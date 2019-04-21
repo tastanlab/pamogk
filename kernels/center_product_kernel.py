@@ -1,12 +1,18 @@
 import numpy as np
+import pdb
+from lib.sutils import *
 
 
 def calculate_S_and_P(patients, gene_vectors):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector
     for p in patients:
-        genes = np.array([gene_vectors[str(n)] for n in p['mutated_nodes']])
+        # try:
+        pdb.set_trace()
+        genes = np.array([gene_vectors[n] for n in p['mutated_nodes']])
         p['S'] = genes
         p['P'] = np.average(genes, axis=0)
+        # except:
+        #     pdb.set_trace()
 
 def test_accr():
     hit = 0
@@ -20,7 +26,7 @@ def test_accr():
         is_hit = linear_svc.predict([test_p['P']]) == [test_p['sick']]
         # print('%3d: %s' % (pid, is_hit), linear_svc.predict([test_p['P']]), test_p['pid'], test_p['sick'])
         hit += is_hit[0]
-    print('Accuracy Leave-One-Out accuracy=%.2lf' % (hit/len(pids)))
+    log('Accuracy Leave-One-Out accuracy=%.2lf' % (hit/len(pids)))
 
     hit = 0
     pids = [p['pid'] for p in patients]
@@ -36,4 +42,4 @@ def test_accr():
         is_hit = linear_svc.predict([p['P'] for p in test_p]) == [p['sick'] for p in test_p]
         # print('%3d: %s' % (i, is_hit))
         hit += np.sum(is_hit)
-    print('Accuracy K-fold with K=%d accuracy=%.2lf' % (K, hit/len(pids)))
+    log('Accuracy K-fold with K=%d accuracy=%.2lf' % (K, hit/len(pids)))
