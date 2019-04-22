@@ -1,8 +1,10 @@
 import time
 import os
 import sys
+import pdb
+import numpy as np
 
-class timeit(object):
+def timeit(f):
     '''Timing decorator for functions. Just add @timeit to start and function
     will be timed. It will write starting and ending times
 
@@ -22,23 +24,44 @@ class timeit(object):
         when any error thrown by called function does not catch it
     '''
 
-    def __init__(self, f):
-        self.f = f
-
-    def __call__(self, *args, **kwargs):
-        print("Started:", self.f.__name__)
+    def wrapper(*args, **kwargs):
+        log("Started:", f.__qualname__)
         t = time.time()
-        res = self.f(*args, **kwargs)
-        print("Finished: {} elapsed: {:.2f}s".format(self.f.__name__, time.time() - t))
+        res = f(*args, **kwargs)
+        log("Finished: {} elapsed: {:.2f}s".format(f.__qualname__, time.time() - t))
         return res
+    return wrapper
 
 def safe_create_dir(d):
     if not os.path.exists(d):
-        print('Dir not found creating:', d)
+        log('Dir not found creating:', d)
         os.makedirs(d)
 
-# _print = print
+log_f = None
+log_p = None
 
-# def print(*args, flush=True, **kwargs):
-#     _print(*args, **kwargs)
-#     if flush: sys.stdout.flush()
+def change_log_path(path):
+    global log_p, log_f
+    if log_p == path: return
+    if log_f: log_f.close()
+    log_p = path
+    d = os.path.basename(path)
+    safe_create_dir(d)
+    log_f = open(path, 'a')
+    log('Initialized log_path:', path)
+
+def log(*args, **kwargs):
+    print(*args, **kwargs)
+    if log_f:
+        print(*args, **kwargs, file=log_f)
+        log_f.flush()
+
+def exists_np_data(path):
+    return os.path.exists(path + '.npz')
+
+def save_np_data(path, *args, **kwargs):
+    if len(kwargs) == 0: kwargs = { 'data': args[0] }
+    np.savez_compressed(path + '.npz', **kwargs)
+
+def load_np_data(path, key='data'):
+    return np.load(path + '.npz')['data']

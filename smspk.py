@@ -4,101 +4,103 @@ import networkx as nx
 import numpy as np
 import scipy
 import pdb
-np.seterr(all='warn')
+from lib.sutils import *
 
-class smspk:
+# options are raise, warn, print (default)
+# np.seterr(all='raise')
 
-	@staticmethod
-	def kernel(pat_ids, pathway, alpha, label_key, epsilon=1e-6, normalization=False):
-		'''
-		Parameters
-		----------
-		pat_ids:
-			list of patient ids
-		pathway:
-			pathway networkx graph
-		alpha: float
-			the smoothing parameter
-		label_key: str
-			label attribute key showing patient to label mapping. Should be filled in experiment
-		epsilon: {1e-6} float
-			smoothing converges if the change is lower than epsilon
-		normalization: {False} bool
-			normalize the kernel matrix such that the diagonal is 1
-		'''
+def kernel(pat_ids, pathway, label_key, alpha=0.5, epsilon=1e-6, normalization=False):
+	'''
+	Parameters
+	----------
+	pat_ids:
+		list of patient ids
+	pathway:
+		pathway networkx graph
+	alpha: float
+		the smoothing parameter
+	label_key: str
+		label attribute key showing patient to label mapping. Should be filled in experiment
+	epsilon: {1e-6} float
+		smoothing converges if the change is lower than epsilon
+	normalization: {False} bool
+		normalize the kernel matrix such that the diagonal is 1
+	'''
 
-		num_pat = pat_ids.shape[0]
-		pat_ind = {}
-		for ind, pid in enumerate(pat_ids): pat_ind[pid] = ind
-		# extract labels of nodes of graphs
-		mutations = np.empty([num_pat, len(pathway.nodes)])
-		for nid in pathway.nodes:
-			nd = pathway.nodes[nid]
-			for pid, lb in nd[label_key].items():
-				mutations[pat_ind[pid], nid]
+	num_pat = pat_ids.shape[0]
+	pat_ind = {}
+	for ind, pid in enumerate(pat_ids): pat_ind[pid] = ind
+	# extract labels of nodes of graphs
+	mutations = np.zeros([num_pat, len(pathway.nodes)])
+	for nid in pathway.nodes:
+		nd = pathway.nodes[nid]
+		for pid, lb in nd[label_key].items():
+			mutations[pat_ind[pid], nid] = lb
 
-		# extract the adjacency matrix on the order of nodes we have
-		adj_mat = nx.to_numpy_array(pathway, nodelist=pathway.nodes)
+	# extract the adjacency matrix on the order of nodes we have
+	adj_mat = nx.to_numpy_array(pathway, nodelist=pathway.nodes)
 
-		# smooth the mutations through the pathway
-		mutations = smspk.smooth(mutations, adj_mat, alpha, epsilon)
-		# get all pairs shortest paths
-		all_pairs_sp = nx.all_pairs_shortest_path(pathway)
+	# smooth the mutations through the pathway
+	mutations = smooth(mutations, adj_mat, alpha, epsilon)
+	# get all pairs shortest paths
+	all_pairs_sp = nx.all_pairs_shortest_path(pathway)
 
-		km = np.zeros((num_pat, num_pat))
-		# print km
-		checked=[]
-		for src, dsp in all_pairs_sp: # iterate all pairs shortest paths
-			# add source node to checked nodes so we won't check it again in destinations
-			checked.append(src)
-			# skip if the source is not gene/protein
-			if pathway.nodes[src]['type'] != 'Protein': continue
-			# otherwise
-			for dst, sp in dsp.items():
-				# if destination already checked skip
-				if dst in checked: continue
-				# if the destination is not gene/protein skip
-				if pathway.nodes[sp[-1]]['type'] != 'Protein': continue
-				ind = np.isin(pathway.nodes, sp)
-				tmp_md = mutations[:,ind]
-				# calculate similarities of patients based on the current pathway
-				tmp_km = tmp_md @ np.transpose(tmp_md)
-				km += tmp_km # update the main kernel matrix
+	km = np.zeros((num_pat, num_pat))
 
-		# normalize the kernel matrix if normalization is true
-		if normalization == True: km = smspk.normalize_kernel_matrix(km)
+	checked=[]
+	for src, dsp in all_pairs_sp: # iterate all pairs shortest paths
+		# add source node to checked nodes so we won't check it again in destinations
+		checked.append(src)
+		# skip if the source is not gene/protein
+		if pathway.nodes[src]['type'] != 'Protein': continue
+		# otherwise
+		for dst, sp in dsp.items():
+			# if destination already checked skip
+			if dst in checked: continue
+			# if the destination is not gene/protein skip
+			if pathway.nodes[sp[-1]]['type'] != 'Protein': continue
+			ind = np.isin(pathway.nodes, sp)
+			tmp_md = mutations[:,ind]
+			# calculate similarities of patients based on the current pathway
+			tmp_km = tmp_md @ np.transpose(tmp_md)
+			km += tmp_km # update the main kernel matrix
 
-		return km
+	# normalize the kernel matrix if normalization is true
+	if normalization == True: km = normalize_kernel_matrix(km)
+
+	return km
 
 
-	@staticmethod
-	def smooth(md, adj_m, alpha, epsilon=10**-6):
-		'''
-		md: numpy array
-			a numpy array of genes of patients indicating which one is mutated or not
-		adj_m: numpy array
-			the adjacency matrix of the pathway
-		alpha: float
-			the smoothing parameter
-		epsilon: {1e-6} float
-			smoothing converges if the change is lower than epsilon
-		'''
-		norm_adj_mat = adj_m @ np.diag(1.0 / np.sum(adj_m, axis=0))
+def smooth(md, adj_m, alpha=0.5, epsilon=10**-6):
+	'''
+	md: numpy array
+		a numpy array of genes of patients indicating which one is mutated or not
+	adj_m: numpy array
+		the adjacency matrix of the pathway
+	alpha: {0.5} float
+		the smoothing parameter in range of 0-1
+	epsilon: {1e-6} float
+		smoothing converges if the change is lower than epsilon
+	'''
+	# since alpha will be together with norm_adj_mat all the time multiply here
+	alpha_norm_adj_mat = alpha * adj_m / np.sum(adj_m, axis=0)
 
-		s_md = md
-		pre_s_md = md + epsilon + 1
+	s_md = md
+	pre_s_md = md + epsilon + 1
 
-		while np.linalg.norm(s_md - pre_s_md) > epsilon:
-			pre_s_md = s_md
-			s_md = ((alpha * pre_s_md) @ norm_adj_mat) + (1 - alpha) * md
+	while np.linalg.norm(s_md - pre_s_md) > epsilon:
+		pre_s_md = s_md
+		# alpha_norm_adj_mat already inclues alpha multiplier
+		s_md = (s_md @ alpha_norm_adj_mat) + (1 - alpha) * md
 
-		return s_md
+	return s_md
 
-	@staticmethod
-	def normalize_kernel_matrix(km):
-		D = np.diag(1 / np.sqrt(np.diag(km)))
-		norm_km = D @ km @ D # K_ij / sqrt(K_ii * K_jj)
-		return np.nan_to_num(norm_km) # replace NaN with 0
+def normalize_kernel_matrix(km):
+	kmD = np.array(np.diag(km))
+	kmD[kmD == 0] = 1
+	D = np.diag(1 / np.sqrt(kmD))
+	norm_km = D @ km @ D # K_ij / sqrt(K_ii * K_jj)
+	return np.nan_to_num(norm_km) # replace NaN with 0
 
 def main():
 	# Create a networkx graph object
