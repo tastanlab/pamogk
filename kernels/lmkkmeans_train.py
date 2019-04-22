@@ -26,7 +26,7 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
             start_index = m * N
             end_index = (m + 1) * N
             Q[start_index:end_index, start_index:end_index] = np.eye(N) * Km[m] - HHT * Km[m]
-        resxx = call_mosek(Q)
+        resxx = call_mosek(Q, N, P)
         Theta = np.array(resxx).reshape((P, N)).T
         K_Theta = calculate_localized_kernel_theta(Km, Theta)
         np.matmul(np.conjugate(H.transpose()), K_Theta)
@@ -48,9 +48,7 @@ def calculate_localized_kernel_theta(K, Theta):
     return K_Theta
 
 
-def call_mosek(Q):
-    N = 120
-    P = 3
+def call_mosek(Q, N=120, P=3):
     with mosek.Env() as env:
         # Attach a printer to the environment
         env.set_Stream(mosek.streamtype.log, streamprinter)
