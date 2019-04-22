@@ -34,7 +34,7 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         print()
 
     tempH = (np.matlib.repmat(np.sqrt((np.power(H, 2)).sum(axis=1)), cluster_count, 1)).transpose()
-    H_normalized = np.divide(H, tempH)
+    H_normalized = np.divide(H, tempH, out=np.zeros_like(H), where=tempH!=0)
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000, ).fit(H_normalized)
     return clustering, objective, Theta
 
@@ -48,7 +48,7 @@ def calculate_localized_kernel_theta(K, Theta):
     return K_Theta
 
 
-def call_mosek(Q, N=120, P=3):
+def call_mosek(Q, N, P):
     with mosek.Env() as env:
         # Attach a printer to the environment
         env.set_Stream(mosek.streamtype.log, streamprinter)
@@ -59,12 +59,10 @@ def call_mosek(Q, N=120, P=3):
             bkc = [mosek.boundkey.ra] * N
             blc = np.ones((N, 1))
             buc = np.ones((N, 1))
-            numvar = 3
             bkx = [mosek.boundkey.ra] * N * P
             blx = np.zeros((N * P, 1))
             bux = np.ones((N * P, 1))
             c = np.zeros((N * P, 1))
-            A = np.eye(N)
             aval = np.ones((N * P, 1)).astype(int)
             asub = np.zeros((N * P, 1)).astype(int)
             for i in range(P):
