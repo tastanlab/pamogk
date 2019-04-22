@@ -2,6 +2,7 @@ import sys, mosek
 import numpy as np
 import heapq
 from sklearn.cluster import KMeans
+import numpy.matlib as npML
 
 
 def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
@@ -21,19 +22,30 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         H = H[:, maxIndexes]
         HHT = np.matmul(H, np.conjugate(H.transpose()))
 
-        Q = np.zeros((N * P, N * P))
+
+        qsubi = []
+        qsubj = []
+        qval = []
+        #Q = np.zeros((N * P, N * P), dtype=np.float64)
         for m in range(P):
             start_index = m * N
             end_index = (m + 1) * N
-            Q[start_index:end_index, start_index:end_index] = np.eye(N) * Km[m] - HHT * Km[m]
-        resxx = call_mosek(Q, N, P)
+            tmpMatrix = np.eye(N) * Km[m] - HHT * Km[m]
+            for i in range(len(tmpMatrix)):
+                for j in range(i+1):
+                    if tmpMatrix[i,j]!=0:
+                        qsubi.append(start_index+i)
+                        qsubj.append(start_index+j)
+                        qval.append(tmpMatrix[i, j])
+            #Q[start_index:end_index, start_index:end_index] = tmpMatrix
+        resxx = call_mosek(qsubi,qsubj,qval, N, P)
         Theta = np.array(resxx).reshape((P, N)).T
         K_Theta = calculate_localized_kernel_theta(Km, Theta)
         np.matmul(np.conjugate(H.transpose()), K_Theta)
         objective[iter] = np.trace(np.matmul(np.matmul(np.conjugate(H.transpose()), K_Theta), H)) - np.trace(K_Theta)
         print()
 
-    tempH = (np.matlib.repmat(np.sqrt((np.power(H, 2)).sum(axis=1)), cluster_count, 1)).transpose()
+    tempH = (npML.repmat(np.sqrt((np.power(H, 2)).sum(axis=1)), cluster_count, 1)).transpose()
     H_normalized = np.divide(H, tempH, out=np.zeros_like(H), where=tempH!=0)
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000, ).fit(H_normalized)
     return clustering, objective, Theta
@@ -48,7 +60,7 @@ def calculate_localized_kernel_theta(K, Theta):
     return K_Theta
 
 
-def call_mosek(Q, N, P):
+def call_mosek(qsubi,qsubj,qval, N, P):
     with mosek.Env() as env:
         # Attach a printer to the environment
         env.set_Stream(mosek.streamtype.log, streamprinter)
@@ -68,7 +80,7 @@ def call_mosek(Q, N, P):
             for i in range(P):
                 for j in range(N):
                     asub[j + N * i] = j
-
+            '''
             qsubi = []
             qsubj = []
             qval = []
@@ -78,6 +90,7 @@ def call_mosek(Q, N, P):
                         qsubi.append(i)
                         qsubj.append(j)
                         qval.append(Q[i, j])
+            '''
 
             numvar = len(bkx)
             numcon = len(bkc)
