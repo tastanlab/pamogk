@@ -1,6 +1,9 @@
 import numpy as np
 import pdb
 from lib.sutils import *
+import os,config,math
+from sklearn.svm import SVC
+from sklearn.metrics.pairwise import linear_kernel,rbf_kernel
 
 
 def calculate_S_and_P(patients, gene_vectors):
@@ -14,7 +17,30 @@ def calculate_S_and_P(patients, gene_vectors):
         # except:
         #     pdb.set_trace()
 
-def test_accr():
+def calculate_S_and_P1(patients, gene_vectors):
+    # calculate S (mutated gene vector set) and P (average mutataion point) vector
+    for p in patients:
+        # try:
+        #pdb.set_trace()
+        genes = []
+        for pathway in gene_vectors:
+            for n in p['mutated_nodes']:
+                if n in gene_vectors[pathway].keys():
+                    genes.append(gene_vectors[pathway][n])
+        p['S'] = genes
+        p['P'] = np.average(genes, axis=0)
+        # except:
+        #     pdb.set_trace()
+    return np.array(patients)
+
+def CP_kernel(patients):
+    # calculate maximum S difference for given pair
+    vectors = np.array([p['P'] for p in patients])
+    linK = linear_kernel(vectors)
+    rbfK = rbf_kernel(vectors)
+    return linK,rbfK
+
+def test_accr(patients):
     hit = 0
     pids = [p['pid'] for p in patients]
     for pid in pids:
