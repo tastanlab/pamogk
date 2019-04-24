@@ -33,7 +33,7 @@ parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Sur
 parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
 
 args = parser.parse_args()
-print('Running args:', args)
+log('Running args:', args)
 
 
 class Experiment1(object):
@@ -96,9 +96,9 @@ class Experiment1(object):
         # otherwise calculate
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
-            print('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            log('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
             res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
-        print()
+        log()
         # store gene vectors
         with open(fpath, 'w') as f: json.dump(res, f)
         return res

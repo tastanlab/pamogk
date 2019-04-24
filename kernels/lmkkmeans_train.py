@@ -41,7 +41,6 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         objective[it] = np.trace(H_con @ K_Theta @ H) - np.trace(K_Theta)
         print()
 
-    pdb.set_trace()
     tempH = (npML.repmat(np.sqrt((H ** 2).sum(axis=1)), cluster_count, 1)).transpose()
     H_normalized = np.divide(H, tempH, out=np.zeros_like(H), where=tempH != 0)
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000).fit(H_normalized)

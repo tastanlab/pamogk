@@ -89,7 +89,7 @@ class Experiment1(object):
         res_pw_map = {}
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_pw_path(pw_id)
-            log('Loading over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            log('Loading over/under expressed data {:3}/{} pw={}'.format(ind+1, num_pw, pw_id), end='\r')
             res_pw_map[pw_id] = nx.read_gpickle(path)
         log()
         return res_pw_map
@@ -99,7 +99,7 @@ class Experiment1(object):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             path = self.get_pw_path(pw_id)
-            log('Saving over/under expressed data {:3}/{} path={}'.format(ind+1, num_pw, path), end='\r')
+            log('Saving over/under expressed data {:3}/{} pw={}'.format(ind+1, num_pw, pw_id), end='\r')
             nx.write_gpickle(pw, path)
         log()
 

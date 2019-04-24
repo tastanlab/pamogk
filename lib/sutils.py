@@ -3,6 +3,9 @@ import os
 import sys
 import pdb
 import numpy as np
+from datetime import datetime
+
+ISO_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
 def timeit(f):
     '''Timing decorator for functions. Just add @timeit to start and function
@@ -51,6 +54,9 @@ def change_log_path(path):
     log('Initialized log_path:', path)
 
 def log(*args, **kwargs):
+    ts = datetime.now().strftime(ISO_FORMAT)[:-3]
+    if 'ts' not in kwargs or kwargs['ts'] != False: args = [ts, *args]
+    if 'ts' in kwargs: del kwargs['ts']
     print(*args, **kwargs)
     if log_f:
         print(*args, **kwargs, file=log_f)
