@@ -8,6 +8,7 @@ from operator import itemgetter
 import operator
 import matplotlib.pyplot as plt
 import pandas as pd
+from kernels.lmkkmeans_train import lmkkmeans_train
 from data_processor import node2vec_processor
 from pathway_reader import cx_pathway_reader as cx_pw
 from gene_mapper import uniprot_mapper
@@ -19,6 +20,7 @@ import csv
 import config
 from lib.sutils import *
 import argparse
+from sklearn.cluster import KMeans
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 # parser.add_argument('pathways', metavar='pathway-id', type=str, nargs='+', help='pathway ID list', default=['hsa04151'])
@@ -48,7 +50,7 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
         patients = {}
-        with open('data/kirc_data/kirc_somatic_mutation_data.csv') as csvfile:
+        with open('../data/kirc_data/kirc_somatic_mutation_data.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 pat_id = row['Patient ID']
@@ -88,25 +90,57 @@ class Experiment1(object):
     def get_node2vecs(self, all_pw_map):
         fpath = 'p={p}-q={q}-size={n2v_size}-is_directed={is_directed}.json'.format(**vars(args))
         fpath = os.path.join(self.exp_data_dir, fpath)
+        fpathL = 'p={p}-q={q}-size={n2v_size}-is_directed={is_directed}-Labels.json'.format(**vars(args))
+        fpathL = os.path.join(self.exp_data_dir, fpathL)
         res = {}
+        resLabel = {}
         # if exists reload
-        if os.path.exists(fpath):
+        if os.path.exists(fpath) and os.path.exists(fpathL):
             with open(fpath) as f:
-                return json.load(f)
+                with open(fpathL) as fL:
+                    return json.load(f), json.load(fL)
         # otherwise calculate
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             print('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            tmp = {}
+            for i in range(len(pw._node)):
+                tmp[i]=pw._node[i]['uniprot-ids']
+            resLabel[pw_id] = tmp
             res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
         print()
         # store gene vectors
         with open(fpath, 'w') as f: json.dump(res, f)
-        return res
+        with open(fpathL, 'w') as f: json.dump(resLabel, f)
+        return res,resLabel
+
+    @timeit
+    def processGeneVecMap(self,gene_vec_map):
+        vec_map = gene_vec_map[0]
+        label_map = gene_vec_map[1]
+
+        for i,item in enumerate(vec_map):
+
+            pvec_map = vec_map[item]
+            plabel_map = label_map[item]
+            for j in range(len(pvec_map)):
+                for k in range(len(plabel_map[str(j)])):
+                    vec_map[item][plabel_map[str(j)][k]] = pvec_map[str(j)]
+
+        return vec_map
 
     @timeit
     def create_kernels(self, patients, gene_vec_map):
-        center_product_kernel.calculate_S_and_P(patients, gene_vec_map)
-        center_product_kernel.test_accr(patients)
+        center_product_kernel.calculate_S_and_P1(patients, gene_vec_map)
+        k1, k2 = center_product_kernel.CP_kernel(patients)
+        return k1,k2
+        #center_product_kernel.test_accr(patients)
+
+    @timeit
+    def cluster(self, kernels):
+        return lmkkmeans_train(kernels)
+
+
 
 
 exp = Experiment1()
@@ -119,4 +153,11 @@ all_pw_map = exp.read_pathways()
 
 gene_vec_map = exp.get_node2vecs(all_pw_map)
 
-exp.create_kernels(patients, gene_vec_map)
+gene_vec = exp.processGeneVecMap(gene_vec_map)
+
+k1,k2 = exp.create_kernels(patients, gene_vec)
+
+results = exp.cluster(np.stack((k1,k2)))
+
+print()
+
