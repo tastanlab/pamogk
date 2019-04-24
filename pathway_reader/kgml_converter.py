@@ -18,7 +18,9 @@ import networkx as nx
 from Bio.KEGG.KGML import KGML_parser
 from Bio.KEGG.KGML.KGML_pathway import Relation
 from . import kgml_pathway_reader
+from lib.sutils import *
 
+@timeit
 def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None):
     '''
     @param is_directed forced to prevent parsing the graph wrongly
@@ -28,7 +30,7 @@ def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None
         entries, relations = kgml_pathway_reader.get_pathway_KGML(pathway_id)
 
     # validate data dir
-    if not os.path.exists(config.data_dir): os.makedirs(config.data_dir)
+    safe_create_dir(config.data_dir)
     # convert kgml data to networkx graph
     nodes = [(eid, {'name': entries[eid].name, 'hname': entries[eid].graphics[0].name, 'eid': eid }) for eid in entries]
     edges = [(r.entry1.id, r.entry2.id, {'weight': 1}) for r in relations]

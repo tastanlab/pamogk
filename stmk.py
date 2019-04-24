@@ -24,7 +24,7 @@ import argparse
 # from pathway_reader import kgml_converter
 from pathway_reader import cx_pathway_reader
 from pathway_reader import network_plotter
-from structural_processor import node2vec_processor
+from data_processor import node2vec_processor
 from synthetic_experiments import cell_survival_group_kegg
 from sklearn.manifold import TSNE
 from sklearn.svm import SVC
