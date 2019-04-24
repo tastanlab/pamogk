@@ -1,20 +1,34 @@
 import numpy as np
 import pdb
 from lib.sutils import *
+import os,config,math
+from sklearn.svm import SVC
+from sklearn.metrics.pairwise import linear_kernel,rbf_kernel
 
 
 def calculate_S_and_P(patients, gene_vectors):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector
     for p in patients:
-        # try:
-        pdb.set_trace()
         genes = np.array([gene_vectors[n] for n in p['mutated_nodes']])
         p['S'] = genes
         p['P'] = np.average(genes, axis=0)
-        # except:
-        #     pdb.set_trace()
 
-def test_accr():
+def calculate_S_and_P1(patients, gene_vectors, uni_to_vec):
+    # calculate S (mutated gene vector set) and P (average mutataion point) vector
+    for p in patients:
+        genes = []
+        for pw_genes in gene_vectors.values():
+            for n in p['mutated_nodes']:
+                genes.append(uni_to_vec[n])
+        p['S'] = genes
+        p['P'] = np.average(genes, axis=0)
+    return patients
+
+def CP_kernels(patients):
+    vectors = np.array([p['P'] for p in patients])
+    return linear_kernel(vectors), rbf_kernel(vectors)
+
+def test_accr(patients):
     hit = 0
     pids = [p['pid'] for p in patients]
     for pid in pids:
