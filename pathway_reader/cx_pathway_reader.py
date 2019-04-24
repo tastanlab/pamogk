@@ -141,7 +141,7 @@ def read_single_pathway(pathway_id, reading_all=False):
 
     return G
 
-def getPathwaysWithGene(pathways, genes):
+def get_pathways_with_genes(pathways, genes):
     acceptedPathways = []
     for p in pathways:
         PATHWAY_PATH = os.path.join(config.data_dir, p + '.cx')
