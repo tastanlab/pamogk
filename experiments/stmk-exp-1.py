@@ -23,7 +23,7 @@ import argparse
 from sklearn.cluster import KMeans
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-# parser.add_argument('pathways', metavar='pathway-id', type=str, nargs='+', help='pathway ID list', default=['hsa04151'])
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='data/kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
 parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
@@ -50,7 +50,7 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
         patients = {}
-        with open('../data/kirc_data/kirc_somatic_mutation_data.csv') as csvfile:
+        with open(args.patient_data) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 pat_id = row['Patient ID']
@@ -90,51 +90,35 @@ class Experiment1(object):
     def get_node2vecs(self, all_pw_map):
         fpath = 'p={p}-q={q}-size={n2v_size}-is_directed={is_directed}.json'.format(**vars(args))
         fpath = os.path.join(self.exp_data_dir, fpath)
-        fpathL = 'p={p}-q={q}-size={n2v_size}-is_directed={is_directed}-Labels.json'.format(**vars(args))
-        fpathL = os.path.join(self.exp_data_dir, fpathL)
         res = {}
-        resLabel = {}
-        # if exists reload
-        if os.path.exists(fpath) and os.path.exists(fpathL):
+        # if exists load from disk
+        if os.path.exists(fpath):
             with open(fpath) as f:
-                with open(fpathL) as fL:
-                    return json.load(f), json.load(fL)
+                return json.load(f)
         # otherwise calculate
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
-            print('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
-            tmp = {}
-            for i in range(len(pw._node)):
-                tmp[i]=pw._node[i]['uniprot-ids']
-            resLabel[pw_id] = tmp
+            log('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
             res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
-        print()
+        log()
         # store gene vectors
-        with open(fpath, 'w') as f: json.dump(res, f)
-        with open(fpathL, 'w') as f: json.dump(resLabel, f)
-        return res,resLabel
+        with open(fpath, 'w') as f: json.dump(n2v_vectors, f)
+        return res
 
     @timeit
-    def processGeneVecMap(self,gene_vec_map):
-        vec_map = gene_vec_map[0]
-        label_map = gene_vec_map[1]
-
-        for i,item in enumerate(vec_map):
-
-            pvec_map = vec_map[item]
-            plabel_map = label_map[item]
-            for j in range(len(pvec_map)):
-                for k in range(len(plabel_map[str(j)])):
-                    vec_map[item][plabel_map[str(j)][k]] = pvec_map[str(j)]
-
-        return vec_map
+    def process_gene_vec_map(self, gene_vec_map, all_pw_map):
+        uni_to_vec = {}
+        for pw_id, pw_genes in gene_vec_map.items():
+            pw = all_pw_map[pw_id]
+            for n, gene_vec in pw_genes.items():
+                for gene_id in pw.nodes[int(n)]['uniprot-ids']:
+                    uni_to_vec[gene_id] = gene_vec
+        return uni_to_vec
 
     @timeit
-    def create_kernels(self, patients, gene_vec_map):
-        center_product_kernel.calculate_S_and_P1(patients, gene_vec_map)
-        k1, k2 = center_product_kernel.CP_kernel(patients)
-        return k1,k2
-        #center_product_kernel.test_accr(patients)
+    def create_kernels(self, patients, gene_vec_map, uni_to_vec):
+        center_product_kernel.calculate_S_and_P1(patients, gene_vec_map, uni_to_vec)
+        return center_product_kernel.CP_kernels(patients)
 
     @timeit
     def cluster(self, kernels):
@@ -153,9 +137,9 @@ all_pw_map = exp.read_pathways()
 
 gene_vec_map = exp.get_node2vecs(all_pw_map)
 
-gene_vec = exp.processGeneVecMap(gene_vec_map)
+uni_to_vec = exp.process_gene_vec_map(gene_vec_map, all_pw_map)
 
-k1,k2 = exp.create_kernels(patients, gene_vec)
+k1, k2 = exp.create_kernels(patients, gene_vec_map, uni_to_vec)
 
 results = exp.cluster(np.stack((k1,k2)))
 
