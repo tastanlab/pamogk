@@ -5,7 +5,6 @@ import os,config,math
 from sklearn.svm import SVC
 from sklearn.metrics.pairwise import linear_kernel,rbf_kernel
 
-
 def calculate_S_and_P(patients, gene_vectors):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector
     for p in patients:
