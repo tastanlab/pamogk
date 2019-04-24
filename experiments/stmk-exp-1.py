@@ -35,7 +35,7 @@ parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Sur
 parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
 
 args = parser.parse_args()
-print('Running args:', args)
+log('Running args:', args)
 
 
 class Experiment1(object):
