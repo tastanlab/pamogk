@@ -12,7 +12,7 @@ from kernels.lmkkmeans_train import lmkkmeans_train
 from data_processor import node2vec_processor
 from pathway_reader import cx_pathway_reader as cx_pw
 from gene_mapper import uniprot_mapper
-from kernels import center_product_kernel
+from kernels import center_product_kernel as CPK
 import time
 import json
 import os
@@ -117,8 +117,8 @@ class Experiment1(object):
 
     @timeit
     def create_kernels(self, patients, gene_vec_map, uni_to_vec):
-        center_product_kernel.calculate_S_and_P1(patients, gene_vec_map, uni_to_vec)
-        return center_product_kernel.CP_kernels(patients)
+        kms = CPK.calculate_S_and_P(patients, gene_vec_map, uni_to_vec)
+        return CPK.CP_kernels(kms)
 
     @timeit
     def cluster(self, kernels):

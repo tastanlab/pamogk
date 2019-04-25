@@ -5,27 +5,27 @@ import os,config,math
 from sklearn.svm import SVC
 from sklearn.metrics.pairwise import linear_kernel,rbf_kernel
 
-def calculate_S_and_P(patients, gene_vectors):
+def calculate_S_and_P(patients, gene_vectors, uni_to_vec):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector
-    for p in patients:
-        genes = np.array([gene_vectors[n] for n in p['mutated_nodes']])
-        p['S'] = genes
-        p['P'] = np.average(genes, axis=0)
-
-def calculate_S_and_P1(patients, gene_vectors, uni_to_vec):
-    # calculate S (mutated gene vector set) and P (average mutataion point) vector
+    kms_map = {}
     for p in patients:
         genes = []
-        for pw_genes in gene_vectors.values():
+        p['S'] = {}
+        p['P'] = {}
+        for pw_id, pw_genes in gene_vectors.items():
             for n in p['mutated_nodes']:
                 genes.append(uni_to_vec[n])
-        p['S'] = genes
-        p['P'] = np.average(genes, axis=0)
-    return patients
+            P = np.average(genes, axis=0)
+            p['S'] = { pw_id: genes }
+            p['P'] = { pw_id: P }
+            if pw_id not in kms_map: kms_map[pw_id] = [P]
+            else: kms_map[pw_id].append(P)
+    for pw_id in kms_map:
+        kms_map[pw_id] = np.vstack(kms_map)
+    return kms_map
 
-def CP_kernels(patients):
-    vectors = np.array([p['P'] for p in patients])
-    return linear_kernel(vectors), rbf_kernel(vectors)
+def CP_kernels(kms, method=linear_kernel):
+    return [method(v) for v in kms.values()]
 
 def test_accr(patients):
     hit = 0
