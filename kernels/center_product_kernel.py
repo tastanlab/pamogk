@@ -20,12 +20,13 @@ def calculate_S_and_P(patients, gene_vectors, uni_to_vec):
             p['P'] = { pw_id: P }
             if pw_id not in kms_map: kms_map[pw_id] = [P]
             else: kms_map[pw_id].append(P)
+    # convert list to array
     for pw_id in kms_map:
-        kms_map[pw_id] = np.vstack(kms_map)
+        kms_map[pw_id] = np.vstack(kms_map[pw_id])
     return kms_map
 
 def CP_kernels(kms, method=linear_kernel):
-    return [method(v) for v in kms.values()]
+    return map(method, kms.values())
 
 def test_accr(patients):
     hit = 0
