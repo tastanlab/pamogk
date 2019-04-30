@@ -125,7 +125,7 @@ def get_n2v_representations():
         for pathway in patientPathway[1]:
             nx_G = cx_pathway_reader.read_single_pathway(pathway)
             #gene_vec_map = node2vec_processor.process(pathway, nx_G, args)
-            FNAME = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv'
+            FNAME = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv'\
                 .format(pathway, args.p, args.q, args.is_directed, args.rid)
             gene_vec_map = {}
             FPATH = os.path.join(config.data_dir, 'node2vec', FNAME)

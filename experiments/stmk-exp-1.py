@@ -23,7 +23,7 @@ import argparse
 from sklearn.cluster import KMeans
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='data/kirc_data/kirc_somatic_mutation_data.csv')
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
 parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
@@ -102,7 +102,7 @@ class Experiment1(object):
             res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
         log()
         # store gene vectors
-        with open(fpath, 'w') as f: json.dump(n2v_vectors, f)
+        with open(fpath, 'w') as f: json.dump(res, f)
         return res
 
     @timeit
@@ -132,6 +132,10 @@ exp = Experiment1()
 patient_map = exp.read_data()
 
 patients = exp.preprocess_patient_data(patient_map)
+
+clinicalData =
+
+exp.findIntersection(patients, clinicalData)
 
 all_pw_map = exp.read_pathways()
 

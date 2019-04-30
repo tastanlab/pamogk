@@ -8,7 +8,6 @@ from operator import itemgetter
 import operator
 import matplotlib.pyplot as plt
 import smspk
-import pandas as pd
 import label_mapper
 from data_processor import rnaseq_processor as rp
 from pathway_reader import cx_pathway_reader as cx_pw
