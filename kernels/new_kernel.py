@@ -3,8 +3,12 @@ from gene_mapper import uniprot_mapper
 import csv
 from lib.sutils import *
 import argparse
-import kernels.node2vec_h_i as n2v
+import kernels.node2vec_h_i_k as n2v
 import pandas
+import scipy as scip
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
@@ -150,15 +154,26 @@ def calc_patientwise_score(neighbors, patient1,patient2,mapper):
     return avg
 
 @timeit
-def calc_kernel_from_pathway(neighbors, patients,id_mapper):
+def calc_similarity_from_pathway(neighbors, patients,id_mapper):
     len_p = len(patients)
-    kernel = np.zeros((len_p,len_p))
+    similarityMatrix = np.zeros((len_p,len_p))
     for i in range(len_p):
         for j in range(i,len_p):
             score = calc_patientwise_score(neighbors,patients[i],patients[j],id_mapper)
-            kernel[i,j] = score
-            kernel[j,i] = score
-    return kernel
+            if i==j and score!=1:
+                similarityMatrix[i,j]=1
+            else:
+                similarityMatrix[i,j] = score
+                similarityMatrix[j,i] = score
+
+    return similarityMatrix
+
+@timeit
+def calc_kernel_from_similarity(similarityMatrix):
+    distanceMatrix = 1-similarityMatrix
+    sigmasqList = [0.2,0.5,1,5]
+    sigmasq = sigmasqList[1]
+    return scip.exp(    -np.square(distanceMatrix) / (2*sigmasq)  )
 
 
 @timeit
@@ -167,7 +182,8 @@ def calc_kernel_from_pathways(neighbor_mappings,patients,id_mapper):
     flag = 0
     len_p = len(patients)
     for pathway_id in neighbor_mappings.keys():
-        one_kernel = calc_kernel_from_pathway(neighbor_mappings[pathway_id], patients,id_mapper[pathway_id])
+        similarityMatrix = calc_similarity_from_pathway(neighbor_mappings[pathway_id], patients,id_mapper[pathway_id])
+        one_kernel = calc_kernel_from_similarity(similarityMatrix)
         if flag==0:
             kernel_res = one_kernel
             kernel_res = np.reshape(kernel_res, (-1, len_p, len_p))
@@ -187,8 +203,7 @@ def isPSD(A, tol=1e-8):
   return np.all(E >= -tol)
 
 
-
-conf = 0.5
+conf=0.1
 patient_map = read_data()
 
 #Patient ve mutated genleri yaziyor
@@ -202,7 +217,7 @@ neighbor_mappings,id_mapper = get_neighbors_for_all_pathways(all_pw_map,conf)
 
 #
 kernels = calc_kernel_from_pathways(neighbor_mappings,patients,id_mapper)
-for i in range(165):
-    print(isPSD(kernels[i::]))
-#kernel = loadKernel("test.txt")
-#print(isPSD(kernel))
+for i in range(1):
+    print(isPSD(kernels[i]))
+    plt.imshow(kernels[i], cmap='hot')
+    plt.show()
