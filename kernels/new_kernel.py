@@ -11,7 +11,7 @@ import numpy as np
 
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='data/kirc_data/kirc_somatic_mutation_data.csv')
 
 args = parser.parse_args()
 #log('Running args:', args)
@@ -220,4 +220,4 @@ kernels = calc_kernel_from_pathways(neighbor_mappings,patients,id_mapper)
 for i in range(1):
     print(isPSD(kernels[i]))
     plt.imshow(kernels[i], cmap='hot')
-    plt.show()
+    plt.savefig('{}.png'.format(i))

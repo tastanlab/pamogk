@@ -71,3 +71,10 @@ def save_np_data(path, *args, **kwargs):
 
 def load_np_data(path, key='data'):
     return np.load(path + '.npz')['data']
+
+def print_args(args):
+    arg_dict = vars(args)
+    m = max(len(k) for k in arg_dict.keys())
+    log('Running args:')
+    for k, v in arg_dict.items():
+        print('  {}: {}'.format(k + ' '*(m-len(k)), v))
