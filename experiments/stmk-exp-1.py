@@ -25,6 +25,7 @@ from sklearn.cluster import KMeans
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='data/kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
+parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
 parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
 parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float, help='Node2Vec feature space size', default=128)
@@ -35,15 +36,18 @@ parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Sur
 parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
 
 args = parser.parse_args()
-log('Running args:', args)
+print_args(args)
 
 
 class Experiment1(object):
     def __init__(self):
         self.exp_data_dir = os.path.join(config.data_dir, 'stmk', self.__class__.__name__)
         safe_create_dir(self.exp_data_dir)
-        change_log_path(os.path.join(self.exp_data_dir, 'logs'))
+        change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
         log('exp_data_dir:', self.exp_data_dir)
+
+        self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
+        safe_create_dir(self.exp_result_dir)
 
     @timeit
     def read_data(self):
@@ -92,7 +96,7 @@ class Experiment1(object):
         fpath = os.path.join(self.exp_data_dir, fpath)
         res = {}
         # if exists load from disk
-        if os.path.exists(fpath):
+        if args.cache and os.path.exists(fpath):
             with open(fpath) as f:
                 return json.load(f)
         # otherwise calculate
@@ -102,7 +106,7 @@ class Experiment1(object):
             res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
         log()
         # store gene vectors
-        with open(fpath, 'w') as f: json.dump(n2v_vectors, f)
+        with open(fpath, 'w') as f: json.dump(res, f)
         return res
 
     @timeit
@@ -124,6 +128,8 @@ class Experiment1(object):
     def cluster(self, kernels):
         return lmkkmeans_train(kernels)
 
+    def save_results(self, **kwargs):
+        save_np_data(os.path.join(self.exp_result_dir, 'stmk-exp-1-run={}'.format(args.rid)), **kwargs)
 
 
 
@@ -141,7 +147,9 @@ uni_to_vec = exp.process_gene_vec_map(gene_vec_map, all_pw_map)
 
 k1, k2 = exp.create_kernels(patients, gene_vec_map, uni_to_vec)
 
-results = exp.cluster(np.stack((k1,k2)))
+labels, h_normalized = exp.cluster(np.stack((k1,k2)))
 
-print()
+exp.save_results(labels=labels, h_normalized=h_normalized)
+
+log('Finished')
 

@@ -8,7 +8,6 @@ from operator import itemgetter
 import operator
 import matplotlib.pyplot as plt
 import smspk
-import pandas as pd
 import label_mapper
 from data_processor import rnaseq_processor as rp
 from pathway_reader import cx_pathway_reader as cx_pw
@@ -17,8 +16,25 @@ from kernels.lmkkmeans_train import lmkkmeans_train
 import time
 import json
 import os
+import argparse
 import config
 from lib.sutils import *
+
+parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
+parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
+parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
+parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
+parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float, help='Node2Vec feature space size', default=128)
+parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
+parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed')
+parser.add_argument('--num-pat', dest='num_pat', type=int, help='Number of Patients for Synthetic Experiments', default=1000)
+parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Surviving patient percentage in range [0, 1]', default=0.9)
+parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
+
+args = parser.parse_args()
+print_args(args)
 
 class Experiment1(object):
     def __init__(self, label = 1, smoothing_alpha = 0, normalization = True):
@@ -39,8 +55,11 @@ class Experiment1(object):
 
         self.exp_data_dir = os.path.join(config.data_dir, 'smspk', exp_subdir)
         safe_create_dir(self.exp_data_dir)
+
+        self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
+        safe_create_dir(self.exp_result_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'logs'))
+        change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
         log('exp_data_dir:', self.exp_data_dir)
 
         data_file = 'smspk-over-under-expressed'
@@ -56,6 +75,7 @@ class Experiment1(object):
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values # patient TCGA ids
         ent_ids = gene_exp.index.values # gene entrez ids
+        print('num_pat:', pat_ids.shape)
         return gene_exp.values, pat_ids, ent_ids
 
     @timeit
@@ -145,7 +165,7 @@ class Experiment1(object):
         num_pat = pat_ids.shape[0]
         num_pw = len(all_pw_map)
         kms_path = os.path.join(self.exp_data_dir, 'kms.npz')
-        if os.path.exists(kms_path): return np.load(kms_path)['kms']
+        if args.cache and os.path.exists(kms_path): return np.load(kms_path)['kms']
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()): # for each pathway
@@ -169,6 +189,9 @@ class Experiment1(object):
     def cluster(self, kernels):
         return lmkkmeans_train(kernels)
 
+    def save_results(self, **kwargs):
+        save_np_data(os.path.join(self.exp_result_dir, 'smspk-exp-1-run={}'.format(args.rid)), **kwargs)
+
 exp = Experiment1()
 
 GE, pat_ids, ent_ids = exp.read_data()
@@ -181,6 +204,8 @@ labeled_all_pw_map = exp.label_patient_genes(all_pw_map, pat_ids, GE)
 
 kernels = exp.create_kernels(labeled_all_pw_map, pat_ids)
 
-results = exp.cluster(kernels)
+labels, h_normalized = exp.cluster(kernels)
 
-pdb.set_trace()
+exp.save_results(labels=labels, h_normalized=h_normalized)
+
+log('Finished')
