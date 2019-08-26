@@ -27,7 +27,7 @@ args = parser.parse_args()
 log('Running args:', args)
 
 class Experiment1(object):
-    def __init__(self, label = 1, smoothing_alpha = 0.05, normalization = True):
+    def __init__(self, label = 1, smoothing_alpha = 0.05, normalization = True, drop_percent = 0):
         '''
         Parameters
         ----------
@@ -39,12 +39,13 @@ class Experiment1(object):
         self.label = label
         self.smoothing_alpha = smoothing_alpha
         self.normalization = normalization
+        self.drop_percent = drop_percent
 
         param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
         exp_subdir = self.__class__.__name__ + param_suffix
 
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'smspk_all', exp_subdir)
+        self.exp_data_dir = os.path.join(config.data_dir, 'smspk_kirc_all', exp_subdir)
 
         safe_create_dir(self.exp_data_dir)
         # change log and create log file
@@ -124,7 +125,13 @@ class Experiment1(object):
         for pat in som_pat.keys():
             som_pat_list.append(pat)
 
-        intersection_list = self.find_intersection_lists(rs_pat_list, rp_pat_list, som_pat_list)
+        intersection_list = list(self.find_intersection_lists(rs_pat_list, rp_pat_list, som_pat_list))
+        intersection_list.sort()
+        intersect_loc = os.path.join(self.exp_data_dir,"patients.csv")
+        with open(intersect_loc,"w") as f:
+            kirc_int = list(intersection_list)
+            writer = csv.writer(f)
+            writer.writerow(kirc_int)
 
         rs_pat_deleted_list = []
         for idx, value in enumerate(rs_pat_list):
@@ -180,12 +187,17 @@ class Experiment1(object):
             # uni_ids = [uid for eid in ent_ids if eid in ent2uni for uid in ent2uni[eid]]
             uni_ids = [uid for eid in ent_ids if eid in ent2uni for uid in ent2uni[eid]]
             # if there are any matches map them
+            '''
             if len(uni_ids) > 0: res.append({
                 'pat_id': pat_id,
                 'mutated_nodes': uni_ids,
             })
             else: num_empty += 1
-
+            '''
+            res.append({
+                'pat_id': pat_id,
+                'mutated_nodes': uni_ids,
+            })
         log('removed patients:', num_empty)
 
         return res
@@ -417,8 +429,34 @@ class Experiment1(object):
         return kms
 
     @timeit
-    def cluster(self, kernels,cluster):
-        return lmkkmeans_train(kernels,cluster_count=cluster,iteration_count=5)
+    def cluster(self, kernels,cluster,drop_percent):
+        save_path = os.path.join(self.exp_data_dir,"labels_dropped"+str(drop_percent),"smspk-all-lmkkmeans-"+str(cluster)+"lab")
+        numsample = kernels.shape[1]
+        if os.path.exists(save_path):
+            return np.load(save_path)
+        else:
+            dropped = []
+            stayed = []
+            deletion = []
+            total = numsample*numsample
+            limit = (drop_percent*total)/100.0
+            for i in range(len(kernels)):
+                if np.count_nonzero(kernels[i]) < limit:
+                    dropped.append(i+1)
+                    deletion.append(i)
+                else:
+                    stayed.append(i+1)
+            kernels = np.delete(kernels, deletion,axis=0)
+
+            results = lmkkmeans_train(kernels[0:2],cluster_count=cluster,iteration_count=5)
+            directory = os.path.dirname(save_path)
+            safe_create_dir(directory)
+            weights = np.mean(results[2], axis=0)
+            weights = np.stack((stayed[0:2], weights))
+            weights_loc = save_path+"weights"
+            np.savetxt(weights_loc, weights.T, delimiter=",")
+            np.save(save_path,results[0].labels_)
+        return results[0].labels_
 
 
     @timeit
@@ -431,8 +469,8 @@ class Experiment1(object):
 
 
 def main():
-    for a in [0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
-        exp = Experiment1(smoothing_alpha=a)
+    for a in [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
+        exp = Experiment1(smoothing_alpha=a, drop_percent=1)
 
         # Patient part
         # RnaSeq Data
@@ -444,9 +482,9 @@ def main():
         # Somatic mutation data
         som_patients = exp.read_som_data()
 
-        # Find intersect
-        rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients = exp.find_intersection_patients(rs_GE, rs_pat_ids, rp_GE,
-                                                                                            rp_pat_ids, som_patients)
+        #Find intersect
+        rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients = exp.find_intersection_patients(rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients)
+
 
         # Kernel part
         # RnaSeq Data
@@ -466,6 +504,13 @@ def main():
         all_som_pw_map = exp.read_pathways()
         labeled_all_som_pw_map = exp.label_som_patient_genes(all_som_pw_map, som_patients)
         som_kernels = exp.create_som_kernels(labeled_all_som_pw_map, som_patients)
+
+        all_kernels = np.concatenate((rs_kernels, rp_kernels, som_kernels))
+
+        for i in [2,3,4,5]:
+            exp.cluster(all_kernels,i, exp.drop_percent)
+
+
 
 if __name__ == '__main__':
     main()
