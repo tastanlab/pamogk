@@ -34,6 +34,10 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         self.coef0 = coef0
         self.kernel_params = kernel_params
         self.verbose = verbose
+        self.X_fit_ = None
+        self.sample_weight_ = None
+        self.labels_ = None
+        self.within_distances_ = None
 
     @property
     def _pairwise(self):
@@ -43,11 +47,12 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         if callable(self.kernel):
             params = self.kernel_params or {}
         else:
-            params = {"gamma": self.gamma,
-                      "degree": self.degree,
-                      "coef0": self.coef0}
-        return pairwise_kernels(X, Y, metric=self.kernel,
-                                filter_params=True, **params)
+            params = {
+                "gamma": self.gamma,
+                "degree": self.degree,
+                "coef0": self.coef0,
+            }
+        return pairwise_kernels(X, Y, metric=self.kernel, filter_params=True, **params)
 
     def fit(self, X, y=None, sample_weight=None):
         n_samples = X.shape[0]
@@ -63,7 +68,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         dist = np.zeros((n_samples, self.n_clusters))
         self.within_distances_ = np.zeros(self.n_clusters)
 
-        for it in xrange(self.max_iter):
+        for it in range(self.max_iter):
             dist.fill(0)
             self._compute_dist(K, dist, self.within_distances_,
                                update_within=True)
@@ -75,7 +80,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             n_same = np.sum((self.labels_ - labels_old) == 0)
             if 1 - float(n_same) / n_samples < self.tol:
                 if self.verbose:
-                    print "Converged at iteration", it + 1
+                    print("Converged at iteration", it + 1)
                 break
 
         self.X_fit_ = X
@@ -87,7 +92,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         kernel trick."""
         sw = self.sample_weight_
 
-        for j in xrange(self.n_clusters):
+        for j in range(self.n_clusters):
             mask = self.labels_ == j
 
             if np.sum(mask) == 0:
@@ -114,10 +119,12 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
                            update_within=False)
         return dist.argmin(axis=1)
 
+
 if __name__ == '__main__':
     from sklearn.datasets import make_blobs
+
     X, y = make_blobs(n_samples=1000, centers=5, random_state=0)
 
     km = KernelKMeans(n_clusters=5, max_iter=100, random_state=0, verbose=1)
-    print km.fit_predict(X)[:10]
-    print km.predict(X[:10])
+    print(km.fit_predict(X)[:10])
+    print(km.predict(X[:10]))

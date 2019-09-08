@@ -1,51 +1,42 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 Usage: python3 stmk.py hsa04151
 
-Packages required:
-requests
-biopython
-networkx
-numpy
-gensim
-plotly
-'''
+See readme
+"""
 
-import sys
-import config
-sys.path.append(config.root_dir)
-import requests
-import os
-import math
-import networkx as nx
-import numpy as np
 import argparse
+import os
+
+import numpy as np
+# import plotly.plotly as py
+import plotly.graph_objs as go
+import plotly.offline as pyoff
+from sklearn.manifold import TSNE
+
+import config
+from data_processor import node2vec_processor
 # from pathway_reader import kgml_converter
 from pathway_reader import cx_pathway_reader
 from pathway_reader import network_plotter
-from data_processor import node2vec_processor
-from synthetic_experiments import cell_survival_group_kegg
-from sklearn.manifold import TSNE
-from sklearn.svm import SVC
-from gene_mapper import uniprot_mapper
-import pdb
-
-import plotly.offline as pyoff
-#import plotly.plotly as py
-import plotly.graph_objs as go
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('pathways', metavar='pathway-id', type=str, nargs='+', help='pathway ID list', default=['hsa04151'])
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
 parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
-parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float, help='Node2Vec feature space size', default=128)
+parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float,
+                    help='Node2Vec feature space size', default=128)
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
-parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed', default=False)
-parser.add_argument('--num-pat', dest='num_pat', type=int, help='Number of Patients for Synthetic Experiments', default=1000)
-parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float, help='Surviving patient percentage in range [0, 1]', default=0.9)
-parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]', default=0.4)
+parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed',
+                    default=False)
+parser.add_argument('--num-pat', dest='num_pat', type=int, help='Number of Patients for Synthetic Experiments',
+                    default=1000)
+parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float,
+                    help='Surviving patient percentage in range [0, 1]', default=0.9)
+parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]',
+                    default=0.4)
 
 args = parser.parse_args()
 print('Running args:', args)
@@ -57,24 +48,25 @@ print('Running args:', args)
 pathway_id = args.pathways[0]
 pathway_id = '8bbf39aa-6193-11e5-8ac5-06603eb7f303'
 
-OUT_FILENAME = os.path.join(config.data_dir, '{}-p={:0.2f}-q={:0.2f}-undirected-run={}'.format(pathway_id, args.p, args.q, args.rid))
+OUT_FILENAME = os.path.join(config.data_dir,
+                            '{}-p={:0.2f}-q={:0.2f}-undirected-run={}'.format(pathway_id, args.p, args.q, args.rid))
 
 # read kgml in format of network
-# nx_G, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
+# nx_g, entries, relations = kgml_converter.KGML_to_networkx_graph(pathway_id, is_directed=args.is_directed)
 # all_pws = cx_pathway_reader.read_pathways()
 # uniprot_mapper.get_uniprot_to_entrez_map()
 
 # sys.exit(0)
 nx_G = cx_pathway_reader.read_single_pathway(pathway_id)
 network_plotter.plot(nx_G, title='Pathway Graph for {}'.format(pathway_id))
-# network_plotter.plot(nx_G, title='TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid))
+# network_plotter.plot(nx_g, title='TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid))
 
 # run node2vec to get feature representations
 gene_vec_map = node2vec_processor.process(pathway_id, nx_G, args)
 hnames = np.array([nx_G.node[int(eid)]['n'] for eid in gene_vec_map])
 
 '''
-patients = cell_survival_group_kegg.generate_patients(G=nx_G, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
+patients = cell_survival_group_kegg.generate_patients(G=nx_g, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
 
 center_product_kernel.calculate_S_and_P(patients, gene_vec_map)
 center_product_kernel.test_accr(patients)
@@ -93,7 +85,7 @@ np.savetxt(TSNE_OUT_PATH, T)
 # cluster using dbscan
 from sklearn import cluster
 
-# clt = cluster.SpectralClustering(n_clusters=3, eigen_solver='arpack', affinity="nearest_neighbors").fit(gene_vectors)
+# clt = cluster.SpectralClustering(n_clusters=3, eigen_solver='arpack', affinity='nearest_neighbors').fit(gene_vectors)
 clt = cluster.AffinityPropagation().fit(gene_vectors)
 # clt = cluster.DBSCAN(eps=0.3, min_samples=10).fit(gene_vectors)
 clabels = clt.labels_
@@ -111,24 +103,24 @@ labels = ['?' + l if l[0] == '-' else l for l in labels]
 print(labels)
 
 fig = go.Figure(
-    data = [
+    data=[
         go.Scatter(
-        x=T[:, 0],
-        y=T[:, 1],
-        mode='markers+text',
-        text=labels,
-        textposition='bottom center',
-        marker=go.scatter.Marker(color=clabels, colorscale='Viridis', showscale=True))
+            x=T[:, 0],
+            y=T[:, 1],
+            mode='markers+text',
+            text=labels,
+            textposition='bottom center',
+            marker=go.scatter.Marker(color=clabels, colorscale='Viridis', showscale=True))
     ],
-    layout = go.Layout(
-        title= 'TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid),
-        hovermode= 'closest',
-        xaxis= dict(
-            ticklen= 5,
-            zeroline= False,
-            gridwidth= 2,
+    layout=go.Layout(
+        title='TSNE Representation of {} p={:0.2f} q={:0.2f} run={}'.format(pathway_id, args.p, args.q, args.rid),
+        hovermode='closest',
+        xaxis=dict(
+            ticklen=5,
+            zeroline=False,
+            gridwidth=2,
         ),
-        yaxis = dict(
+        yaxis=dict(
             ticklen=5,
             gridwidth=2,
         ),

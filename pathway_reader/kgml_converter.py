@@ -38,7 +38,7 @@ def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None
     nx_G.add_nodes_from(nodes)
     nx_G.add_edges_from(edges)
     # remove 0 degree info nodes
-    # nx_G.remove_nodes_from([n for n in nx.isolates(nx_G)])
+    # nx_g.remove_nodes_from([n for n in nx.isolates(nx_g)])
     print('Nodes with no edges:', len([n for n in nx.isolates(nx_G)]))
     path = os.path.join(config.data_dir, pathway_id + '.gml')
     print('Saving GML to path:', path)

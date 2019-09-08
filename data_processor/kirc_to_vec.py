@@ -1,12 +1,12 @@
-import sys
-import config
-sys.path.append(config.root_dir)
-import os
+import argparse
 import csv
+import os
+
+from gensim.models.keyedvectors import KeyedVectors
+
+import config
 from gene_mapper import uniprot_mapper as um
 from pathway_reader import cx_pathway_reader
-import argparse
-from gensim.models.keyedvectors import KeyedVectors
 
 '''
 Calling get_n2v_representations() returns vectors for each patient.
@@ -17,73 +17,73 @@ UNIPROT_ENTREZ_MAP_FPATH = os.path.join(config.root_dir, 'gene_mapper', 'uniprot
 
 
 def patient_entrez_to_uniprot():
-
-    listOfGenePatient = []
+    list_of_gene_patient = []
     with open(KIRC_PATH, 'r') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        next(spamreader)
-        for row in spamreader:
-            if int(row[1])!=0:
-                listOfGenePatient.append(list(row))
+        csv_reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        next(csv_reader)
+        for row in csv_reader:
+            if int(row[1]) != 0:
+                list_of_gene_patient.append(list(row))
 
-    UMap = []
-    EMap = []
+    u_map = []
+    e_map = []
     with open(UNIPROT_ENTREZ_MAP_FPATH, 'r') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
-        next(spamreader)
-        for row in spamreader:
-            UMap.append(row[0])
-            EMap.append(row[1])
+        csv_reader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+        next(csv_reader)  # skip header
+        for row in csv_reader:
+            u_map.append(row[0])
+            e_map.append(row[1])
 
-    uniToEntrez, entrezToUni = um.json_to_dict()
+    uni_to_entrez, entrez_to_uni = um.json_to_dict()
 
     patient_uniprot_list = []
-    for row in listOfGenePatient:
-        uniProt=[]
+    for row in list_of_gene_patient:
+        uni_prot = []
         patient = row[2]
 
         try:
-            uniProt.append(entrezToUni[row[1]])
+            uni_prot.append(entrez_to_uni[row[1]])
         except:
-            if row[2] in EMap:
-                uniProt.append(UMap[EMap.index(row[2])])
+            if row[2] in e_map:
+                uni_prot.append(u_map[e_map.index(row[2])])
             else:
                 print("none")
 
-        if len(uniProt)!=0:
-            patient_uniprot_list.append([patient,uniProt])
+        if len(uni_prot) != 0:
+            patient_uniprot_list.append([patient, uni_prot])
     return patient_uniprot_list
 
 
-def findPathwaysForAllPatients():
+def find_pathways_for_all_patients():
     patient_uniprot_list = patient_entrez_to_uniprot()
     count = 0
     pat_pws = []
     pathways = cx_pathway_reader.get_pathway_map()
     for patient in patient_uniprot_list:
-        pathwaysPart = []
-        count+=1
-        if len(patient[1])>0:
+        pathways_part = []
+        count += 1
+        if len(patient[1]) > 0:
             for geneList in patient[1]:
-                x = cx_pathway_reader.get_pathways_with_gene(pathways, geneList)
-                pathwaysPart.append(x)
-        if len(pathwaysPart) != 0:
-            pat_pws.append([patient[0], pathwaysPart])
+                x = cx_pathway_reader.get_pathways_with_genes(pathways, geneList)
+                pathways_part.append(x)
+        if len(pathways_part) != 0:
+            pat_pws.append([patient[0], pathways_part])
 
     path = os.path.join(config.data_dir, 'KircPathways.txt')
     with open(path, 'w') as f:
         for pat_pw in pat_pws:
             print(','.join(pat_pw[1]), file=f)
 
+
 def get_patient_pathways_from_file():
-    patient_Pathway_List = []
+    patient_pathway_list = []
     path = os.path.join(config.data_dir, 'KircPathways.txt')
     with open(path, 'r') as f:
         for line in f:
             line = line[:-1]
             tokens = line.split(",")
-            patient_Pathway_List.append([tokens[0],tokens[1:]])
-    return patient_Pathway_List
+            patient_pathway_list.append([tokens[0], tokens[1:]])
+    return patient_pathway_list
 
 
 def get_patient_uniprots_from_file():
@@ -93,8 +93,9 @@ def get_patient_uniprots_from_file():
         for line in f:
             line = line[:-1]
             tokens = line.split(',')
-            patient_uniprot_list.append([tokens[0],tokens[1:]])
+            patient_uniprot_list.append([tokens[0], tokens[1:]])
     return patient_uniprot_list
+
 
 def get_n2v_representations():
     parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
@@ -117,43 +118,39 @@ def get_n2v_representations():
 
     args = parser.parse_args()
     patient_uniprot_list = get_patient_uniprots_from_file()
-    patient_Pathway_List = get_patient_pathways_from_file()
+    patient_pathway_list = get_patient_pathways_from_file()
     count = 0
     patient_vector_list = []
-    for patientPathway in patient_Pathway_List:
-        vectorList = []
-        for pathway in patientPathway[1]:
-            nx_G = cx_pathway_reader.read_single_pathway(pathway)
-            #gene_vec_map = node2vec_processor.process(pathway, nx_G, args)
-            FNAME = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv'\
+    for patient_pathway in patient_pathway_list:
+        vector_list = []
+        for pathway in patient_pathway[1]:
+            nx_g = cx_pathway_reader.read_single_pathway(pathway)
+            # gene_vec_map = node2vec_processor.process(pathway, nx_g, args)
+            filename = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv' \
                 .format(pathway, args.p, args.q, args.is_directed, args.rid)
             gene_vec_map = {}
-            FPATH = os.path.join(config.data_dir, 'node2vec', FNAME)
-            keyVectors = KeyedVectors.load_word2vec_format(FPATH, binary=False)
-            for (eid, gene_vec) in zip(keyVectors.index2entity, keyVectors.vectors):
+            filepath = os.path.join(config.data_dir, 'node2vec', filename)
+            key_vectors = KeyedVectors.load_word2vec_format(filepath, binary=False)
+            for (eid, gene_vec) in zip(key_vectors.index2entity, key_vectors.vectors):
                 gene_vec_map[int(eid)] = gene_vec
-            uniprotList = patient_uniprot_list[count][1]
-            for gene in list(nx_G.nodes(data=True)):
+            uniprot_list = patient_uniprot_list[count][1]
+            for gene in list(nx_g.nodes(data=True)):
                 for alias in gene[1]['alias']:
                     if len(alias.split(':')) > 1:
                         alias = alias.split(':')[1]
-                    if alias in uniprotList:
-                        vectorList.append(gene_vec_map[gene[0]])
-        patient_vector_list.append([patientPathway[0],vectorList])
-        count +=1
+                    if alias in uniprot_list:
+                        vector_list.append(gene_vec_map[gene[0]])
+        patient_vector_list.append([patient_pathway[0], vector_list])
+        count += 1
 
     path = os.path.join(config.data_dir, 'KircVectors.txt')
     with open(path, 'w') as f:
         for patient in patient_vector_list:
-            l = patient[0]
+            line = patient[0]
             for vector in patient[1]:
-                l += ";" + ','.join(map(str, vector))
-            f.write(l+"\n")
+                line += ";" + ','.join(map(str, vector))
+            f.write(line + "\n")
     return patient_vector_list
 
-    print("Done")
-
-#get_n2v_representations()
-#findPathwaysForAllPatients()
-
-
+# get_n2v_representations()
+# find_pathways_for_all_patients()

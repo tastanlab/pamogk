@@ -1,8 +1,8 @@
-import numpy as np
-import networkx as nx
 import math
 import random
 import sys
+
+import networkx as nx
 
 hsa_04151 = {
     'cell_cycle_nodes': [24, 35, 105, 62, 26, 25, 61],
@@ -14,14 +14,14 @@ hsa_04151 = {
 NOTE: THIS SHOULD BE USED WITH KEGG PATHWAYS
 '''
 
+
 def generate_patients(G, num_pat, surv_dist, mut_dist=0.2, psm=0.9, has_cycle=False, has_survival=True):
     print('Generating %d patients with %2d%% survival rate:' % (num_pat, surv_dist * 100))
     patients = []
-    num_surv = math.ceil(surv_dist * num_pat) # surviving patient count
+    num_surv = math.ceil(surv_dist * num_pat)  # surviving patient count
     for i in range(num_pat):
         sick = i >= num_surv
-        patient = { 'pid': i, 'mutated_nodes': [] }
-        patient['sick'] = sick
+        patient = {'pid': i, 'mutated_nodes': [], 'sick': sick}
         _psm = psm if sick else 1 - psm
         patient['mutated_nodes'] = calc_mutated_nodes(G, mut_dist, _psm, has_cycle, has_survival)
         patients.append(patient)
@@ -29,9 +29,13 @@ def generate_patients(G, num_pat, surv_dist, mut_dist=0.2, psm=0.9, has_cycle=Fa
     for i in range(num_pat):
         patients[i]['pid'] = i
     return patients
+
+
 '''
 This is for hsa04151, for others we don't have same structure
 '''
+
+
 def calc_mutated_nodes(G, mut_dist=0.2, psm=0.9, has_cycle=False, has_survival=True):
     dest_nodes = []
     if has_cycle: dest_nodes += hsa_04151['cell_cycle_nodes']
@@ -70,6 +74,7 @@ def calc_mutated_nodes(G, mut_dist=0.2, psm=0.9, has_cycle=False, has_survival=T
     print('All mutated nodes:', mutated_nodes)
     return mutated_nodes
 
+
 def mutate_nodes(node_list, node_mut_count, rand):
     mutated_nodes = set()
     # copy to not mutate original
@@ -84,4 +89,3 @@ def mutate_nodes(node_list, node_mut_count, rand):
         mutated_nodes.add(mut_n)
     print('Mutated nodes:', mutated_nodes)
     return mutated_nodes
-

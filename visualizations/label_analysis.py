@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
-sys.path.append('..')
-import matplotlib.pyplot as plt
-import pandas as pd
-import csv
-from lib.sutils import *
-import argparse
-from lifelines import KaplanMeierFitter
-from lifelines.statistics import multivariate_logrank_test
-from collections import OrderedDict
-import Visualise.report_creator as rc
 
-'''
+"""
 Label Evaluation
 Arguments take 3 files:
     patient_data: list of patients (csv file 1 row)
     clinical_data: csv clinical data file.
     label_file: file containing labels which can be read with np.loadtxt() function at once.
-'''
+"""
+
+import argparse
+import csv
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from lifelines import KaplanMeierFitter
+from lifelines.statistics import multivariate_logrank_test
+
+import visualizations.report_creator as rc
+from lib.sutils import *
+
+KERNELS = ['smspk-all']
+METHODS = ['mkkm', 'kmeans']
+LABELS = ['2', '3', '4', '5']
+LAMBDAS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 
 parser = argparse.ArgumentParser(description='Evaluate labels')
 parser.add_argument('--patient-data', '-p', metavar='file-path', dest='patient_data', type=str, help='Patient Ids',
@@ -32,7 +37,7 @@ args = parser.parse_args()
 log('Running args:', args)
 
 
-class Label_Analysis(object):
+class LabelAnalysis(object):
     def __init__(self):
         print()
 
@@ -41,11 +46,11 @@ class Label_Analysis(object):
     def read_data(self, label_loc):
         patients = []
         labels = np.loadtxt(label_loc)
-        with open(args.patient_data, "r") as f:
-            reader = csv.reader(f, delimiter=",")
-            row1 = next(reader)
-            for idx, pt_id in enumerate(row1):
-                patients.append({"pat_id": pt_id, "label": labels[idx]})
+        with open(args.patient_data, 'r') as f:
+            reader = csv.reader(f, delimiter=',')
+            header = next(reader)
+            for idx, pt_id in enumerate(header):
+                patients.append({'pat_id': pt_id, 'label': labels[idx]})
 
         return patients
 
@@ -68,16 +73,16 @@ class Label_Analysis(object):
     def findIntersection(self, patients, clinical_data):
         ### Real Data ###
         # Eliminate patients not in ClinicalData, insert status and days
-        delIndex = []
+        del_index = []
         for i in range(len(patients)):
-            if patients[i]["pat_id"] in clinical_data.keys():
-                patients[i]["status"] = clinical_data[patients[i]["pat_id"]][0]
-                patients[i]["days"] = clinical_data[patients[i]["pat_id"]][1]
+            if patients[i]['pat_id'] in clinical_data.keys():
+                patients[i]['status'] = clinical_data[patients[i]['pat_id']][0]
+                patients[i]['days'] = clinical_data[patients[i]['pat_id']][1]
             else:
-                print("Patient " + str(patients[i]["pat_id"]) + " will be deleted")
-                delIndex.append(i)
+                print('Patient', patients[i]['pat_id'], 'will be deleted')
+                del_index.append(i)
 
-        return np.delete(patients, delIndex)
+        return np.delete(patients, del_index)
 
     @timeit
     def one_vs_all(self, data_df):
@@ -99,7 +104,7 @@ class Label_Analysis(object):
 
     @timeit
     def km_analysis(self, patients, out_file):
-        '''
+        """
         Parameters
         ----------
         patients:
@@ -113,22 +118,22 @@ class Label_Analysis(object):
             Multivariate log-rank test p values
         [1]:
             One-vs-All result of log-rank test (array of p values)
-        '''
+        """
         plt.clf()
-        labels = np.array([p["label"] for p in patients]).astype(int)
-        days = np.array([p["days"] for p in patients]).astype(int)
-        status = np.array([p["status"] for p in patients]).astype(int)
+        labels = np.array([p['label'] for p in patients]).astype(int)
+        days = np.array([p['days'] for p in patients]).astype(int)
+        status = np.array([p['status'] for p in patients]).astype(int)
 
         ax = plt.subplot(111)
         for i in range(min(labels), max(labels) + 1):
             indexes = [index for index in range(len(patients)) if labels[index] == i]
-            daysTmp = days[indexes]
-            statusTmp = status[indexes]
+            days_tmp = days[indexes]
+            status_tmp = status[indexes]
             kmf = KaplanMeierFitter()
-            kmf.fit(daysTmp, statusTmp, label=str(len(indexes)))
+            kmf.fit(days_tmp, status_tmp, label=str(len(indexes)))
             kmf.plot(ax=ax, ci_show=False)
-            ax.set_xlabel("Süre (gün)")
-            ax.set_ylabel("Hayatta Kalma Olasılığı")
+            ax.set_xlabel('Süre (gün)')
+            ax.set_ylabel('Hayatta Kalma Olasılığı')
 
         plt.savefig(out_file)
         df = pd.DataFrame({
@@ -142,9 +147,10 @@ class Label_Analysis(object):
 
         return results.p_value, vs_p
 
-#Process one file
+
+# Process one file
 def process_one_file(label_file='', out_file='--'):
-    '''
+    """
     Takes label from label_file and saves figure to out_file location
     Returns the multivariate p result and one-vs-all p result.
 
@@ -161,14 +167,14 @@ def process_one_file(label_file='', out_file='--'):
         Multivariate log-rank test p values
     [1]:
         One-vs-All result of log-rank test (array of p values)
-    '''
+    """
 
     if label_file == '':
         label_file = args.label_file
     if out_file == '--':
         out_file = os.path.join(os.path.dirname(label_file), 'no-name.png')
 
-    exp = Label_Analysis()
+    exp = LabelAnalysis()
 
     patients = exp.read_data(label_file)
 
@@ -182,51 +188,49 @@ def process_one_file(label_file='', out_file='--'):
 
 
 def main():
-    KERNELS = ["smspk-all"]
-    METHODS = ["mkkm", "kmeans"]
-    LABELS = ["2", "3", "4", "5"]
-    LAMBDAS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
-
     lambda_values = [2 ** (-18 + 3 * int(l)) for l in LAMBDAS]
     lambda_values_formatted = ['{:.2e}'.format(l) for l in lambda_values]
     lambda_values_formatted_for_vs = lambda_values_formatted.copy()
-    if "kmeans" in METHODS:
-        lambda_values_formatted.append("kmeans")
-    if "lmkkmeans" in METHODS:
-        lambda_values_formatted.append("lmkkmeans")
+    if 'kmeans' in METHODS:
+        lambda_values_formatted.append('kmeans')
+    if 'lmkkmeans' in METHODS:
+        lambda_values_formatted.append('lmkkmeans')
     result_df = pd.DataFrame(columns=LABELS, index=lambda_values_formatted)
 
-    if not os.path.exists(args.label_file + "figures"):
-        os.makedirs(args.label_file + "figures")
+    fig_dir = os.path.join(args.label_file, 'figures')
+    if not os.path.exists(fig_dir):
+        os.makedirs(fig_dir)
 
     for kernel in KERNELS:
         for method in METHODS:
             for label in LABELS:
                 vs_df = pd.DataFrame(columns=list(range(1, int(label) + 1)), index=lambda_values_formatted_for_vs)
-                if method == "mkkm":
-                    method_name = "rmmk"
-                    for lambdaa in LAMBDAS:
-                        in_file = args.label_file + kernel + "-" + method_name + "-" + label + "lab-lambda" + lambdaa
-                        out_file = args.label_file + "figures/" + kernel + "-" + method + "-" + label + "lab-lambda" + lambdaa + ".png"
+                if method == 'mkkm':
+                    method_name = 'rmmk'
+                    for lamd in LAMBDAS:
+                        in_file = os.path.join(args.label_file,
+                                               '{0}-{1}-{2}lab-lambda{3}'.format(kernel, method_name, label, lamd))
+                        out_file = os.path.join(fig_dir,
+                                                '{0}-{1}-{2}lab-lambda{3}.png'.format(kernel, method, label, lamd))
                         res, vs_res = process_one_file(in_file, out_file)
-                        lambda_value = 2 ** (-18 + 3 * int(lambdaa))
+                        lambda_value = 2 ** (-18 + 3 * int(lamd))
                         lambda_value_formatted = '{:.2e}'.format(lambda_value)
                         result_df.loc[lambda_value_formatted][label] = '{:.2e}'.format(res)
                         vs_df.loc[lambda_value_formatted] = vs_res
 
-                    rc.pandas_to_latex_table(vs_df, "l", "k",
-                                             args.label_file + "/latex_table_1v_" + str(int(label) - 1) + ".txt")
-                    rc.pandas_to_csv_table(vs_df, "l", "k",
-                                           args.label_file + "/results_1v_" + str(int(label) - 1) + ".csv")
+                    out_file = os.path.join(args.label_file, 'latex_table_1v_{0}.txt'.format(int(label) - 1))
+                    rc.pandas_to_latex_table(vs_df, 'l', 'k', out_file)
+                    out_file = os.path.join(args.label_file, 'results_1v_{0}.csv'.format(int(label) - 1))
+                    rc.pandas_to_csv_table(vs_df, 'l', 'k', out_file)
                 else:
                     method_name = method
-                    in_file = args.label_file + kernel + "-" + method + "-" + label + "lab"
-                    out_file = args.label_file + "figures/" + kernel + '-' + method + "-" + label + "lab.png"
+                    in_file = os.path.join(args.label_file, '{0}-{1}-{2}lab'.format(kernel, method, label))
+                    out_file = os.path.join(fig_dir, '{}-{}-{}lab.png'.format(kernel, method, label))
                     res, vs_res = process_one_file(in_file, out_file)
                     result_df.loc[method_name][label] = '{:.2e}'.format(res)
 
-    rc.pandas_to_latex_table(result_df, "l", "k", args.label_file + "/latex_table.txt")
-    rc.pandas_to_csv_table(result_df, "l", "k", args.label_file + "/results.csv")
+    rc.pandas_to_latex_table(result_df, 'l', 'k', os.path.join(args.label_file, 'latex_table.txt'))
+    rc.pandas_to_csv_table(result_df, 'l', 'k', os.path.join(args.label_file, 'results.csv'))
 
 
 if __name__ == '__main__':
