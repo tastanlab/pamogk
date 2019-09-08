@@ -101,8 +101,7 @@ def write_to_file(report, filepath):
     with open(filepath, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(['Patient ID', 'Status', 'Days', 'Stage'])
-        for row in report:
-            csv_writer.writerow(row)
+        csv_writer.writerows(report)
 
 
 def print_report(report):

@@ -43,6 +43,11 @@ def safe_create_dir(d):
         os.makedirs(d)
 
 
+def ensure_file_dir(file_path):
+    file_dir = os.path.dirname(file_path)
+    safe_create_dir(file_dir)
+
+
 log_f = None
 log_p = None
 

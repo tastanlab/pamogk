@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
+from lib.sutils import ensure_file_dir
+
 sns.set()
 
 
@@ -160,12 +162,6 @@ def get_npz_kernels(kms_path):
     return np.load(kms_path)['kms']
 
 
-def ensure_dir(file_path):
-    directory = os.path.dirname(file_path)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-
 def process_infile(figure_type, process_type, in_file, extra):
     """
     Helper function to return the output_file name and kernels given that figure_type, process_type,
@@ -187,7 +183,7 @@ def process_infile(figure_type, process_type, in_file, extra):
         out_file = os.path.join(out_folder, kernel_type + '-bin=' + str(extra))
     elif figure_type == 'heatmaps':
         out_file = os.path.join(out_folder, kernel_type)
-    ensure_dir(out_file)
+    ensure_file_dir(out_file)
     kernels = get_npz_kernels(in_file)
     return out_file, kernels
 

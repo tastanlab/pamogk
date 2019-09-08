@@ -5,6 +5,8 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+from lib.sutils import ensure_file_dir
+
 '''
     This file is to process som file which has type of .maf
     It is enough to call processOneCancerSomatic with file location as argument to function:
@@ -61,8 +63,7 @@ def write_to_file(report, filepath):
     with open(filepath, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(['Gene Name', 'Entrez Gene ID', 'Patient ID'])
-        for row in report:
-            csv_writer.writerow(row)
+        csv_writer.writerows(report)
 
 
 def print_report(report):
@@ -110,16 +111,10 @@ def draw_hist(pat_dict):
     plt.show()
 
 
-def ensure_dir(file_path):
-    directory = os.path.dirname(file_path)
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-
 def process_and_save_cancer(cancer_type='BRCA', data_dir='/home/yitepeli/ForExp/'):
     ct_lower = cancer_type.lower()
     outfile_path = os.path.join('../data', ct_lower + '_data', ct_lower + '_somatic_mutation_data.csv')
-    ensure_dir(outfile_path)
+    ensure_file_dir(outfile_path)
     filepath = os.path.join(data_dir, cancer_type, 'som.maf')
     rep = process_one_cancer_somatic(filepath)
     write_to_file(rep, outfile_path)

@@ -20,7 +20,7 @@ for p in args:
             with open('/tmp/kernel-{}.csv'.format(i), 'w') as f:
                 sio.savemat('/tmp/kms-{}'.format(i), {'out_kernel{}_'.format(i): m})
                 c = csv.writer(f)
-                for r in m: c.writerow(r)
+                c.writerows(m)
         sio.savemat('/tmp/kms.mat', {'kms': kms})
         print('\nFinished')
     except:
