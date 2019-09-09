@@ -61,17 +61,31 @@ def add_data_to_patient(key, data, pat_data=None):
     return pat_data
 
 
-def write_csv(data, key):
+def write_csv(data, key, pat_ids, use_index=False):
     filepath = os.path.join(KIRC_DATA_DIR, 'rmkl', key + '.csv')
     print('Writing patient data type', key, 'to path', filepath)
     ensure_file_dir(filepath)
     with open(filepath, 'w') as f:
         key_data = [r[key] for r in data]
+        if use_index:
+            for r in key_data:
+                r['Patient ID'] = pat_ids.index(r['Patient ID'])
         # make sure patient id is the first column
         fieldnames = ['Patient ID'] + list(k for k in key_data[0].keys() if k not in ['Patient ID'])
         csv_writer = csv.DictWriter(f, fieldnames)
         csv_writer.writeheader()
         csv_writer.writerows(key_data)
+
+
+def write_pat_id_map(full_pat_ids):
+    filepath = os.path.join(KIRC_DATA_DIR, 'rmkl', 'pat-id-map.csv')
+    print('Writing patient id map to path', filepath)
+    ensure_file_dir(filepath)
+    with open(filepath, 'w') as f:
+        csv_writer = csv.DictWriter(f, ['Patient ID', 'index'])
+        csv_writer.writeheader()
+        for i, pat_id in enumerate(full_pat_ids):
+            csv_writer.writerow({'Patient ID': pat_id, 'index': i})
 
 
 def main():
@@ -92,10 +106,11 @@ def main():
     full_pats = [data[pat_id] for pat_id in full_pats_ids]
     print('Patients with full data:', len(full_pats))
 
-    write_csv(full_pats, 'clinical')
-    # write_csv(full_pats, 'somatic')
-    write_csv(full_pats, 'rnaseq')
-    write_csv(full_pats, 'rppa')
+    write_pat_id_map(full_pats_ids)
+    write_csv(full_pats, 'clinical', full_pats_ids)
+    # write_csv(full_pats, 'somatic', full_pats_ids)
+    write_csv(full_pats, 'rnaseq', full_pats_ids)
+    write_csv(full_pats, 'rppa', full_pats_ids)
 
     # illimuna_data = read_csv('unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 
