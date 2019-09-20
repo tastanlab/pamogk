@@ -18,4 +18,4 @@ maxIter = 50;
 % res = [max(tmp1);max(tmp2);max(tmp3)];
 
 indx = litekmeans(U_normalized,numclass, 'MaxIter',100, 'Replicates',maxIter);
-%% indx = kmeans(U_normalized,numclass, 'MaxIter',100, 'Replicates',maxIter);
+%indx = kmeans(U_normalized,numclass, 'MaxIter',100, 'Replicates',maxIter);

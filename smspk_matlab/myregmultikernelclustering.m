@@ -14,5 +14,8 @@ while flag
     if iter>2 && (abs((obj(iter-1)-obj(iter))/(obj(iter-1)))<1e-6)
         flag =0;
     end
+    if iter>50 && (ismembertol(obj(iter), obj(1:iter-1),1e-6))
+        flag =0;
+    end
 end
 H_normalized = H./ repmat(sqrt(sum(H.^2, 2)), 1,cluster_count);
