@@ -108,7 +108,8 @@ class Experiment1(object):
 
         return patients
 
-    def find_intersection_lists(self, list1, list2, list3):
+    @staticmethod
+    def find_intersection_lists(list1, list2, list3):
         intersection_list = set(list1).intersection(list2, list3)
         return intersection_list
 
