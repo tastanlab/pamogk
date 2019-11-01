@@ -63,7 +63,7 @@ gamma0 = ones(numker,1)/numker;
 avgKer = mycombFun(KH,gamma0);
 [H_normalized1] = mykernelkmeans(avgKer,numclass);
 indx = untitled(H_normalized1,numclass);
-name = folderNameOut+"/smspk-all-kmeans-"+int2str(numclass)+"lab";
+name = folderNameOut+"/pagomk-all-kmeans-"+int2str(numclass)+"lab";
 csvwrite(name,indx)
 
 %%%%%%%%%%---AAAI-16----%%%%%%%%
@@ -74,13 +74,13 @@ M = calculateM(KH);
 for il =1:length(lambdaset2)
     [H_normalized2,gamma2,obj2] = myregmultikernelclustering(KH,M,numclass,lambdaset2(il));
     indx2 = untitled(H_normalized2,numclass);
-    name = strcat(folderNameOut+"/smspk-all-mkkm-"+int2str(numclass)+"lab-lambda"+ num2str(il));
+    name = strcat(folderNameOut+"/pagomk-all-mkkm-"+int2str(numclass)+"lab-lambda"+ num2str(il));
     csvwrite(name,indx2)
 end
 %res(:,2) = [max(accval2);max(nmival2);max(purval2)];
 
 %% Contact 1022xinwang.liu@gmail.com
 %%%%%%%-----Citation----------------------%%%%%%%
-%% Xinwang Liu, Yong Dou, Jianping Yin, Lei Wang, En Zhu: 
+%% Xinwang Liu, Yong Dou, Jianping Yin, Lei Wang, En Zhu:
 %% Multiple Kernel k-Means Clustering with Matrix-Induced Regularization. AAAI 2016: 1888-1894
 
