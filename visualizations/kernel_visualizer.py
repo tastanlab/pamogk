@@ -225,7 +225,7 @@ def main():
     kernel_types = ['rnaseq-kms', 'rppa-kms', 'som-kms']
     for alpha in alpha_values:
         for kernel in kernel_types:
-            in_file = '../data/smspk_all/Experiment1-label=1-smoothing_alpha={}-norm=True/{}.npz'.format(alpha, kernel)
+            in_file = '../data/pamogk_all/Experiment1-label=1-smoothing_alpha={}-norm=True/{}.npz'.format(alpha, kernel)
             # in_file = '../data/grakel_all/Experiment_Sp-label=1-norm=True/' + kernel + '.npz'
             histogram_var(in_file)
             histogram_count(in_file, 0.2)

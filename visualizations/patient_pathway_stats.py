@@ -78,7 +78,7 @@ def get_nodes(all_pw_map):
     for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
         gene_list = []
         for node in pw._node:
-            gene_list += pw._node[node]['uniprot-ids']
+            gene_list += pw._node[node]['uniprotids']
         res[pw_id] = gene_list
 
     return res

@@ -80,7 +80,7 @@ def get_neighbors_in_pathway(pw_graph,conf):
 
     id_gene_map = {}
     for nodeId in pw_graph._node.keys():
-        id_gene_map[nodeId] = pw_graph._node[nodeId]["uniprot-ids"]
+        id_gene_map[nodeId] = pw_graph._node[nodeId]["uniprotids"]
 
     directed = False
     G = n2v.Graph(nx_G, directed, p, q)
@@ -191,7 +191,7 @@ def calc_kernel_from_pathways(neighbor_mappings,patients,id_mapper):
         else:
             one_kernel = np.reshape(one_kernel, (-1, len_p, len_p))
             kernel_res = np.concatenate((kernel_res,one_kernel),axis=0)
-    
+
     return kernel_res
 
 def loadKernel(fileLoc):

@@ -69,7 +69,7 @@ def get_pathway_KGML(pathway_id='hsa04151'):
     print('  relation:', len(pathway.relations))
     entries, relations = prune_KGML(pathway)
     print('Finished reading:', pathway_id)
-    print(' entry:', len(entries.keys()), 'relation:', len(relations), 'new_relation:', len([1 for r in relations if hasattr(r, '_smspk')]))
+    print(' entry:', len(entries.keys()), 'relation:', len(relations), 'new_relation:', len([1 for r in relations if hasattr(r, '_pamogk')]))
     return entries, relations
 
 def prune_KGML(pathway, remove_compounds=True):
@@ -155,7 +155,7 @@ def prune_KGML(pathway, remove_compounds=True):
         r = Relation()
         r._entry1 = entries[s]
         r._entry2 = entries[d]
-        r._smspk = True # to mark relation as added by smSMK
+        r._pamogk = True # to mark relation as added by PAMOGK
         new_rel.append(r)
     relations += new_rel
 

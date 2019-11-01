@@ -11,13 +11,13 @@ from lifelines.statistics import multivariate_logrank_test
 from data_processor import rnaseq_processor as rp
 from lib.sutils import *
 
-parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
+parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
 parser.add_argument('--rnaSeq-data', '-r', metavar='file-path', dest='rnaseq_data', type=str, help='RnaSeq Data',
                     default='../data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=str, help='Clinical Data',
                     default='../data/kirc_data/kirc_clinical_data.csv')
 parser.add_argument('--label-data', '-l', metavar='file-path', dest='label_data', type=str, help='Label Data',
-                    default='../experiments/label_data/smspk-2lab-5it-lmkkmeans.txt')
+                    default='../experiments/label_data/pamogk-2lab-5it-lmkkmeans.txt')
 
 args = parser.parse_args()
 log('Running args:', args)

@@ -22,5 +22,5 @@ def mark_label_on_pathways(name, pid, pw_map, gene_id_list, label=1):
         for n in pw.nodes():
             nd = pw.nodes[n]
             if label_field not in nd: pw.add_node(n, **{label_field: {}})
-            if np.any([g in nd['uniprot-ids'] for g in gene_ids]):
+            if np.any([g in nd['uniprotids'] for g in gene_ids]):
                 nd[label_field][pid] = label

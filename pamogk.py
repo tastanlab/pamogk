@@ -143,12 +143,12 @@ def main():
     # smoothing parameter for the kernel
     alpha = 0.1
 
-    # calculate the kernel using smspk
+    # calculate the kernel using PAMOGK
     # NOTE: this might not be working after some changes to the kernel method
     km = kernel(np.array([0, 1]), mg, alpha=alpha, label_key='label')
 
     # display the resulting kernel matrix
-    print('Kernel matrix calculated by smspk with alpha', alpha)
+    print('Kernel matrix calculated by PAMOGK with alpha', alpha)
     print(km)
 
 

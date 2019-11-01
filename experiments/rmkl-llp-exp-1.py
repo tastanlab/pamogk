@@ -46,7 +46,7 @@ class Experiment1(object):
         param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'smspk', exp_subdir)
+        self.exp_data_dir = os.path.join(config.data_dir, 'pamogk', exp_subdir)
         safe_create_dir(self.exp_data_dir)
 
         self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
@@ -55,7 +55,7 @@ class Experiment1(object):
         change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
         log('exp_data_dir:', self.exp_data_dir)
 
-        data_file = 'smspk-over-under-expressed'
+        data_file = 'pamogk-over-under-expressed'
         data_path = os.path.join(self.exp_data_dir, data_file);
         self.get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(data_path, pw_id)
 

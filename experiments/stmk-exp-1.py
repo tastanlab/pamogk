@@ -116,7 +116,7 @@ class Experiment1(object):
         for pw_id, pw_genes in gene_vec_map.items():
             pw = all_pw_map[pw_id]
             for n, gene_vec in pw_genes.items():
-                for gene_id in pw.nodes[int(n)]['uniprot-ids']:
+                for gene_id in pw.nodes[int(n)]['uniprotids']:
                     uni_to_vec[gene_id] = gene_vec
         return uni_to_vec
 

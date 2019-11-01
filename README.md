@@ -1,4 +1,4 @@
-smSPK
+PAMOGK
 =====
 Install dependencies:
 if using virtual env omit `--user` parts

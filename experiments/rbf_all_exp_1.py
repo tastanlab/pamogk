@@ -14,7 +14,7 @@ from data_processor import synapse_rppa_processor as rpp
 from kernels.lmkkmeans_train import lmkkmeans_train
 from lib.sutils import *
 
-parser = argparse.ArgumentParser(description='Run SMSPK-mut algorithms on pathways')
+parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str,
                     help='rnaseq pathway ID list',
                     default='../data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
@@ -222,34 +222,28 @@ class Experiment1(object):
 
             for med_gamma in gammas_over_under:
                 kernel = rbf_kernel(ge_over_under, gamma=med_gamma)
-                f_gamma = '{:.2e}'.format(med_gamma)
-                np.save(save_over_under + '-gamma=' + f_gamma, kernel)
+                np.save('{}-gamma={:.2e}'.format(save_over_under, med_gamma), kernel)
 
             for med_gamma in gammas_over:
                 kernel = rbf_kernel(ge_over_under, gamma=med_gamma)
-                f_gamma = '{:.2e}'.format(med_gamma)
-                np.save(save_over + '-gamma=' + f_gamma, kernel)
+                np.save('{}-gamma={:.2e}'.format(save_over, med_gamma), kernel)
 
             for med_gamma in gammas_under:
                 kernel_under = rbf_kernel(ge_under, gamma=med_gamma)
-                f_gamma = '{:.2e}'.format(med_gamma)
-                np.save(save_under + '-gamma=' + f_gamma, kernel_under)
+                np.save('{}-gamma={:.2e}'.format(save_under, med_gamma), kernel_under)
             cur_gamma = None
         elif self.gamma == 'median2':
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_over_under))
             kernel_over_under = rbf_kernel(ge_over_under, gamma=med_gamma)
-            f_gamma = '{:.2e}'.format(med_gamma)
-            np.save(save_over_under + '-gamma=' + f_gamma, kernel_over_under)
+            np.save('{}-gamma={:.2e}'.format(save_over_under, med_gamma), kernel_over_under)
 
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_over))
             kernel_over = rbf_kernel(ge_over_under, gamma=med_gamma)
-            f_gamma = '{:.2e}'.format(med_gamma)
-            np.save(save_over + '-gamma=' + f_gamma, kernel_over)
+            np.save('{}-gamma={:.2e}'.format(save_over, med_gamma), kernel_over)
 
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_under))
             kernel_under = rbf_kernel(ge_over_under, gamma=med_gamma)
-            f_gamma = '{:.2e}'.format(med_gamma)
-            np.save(save_under + '-gamma=' + f_gamma, kernel_under)
+            np.save('{}-gamma={:.2e}'.format(save_unde, med_gamma), kernel_under)
             return kernel_over, kernel_under, kernel_over_under
         kernel_over = rbf_kernel(ge_over, gamma=cur_gamma)
         kernel_under = rbf_kernel(ge_under, gamma=cur_gamma)
@@ -287,14 +281,14 @@ class Experiment1(object):
             for med_gamma in gammas:
                 kernel = rbf_kernel(feature_matrix, gamma=med_gamma)
                 f_gamma = '{:.2e}'.format(med_gamma)
-                np.save(save_loc + '-gamma=' + str(f_gamma), kernel)
+                np.save('{}-gamma={}'.format(save_loc, f_gamma), kernel)
             cur_gamma = None
         elif self.gamma == 'median2':
             sigma = self.find_sigma(feature_matrix)
             med_gamma = self.sig_to_gamma(sigma)
             kernel = rbf_kernel(feature_matrix, gamma=med_gamma)
             f_gamma = '{:.2e}'.format(med_gamma)
-            np.save(save_loc + '-gamma=' + str(f_gamma), kernel)
+            np.save('{}-gamma={}'.format(save_loc, f_gamma), kernel)
             return kernel
 
         kernel = rbf_kernel(feature_matrix, gamma=cur_gamma)
@@ -316,7 +310,7 @@ class Experiment1(object):
 
     @timeit
     def callback(self):
-        return np.array([np.loadtxt('smspk-kernels-brca/' + str(i)) for i in range(330)])
+        return np.array([np.loadtxt('pamogk-kernels-brca/{}'.format(i)) for i in range(330)])
 
 
 def main():

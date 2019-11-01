@@ -115,7 +115,7 @@ def read_single_pathway(pathway_id, reading_all=False):
             else: attrs['alias'].append(n['r'])
         if 'alias' in attrs: # create attribute for ids only
             tmp = [a.split(':') for a in attrs['alias']]
-            attrs['uniprot-ids'] = [s[1] for s in tmp if len(s) > 1 and len(s[1]) > 0]
+            attrs['uniprotids'] = [s[1] for s in tmp if len(s) > 1 and len(s[1]) > 0]
         G.add_node(nid, **attrs)
 
     # get edge map

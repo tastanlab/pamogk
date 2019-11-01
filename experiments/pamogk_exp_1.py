@@ -6,14 +6,14 @@ import networkx as nx
 
 import config
 import label_mapper
-import smspk
+import pamogk
 from data_processor import rnaseq_processor as rp
 from gene_mapper import uniprot_mapper
 from kernels.lmkkmeans_train import lmkkmeans_train
 from lib.sutils import *
 from pathway_reader import cx_pathway_reader as cx_pw
 
-parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
+parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list',
                     default='../data/kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
@@ -52,7 +52,7 @@ class Experiment1(object):
         param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'smspk', exp_subdir)
+        self.exp_data_dir = os.path.join(config.data_dir, 'pamogk', exp_subdir)
         safe_create_dir(self.exp_data_dir)
 
         self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
@@ -61,7 +61,7 @@ class Experiment1(object):
         change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
         log('exp_data_dir:', self.exp_data_dir)
 
-        data_file = 'smspk-over-under-expressed'
+        data_file = 'pamogk-over-under-expressed'
         data_path = os.path.join(self.exp_data_dir, data_file)
         self.get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(data_path, pw_id)
 
@@ -172,7 +172,7 @@ class Experiment1(object):
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            over_exp_kms[ind] = smspk.kernel(pat_ids, pw, label_key='label-oe', alpha=self.smoothing_alpha,
+            over_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-oe', alpha=self.smoothing_alpha,
                                              normalization=self.normalization)
             log('Calculating oe pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
         log()
@@ -180,7 +180,7 @@ class Experiment1(object):
         # calculate kernel matrices for under expressed genes
         under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            under_exp_kms[ind] = smspk.kernel(pat_ids, pw, label_key='label-ue', alpha=self.smoothing_alpha,
+            under_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-ue', alpha=self.smoothing_alpha,
                                               normalization=self.normalization)
             log('Calculating ue pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
         log()
@@ -195,7 +195,7 @@ class Experiment1(object):
         return lmkkmeans_train(kernels)
 
     def save_results(self, **kwargs):
-        save_np_data(os.path.join(self.exp_result_dir, 'smspk-exp-1-run={}'.format(args.rid)), **kwargs)
+        save_np_data(os.path.join(self.exp_result_dir, 'pamogk-exp-1-run={}'.format(args.rid)), **kwargs)
 
 
 def main():

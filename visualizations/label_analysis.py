@@ -20,7 +20,7 @@ from lifelines.statistics import multivariate_logrank_test
 import visualizations.report_creator as rc
 from lib.sutils import *
 
-KERNELS = ['smspk-all']
+KERNELS = ['pamogk-all']
 METHODS = ['mkkm', 'kmeans']
 LABELS = ['2', '3', '4', '5']
 LAMBDAS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
@@ -31,7 +31,7 @@ parser.add_argument('--patient-data', '-p', metavar='file-path', dest='patient_d
 parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=str, help='Clinical Data',
                     default='../data/kirc_data/kirc_clinical_data.csv')
 parser.add_argument('--label-file', '-l', metavar='file-path', dest='label_file', type=str, help='Label Data',
-                    default='../data/smspk_all/Experiment1-label=1-smoothing_alpha=0.9-norm=True/labels/')
+                    default='../data/pamogk_all/Experiment1-label=1-smoothing_alpha=0.9-norm=True/labels/')
 
 args = parser.parse_args()
 log('Running args:', args)
