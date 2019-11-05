@@ -63,7 +63,7 @@ gamma0 = ones(numker,1)/numker;
 avgKer = mycombFun(KH,gamma0);
 [H_normalized1] = mykernelkmeans(avgKer,numclass);
 indx = untitled(H_normalized1,numclass);
-name = folderNameOut+"/pagomk-all-kmeans-"+int2str(numclass)+"lab";
+name = folderNameOut+"/pamogk-all-kmeans-"+int2str(numclass)+"lab";
 csvwrite(name,indx)
 
 %%%%%%%%%%---AAAI-16----%%%%%%%%
@@ -74,7 +74,7 @@ M = calculateM(KH);
 for il =1:length(lambdaset2)
     [H_normalized2,gamma2,obj2] = myregmultikernelclustering(KH,M,numclass,lambdaset2(il));
     indx2 = untitled(H_normalized2,numclass);
-    name = strcat(folderNameOut+"/pagomk-all-mkkm-"+int2str(numclass)+"lab-lambda"+ num2str(il));
+    name = strcat(folderNameOut+"/pamogk-all-mkkm-"+int2str(numclass)+"lab-lambda"+ num2str(il));
     csvwrite(name,indx2)
 end
 %res(:,2) = [max(accval2);max(nmival2);max(purval2)];

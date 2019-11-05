@@ -106,8 +106,7 @@ def read_single_pathway(pathway_id, reading_all=False):
 
     # add nodes to graph
     # NOTE networkx graphs only allow alphanumeric characters as attribute names no - or _
-    for nid in nodes:
-        n = nodes[nid]
+    for nid, n in nodes.items():
         attrs = attr_dict[nid]
         attrs['n'] = n['n']
         if 'r' in n:
@@ -157,6 +156,65 @@ def get_pathways_with_genes(pathways, genes):
 
     return acceptedPathways
 
+def get_all_pws_PARADIGM():
+    '''
+    Reads all cx pathways and converts them to PARADIGM pathway format
+    '''
+    nmapping = {
+        'protein': 'protein',
+        'none': 'abstract',
+        'smallmolecule': 'chemical',
+    }
+    emapping = {
+        'controls-state-change-of': '-a>',
+        'controls-phosphorylation-of': '-a>',
+        'used-to-produce': '-a>',
+        'consumption-controlled-by': '-a>',
+        'controls-expression-of': '-t>',
+        'neighbor-of': 'component>',
+        'catalysis-precedes': '-a>',
+        'controls-production-of': '-a>',
+        'controls-transport-of': '-a>',
+        'chemical-affects': 'component>',
+        'reacts-with': 'component>',
+        'in-complex-with': 'component>',
+        'controls-transport-of-chemical': 'component>',
+    }
+    def cln(n):
+        n = n['alias'][0]
+        if n.startswith('uniprot knowledge'): return n.split(':')[1]
+        return n.replace(' ', '_').replace(',', '_c_').replace(':', '_')
+    pw_map = read_pathways()
+    ntypes = set()
+    etypes = set()
+    nodes = []
+    uids = set()
+    edges = []
+    for pw_id, pw in pw_map.items():
+        print('Reading pathway={}'.format(pw_id))
+        # pdb.set_trace()
+        lines = []
+        for n in pw.nodes().values():
+            # print(n['n'], n['type'])
+            ntypes.add(n['type'].lower())
+            r = [nmapping[n['type'].lower()], cln(n)]
+            lines.append(r)
+            if r[1] not in uids:
+                nodes.append(r)
+                uids.add(r[1])
+        for (f, t), e in pw.edges().items():
+            etypes.add(e['i'].lower())
+            r = [cln(pw.nodes[f]), cln(pw.nodes[t]), emapping[e['i']]]
+            lines.append(r)
+            edges.append(r)
+        with open('../data/paradigm/{}.tsv'.format(pw_id), 'w') as f:
+            f.write('\n'.join('\t'.join(r) for r in lines))
+    with open('../data/paradigm/pws.tsv', 'w') as f:
+        f.write('\n'.join('\t'.join(r) for r in nodes) + '\n')
+        f.write('\n'.join('\t'.join(r) for r in edges))
+
+
 if __name__ == '__main__':
-    G = read_pathways()
+    get_all_pws_PARADIGM()
+    # pw_map = read_pathways()
     pdb.set_trace()
