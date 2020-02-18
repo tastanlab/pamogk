@@ -5,11 +5,11 @@ import random
 
 class Graph():
 	def __init__(self, nx_G, is_directed, p, q, debug=False):
+		self.debug = debug
 		self.G = nx_G
 		self.is_directed = is_directed
 		self.p = p
 		self.q = q
-		self.debug = debug
 
 	def node2vec_walk(self, walk_length, start_node):
 		'''
@@ -29,7 +29,7 @@ class Graph():
 					walk.append(cur_nbrs[alias_draw(alias_nodes[cur][0], alias_nodes[cur][1])])
 				else:
 					prev = walk[-2]
-					next = cur_nbrs[alias_draw(alias_edges[(prev, cur)][0],
+					next = cur_nbrs[alias_draw(alias_edges[(prev, cur)][0], 
 						alias_edges[(prev, cur)][1])]
 					walk.append(next)
 			else:
@@ -147,4 +147,6 @@ def alias_draw(J, q):
 	if np.random.rand() < q[kk]:
 	    return kk
 	else:
-	    return J[kk]# accessed:2018-10-02 14:20:24.723933
+	    return J[kk]
+
+# accessed:2020-02-18 20:00:07.529926

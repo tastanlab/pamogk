@@ -69,7 +69,7 @@ class Experiment1(object):
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
         ent_ids = gene_exp.index.values  # gene entrez ids
-        print('num_pat:', pat_ids.shape)
+        log('num_pat:', pat_ids.shape)
         return gene_exp.values, pat_ids, ent_ids
 
     @timeit

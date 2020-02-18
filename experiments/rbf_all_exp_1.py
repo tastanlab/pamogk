@@ -16,14 +16,17 @@ from lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str,
-                    help='rnaseq pathway ID list',
-                    default='../data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+                    help='RNAseq Patient data file (relative to data dir, otherwise use absolute path)',
+                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str,
-                    help='rppa pathway ID list', default='../data/kirc_data/kirc_rppa_data')
+                    help='RPPA Patient data file (relative to data dir, otherwise use absolute path)',
+                    default='kirc_data/kirc_rppa_data')
 parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str,
-                    help='som mut pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+                    help='Somatic Patient data file (relative to data dir, otherwise use absolute path)',
+                    default='kirc_data/kirc_somatic_mutation_data.csv')
+
 args = parser.parse_args()
-log('Running args:', args)
+print_args(args)
 
 
 class Experiment1(object):
@@ -55,7 +58,8 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
 
-        gene_exp, gene_name_map = rp.process(args.rnaseq_patient_data)
+        fpath = config.get_safe_data_file(args.rnaseq_patient_data)
+        gene_exp, gene_name_map = rp.process(fpath)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -67,7 +71,8 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
 
-        gene_exp = rpp.process(args.rppa_patient_data)
+        fpath = config.get_safe_data_file(args.rppa_patient_data)
+        gene_exp = rpp.process(fpath)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -79,7 +84,8 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
         patients = {}
-        with open(args.som_patient_data) as csvfile:
+        fpath = config.get_safe_data_file(args.som_patient_data)
+        with open(fpath) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 pat_id = row['Patient ID']
@@ -243,7 +249,7 @@ class Experiment1(object):
 
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_under))
             kernel_under = rbf_kernel(ge_over_under, gamma=med_gamma)
-            np.save('{}-gamma={:.2e}'.format(save_unde, med_gamma), kernel_under)
+            np.save('{}-gamma={:.2e}'.format(save_under, med_gamma), kernel_under)
             return kernel_over, kernel_under, kernel_over_under
         kernel_over = rbf_kernel(ge_over, gamma=cur_gamma)
         kernel_under = rbf_kernel(ge_under, gamma=cur_gamma)
@@ -302,11 +308,11 @@ class Experiment1(object):
         if os.path.exists(save_path):
             return np.load(save_path)
         else:
-            results = lmkkmeans_train(kernels, cluster_count=cluster, iteration_count=5)
+            labels, _ = lmkkmeans_train(kernels, cluster_count=cluster, iteration_count=5)
             directory = os.path.dirname(save_path)
             safe_create_dir(directory)
-            np.save(save_path, results[0].labels_)
-        return results[0].labels_
+            np.save(save_path, labels)
+        return labels
 
     @timeit
     def callback(self):

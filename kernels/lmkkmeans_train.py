@@ -89,14 +89,14 @@ def call_mosek(qsubi, qsubj, qval, N, P):
                 task.putcj(j, c[j])
                 # Set the bounds on variable j
                 # blx[j] <= x_j <= bux[j]
-                task.putbound(mosek.accmode.var, j, bkx[j], blx[j], bux[j])
+                task.putvarbound(j, bkx[j], blx[j], bux[j])
                 # Input column j of A
                 task.putacol(j,  # Variable (column) index.
                              # Row index of non-zeros in column j.
                              asub[j],
                              aval[j])  # Non-zero Values of column j.
             for i in range(numcon):
-                task.putbound(mosek.accmode.con, i, bkc[i], blc[i], buc[i])
+                task.putconbound(i, bkc[i], blc[i], buc[i])
             # Set up and input quadratic objective
             task.putqobj(qsubi, qsubj, qval)
             # Input the objective sense (minimize/maximize)

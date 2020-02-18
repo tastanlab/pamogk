@@ -63,7 +63,7 @@ network_plotter.plot(nx_G, title='Pathway Graph for {}'.format(pathway_id))
 
 # run node2vec to get feature representations
 gene_vec_map = node2vec_processor.process(pathway_id, nx_G, args)
-hnames = np.array([nx_G.node[int(eid)]['n'] for eid in gene_vec_map])
+hnames = np.array([nx_G.nodes[int(eid)]['n'] for eid in gene_vec_map])
 
 '''
 patients = cell_survival_group_kegg.generate_patients(G=nx_g, num_pat=args.num_pat, surv_dist=args.surv_dist, mut_dist=args.mut_dist)
