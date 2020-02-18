@@ -9,21 +9,9 @@ from lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run rMKL-LLP')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str,
-                    help='patient data path', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
-parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
-parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
-parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
-parser.add_argument('--node2vec-q', '-q', metavar='q', dest='q', type=float, help='Node2Vec q value', default=1)
-parser.add_argument('--node2vec-size', '-n', metavar='node2vec-size', dest='n2v_size', type=float,
-                    help='Node2Vec feature space size', default=128)
+                    help='Patient data file (if relative searched under data folder)',
+                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
-parser.add_argument('--directed', '-d', dest='is_directed', action='store_true', help='Is graph directed')
-parser.add_argument('--num-pat', dest='num_pat', type=int, help='Number of Patients for Synthetic Experiments',
-                    default=1000)
-parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float,
-                    help='Surviving patient percentage in range [0, 1]', default=0.9)
-parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]',
-                    default=0.4)
 
 args = parser.parse_args()
 print_args(args)
@@ -63,8 +51,7 @@ class Experiment1(object):
     def read_data(self):
         ### Real Data ###
         # process RNA-seq expression data
-        gene_exp, gene_name_map = rp.process(
-            'data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+        gene_exp, gene_name_map = rp.process(config.get_safe_data_file(args.patient_data))
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids

@@ -10,9 +10,8 @@ import argparse
 import os
 
 import numpy as np
-# import plotly.plotly as py
 import plotly.graph_objs as go
-import plotly.offline as pyoff
+import plotly.io as pio
 from sklearn.manifold import TSNE
 
 import config
@@ -128,7 +127,9 @@ fig = go.Figure(
         width=1200,
         height=900,
     ))
-pyoff.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=True)
+pio.write_html(fig, f'{OUT_FILENAME}-plot.html',
+    include_plotlyjs='directory',
+    auto_open=True)
 '''
 # save library to plotly cloud for online sharing
 py.plot(fig, filename=OUT_FILENAME + '-plot.html', auto_open=False)

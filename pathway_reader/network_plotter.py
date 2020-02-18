@@ -1,5 +1,4 @@
-import plotly.offline as pyoff
-import plotly.plotly as py
+import plotly.io as pio
 import plotly.graph_objs as go
 import os
 import config
@@ -43,6 +42,7 @@ def plot(nx_G, title, auto_open=False):
             width=1200,
             height=900,
         ))
-    pyoff.plot(fig,
-        filename=os.path.join(config.data_dir, title + '.html'),
-         auto_open=auto_open)
+    pio.write_html(fig,
+        os.path.join(config.data_dir, title + '.html'),
+        include_plotlyjs='directory', # adds plotly.js file separately
+        auto_open=auto_open)

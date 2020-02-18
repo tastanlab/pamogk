@@ -13,8 +13,9 @@ from lib.sutils import *
 from pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str, help='pathway ID list',
-                    default='data/kirc_data/kirc_somatic_mutation_data.csv')
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str,
+                    help='Patient data file (if relative searched under data folder)',
+                    default='kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
@@ -50,7 +51,7 @@ class Experiment1(object):
         ### Real Data ###
         # process RNA-seq expression data
         patients = {}
-        with open(args.patient_data) as csvfile:
+        with open(config.get_safe_data_file(args.patient_data)) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 pat_id = row['Patient ID']
