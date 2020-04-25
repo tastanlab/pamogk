@@ -34,15 +34,19 @@ def kernel(pat_ids, pathway, label_key, alpha=0.5, epsilon=1e-6, normalization=F
     for nid in pathway.nodes:
         nd = pathway.nodes[nid]
         for pid, lb in nd[label_key].items():
-            mutations[pat_ind[pid], nid] = lb
+            if pid in pat_ind.keys():
+                mutations[pat_ind[pid], nid] = lb
 
     # extract the adjacency matrix on the order of nodes we have
     adj_mat = nx.to_numpy_array(pathway, nodelist=pathway.nodes)
+    ordered_graph = nx.OrderedGraph()
+    ordered_graph.add_nodes_from(pathway.nodes())
+    ordered_graph.add_edges_from(sorted(list(pathway.edges())))
 
     # smooth the mutations through the pathway
     mutations = smooth(mutations, adj_mat, alpha, epsilon)
     # get all pairs shortest paths
-    all_pairs_sp = nx.all_pairs_shortest_path(pathway)
+    all_pairs_sp = nx.all_pairs_shortest_path(ordered_graph)
 
     km = np.zeros((num_pat, num_pat))
 

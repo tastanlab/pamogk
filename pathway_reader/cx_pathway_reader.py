@@ -7,6 +7,7 @@ import json
 import networkx as nx
 import pdb
 from lib.sutils import *
+import collections as coll
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
@@ -33,7 +34,7 @@ def get_pathway_map():
 
     pathway_list = json.load(open(PATHWAY_LIST_PATH))
 
-    pathway_map = {}
+    pathway_map = coll.OrderedDict()
     for p in pathway_list:
         pathway_map[p['externalId']] = p
     return pathway_map
@@ -47,7 +48,7 @@ def _get_pathway_child(pathway_data, key):
 @timeit
 def read_pathways():
     pathway_map = get_pathway_map()
-    pw_map = {}
+    pw_map = coll.OrderedDict()
     pw_ids = pathway_map.keys()
     log('Pathway data_dir={}'.format(DATA_ROOT))
     for (ind, pw_id) in enumerate(pw_ids):
