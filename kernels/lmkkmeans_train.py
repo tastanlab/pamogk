@@ -3,12 +3,15 @@ from pathlib import Path
 
 from lib.sutils import log
 
+# if mosek env var is not given check custom valid paths
 MOSEK_LIC_FILE_ENV = 'MOSEKLM_LICENSE_FILE'
 if MOSEK_LIC_FILE_ENV not in os.environ:
-    # check custom valid paths
-    for p in ['~/.mosek/mosek.lic', '~/.mosek.lic']:
-        if Path(p).exists():
-            os.environ[MOSEK_LIC_FILE_ENV] = p
+    for p in ['~/mosek/mosek.lic', '~/.mosek/mosek.lic', '~/.mosek.lic']:
+        _p = Path(p).expanduser()
+        if _p.exists():
+            _p = str(_p)
+            os.environ[MOSEK_LIC_FILE_ENV] = _p
+            os.putenv(MOSEK_LIC_FILE_ENV, _p)
             log(f'{MOSEK_LIC_FILE_ENV} not found but mosek file on path:', p)
             break
 
