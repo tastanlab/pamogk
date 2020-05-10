@@ -1,10 +1,11 @@
 import argparse
 import csv
-import os
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+import config
 from lib.sutils import ensure_file_dir
 
 '''
@@ -23,8 +24,8 @@ from lib.sutils import ensure_file_dir
 # CancerTypes = ['BLCA','BRCA','COAD','GBM','HNSC','KIRC','LAML','LUAD','LUSC','OV','READ','UCEC']
 CANCER_TYPES = ['BLCA', 'COAD', 'GBM', 'HNSC', 'LAML', 'LUAD', 'LUSC', 'OV', 'READ', 'UCEC']
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=str, help='Somatic Data',
-                    default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=Path, help='Somatic Data',
+                    default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 
 args = parser.parse_args()
 
@@ -74,14 +75,14 @@ def print_report(report):
 
 def report_all_cancer_types(data_dir):
     for cancer in CANCER_TYPES:
-        filepath = os.path.join(data_dir, cancer, '/som.maf')
+        filepath = data_dir / cancer / 'som.maf'
         report = process_one_cancer_somatic(filepath)
         print(cancer + '# of row, # of Unique Gene, #of Unique Patient')
         print_report(report)
 
 
 def read_processed_data():
-    ### Real Data ###
+    # Real Data #
     # process RNA-seq expression data
     patients = {}
     with open(args.somatic_data) as csvfile:
@@ -111,11 +112,11 @@ def draw_hist(pat_dict):
     plt.show()
 
 
-def process_and_save_cancer(cancer_type='BRCA', data_dir='/home/yitepeli/ForExp/'):
+def process_and_save_cancer(cancer_type='BRCA', data_dir=Path('/home/yitepeli/ForExp/')):
     ct_lower = cancer_type.lower()
-    outfile_path = os.path.join('../data', ct_lower + '_data', ct_lower + '_somatic_mutation_data.csv')
+    outfile_path = data_dir / f'{ct_lower}_data' / f'{ct_lower}_somatic_mutation_data.csv'
     ensure_file_dir(outfile_path)
-    filepath = os.path.join(data_dir, cancer_type, 'som.maf')
+    filepath = data_dir / cancer_type / 'som.maf'
     rep = process_one_cancer_somatic(filepath)
     write_to_file(rep, outfile_path)
 

@@ -2,20 +2,20 @@
 # -*- coding: utf-8 -*-
 import argparse
 import csv
-import os
+from pathlib import Path
 
 import config
 from lib.sutils import ensure_file_dir
 
-parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=str, help='Somatic Data',
-                    default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+KIRC_DATA_DIR = config.DATA_DIR / 'kirc_data'
 
-KIRC_DATA_DIR = os.path.join(config.data_dir, 'kirc_data')
+parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
+parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=Path, help='Somatic Data',
+                    default=KIRC_DATA_DIR / 'kirc_somatic_mutation_data.csv')
 
 
 def read_csv(filename, delimiter=','):
-    with open(os.path.join(KIRC_DATA_DIR, filename), encoding='utf8') as f:
+    with open(KIRC_DATA_DIR / filename, encoding='utf8') as f:
         return [r for r in csv.DictReader(f, delimiter=delimiter)]
 
 
@@ -62,7 +62,7 @@ def add_data_to_patient(key, data, pat_data=None):
 
 
 def write_csv(data, key, pat_ids, use_index=False):
-    filepath = os.path.join(KIRC_DATA_DIR, 'rmkl', key + '.csv')
+    filepath = KIRC_DATA_DIR / 'rmkl' / f'{key}.csv'
     print('Writing patient data type', key, 'to path', filepath)
     ensure_file_dir(filepath)
     with open(filepath, 'w') as f:
@@ -78,7 +78,7 @@ def write_csv(data, key, pat_ids, use_index=False):
 
 
 def write_pat_id_map(full_pat_ids):
-    filepath = os.path.join(KIRC_DATA_DIR, 'rmkl', 'pat-id-map.csv')
+    filepath = KIRC_DATA_DIR / 'rmkl' / 'pat-id-map.csv'
     print('Writing patient id map to path', filepath)
     ensure_file_dir(filepath)
     with open(filepath, 'w') as f:
@@ -90,7 +90,7 @@ def write_pat_id_map(full_pat_ids):
 
 def main():
     clinical_data = read_csv('kirc_clinical_data.csv')
-    somatic_mut_data = read_csv('kirc_somatic_mutation_data.csv')
+    # somatic_mut_data = read_csv('kirc_somatic_mutation_data.csv')
     rnaseq_data = transpose_data(read_csv('kirc_rna_seq_expression_data.csv'), 'Entrez Gene ID', ['Gene Name'])
     rppa_data = transpose_data(read_csv('kirc_rppa_data', delimiter='\t'), '#probe')
 

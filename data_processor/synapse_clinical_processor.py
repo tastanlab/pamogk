@@ -16,7 +16,7 @@
 """
 
 import csv
-import os
+from pathlib import Path
 
 import numpy as np
 
@@ -118,17 +118,17 @@ def print_report(report):
 
 def report_all_cancer_types(dir_path):
     for ct in CANCER_TYPES:
-        filepath = os.path.join(dir_path, ct, 'clinical')
+        filepath = dir_path / ct / 'clinical'
         report = process_one_clinical_somatic(filepath)
         print(ct + '# of row, # of Unique Gene, #of Unique Patient')
         print_report(report)
 
 
-ROOT_DIR = '/home/yitepeli/ForExp/'
+ROOT_DIR = Path('/home/yitepeli/ForExp/')
 CANCER_TYPE = 'OV'
 
-FILEPATH = os.path.join(ROOT_DIR, CANCER_TYPE, 'clinical')
+FILEPATH = ROOT_DIR / CANCER_TYPE / 'clinical'
 rep = process_one_clinical_somatic(FILEPATH)
 write_to_file(rep, '../data/ov_data/ov_clinical_data.csv')
 
-# report_all_cancer_types(data_dir)
+# report_all_cancer_types(DATA_DIR)

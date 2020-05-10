@@ -8,9 +8,9 @@ from gene_mapper import uniprot_mapper
 from lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run rMKL-LLP')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
                     help='Patient data file (if relative searched under data folder)',
-                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+                    default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 
 args = parser.parse_args()
@@ -19,39 +19,37 @@ print_args(args)
 
 class Experiment1(object):
     def __init__(self, label=1, smoothing_alpha=0, normalization=True):
-        '''
+        """
         Parameters
         ----------
         label: {1} str
             label for over/under expressed
         smoothing_alpha: {0}
             smoothing parameter for smoothing out mutations
-        '''
+        """
         self.label = label
         self.smoothing_alpha = smoothing_alpha
         self.normalization = normalization
 
-        param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
+        param_suffix = f'-label={label}-smoothing_alpha={smoothing_alpha}-norm={normalization}'
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'pamogk', exp_subdir)
+        self.exp_data_dir = config.DATA_DIR / 'pamogk' / exp_subdir
         safe_create_dir(self.exp_data_dir)
 
-        self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
+        self.exp_result_dir = config.ROOT_DIR / '..' / 'results'
         safe_create_dir(self.exp_result_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
+        change_log_path(self.exp_data_dir / f'log-run={args.rid}.log')
         log('exp_data_dir:', self.exp_data_dir)
 
-        data_file = 'pamogk-over-under-expressed'
-        data_path = os.path.join(self.exp_data_dir, data_file);
-        self.get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(data_path, pw_id)
+        self.get_pw_path = lambda pw_id: self.exp_data_dir / f'pamogk-over-under-expressed-pw_id={pw_id}.gpickle'
 
     @timeit
     def read_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
-        gene_exp, gene_name_map = rp.process(config.get_safe_data_file(args.patient_data))
+        gene_exp, gene_name_map = rp.process(args.patient_data)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids

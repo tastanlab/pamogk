@@ -3,45 +3,38 @@
 
 import argparse
 import collections
-import csv
-
-import networkx as nx
+import pdb
 
 import config
-import label_mapper
-import pamogk
 from data_processor import rnaseq_processor as rp
 from data_processor import synapse_rppa_processor as rpp
 from gene_mapper import uniprot_mapper
-from kernels.lmkkmeans_train import lmkkmeans_train
 from lib.sutils import *
-from pathway_reader import cx_pathway_reader as cx_pw
-import pdb
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
                     help='rnaseq pathway ID list',
-                    default='../data/kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str,
-                    help='rppa pathway ID list', default='../data/kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str,
-                    help='som mut pathway ID list', default='../data/kirc_data/kirc_somatic_mutation_data.csv')
+                    default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
+                    help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
+                    help='som mut pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 args = parser.parse_args()
 print_args(args)
 
 
 class ParadigmDataPrep(object):
     def __init__(self):
-        self.exp_data_dir = os.path.join(config.data_dir, 'paradigm')
+        self.exp_data_dir = config.DATA_DIR / 'paradigm'
 
         safe_create_dir(self.exp_data_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'logs'))
+        change_log_path(self.exp_data_dir / 'run.log')
         log('exp_data_dir:', self.exp_data_dir)
 
     @timeit
     def read_rnaseq_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
 
         gene_exp, gene_name_map = rp.process(args.rnaseq_patient_data)
@@ -53,7 +46,7 @@ class ParadigmDataPrep(object):
 
     @timeit
     def read_rppa_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
 
         gene_exp = rpp.process(args.rppa_patient_data)
@@ -65,7 +58,7 @@ class ParadigmDataPrep(object):
 
     @timeit
     def read_som_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
         patients = {}
         with open(args.som_patient_data) as csvfile:
@@ -74,7 +67,7 @@ class ParadigmDataPrep(object):
                 pat_id = row['Patient ID']
                 ent_id = row['Entrez Gene ID']
                 if pat_id not in patients:
-                    patients[pat_id] = set([ent_id])
+                    patients[pat_id] = {ent_id}
                 else:
                     patients[pat_id].add(ent_id)
         patients = collections.OrderedDict(sorted(patients.items()))
@@ -104,7 +97,7 @@ class ParadigmDataPrep(object):
 
         intersection_list = list(self.find_intersection_lists(rs_pat_list, rp_pat_list, som_pat_list))
         intersection_list.sort()
-        intersect_loc = os.path.join(self.exp_data_dir, 'patients.csv')
+        intersect_loc = self.exp_data_dir / 'patients.csv'
         with open(intersect_loc, 'w') as f:
             kirc_int = list(intersection_list)
             writer = csv.writer(f)
@@ -180,8 +173,7 @@ class ParadigmDataPrep(object):
 
     @timeit
     def save_data(self, fname, data, pat_ids, uni_ids):
-        fpath = os.path.join(self.exp_data_dir, fname)
-        with open(fpath, 'w') as f:
+        with (self.exp_data_dir / fname).open('w') as f:
             f.write('\t'.join(['gene_id', *[uids[0] for uids in uni_ids]]))
             for i, pid in enumerate(pat_ids):
                 f.write('\n' + '\t'.join([str(v) for v in ['-'.join(pid.split('-')[:3]), *data[i][:]]]))

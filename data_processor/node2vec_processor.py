@@ -7,12 +7,10 @@ TODO: migrate to https://github.com/eliorc/node2vec
 '''
 
 
-def process(pathway_id, nx_g, args, gene_vec_conv=lambda x: x):
+def process(nx_g, args, gene_vec_conv=lambda x: x):
     """Generates node2vec representation of genes for given pathway network
     Parameters
     ----------
-    pathway_id: str
-        pathway that is being processed, will be used to cache processed pathway
     nx_g: :networkx.classes.graph.Graph:
         pathway graph
     args: Namespace
@@ -28,12 +26,6 @@ def process(pathway_id, nx_g, args, gene_vec_conv=lambda x: x):
     walks = [list(map(str, walk)) for walk in walks_sim]
     # size=dimension, window=context_size, workers=num_of_parallel_workers, iter=num_epochs_in_sgd
     model = Word2Vec(walks, size=args.n2v_size, window=10, min_count=0, sg=1, workers=4, iter=1)
-
-    # disabled backup because caller will handle it
-    ## backup node2vec result
-    # FNAME = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv'.format(pathway_id, args.p, args.q, args.is_directed, args.rid)
-    # FPATH = os.path.join(config.data_dir, FNAME)
-    # model.wv.save_word2vec_format(FPATH)
 
     # wv has:
     #   * index2entity: array of result index to node id map size N

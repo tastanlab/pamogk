@@ -1,9 +1,10 @@
-import numpy as np
-import pdb
-from lib.sutils import *
-import os,config,math
+import math
+
+from sklearn.metrics.pairwise import linear_kernel
 from sklearn.svm import SVC
-from sklearn.metrics.pairwise import linear_kernel,rbf_kernel
+
+from lib.sutils import *
+
 
 def calculate_S_and_P(patients, gene_vectors, uni_to_vec):
     # calculate S (mutated gene vector set) and P (average mutataion point) vector

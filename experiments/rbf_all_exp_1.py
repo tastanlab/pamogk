@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import argparse
 import collections
-import csv
 import math
 
 from sklearn import preprocessing
@@ -15,15 +14,15 @@ from kernels.lmkkmeans_train import lmkkmeans_train
 from lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
                     help='RNAseq Patient data file (relative to data dir, otherwise use absolute path)',
-                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str,
+                    default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
                     help='RPPA Patient data file (relative to data dir, otherwise use absolute path)',
-                    default='kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str,
+                    default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
                     help='Somatic Patient data file (relative to data dir, otherwise use absolute path)',
-                    default='kirc_data/kirc_somatic_mutation_data.csv')
+                    default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 
 args = parser.parse_args()
 print_args(args)
@@ -36,30 +35,29 @@ class Experiment1(object):
         ----------
         label: {1} str
             label for over/under expressed
-        gamma: {0}
+        gamma: {0} str
             gamma parameter for rbf kernel
         """
         self.label = label
         self.gamma = gamma
         self.normalization = normalization
 
-        param_suffix = '-label={}-gamma={}-norm={}'.format(label, gamma, normalization)
+        param_suffix = f'-label={label}-gamma={gamma}-norm={normalization}'
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'rbf_kirc_all', exp_subdir)
+        self.exp_data_dir = config.DATA_DIR / 'rbf_kirc_all' / exp_subdir
 
         safe_create_dir(self.exp_data_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'logs'))
+        change_log_path(self.exp_data_dir / 'run.log')
         log('exp_data_dir:', self.exp_data_dir)
 
     @timeit
     def read_rnaseq_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
 
-        fpath = config.get_safe_data_file(args.rnaseq_patient_data)
-        gene_exp, gene_name_map = rp.process(fpath)
+        gene_exp, gene_name_map = rp.process(args.rnaseq_patient_data)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -68,11 +66,10 @@ class Experiment1(object):
 
     @timeit
     def read_rppa_data(self):
-        ### Real Data ###
+        # Real Data
         # process RNA-seq expression data
 
-        fpath = config.get_safe_data_file(args.rppa_patient_data)
-        gene_exp = rpp.process(fpath)
+        gene_exp = rpp.process(args.rppa_patient_data)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -81,12 +78,11 @@ class Experiment1(object):
 
     @timeit
     def read_som_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
         patients = {}
-        fpath = config.get_safe_data_file(args.som_patient_data)
-        with open(fpath) as csvfile:
-            reader = csv.DictReader(csvfile)
+        with open(config.get_safe_data_file(args.som_patient_data)) as csv_file:
+            reader = csv.DictReader(csv_file)
             for row in reader:
                 pat_id = row['Patient ID']
                 ent_id = row['Entrez Gene ID']
@@ -94,9 +90,8 @@ class Experiment1(object):
                     patients[pat_id] = {ent_id}
                 else:
                     patients[pat_id].add(ent_id)
-        patients = collections.OrderedDict(sorted(patients.items()))
 
-        return patients
+        return collections.OrderedDict(sorted(patients.items()))
 
     @staticmethod
     def find_intersection_lists(list1, list2, list3):
@@ -121,7 +116,7 @@ class Experiment1(object):
 
         intersection_list = list(self.find_intersection_lists(rs_pat_list, rp_pat_list, som_pat_list))
         intersection_list.sort()
-        intersect_loc = os.path.join(self.exp_data_dir, 'patients.csv')
+        intersect_loc = self.exp_data_dir / 'patients.csv'
         with open(intersect_loc, 'w') as f:
             kirc_int = list(intersection_list)
             writer = csv.writer(f)
@@ -200,16 +195,16 @@ class Experiment1(object):
     @timeit
     def create_seq_kernels(self, ge, kms_file_name):
         # experiment variables
-        np.random.seed()
-        save_over = os.path.join(self.exp_data_dir, kms_file_name + '-over')
-        save_under = os.path.join(self.exp_data_dir, kms_file_name + '-under')
-        save_over_under = os.path.join(self.exp_data_dir, kms_file_name + '-over-under')
-        if os.path.exists(save_over + '.npy') and os.path.exists(save_under + '.npy') and \
-                os.path.exists(save_over_under + '.npy'):
-            kernel_over = np.load(save_over + '.npy')
-            kernel_under = np.load(save_under + '.npy')
-            kernel_over_under = np.load(save_over_under + '.npy')
-            return kernel_over, kernel_under, kernel_over_under
+        np.random.seed(None)
+        save_over = self.exp_data_dir / f'{kms_file_name}-over'
+        save_under = self.exp_data_dir / f'{kms_file_name}-under'
+        save_over_under = self.exp_data_dir / f'{kms_file_name}-over-under'
+
+        # if all cache files exist return fro mcache
+        cache_files = [f.with_suffix('.npy') for f in [save_over, save_under, save_over_under]]
+        if sum(f.exists() for f in cache_files) == len(cache_files):
+            return [np.load(f) for f in cache_files]
+
         ge_t = ge.T
         ge_over = ge_t.copy()
         ge_under = ge_t.copy()
@@ -228,28 +223,28 @@ class Experiment1(object):
 
             for med_gamma in gammas_over_under:
                 kernel = rbf_kernel(ge_over_under, gamma=med_gamma)
-                np.save('{}-gamma={:.2e}'.format(save_over_under, med_gamma), kernel)
+                np.save(f'{save_over_under}-gamma={med_gamma:.2e}', kernel)
 
             for med_gamma in gammas_over:
                 kernel = rbf_kernel(ge_over_under, gamma=med_gamma)
-                np.save('{}-gamma={:.2e}'.format(save_over, med_gamma), kernel)
+                np.save(f'{save_over}-gamma={med_gamma:.2e}', kernel)
 
             for med_gamma in gammas_under:
                 kernel_under = rbf_kernel(ge_under, gamma=med_gamma)
-                np.save('{}-gamma={:.2e}'.format(save_under, med_gamma), kernel_under)
+                np.save(f'{save_under}-gamma={med_gamma:.2e}', kernel_under)
             cur_gamma = None
         elif self.gamma == 'median2':
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_over_under))
             kernel_over_under = rbf_kernel(ge_over_under, gamma=med_gamma)
-            np.save('{}-gamma={:.2e}'.format(save_over_under, med_gamma), kernel_over_under)
+            np.save(f'{save_over_under}-gamma={med_gamma:.2e}', kernel_over_under)
 
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_over))
             kernel_over = rbf_kernel(ge_over_under, gamma=med_gamma)
-            np.save('{}-gamma={:.2e}'.format(save_over, med_gamma), kernel_over)
+            np.save(f'{save_over}-gamma={med_gamma:.2e}', kernel_over)
 
             med_gamma = self.sig_to_gamma(self.find_sigma(ge_under))
             kernel_under = rbf_kernel(ge_over_under, gamma=med_gamma)
-            np.save('{}-gamma={:.2e}'.format(save_under, med_gamma), kernel_under)
+            np.save(f'{save_under}-gamma={med_gamma:.2e}', kernel_under)
             return kernel_over, kernel_under, kernel_over_under
         kernel_over = rbf_kernel(ge_over, gamma=cur_gamma)
         kernel_under = rbf_kernel(ge_under, gamma=cur_gamma)
@@ -262,9 +257,9 @@ class Experiment1(object):
     @timeit
     def create_som_kernels(self, patients):
         # experiment variables
-        save_loc = os.path.join(self.exp_data_dir, 'som')
-        if os.path.exists(save_loc + '.npy'):
-            kernel = np.load(save_loc + '.npy')
+        save_loc = self.exp_data_dir / 'som'
+        if save_loc.with_suffix('.npy'):
+            kernel = np.load(save_loc.with_suffix('.npy'))
             return kernel
         num_pat = len(patients)
         entrez_ids = []
@@ -286,15 +281,13 @@ class Experiment1(object):
             gammas = self.find_gammas(feature_matrix)
             for med_gamma in gammas:
                 kernel = rbf_kernel(feature_matrix, gamma=med_gamma)
-                f_gamma = '{:.2e}'.format(med_gamma)
-                np.save('{}-gamma={}'.format(save_loc, f_gamma), kernel)
+                np.save(f'{save_loc}-gamma={med_gamma:.2e}', kernel)
             cur_gamma = None
         elif self.gamma == 'median2':
             sigma = self.find_sigma(feature_matrix)
             med_gamma = self.sig_to_gamma(sigma)
             kernel = rbf_kernel(feature_matrix, gamma=med_gamma)
-            f_gamma = '{:.2e}'.format(med_gamma)
-            np.save('{}-gamma={}'.format(save_loc, f_gamma), kernel)
+            np.save(f'{save_loc}-gamma={med_gamma:.2e}', kernel)
             return kernel
 
         kernel = rbf_kernel(feature_matrix, gamma=cur_gamma)
@@ -304,19 +297,18 @@ class Experiment1(object):
 
     @timeit
     def cluster(self, kernels, cluster, run_type):
-        save_path = os.path.join(self.exp_data_dir, 'labels', 'rbf-all-{}-lmkkmeans-{}lab'.format(run_type, cluster))
-        if os.path.exists(save_path):
+        save_path = self.exp_data_dir / 'labels' / f'rbf-all-{run_type}-lmkkmeans-{cluster}lab'
+        if save_path.exists():
             return np.load(save_path)
         else:
             labels, _ = lmkkmeans_train(kernels, cluster_count=cluster, iteration_count=5)
-            directory = os.path.dirname(save_path)
-            safe_create_dir(directory)
+            ensure_file_dir(save_path)
             np.save(save_path, labels)
         return labels
 
     @timeit
     def callback(self):
-        return np.array([np.loadtxt('pamogk-kernels-brca/{}'.format(i)) for i in range(330)])
+        return np.array([np.loadtxt(f'pamogk-kernels-brca/{i}') for i in range(330)])
 
 
 def main():

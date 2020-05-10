@@ -10,13 +10,13 @@ Arguments take 3 files:
 """
 
 import argparse
-import csv
 
 import matplotlib.pyplot as plt
 import pandas as pd
 from lifelines import KaplanMeierFitter
 from lifelines.statistics import multivariate_logrank_test
 
+import config
 import visualizations.report_creator as rc
 from lib.sutils import *
 
@@ -26,15 +26,15 @@ LABELS = ['2', '3', '4', '5']
 LAMBDAS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 
 parser = argparse.ArgumentParser(description='Evaluate labels')
-parser.add_argument('--patient-data', '-p', metavar='file-path', dest='patient_data', type=str, help='Patient Ids',
-                    default='../data/kirc_data/kirc_intersect.csv')
-parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=str, help='Clinical Data',
-                    default='../data/kirc_data/kirc_clinical_data.csv')
-parser.add_argument('--label-file', '-l', metavar='file-path', dest='label_file', type=str, help='Label Data',
-                    default='../data/pamogk_all/Experiment1-label=1-smoothing_alpha=0.9-norm=True/labels/')
+parser.add_argument('--patient-data', '-p', metavar='file-path', dest='patient_data', type=Path, help='Patient Ids',
+                    default=config.DATA_DIR / 'kirc_data/kirc_intersect.csv')
+parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=Path, help='Clinical Data',
+                    default=config.DATA_DIR / 'kirc_data/kirc_clinical_data.csv')
+parser.add_argument('--label-file', '-l', metavar='file-path', dest='label_file', type=Path, help='Label Data',
+                    default=config.DATA_DIR / 'pamogk_all/Experiment1-label=1-smoothing_alpha=0.9-norm=True/labels/')
 
 args = parser.parse_args()
-log('Running args:', args)
+print_args(args)
 
 
 class LabelAnalysis(object):
@@ -56,7 +56,7 @@ class LabelAnalysis(object):
 
     @timeit
     def read_clinical_data(self, file_loc):
-        ### Real Data ###
+        # Real Data #
         # process clinical data
         patients = {}
         with open(file_loc) as f:
@@ -71,7 +71,7 @@ class LabelAnalysis(object):
 
     @timeit
     def findIntersection(self, patients, clinical_data):
-        ### Real Data ###
+        # Real Data #
         # Eliminate patients not in ClinicalData, insert status and days
         del_index = []
         for i in range(len(patients)):
@@ -98,7 +98,7 @@ class LabelAnalysis(object):
                 else:
                     new_labels.append(cur_label + 1)
             results = multivariate_logrank_test(data_df['durations'], new_labels, data_df['events'])
-            p = '{:.2e}'.format(results.p_value)
+            p = f'{results.p_value:.2e}'
             vs_p.append(p)
         return vs_p
 
@@ -171,8 +171,9 @@ def process_one_file(label_file='', out_file='--'):
 
     if label_file == '':
         label_file = args.label_file
+    label_file = Path(label_file)
     if out_file == '--':
-        out_file = os.path.join(os.path.dirname(label_file), 'no-name.png')
+        out_file = label_file.parent / 'no-name.png'
 
     exp = LabelAnalysis()
 
@@ -188,8 +189,8 @@ def process_one_file(label_file='', out_file='--'):
 
 
 def main():
-    lambda_values = [2 ** (-18 + 3 * int(l)) for l in LAMBDAS]
-    lambda_values_formatted = ['{:.2e}'.format(l) for l in lambda_values]
+    lambda_values = [2 ** (-18 + 3 * int(lmb)) for lmb in LAMBDAS]
+    lambda_values_formatted = [f'{lmb:.2e}' for lmb in lambda_values]
     lambda_values_formatted_for_vs = lambda_values_formatted.copy()
     if 'kmeans' in METHODS:
         lambda_values_formatted.append('kmeans')
@@ -197,9 +198,8 @@ def main():
         lambda_values_formatted.append('lmkkmeans')
     result_df = pd.DataFrame(columns=LABELS, index=lambda_values_formatted)
 
-    fig_dir = os.path.join(args.label_file, 'figures')
-    if not os.path.exists(fig_dir):
-        os.makedirs(fig_dir)
+    fig_dir = args.label_file / 'figures'
+    safe_create_dir(fig_dir)
 
     for kernel in KERNELS:
         for method in METHODS:
@@ -208,29 +208,26 @@ def main():
                 if method == 'mkkm':
                     method_name = 'rmmk'
                     for lamd in LAMBDAS:
-                        in_file = os.path.join(args.label_file,
-                                               '{0}-{1}-{2}lab-lambda{3}'.format(kernel, method_name, label, lamd))
-                        out_file = os.path.join(fig_dir,
-                                                '{0}-{1}-{2}lab-lambda{3}.png'.format(kernel, method, label, lamd))
+                        in_file = args.label_file / f'{kernel}-{method_name}-{label}lab-lambda{lamd}'
+                        out_file = fig_dir / f'{kernel}-{method}-{label}lab-lambda{lamd}.png'
                         res, vs_res = process_one_file(in_file, out_file)
                         lambda_value = 2 ** (-18 + 3 * int(lamd))
-                        lambda_value_formatted = '{:.2e}'.format(lambda_value)
-                        result_df.loc[lambda_value_formatted][label] = '{:.2e}'.format(res)
+                        lambda_value_formatted = f'{lambda_value:.2e}'
+                        result_df.loc[lambda_value_formatted][label] = f'{res:.2e}'
                         vs_df.loc[lambda_value_formatted] = vs_res
 
-                    out_file = os.path.join(args.label_file, 'latex_table_1v_{0}.txt'.format(int(label) - 1))
+                    out_file = args.label_file / f'latex_table_1v_{int(label) - 1}.txt'
                     rc.pandas_to_latex_table(vs_df, 'l', 'k', out_file)
-                    out_file = os.path.join(args.label_file, 'results_1v_{0}.csv'.format(int(label) - 1))
-                    rc.pandas_to_csv_table(vs_df, 'l', 'k', out_file)
+                    out_file = args.label_file / f'results_1v_{int(label) - 1}.csv'
+                    vs_df.to_csv(out_file)
                 else:
-                    method_name = method
-                    in_file = os.path.join(args.label_file, '{0}-{1}-{2}lab'.format(kernel, method, label))
-                    out_file = os.path.join(fig_dir, '{}-{}-{}lab.png'.format(kernel, method, label))
+                    in_file = args.label_file / f'{kernel}-{method}-{label}lab'
+                    out_file = fig_dir / f'{kernel}-{method}-{label}lab.png'
                     res, vs_res = process_one_file(in_file, out_file)
-                    result_df.loc[method_name][label] = '{:.2e}'.format(res)
+                    result_df.loc[method][label] = f'{res:.2e}'
 
-    rc.pandas_to_latex_table(result_df, 'l', 'k', os.path.join(args.label_file, 'latex_table.txt'))
-    rc.pandas_to_csv_table(result_df, 'l', 'k', os.path.join(args.label_file, 'results.csv'))
+    rc.pandas_to_latex_table(result_df, 'l', 'k', args.label_file / 'latex_table.txt')
+    result_df.to_csv(args.label_file / 'results.csv')
 
 
 if __name__ == '__main__':

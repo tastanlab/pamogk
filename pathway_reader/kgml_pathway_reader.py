@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 import and use methods
 
 Packages required:
@@ -10,25 +10,28 @@ networkx
 numpy
 gensim
 plotly
-'''
-import os
+"""
+import sys
+
 import requests
-import config
 from Bio.KEGG.KGML import KGML_parser
 from Bio.KEGG.KGML.KGML_pathway import Relation
+
+import config
 from lib.sutils import *
 
-HOST='http://rest.kegg.jp'
+HOST = 'http://rest.kegg.jp'
 
-DATA_ROOT = os.path.join(config.data_dir, 'kegg')
+DATA_ROOT = config.DATA_DIR / 'kegg'
 
 safe_create_dir(DATA_ROOT)
 
+
 @timeit
 def get_all_pathways(force=False):
-    list_url = HOST + '/list/pathway/hsa'
-    path = os.path.join(DATA_ROOT, 'kegg-all-pathways.txt')
-    if force or not os.path.exists(path):
+    list_url = f'{HOST}/list/pathway/hsa'
+    path = DATA_ROOT / 'kegg-all-pathways.txt'
+    if force or not path.exists():
         r = requests.get(list_url)
         if not r.status_code == 200:
             print('Failed to get pathway:', path, r.text)
@@ -38,19 +41,19 @@ def get_all_pathways(force=False):
             print('Saved KGML file at:', path)
 
     with open(path) as f:
-        lines = [l for l in f.readlines() if l.strip() != '']
-        all_pathways = [l.split('\t')[0] for l in lines]
-    print('Number of pathways:', len(all_pathways))
-    return all_pathways
+        lines = [line for line in f.readlines() if line.strip() != '']
+        all_pathways = [line.split('\t')[0] for line in lines]
+        print('Number of pathways:', len(all_pathways))
+        return all_pathways
 
 
-def get_pathway_KGML(pathway_id='hsa04151'):
+def get_pathway_kgml(pathway_id='hsa04151'):
     print('Reading pathway:', pathway_id)
-    pw_url = HOST + '/get/' + pathway_id + '/kgml'
+    pw_url = f'{HOST}/get/{pathway_id}/kgml'
 
     # get pathway data if not exists
-    path = os.path.join(DATA_ROOT, pathway_id + '.kgml')
-    if not os.path.exists(path):
+    path = DATA_ROOT / f'{pathway_id}.kgml'
+    if not path.exists():
         print('Could not find hsa file getting from kegg:', pw_url)
         r = requests.get(pw_url)
         if not r.status_code == 200:
@@ -67,13 +70,15 @@ def get_pathway_KGML(pathway_id='hsa04151'):
     print('  entry:', len(pathway.entries))
     print('  reaction:', len(pathway.reactions))
     print('  relation:', len(pathway.relations))
-    entries, relations = prune_KGML(pathway)
+    entries, relations = prune_kgml(pathway)
     print('Finished reading:', pathway_id)
-    print(' entry:', len(entries.keys()), 'relation:', len(relations), 'new_relation:', len([1 for r in relations if hasattr(r, '_pamogk')]))
+    print(' entry:', len(entries.keys()), 'relation:', len(relations), 'new_relation:',
+          len([1 for r in relations if hasattr(r, '_pamogk')]))
     return entries, relations
 
-def prune_KGML(pathway, remove_compounds=True):
-    '''
+
+def prune_kgml(pathway):
+    """
     prune_KGML prune given kgml pathway
       This function prunes the given entries and relations by deleting
       empty entries and corresponding relations, and empty relations and
@@ -88,7 +93,7 @@ def prune_KGML(pathway, remove_compounds=True):
           entries: pruned entries
           relations: pruned relations
           new_relations: new relations added in place of removed compounds
-    '''
+    """
 
     # copy relations as list and entries as dict
     entries = dict([(e.id, e) for e in pathway.entries.values()])
@@ -112,7 +117,7 @@ def prune_KGML(pathway, remove_compounds=True):
     for e in [e for e in entries.values() if e.type in type_filter]:
         del entries[e.id]
 
-    #% prune compounds in entries
+    # % prune compounds in entries
     # retrieve gene ids
     gene_ids = set([e.id for e in entries.values() if e.type == 'gene'])
 
@@ -121,17 +126,16 @@ def prune_KGML(pathway, remove_compounds=True):
         # find indexes of compounds in relations as source and
         # derive the related ids from it
         source_ids = set([r.entry1.id for r in relations if r.entry2.id == cid])
-        source_set = source_ids & gene_ids; #take just genes, ignore others
+        source_set = source_ids & gene_ids  # take just genes, ignore others
 
         # find indexes of compounds in relations as destination
         # and derive the related ids from it
         dest_ids = set([r.entry2.id for r in relations if r.entry1.id == cid])
-        dest_set = dest_ids & gene_ids; #take just genes, ignore others
+        dest_set = dest_ids & gene_ids  # take just genes, ignore others
 
         # create the relation among source and destination if
         # it is not self-relation and if the relation does not already
         # exist in the relations
-        tmp_new_relations = []
         # counter = 0
         if not source_ids or not dest_ids:
             continue
@@ -155,29 +159,34 @@ def prune_KGML(pathway, remove_compounds=True):
         r = Relation()
         r._entry1 = entries[s]
         r._entry2 = entries[d]
-        r._pamogk = True # to mark relation as added by PAMOGK
+        r._pamogk = True  # to mark relation as added by PAMOGK
         new_rel.append(r)
     relations += new_rel
 
     return entries, relations
 
+
 def can_add_relation(s, d, relations, new_relations):
-    '''
+    """
     returns true if (s, d) is a valid new relation
-    '''
+    """
     if s == d:
         return False
     for r in relations:
-        if r.entry1.id == s and r.entry2.id == d: return False
-        if r.entry2.id == s and r.entry1.id == d: return False
+        if r.entry1.id == s and r.entry2.id == d:
+            return False
+        if r.entry2.id == s and r.entry1.id == d:
+            return False
     for ns, nd in new_relations:
-        if ns == s and nd == d: return False
-        if nd == s and ns == d: return False
+        if ns == s and nd == d:
+            return False
+        if nd == s and ns == d:
+            return False
     return True
 
+
 if __name__ == '__main__':
-    all_pathways = get_all_pathways()
-    for pathway_id in all_pathways:
-        print(pathway_id)
-        entries, relations = get_pathway_KGML(pathway_id)
-        print(pathway_id, len(entries.keys()), len(relations), '\n')
+    for pw_id in get_all_pathways():
+        print(pw_id)
+        entry_map, rels = get_pathway_kgml(pw_id)
+        print(pw_id, len(entry_map.keys()), len(rels), '\n')
