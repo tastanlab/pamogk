@@ -1,12 +1,11 @@
 import csv
-import os
 
 import numpy as np
 import pandas as pd
 
 import config
 
-RPPA_DATA_DIR = os.path.join(config.data_dir, 'rppa_converter')
+RPPA_DATA_DIR = config.DATA_DIR / 'rppa_converter'
 
 
 def prune_proteins(data):
@@ -25,7 +24,7 @@ def prune_proteins(data):
 
 
 def read_csv(path, has_header=False, delimiter=',', mapper=lambda r: r):
-    path = os.path.join(RPPA_DATA_DIR, path)
+    path = RPPA_DATA_DIR / path
     with open(path, 'r', encoding='utf8', errors='ignore') as file:
         csv_reader = csv.reader(file, delimiter=delimiter)
         if has_header:
@@ -49,17 +48,14 @@ def get_entrez_data():
     return np.array(p2eg), np.array(add_map), np.array(ext_eg_id_map), np.array(manual_map)
 
 
-def process(fn):
+def process(filename):
     """
-    Inputs
-        fn: file loc of synapse rppa data
-
-    Outputs
-        gene_expressions: a dataframe indicating the over- (1) and under-expressed (-1) genes where
+    :param filename: file loc of synapse rppa data
+    :returns: a dataframe indicating the over- (1) and under-expressed (-1) genes where
             genes with entrez gene id are on rows and patient ids are on columns
     """
 
-    data = pd.read_csv(fn, sep='\t')
+    data = pd.read_csv(config.get_safe_data_file(filename), sep='\t')
     # data = data.set_index(['Gene Name', 'Entrez Gene ID'])
     # data = data.set_index('Entrez Gene ID')
     drop_cols = []
@@ -75,9 +71,6 @@ def process(fn):
 
     eg_ids = np.zeros(len(proc_prots))
     # non_eg_ids = np.zeros(len(procProts))
-
-    proteins = unproc_prots
-    patients = data.columns[1:]
 
     # Try p2eg
     for i in range(len(data)):
@@ -126,17 +119,14 @@ def process(fn):
 
     return gene_expression
 
-def process_cont(fn):
-    '''
-    Inputs
-        fn: file loc of synapse rppa data
 
-    Outputs
-        gene_expressions: a dataframe indicating the normalized values of expressions of genes where
+def process_cont(filename):
+    """
+    :param filename: file loc of synapse rppa data
+    :return: a dataframe indicating the normalized values of expressions of genes where
                 genes with entrez gene id are on rows and patient ids are on columns
-    '''
-
-    data = pd.read_csv(fn, sep='\t')
+    """
+    data = pd.read_csv(config.get_safe_data_file(filename), sep='\t')
     # data = data.set_index(['Gene Name', 'Entrez Gene ID'])
     # data = data.set_index('Entrez Gene ID')
     drop_cols = []
@@ -179,7 +169,7 @@ def process_cont(fn):
     data["#probe"] = eg_ids.astype(int)
 
     # drop the genes which are not expressed more than half of the samples
-    genes_to_drop = data.index[(data == 0).T.sum().values > (len(data.columns)/2)]
+    genes_to_drop = data.index[(data == 0).T.sum().values > (len(data.columns) / 2)]
     data = data.drop(genes_to_drop)
 
     data = data.sort_index(axis=1)

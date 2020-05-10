@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-from lib.sutils import ensure_file_dir
+from lib.sutils import ensure_file_dir, safe_create_dir
 
 sns.set()
 
@@ -108,7 +108,7 @@ The below draw functions are helper functions to deal with multiple kernels or d
 # Saves heatmaps of kernels to out_folder location with name 0.png .... n.png
 def draw_heatmaps(kernels, out_folder):
     for i, kernel in enumerate(kernels):
-        draw_heatmap(kernel, os.path.join(out_folder, '{}.png'.format(i)))
+        draw_heatmap(kernel, out_folder / f'{i}.png')
 
 
 def draw_special1_hist_for_kernels(kernels, bin_no, out_folder):
@@ -129,7 +129,7 @@ def draw_special1_hist_for_kernels(kernels, bin_no, out_folder):
     for idx, kernel_values in enumerate(hist_arr):
         plt.clf()
         plt.hist(kernel_values, bins=manual_bins)
-        plt.savefig(os.path.join(out_folder, '{}.png'.format(idx)))
+        plt.savefig(out_folder / f'{idx}.png')
 
 
 def draw_hist_for_kernels(kernels, threshold, hist_type, out_file):
@@ -171,18 +171,19 @@ def process_infile(figure_type, process_type, in_file, extra):
     in_file:
     extra:
     """
-    folder = '/'.join(in_file.split('/')[:-1])
-    kernel_type = (in_file.split('/')[-1])[:-4]
-    out_folder = os.path.join(folder, figure_type, process_type)
+    in_file = Path(in_file)
+    folder = in_file.parent
+    kernel_type = in_file.name[:-4]
+    out_folder = folder / figure_type / process_type
     out_file = None
     if process_type == 'count' or process_type == 'frequency':
-        out_file = os.path.join(out_folder, kernel_type + '-th=' + str(extra) + '.png')
+        out_file = out_folder / f'{kernel_type}-th={extra}.png'
     elif process_type == 'variance':
-        out_file = os.path.join(out_folder, kernel_type + '.png')
+        out_file = out_folder / f'{kernel_type}.png'
     elif process_type == 'special1':
-        out_file = os.path.join(out_folder, kernel_type + '-bin=' + str(extra))
+        out_file = out_folder / f'{kernel_type}-bin={extra}'
     elif figure_type == 'heatmaps':
-        out_file = os.path.join(out_folder, kernel_type)
+        out_file = out_folder / kernel_type
     ensure_file_dir(out_file)
     kernels = get_npz_kernels(in_file)
     return out_file, kernels
@@ -206,15 +207,13 @@ def histogram_freq(in_file, threshold):
 
 def histogram_special(in_file, bin_no):
     out_folder, kernels = process_infile('histograms', 'special1', in_file, bin_no)
-    if not os.path.exists(out_folder):
-        os.makedirs(out_folder)
+    safe_create_dir(out_folder)
     draw_special1_hist_for_kernels(kernels, bin_no, out_folder)
 
 
 def heatmap_kernel(in_file):
     out_folder, kernels = process_infile('heatmaps', '', in_file, 0)
-    if not os.path.exists(out_folder):
-        os.makedirs(out_folder)
+    safe_create_dir(out_folder)
     draw_heatmaps(kernels, out_folder)
 
 
@@ -225,8 +224,7 @@ def main():
     kernel_types = ['rnaseq-kms', 'rppa-kms', 'som-kms']
     for alpha in alpha_values:
         for kernel in kernel_types:
-            in_file = '../data/pamogk_all/Experiment1-label=1-smoothing_alpha={}-norm=True/{}.npz'.format(alpha, kernel)
-            # in_file = '../data/grakel_all/Experiment_Sp-label=1-norm=True/' + kernel + '.npz'
+            in_file = f'../data/pamogk_all/Experiment1-label=1-smoothing_alpha={alpha}-norm=True/{kernel}.npz'
             histogram_var(in_file)
             histogram_count(in_file, 0.2)
             histogram_freq(in_file, 0.2)

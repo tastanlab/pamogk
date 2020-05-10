@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
-import csv
 import json
 
 import config
 from data_processor import node2vec_processor
 from gene_mapper import uniprot_mapper
-from kernels import center_product_kernel as CPK
+from kernels import center_product_kernel
 from kernels.lmkkmeans_train import lmkkmeans_train
 from lib.sutils import *
 from pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
                     help='Patient data file (if relative searched under data folder)',
-                    default='kirc_data/kirc_somatic_mutation_data.csv')
+                    default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)
@@ -38,17 +37,17 @@ print_args(args)
 
 class Experiment1(object):
     def __init__(self):
-        self.exp_data_dir = os.path.join(config.data_dir, 'stmk', self.__class__.__name__)
+        self.exp_data_dir = config.DATA_DIR / 'stmk' / self.__class__.__name__
         safe_create_dir(self.exp_data_dir)
-        change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
+        change_log_path(self.exp_data_dir / f'log-run={args.rid}')
         log('exp_data_dir:', self.exp_data_dir)
 
-        self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
+        self.exp_result_dir = config.ROOT_DIR.parent / 'results'
         safe_create_dir(self.exp_result_dir)
 
     @timeit
     def read_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
         patients = {}
         with open(config.get_safe_data_file(args.patient_data)) as csvfile:
@@ -93,18 +92,17 @@ class Experiment1(object):
 
     @timeit
     def get_node2vecs(self, all_pw_map):
-        fpath = 'p={p}-q={q}-size={n2v_size}-is_directed={is_directed}.json'.format(**vars(args))
-        fpath = os.path.join(self.exp_data_dir, fpath)
+        fpath = self.exp_data_dir / f'p={args.p}-q={args.q}-size={args.n2v_size}-is_directed={args.is_directed}.json'
         res = {}
         # if exists load from disk
-        if args.cache and os.path.exists(fpath):
+        if args.cache and fpath.exists():
             with open(fpath) as f:
                 return json.load(f)
         # otherwise calculate
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
-            log('Calculating node2vec for {:3}/{} pw_id={}'.format(ind + 1, num_pw, pw_id), end='\r')
-            res[pw_id] = node2vec_processor.process(pw_id, pw, args, lambda x: x.tolist())
+            logr(f'Calculating node2vec for {ind + 1:3}/{num_pw} pw_id={pw_id}')
+            res[pw_id] = node2vec_processor.process(pw, args, lambda x: x.tolist())
         log()
         # store gene vectors
         with open(fpath, 'w') as f:
@@ -123,15 +121,15 @@ class Experiment1(object):
 
     @timeit
     def create_kernels(self, patients, gene_vec_map, uni_to_vec):
-        kms = CPK.calculate_S_and_P(patients, gene_vec_map, uni_to_vec)
-        return CPK.CP_kernels(kms)
+        kms = center_product_kernel.calculate_S_and_P(patients, gene_vec_map, uni_to_vec)
+        return center_product_kernel.CP_kernels(kms)
 
     @timeit
     def cluster(self, kernels):
         return lmkkmeans_train(kernels)
 
     def save_results(self, **kwargs):
-        save_np_data(os.path.join(self.exp_result_dir, 'stmk-exp-1-run={}'.format(args.rid)), **kwargs)
+        save_np_data(self.exp_result_dir / f'stmk-exp-1-run={args.rid}', **kwargs)
 
 
 def main():

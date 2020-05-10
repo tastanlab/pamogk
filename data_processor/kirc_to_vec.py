@@ -1,6 +1,5 @@
 import argparse
 import csv
-import os
 
 from gensim.models.keyedvectors import KeyedVectors
 
@@ -12,8 +11,8 @@ from pathway_reader import cx_pathway_reader
 Calling get_n2v_representations() returns vectors for each patient.
 '''
 
-KIRC_PATH = os.path.join(config.data_dir, 'kirc_data', 'kirc_somatic_mutation_data.csv')
-UNIPROT_ENTREZ_MAP_FPATH = os.path.join(config.root_dir, 'gene_mapper', 'uniprot-entrez-map.tsv')
+KIRC_PATH = config.DATA_DIR / 'kirc_data' / 'kirc_somatic_mutation_data.csv'
+UNIPROT_ENTREZ_MAP_FPATH = config.ROOT_DIR / 'gene_mapper' / 'uniprot-entrez-map.tsv'
 
 
 def patient_entrez_to_uniprot():
@@ -69,7 +68,7 @@ def find_pathways_for_all_patients():
         if len(pathways_part) != 0:
             pat_pws.append([patient[0], pathways_part])
 
-    path = os.path.join(config.data_dir, 'KircPathways.txt')
+    path = config.DATA_DIR / 'KircPathways.txt'
     with open(path, 'w') as f:
         for pat_pw in pat_pws:
             print(','.join(pat_pw[1]), file=f)
@@ -77,7 +76,7 @@ def find_pathways_for_all_patients():
 
 def get_patient_pathways_from_file():
     patient_pathway_list = []
-    path = os.path.join(config.data_dir, 'KircPathways.txt')
+    path = config.DATA_DIR / 'KircPathways.txt'
     with open(path, 'r') as f:
         for line in f:
             line = line[:-1]
@@ -88,7 +87,7 @@ def get_patient_pathways_from_file():
 
 def get_patient_uniprots_from_file():
     patient_uniprot_list = []
-    path = os.path.join(config.data_dir, 'KircUniprots.txt')
+    path = config.DATA_DIR / 'KircUniprots.txt'
     with open(path, 'r') as f:
         for line in f:
             line = line[:-1]
@@ -126,10 +125,9 @@ def get_n2v_representations():
         for pathway in patient_pathway[1]:
             nx_g = cx_pathway_reader.read_single_pathway(pathway)
             # gene_vec_map = node2vec_processor.process(pathway, nx_g, args)
-            filename = '{}-p={:0.2f}-q={:0.2f}-dir={}-run={}-word2vec.csv' \
-                .format(pathway, args.p, args.q, args.is_directed, args.rid)
+            filename = f'{pathway}-p={args.p:0.2f}-q={args.q:0.2f}-dir={args.is_directed}-run={args.rid}-word2vec.csv'
             gene_vec_map = {}
-            filepath = os.path.join(config.data_dir, 'node2vec', filename)
+            filepath = config.DATA_DIR / 'node2vec' / filename
             key_vectors = KeyedVectors.load_word2vec_format(filepath, binary=False)
             for (eid, gene_vec) in zip(key_vectors.index2entity, key_vectors.vectors):
                 gene_vec_map[int(eid)] = gene_vec
@@ -143,7 +141,7 @@ def get_n2v_representations():
         patient_vector_list.append([patient_pathway[0], vector_list])
         count += 1
 
-    path = os.path.join(config.data_dir, 'KircVectors.txt')
+    path = config.DATA_DIR / 'KircVectors.txt'
     with open(path, 'w') as f:
         for patient in patient_vector_list:
             line = patient[0]

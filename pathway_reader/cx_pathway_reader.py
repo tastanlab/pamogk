@@ -1,33 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import config
-import requests
-import os
-import json
-import networkx as nx
-import pdb
-from lib.sutils import *
 import collections as coll
+import json
+import pdb
+
+import networkx as nx
+import requests
+
+import config
+from lib.sutils import *
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
 
-DATA_ROOT = os.path.join(config.data_dir, 'cx')
+DATA_ROOT = config.DATA_DIR / 'cx'
 safe_create_dir(DATA_ROOT)
 
-def get_pathway_map():
-    PATHWAY_LIST_PATH = os.path.join(DATA_ROOT, 'nci_pathway_list.json')
 
-    if not os.path.exists(PATHWAY_LIST_PATH):
+def get_pathway_map():
+    PATHWAY_LIST_PATH = DATA_ROOT / 'nci_pathway_list.json'
+
+    if not PATHWAY_LIST_PATH.exists():
         try:
-            url = '{}/user/{}/showcase'.format(HOST, NCI_USER_ID)
+            url = f'{HOST}/user/{NCI_USER_ID}/showcase'
             log('Pathway map not found fetching from', url)
             r = requests.get(url)
             if r.status_code != 200:
-                raise Exception('Failed to get pathway list:', r.reason)
+                raise Exception(f'Failed to get pathway list reason={r.reason}')
         except requests.exceptions.ConnectionError as e:
-            log('Could not connect to {} server. Please make sure you are connected to a network authorized to access {}'.format(HOST, HOST))
-            raise Exception('Failed to connect to host={}'.format(HOST))
+            log(f'Could not connect to {HOST} server.')
+            log(f'Please make sure you are connected to a network authorized to access {HOST}')
+            raise Exception(f'Failed to connect to host={HOST}', e)
 
         with open(PATHWAY_LIST_PATH, 'w') as f:
             f.write(r.text)
@@ -39,24 +42,27 @@ def get_pathway_map():
         pathway_map[p['externalId']] = p
     return pathway_map
 
+
 def _get_pathway_child(pathway_data, key):
     for d in pathway_data:
         if key in d:
             return d[key]
     return None
 
+
 @timeit
 def read_pathways():
     pathway_map = get_pathway_map()
     pw_map = coll.OrderedDict()
     pw_ids = pathway_map.keys()
-    log('Pathway data_dir={}'.format(DATA_ROOT))
+    log(f'Pathway data_dir={DATA_ROOT}')
     for (ind, pw_id) in enumerate(pw_ids):
-        log('Processing pathway {:3}/{}'.format(ind + 1, len(pw_ids)), end='\t')
+        log(f'Processing pathway {ind + 1:3}/{len(pw_ids)}', end='\t')
         pw_data = read_single_pathway(pw_id, reading_all=True)
         pw_map[pw_id] = pw_data
     log()
     return pw_map
+
 
 def read_single_pathway(pathway_id, reading_all=False):
     pend = '\r' if reading_all else '\n'
@@ -64,28 +70,29 @@ def read_single_pathway(pathway_id, reading_all=False):
     if pathway_id not in pathway_map:
         raise Exception('Pathway not found in pathway list')
 
-    PATHWAY_PATH = os.path.join(DATA_ROOT, pathway_id + '.cx')
+    PATHWAY_PATH = DATA_ROOT / f'{pathway_id}.cx'
 
-    if not os.path.exists(PATHWAY_PATH):
-        url = '{}/network/{}'.format(HOST, pathway_id)
-        log('Pathway with pathway_id={} not found fetching from url={}'.format(pathway_id, url), end=pend, ts=not reading_all)
+    if not PATHWAY_PATH.exists():
+        url = f'{HOST}/network/{pathway_id}'
+        log(f'Pathway with pathway_id={pathway_id} not found fetching from url={url}', end=pend, ts=not reading_all)
         r = requests.get(url)
         if r.status_code != 200:
-            raise Exception('Failed to get pathway: {}-{}'.format(r.status_code, r.reason))
+            raise Exception(f'Failed to get pathway: {r.status_code}-{r.reason}')
 
         with open(PATHWAY_PATH, 'w') as f:
             f.write(r.text)
     else:
-        log('Pathway with pathway_id={} retrieved from local data dir'.format(pathway_id), end=pend, ts=not reading_all)
+        log(f'Pathway with pathway_id={pathway_id} retrieved from local data dir', end=pend, ts=not reading_all)
 
     pathway_data = json.load(open(PATHWAY_PATH))
 
-    G = nx.Graph() # initialize empty graph
+    G = nx.Graph()  # initialize empty graph
 
     # get node map
     node_list = _get_pathway_child(pathway_data, 'nodes')
     nodes = {}
-    for n in node_list: nodes[n['@id']] = n
+    for n in node_list:
+        nodes[n['@id']] = n
 
     # load node attributes
     node_attributes = _get_pathway_child(pathway_data, 'nodeAttributes')
@@ -111,9 +118,11 @@ def read_single_pathway(pathway_id, reading_all=False):
         attrs = attr_dict[nid]
         attrs['n'] = n['n']
         if 'r' in n:
-            if 'alias' not in attrs: attrs['alias'] = [n['r']]
-            else: attrs['alias'].append(n['r'])
-        if 'alias' in attrs: # create attribute for ids only
+            if 'alias' not in attrs:
+                attrs['alias'] = [n['r']]
+            else:
+                attrs['alias'].append(n['r'])
+        if 'alias' in attrs:  # create attribute for ids only
             tmp = [a.split(':') for a in attrs['alias']]
             attrs['uniprotids'] = [s[1] for s in tmp if len(s) > 1 and len(s[1]) > 0]
         G.add_node(nid, **attrs)
@@ -141,15 +150,16 @@ def read_single_pathway(pathway_id, reading_all=False):
 
     return G
 
+
 def get_pathways_with_genes(pathways, genes):
     acceptedPathways = []
     for p in pathways:
-        PATHWAY_PATH = os.path.join(config.data_dir, p + '.cx')
+        PATHWAY_PATH = config.DATA_DIR / f'{p}.cx'
         pathway_data = json.load(open(PATHWAY_PATH))
         nodesInPathway = _get_pathway_child(pathway_data, 'nodes')
         for node in nodesInPathway:
             uniprotId = node["r"]
-            if len(uniprotId.split(":"))>1:
+            if len(uniprotId.split(":")) > 1:
                 uniprotId = uniprotId.split(":")[1]
             if uniprotId in genes:
                 acceptedPathways.append(p)
@@ -157,10 +167,11 @@ def get_pathways_with_genes(pathways, genes):
 
     return acceptedPathways
 
-def get_all_pws_PARADIGM():
-    '''
+
+def get_all_pws_paradigm():
+    """
     Reads all cx pathways and converts them to PARADIGM pathway format
-    '''
+    """
     nmapping = {
         'protein': 'protein',
         'none': 'abstract',
@@ -181,10 +192,13 @@ def get_all_pws_PARADIGM():
         'in-complex-with': 'component>',
         'controls-transport-of-chemical': 'component>',
     }
-    def cln(n):
-        n = n['alias'][0]
-        if n.startswith('uniprot knowledge'): return n.split(':')[1]
-        return n.replace(' ', '_').replace(',', '_c_').replace(':', '_')
+
+    def cln(_n):
+        _n = _n['alias'][0]
+        if _n.startswith('uniprot knowledge'):
+            return _n.split(':')[1]
+        return _n.replace(' ', '_').replace(',', '_c_').replace(':', '_')
+
     pw_map = read_pathways()
     ntypes = set()
     etypes = set()
@@ -192,7 +206,7 @@ def get_all_pws_PARADIGM():
     uids = set()
     edges = []
     for pw_id, pw in pw_map.items():
-        print('Reading pathway={}'.format(pw_id))
+        print(f'Reading pathway={pw_id}')
         # pdb.set_trace()
         lines = []
         for n in pw.nodes().values():
@@ -208,7 +222,7 @@ def get_all_pws_PARADIGM():
             r = [cln(pw.nodes[f]), cln(pw.nodes[t]), emapping[e['i']]]
             lines.append(r)
             edges.append(r)
-        with open('../data/paradigm/{}.tsv'.format(pw_id), 'w') as f:
+        with open(f'../data/paradigm/{pw_id}.tsv', 'w') as f:
             f.write('\n'.join('\t'.join(r) for r in lines))
     with open('../data/paradigm/pws.tsv', 'w') as f:
         f.write('\n'.join('\t'.join(r) for r in nodes) + '\n')
@@ -216,6 +230,6 @@ def get_all_pws_PARADIGM():
 
 
 if __name__ == '__main__':
-    get_all_pws_PARADIGM()
+    get_all_pws_paradigm()
     # pw_map = read_pathways()
     pdb.set_trace()

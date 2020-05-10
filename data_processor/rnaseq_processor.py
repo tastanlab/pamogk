@@ -1,19 +1,21 @@
 import pandas as pd
 
+import config
 
-def process(fn):
+
+def process(filename):
     """
-    Inputs
-        fn: tab separated file in which the first row contains gene name/entrez gene id combined
+    :param filename: tab separated file in which the first row contains gene name/entrez gene id combined
             and patient ids. The rest of the rows are the genes and their expressions on each patient.
 
-    Outputs
+    :returns
         gene_expressions: a dataframe indicating the over- (1) and under-expressed (-1) genes where
             genes with entrez gene id are on rows and patient ids are on columns
         gene_name_map: a dataframe indicating the name of the genes of entrez gene ids
     """
 
-    data = pd.read_csv(fn, sep='\t')
+    fpath = config.get_safe_data_file(filename)
+    data = pd.read_csv(fpath, sep='\t')
     # data = data.set_index(['Gene Name', 'Entrez Gene ID'])
     # data = data.set_index('Entrez Gene ID')
     data[['gene_name', 'entrez_gene_id']] = data['#probe'].str.split('|', n=1, expand=True)
@@ -56,8 +58,9 @@ def process(fn):
 
     return gene_expression, gene_name_map
 
+
 def process_cont(fn):
-    '''
+    """
     Inputs
         fn: tab separated file in which the first row contains gene name/entrez gene id combined
         and patient ids. The rest of the rows are the genes and their expressions on each patient.
@@ -66,7 +69,7 @@ def process_cont(fn):
         gene_expressions: a dataframe indicating the normalized values of expressions of genes where
                 genes with entrez gene id are on rows and patient ids are on columns
         gene_name_map: a dataframe indicating the name of the genes of entrez gene ids
-    '''
+    """
 
     data = pd.read_csv(fn, sep='\t')
     # data = data.set_index(['Gene Name', 'Entrez Gene ID'])

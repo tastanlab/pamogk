@@ -1,11 +1,12 @@
-import plotly.io as pio
 import plotly.graph_objs as go
-import os
+import plotly.io as pio
+
 import config
 
-def plot(nx_G, title, auto_open=False):
+
+def plot(nx_g, title, auto_open=False):
     # import pdb; pdb.set_trace()
-    nodes = [nx_G.nodes[n] for n in nx_G.nodes()]
+    nodes = [nx_g.nodes[n] for n in nx_g.nodes()]
     marker = None
     types = [n['type'] for n in nodes if 'type' in n]
     # if all nodes have type show color depending on type
@@ -17,24 +18,24 @@ def plot(nx_G, title, auto_open=False):
             colorscale='Viridis',
             showscale=True)
     fig = go.Figure(
-        data = [
+        data=[
             go.Scatter(
-            x=[n['x'] for n in nodes],
-            y=[n['y'] for n in nodes],
-            mode='markers+text',
-            text=[n['n'] + '-' + n['type'] for n in nodes],
-            textposition='bottom center',
-            marker=marker)
+                x=[n['x'] for n in nodes],
+                y=[n['y'] for n in nodes],
+                mode='markers+text',
+                text=[n['n'] + '-' + n['type'] for n in nodes],
+                textposition='bottom center',
+                marker=marker)
         ],
-        layout = go.Layout(
+        layout=go.Layout(
             title=title,
-            hovermode= 'closest',
-            xaxis= dict(
-                ticklen= 5,
-                zeroline= False,
-                gridwidth= 2,
+            hovermode='closest',
+            xaxis=dict(
+                ticklen=5,
+                zeroline=False,
+                gridwidth=2,
             ),
-            yaxis = dict(
+            yaxis=dict(
                 ticklen=5,
                 gridwidth=2,
             ),
@@ -43,6 +44,6 @@ def plot(nx_G, title, auto_open=False):
             height=900,
         ))
     pio.write_html(fig,
-        os.path.join(config.data_dir, title + '.html'),
-        include_plotlyjs='directory', # adds plotly.js file separately
-        auto_open=auto_open)
+                   config.DATA_DIR / f'{title}.html',
+                   include_plotlyjs='directory',  # adds plotly.js file separately
+                   auto_open=auto_open)

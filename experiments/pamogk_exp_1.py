@@ -14,9 +14,9 @@ from lib.sutils import *
 from pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
                     help='Patient data file (if relative searched under data folder)',
-                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+                    default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 
@@ -38,27 +38,25 @@ class Experiment1(object):
         self.smoothing_alpha = smoothing_alpha
         self.normalization = normalization
 
-        param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
+        param_suffix = f'-label={label}-smoothing_alpha={smoothing_alpha}-norm={normalization}'
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'pamogk', exp_subdir)
+        self.exp_data_dir = config.DATA_DIR / 'pamogk' / exp_subdir
         safe_create_dir(self.exp_data_dir)
 
-        self.exp_result_dir = os.path.join(config.root_dir, '..', 'results')
+        self.exp_result_dir = config.ROOT_DIR.parent / 'results'
         safe_create_dir(self.exp_result_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'log-run={}.log'.format(args.rid)))
+        change_log_path(self.exp_data_dir / f'log-run={args.rid}.log')
         log('exp_data_dir:', self.exp_data_dir)
 
-        data_file = 'pamogk-over-under-expressed'
-        data_path = os.path.join(self.exp_data_dir, data_file)
-        self.get_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(data_path, pw_id)
+        self.get_pw_path = lambda pw_id: self.exp_data_dir / f'pamogk-over-under-expressed-pw_id={pw_id}.gpickle'
 
     @timeit
     def read_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
-        gene_exp, gene_name_map = rp.process(config.get_safe_data_file(args.patient_data))
+        gene_exp, gene_name_map = rp.process(args.patient_data)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -89,7 +87,7 @@ class Experiment1(object):
 
     def pathways_save_valid(self, all_pw_map):
         def pw_exists(pw_id):
-            return os.path.exists(self.get_pw_path(pw_id))
+            return self.get_pw_path(pw_id).exists()
 
         return np.all([pw_exists(pw_id) for pw_id in all_pw_map])
 
@@ -99,7 +97,7 @@ class Experiment1(object):
         res_pw_map = {}
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_pw_path(pw_id)
-            log('Loading over/under expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Loading over/under expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             res_pw_map[pw_id] = nx.read_gpickle(path)
         log()
         return res_pw_map
@@ -109,7 +107,7 @@ class Experiment1(object):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             path = self.get_pw_path(pw_id)
-            log('Saving over/under expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Saving over/under expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             nx.write_gpickle(pw, path)
         log()
 
@@ -136,12 +134,12 @@ class Experiment1(object):
         # if there are missing ones calculate all of them
         log('Over and under expressed patient pathway labeling')
         for ind, pid in enumerate(pat_ids):
-            log('Checking patient for over-expressed  {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (ge[..., pat_ids == pid] == 1).flatten()  # over expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
 
-            log('Checking patient for under-expressed {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (ge[..., pat_ids == pid] == -1).flatten()  # under expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
@@ -154,23 +152,23 @@ class Experiment1(object):
         # experiment variables
         num_pat = pat_ids.shape[0]
         num_pw = len(all_pw_map)
-        kms_path = os.path.join(self.exp_data_dir, 'kms.npz')
-        if args.cache and os.path.exists(kms_path):
+        kms_path = self.exp_data_dir / 'kms.npz'
+        if args.cache and kms_path.exists():
             return np.load(kms_path)['kms']
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
             over_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-oe', alpha=self.smoothing_alpha,
-                                             normalization=self.normalization)
-            log('Calculating oe pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
+                                              normalization=self.normalization)
+            logr(f'Calculating oe pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         # calculate kernel matrices for under expressed genes
         under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
             under_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-ue', alpha=self.smoothing_alpha,
-                                              normalization=self.normalization)
-            log('Calculating ue pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
+                                               normalization=self.normalization)
+            logr(f'Calculating ue pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         kms = np.vstack([over_exp_kms, under_exp_kms])  # stack all kernels
@@ -183,7 +181,7 @@ class Experiment1(object):
         return lmkkmeans_train(kernels)
 
     def save_results(self, **kwargs):
-        save_np_data(os.path.join(self.exp_result_dir, 'pamogk-exp-1-run={}'.format(args.rid)), **kwargs)
+        save_np_data(self.exp_result_dir / f'pamogk-exp-1-run={args.rid}', **kwargs)
 
 
 def main():

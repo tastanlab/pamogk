@@ -1,17 +1,19 @@
-import os
-import config
 import datetime
+
 import requests
+
+import config
+from .sutils import safe_create_dir
 
 
 def initialize_node2vec():
     print('node2vec: checking')
     # load node2vec as python 3 module
-    NODE2VEC_NAME = 'node2vec.py'
-    NODE2VEC_PATH = os.path.join(config.lib_dir, NODE2VEC_NAME)
-    if not os.path.exists(NODE2VEC_PATH):
+    node2_vec_name = 'node2vec.py'
+    node2_vec_path = config.LIB_DIR / node2_vec_name
+    if not node2_vec_path.exists():
         r = requests.get('https://raw.githubusercontent.com/aditya-grover/node2vec/master/src/node2vec.py')
-        with open(NODE2VEC_PATH, 'w') as q:
+        with open(node2_vec_path, 'w') as q:
             for line in r.text.split('\n'):
                 line = line.replace('save_word2vec_format', 'wv.save_word2vec_format')
                 if 'print' in line:
@@ -25,9 +27,9 @@ def initialize_node2vec():
     else:
         print('node2vec: already exists skipping')
 
-if not os.path.exists(config.lib_dir):
+
+if not config.LIB_DIR.exists():
     print('libs_dir: creating')
-    os.makedirs(config.lib_dir)
+    safe_create_dir(config.LIB_DIR)
 
 initialize_node2vec()
-

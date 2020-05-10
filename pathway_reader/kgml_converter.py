@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
+"""
 import and use methods
 
 Packages required:
@@ -10,27 +10,25 @@ networkx
 numpy
 gensim
 plotly
-'''
-import os
-import requests
-import config
+"""
 import networkx as nx
-from Bio.KEGG.KGML import KGML_parser
-from Bio.KEGG.KGML.KGML_pathway import Relation
-from . import kgml_pathway_reader
+
+import config
 from lib.sutils import *
+from . import kgml_pathway_reader
+
 
 @timeit
 def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None):
-    '''
+    """
     @param is_directed forced to prevent parsing the graph wrongly
-    '''
+    """
     print('Converting KGML pathway to networkx pathway:', pathway_id)
     if entries is None or relations is None:
-        entries, relations = kgml_pathway_reader.get_pathway_KGML(pathway_id)
+        entries, relations = kgml_pathway_reader.get_pathway_kgml(pathway_id)
 
     # validate data dir
-    safe_create_dir(config.data_dir)
+    safe_create_dir(config.DATA_DIR)
     # convert kgml data to networkx graph
     nodes = [(eid, {'name': entries[eid].name, 'hname': entries[eid].graphics[0].name, 'eid': eid }) for eid in entries]
     edges = [(r.entry1.id, r.entry2.id, {'weight': 1}) for r in relations]
@@ -40,7 +38,7 @@ def KGML_to_networkx_graph(pathway_id, is_directed, entries=None, relations=None
     # remove 0 degree info nodes
     # nx_g.remove_nodes_from([n for n in nx.isolates(nx_g)])
     print('Nodes with no edges:', len([n for n in nx.isolates(nx_G)]))
-    path = os.path.join(config.data_dir, pathway_id + '.gml')
+    path = config.DATA_DIR / f'{pathway_id}.gml'
     print('Saving GML to path:', path)
     nx.write_gml(nx_G, path)
 

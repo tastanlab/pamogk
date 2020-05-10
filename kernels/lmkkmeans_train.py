@@ -1,12 +1,29 @@
-import sys, mosek
-import numpy as np
+import os
+from pathlib import Path
+
+from lib.sutils import log
+
+MOSEK_LIC_FILE_ENV = 'MOSEKLM_LICENSE_FILE'
+if MOSEK_LIC_FILE_ENV not in os.environ:
+    # check custom valid paths
+    for p in ['~/.mosek/mosek.lic', '~/.mosek.lic']:
+        if Path(p).exists():
+            os.environ[MOSEK_LIC_FILE_ENV] = p
+            log(f'{MOSEK_LIC_FILE_ENV} not found but mosek file on path:', p)
+            break
+
 import heapq
-from sklearn.cluster import KMeans
+import mosek
+import sys
+
+import numpy as np
 import numpy.matlib as npML
-import pdb
+from sklearn.cluster import KMeans
 
 
 def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
+    if iteration_count < 1:
+        raise ValueError(f'iteracation_count cannot be non positive give: {iteration_count}')
     N = Km.shape[1]
     P = Km.shape[0]
     Theta = np.zeros((N, P))
@@ -41,7 +58,7 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         objective[it] = np.trace(H_con @ K_Theta @ H) - np.trace(K_Theta)
         print()
 
-    tempH = (npML.repmat(np.sqrt((H ** 2).sum(axis=1)), cluster_count, 1)).transpose() #
+    tempH = (npML.repmat(np.sqrt((H ** 2).sum(axis=1)), cluster_count, 1)).transpose()  #
     H_normalized = np.divide(H, tempH, out=np.zeros_like(H), where=tempH != 0)
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000).fit_predict(H_normalized)
     return clustering, H_normalized
@@ -106,18 +123,24 @@ def call_mosek(qsubi, qsubj, qval, N, P):
             # Print a summary containing information
             # about the solution for debugging purposes
             task.solutionsummary(mosek.streamtype.msg)
-            #prosta = task.getprosta(mosek.soltype.itr)
-            #solsta = task.getsolsta(mosek.soltype.itr)
+            # prosta = task.getprosta(mosek.soltype.itr)
+            # solsta = task.getsolsta(mosek.soltype.itr)
             # Output a solution
             xx = [0.] * numvar
             task.getxx(mosek.soltype.itr, xx)
             return xx
-            print("Optimal solution: %s" % xx)
 
 
 def streamprinter(text):
     sys.stdout.write(text)
     sys.stdout.flush()
+
+
+def main():
+    v1, v2, v3 = views.getLinearKernel()
+    Kmm = np.stack((v1, v2, v3))
+
+    lmkkmeans_train(Kmm, cluster_count=3, iteration_count=10)
 
 
 if __name__ == '__main__':
@@ -127,12 +150,7 @@ if __name__ == '__main__':
         print("ERROR: %s" % str(e.errno))
         if e.msg is not None:
             import traceback
+
             traceback.print_exc()
             print("\t%s" % e.msg)
         sys.exit(1)
-
-def main():
-    v1, v2, v3 = views.getLinearKernel()
-    Kmm = np.stack((v1, v2, v3))
-
-    lmkkmeans_train(Kmm, cluster_count=3, iteration_count=10)

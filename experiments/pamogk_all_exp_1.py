@@ -3,7 +3,6 @@
 
 import argparse
 import collections
-import csv
 
 import networkx as nx
 
@@ -18,57 +17,51 @@ from lib.sutils import *
 from pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
                     help='rnaseq pathway ID list',
-                    default='kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str,
-                    help='rppa pathway ID list', default='kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str,
-                    help='som mut pathway ID list', default='kirc_data/kirc_somatic_mutation_data.csv')
+                    default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
+                    help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
+                    help='som mut pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 args = parser.parse_args()
-log('Running args:', args)
+print_args(args)
 
 
 class Experiment1(object):
     def __init__(self, label=1, smoothing_alpha=0.05, normalization=True, drop_percent=0):
-        '''
+        """
         Parameters
         ----------
         label: {1} str
             label for over/under expressed
         smoothing_alpha: {0}
             smoothing parameter for smoothing out mutations
-        '''
+        """
         self.label = label
         self.smoothing_alpha = smoothing_alpha
         self.normalization = normalization
         self.drop_percent = drop_percent
 
-        param_suffix = '-label={}-smoothing_alpha={}-norm={}'.format(label, smoothing_alpha, normalization)
+        param_suffix = f'-label={label}-smoothing_alpha={smoothing_alpha}-norm={normalization}'
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = os.path.join(config.data_dir, 'pamogk_kirc_all', exp_subdir)
+        self.exp_data_dir = config.DATA_DIR / 'pamogk_kirc_all' / exp_subdir
 
         safe_create_dir(self.exp_data_dir)
         # change log and create log file
-        change_log_path(os.path.join(self.exp_data_dir, 'logs'))
+        change_log_path(self.exp_data_dir / 'run.log')
         log('exp_data_dir:', self.exp_data_dir)
 
-        rnaseq_data_file = 'pamogk-rnaseq-over-under-expressed'
-        rnaseq_data_path = os.path.join(self.exp_data_dir, rnaseq_data_file);
-        self.get_rnaseq_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(rnaseq_data_path, pw_id)
-
-        rppa_data_file = 'pamogk-rppa-over-under-expressed'
-        rppa_data_path = os.path.join(self.exp_data_dir, rppa_data_file);
-        self.get_rppa_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(rppa_data_path, pw_id)
-
-        som_data_file = 'pamogk-som-expressed'
-        som_data_path = os.path.join(self.exp_data_dir, som_data_file);
-        self.get_som_pw_path = lambda pw_id: '{}-pw_id={}.gpickle'.format(som_data_path, pw_id)
+        self.get_rnaseq_pw_path = lambda \
+                pw_id: self.exp_data_dir / f'pamogk-rnaseq-over-under-expressed-pw_id={pw_id}.gpickle'
+        self.get_rppa_pw_path = lambda \
+                pw_id: self.exp_data_dir / f'pamogk-rppa-over-under-expressed-pw_id={pw_id}.gpickle'
+        self.get_som_pw_path = lambda pw_id: self.exp_data_dir / f'pamogk-som-expressed-pw_id={pw_id}.gpickle'
 
     @timeit
     def read_rnaseq_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
 
         gene_exp, gene_name_map = rp.process(args.rnaseq_patient_data)
@@ -80,7 +73,7 @@ class Experiment1(object):
 
     @timeit
     def read_rppa_data(self):
-        ### Real Data ###
+        # Real Data #
         # process RNA-seq expression data
 
         gene_exp = rpp.process(args.rppa_patient_data)
@@ -92,71 +85,50 @@ class Experiment1(object):
 
     @timeit
     def read_som_data(self):
-        ### Real Data ###
+        """
+        Returns
+        -------
+        mapping of patient to mutations by entrez ids
+        """
+        # Real Data #
         # process RNA-seq expression data
         patients = {}
-        with open(args.som_patient_data) as csvfile:
+        with open(config.get_safe_data_file(args.som_patient_data)) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 pat_id = row['Patient ID']
                 ent_id = row['Entrez Gene ID']
                 if pat_id not in patients:
-                    patients[pat_id] = set([ent_id])
+                    patients[pat_id] = {ent_id}
                 else:
                     patients[pat_id].add(ent_id)
-        patients = collections.OrderedDict(sorted(patients.items()))
 
-        return patients
+        return collections.OrderedDict(sorted(patients.items()))
 
     @staticmethod
     def find_intersection_lists(list1, list2, list3):
-        intersection_list = set(list1).intersection(list2, list3)
-        return intersection_list
+        return set(list1).intersection(list2, list3)
 
     @timeit
     def find_intersection_patients(self, rs_GE, rs_pat, rp_GE, rp_pat, som_pat):
-        rs_pat_list = []
-        for pat in rs_pat:
-            new_id = '-'.join(pat.split('-')[0:3])
-            rs_pat_list.append(new_id)
+        rs_pat_list = simplify_pat_ids(rs_pat)
+        rp_pat_list = simplify_pat_ids(rp_pat)
+        som_pat_list = simplify_pat_ids(som_pat.keys())
 
-        rp_pat_list = []
-        for pat in rp_pat:
-            new_id = '-'.join(pat.split('-')[0:3])
-            rp_pat_list.append(new_id)
-
-        som_pat_list = []
-        for pat in som_pat.keys():
-            som_pat_list.append(pat)
-
-        intersection_list = list(self.find_intersection_lists(rs_pat_list, rp_pat_list, som_pat_list))
+        intersection_list = list(set(rs_pat_list).intersection(rp_pat_list, som_pat_list))
         intersection_list.sort()
-        intersect_loc = os.path.join(self.exp_data_dir, 'patients.csv')
-        with open(intersect_loc, 'w') as f:
-            kirc_int = list(intersection_list)
-            writer = csv.writer(f)
-            writer.writerow(kirc_int)
+        intersect_loc = self.exp_data_dir / 'patients.csv'
+        save_csv(intersect_loc, intersection_list)
 
-        rs_pat_deleted_list = []
-        for idx, value in enumerate(rs_pat_list):
-            if value not in intersection_list:
-                rs_pat_deleted_list.append(idx)
+        def clean_patient_list_and_ge_data(patients, ge, whitelist):
+            pat_list = simplify_pat_ids(patients)
+            to_del = [idx for idx, value in enumerate(pat_list) if value not in whitelist]
+            return np.delete(patients, to_del), np.delete(ge, to_del, axis=1)
 
-        rs_pat = np.delete(rs_pat, rs_pat_deleted_list)
-        rs_GE = np.delete(rs_GE, rs_pat_deleted_list, axis=1)
+        rs_pat, rs_GE = clean_patient_list_and_ge_data(rs_pat, rs_GE, intersection_list)
+        rp_pat, rp_GE = clean_patient_list_and_ge_data(rp_pat, rp_GE, intersection_list)
 
-        rp_pat_deleted_list = []
-        for idx, value in enumerate(rp_pat_list):
-            if value not in intersection_list:
-                rp_pat_deleted_list.append(idx)
-
-        rp_pat = np.delete(rp_pat, rp_pat_deleted_list)
-        rp_GE = np.delete(rp_GE, rp_pat_deleted_list, axis=1)
-
-        som_pat_deleted_list = []
-        for pat_id in som_pat.keys():
-            if pat_id not in intersection_list:
-                som_pat_deleted_list.append(pat_id)
+        som_pat_deleted_list = [pid for pid in som_pat.keys() if pid not in intersection_list]
 
         for item in som_pat_deleted_list:
             som_pat.pop(item, None)
@@ -211,15 +183,15 @@ class Experiment1(object):
         return cx_pw.read_pathways()
 
     def rnaseq_pathways_save_valid(self, all_pw_map):
-        pw_exists = lambda pw_id: os.path.exists(self.get_rnaseq_pw_path(pw_id))
+        pw_exists = lambda pw_id: self.get_rnaseq_pw_path(pw_id).exists()
         return np.all([pw_exists(pw_id) for pw_id in all_pw_map])
 
     def rppa_pathways_save_valid(self, all_pw_map):
-        pw_exists = lambda pw_id: os.path.exists(self.get_rppa_pw_path(pw_id))
+        pw_exists = lambda pw_id: self.get_rppa_pw_path(pw_id).exists()
         return np.all([pw_exists(pw_id) for pw_id in all_pw_map])
 
     def som_pathways_save_valid(self, all_pw_map):
-        pw_exists = lambda pw_id: os.path.exists(self.get_som_pw_path(pw_id))
+        pw_exists = lambda pw_id: self.get_som_pw_path(pw_id).exists()
         return np.all([pw_exists(pw_id) for pw_id in all_pw_map])
 
     @timeit
@@ -228,7 +200,7 @@ class Experiment1(object):
         res_pw_map = {}
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_rnaseq_pw_path(pw_id)
-            log('Loading over/under rnaseq expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Loading over/under rnaseq expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             res_pw_map[pw_id] = nx.read_gpickle(path)
         log()
         return res_pw_map
@@ -239,7 +211,7 @@ class Experiment1(object):
         res_pw_map = {}
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_rppa_pw_path(pw_id)
-            log('Loading over/under rppa expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Loading over/under rppa expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             res_pw_map[pw_id] = nx.read_gpickle(path)
         log()
         return res_pw_map
@@ -250,7 +222,7 @@ class Experiment1(object):
         res_pw_map = {}
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_som_pw_path(pw_id)
-            log('Loading somatic mutation data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Loading somatic mutation data {ind + 1:3}/{num_pw} pw={pw_id}')
             res_pw_map[pw_id] = nx.read_gpickle(path)
         log()
         return res_pw_map
@@ -260,7 +232,7 @@ class Experiment1(object):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             path = self.get_rnaseq_pw_path(pw_id)
-            log('Saving over/under rnaseq expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Saving over/under rnaseq expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             nx.write_gpickle(pw, path)
         log()
 
@@ -269,7 +241,7 @@ class Experiment1(object):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             path = self.get_rppa_pw_path(pw_id)
-            log('Saving over/under rppa expressed data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Saving over/under rppa expressed data {ind + 1:3}/{num_pw} pw={pw_id}')
             nx.write_gpickle(pw, path)
         log()
 
@@ -278,13 +250,13 @@ class Experiment1(object):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
             path = self.get_som_pw_path(pw_id)
-            log('Saving somatic mutation data {:3}/{} pw={}'.format(ind + 1, num_pw, pw_id), end='\r')
+            logr(f'Saving somatic mutation data {ind + 1:3}/{num_pw} pw={pw_id}')
             nx.write_gpickle(pw, path)
         log()
 
     @timeit
     def label_rnaseq_patient_genes(self, all_pw_map, pat_ids, GE, uni_ids):
-        '''Labels all patients with matching level of expression
+        """Labels all patients with matching level of expression
 
         Parameters
         ----------
@@ -294,9 +266,9 @@ class Experiment1(object):
             list of patient ids
         GE: :obj:`numpy.ndarray`
             Gene expression data array in shape of genes by patients
-        label: int, optional
-            label that will be used for marking patients
-        '''
+        uni_ids: :obj:`numpy.ndarray`
+            mapping from uniprot to gene
+        """
         # check if we already stored all over/under expression pathway data if so restore them
         if self.rnaseq_pathways_save_valid(all_pw_map):
             return self.restore_rnaseq_pathways(all_pw_map)
@@ -305,12 +277,12 @@ class Experiment1(object):
         # if there are missing ones calculate all of them
         log('RnaSeq Over and under expressed patient pathway labeling')
         for ind, pid in enumerate(pat_ids):
-            log('Checking patient for over-expressed  {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
 
-            log('Checking patient for under-expressed {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
@@ -320,7 +292,7 @@ class Experiment1(object):
 
     @timeit
     def label_rppa_patient_genes(self, all_pw_map, pat_ids, GE, uni_ids):
-        '''Labels all patients with matching level of expression
+        """Labels all patients with matching level of expression
 
         Parameters
         ----------
@@ -330,9 +302,9 @@ class Experiment1(object):
             list of patient ids
         GE: :obj:`numpy.ndarray`
             Gene expression data array in shape of genes by patients
-        label: int, optional
-            label that will be used for marking patients
-        '''
+        uni_ids: :obj:`numpy.ndarray`
+            mapping from uniprot to gene
+        """
         # check if we already stored all over/under expression pathway data if so restore them
         if self.rppa_pathways_save_valid(all_pw_map):
             return self.restore_rppa_pathways(all_pw_map)
@@ -341,12 +313,12 @@ class Experiment1(object):
         # if there are missing ones calculate all of them
         log('RPPA Over and under expressed patient pathway labeling')
         for ind, pid in enumerate(pat_ids):
-            log('Checking patient for rppa over-expressed  {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
 
-            log('Checking patient for rppa under-expressed {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for rppa under-expressed {ind + 1:4}/{num_pat} pid={pid}')
             gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
             genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
             label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
@@ -355,19 +327,15 @@ class Experiment1(object):
         return all_pw_map
 
     def label_som_patient_genes(self, all_pw_map, patients):
-        '''Labels all patients with matching level of expression
+        """Labels all patients with matching level of expression
 
         Parameters
         ----------
         all_pw_map: :obj:`list` of :obj:`networkx.classes.graph.Graph`
             a dictionary of all pathways we are using
-        pat_ids: :obj:`list` of :obj:`str`
-            list of patient ids
-        ge: :obj:`numpy.ndarray`
-            Gene expression data array in shape of genes by patients
-        label: int, optional
-            label that will be used for marking patients
-        '''
+        patients: :obj:`list`
+            list of patients with mutation mappings
+        """
         # check if we already stored all over/under expression pathway data if so restore them
         if self.som_pathways_save_valid(all_pw_map):
             return self.restore_som_pathways(all_pw_map)
@@ -379,7 +347,7 @@ class Experiment1(object):
             pid = patient['pat_id']
             genes = patient['mutated_nodes']  # get uniprot gene ids from indices
             genes = np.array([genes])
-            log('Checking patient for somatic mutation {:4}/{} pid={}'.format(ind + 1, num_pat, pid))
+            log(f'Checking patient for somatic mutation {ind + 1:4}/{num_pat} pid={pid}')
             label_mapper.mark_label_on_pathways('som', pid, all_pw_map, genes, self.label)
 
         self.save_som_pathways(all_pw_map)
@@ -390,22 +358,22 @@ class Experiment1(object):
         # experiment variables
         num_pat = pat_ids.shape[0]
         num_pw = len(all_pw_map)
-        kms_path = os.path.join(self.exp_data_dir, kms_file_name + '.npz')
-        if os.path.exists(kms_path): return np.load(kms_path)['kms']
+        kms_path = self.exp_data_dir / f'{kms_file_name}.npz'
+        if kms_path.exists(): return np.load(kms_path)['kms']
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
             over_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-oe', alpha=self.smoothing_alpha,
-                                             normalization=self.normalization)
-            log('Calculating oe pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
+                                              normalization=self.normalization)
+            logr(f'Calculating oe pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         # calculate kernel matrices for under expressed genes
         under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
             under_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-ue', alpha=self.smoothing_alpha,
-                                              normalization=self.normalization)
-            log('Calculating ue pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
+                                               normalization=self.normalization)
+            logr(f'Calculating ue pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         kms = np.vstack([over_exp_kms, under_exp_kms])  # stack all kernels
@@ -418,15 +386,15 @@ class Experiment1(object):
         # experiment variables
         num_pat = len(patients)
         num_pw = len(all_pw_map)
-        kms_path = os.path.join(self.exp_data_dir, 'som-kms.npz')
-        if os.path.exists(kms_path): return np.load(kms_path)['kms']
+        kms_path = self.exp_data_dir / 'som-kms.npz'
+        if kms_path.exists(): return np.load(kms_path)['kms']
         # calculate kernel matrices for over expressed genes
         kms = np.zeros((num_pw, num_pat, num_pat))
         pat_ids = np.array([pat['pat_id'] for pat in patients])
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
             kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-som', alpha=self.smoothing_alpha,
-                                    normalization=self.normalization)
-            log('Calculating som mut pathway kernel {:4}/{} pw_id={}'.format(ind + 1, num_pat, pw_id), end='\r')
+                                     normalization=self.normalization)
+            logr(f'Calculating som mut pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         np.savez_compressed(kms_path, kms=kms)  # save kernels
@@ -435,10 +403,9 @@ class Experiment1(object):
 
     @timeit
     def cluster(self, kernels, cluster, drop_percent):
-        save_path = os.path.join(self.exp_data_dir, 'labels_dropped{}'.format(drop_percent),
-                                 'pamogk-all-lmkkmeans-{}lab'.format(cluster))
+        save_path = self.exp_data_dir / f'labels_dropped{drop_percent}' / f'pamogk-all-lmkkmeans-{cluster}lab'
         numsample = kernels.shape[1]
-        if os.path.exists(save_path):
+        if save_path.exists():
             return np.load(save_path)
         else:
             dropped = []
@@ -455,8 +422,7 @@ class Experiment1(object):
             kernels = np.delete(kernels, deletion, axis=0)
 
             results = lmkkmeans_train(kernels[0:2], cluster_count=cluster, iteration_count=5)
-            directory = os.path.dirname(save_path)
-            safe_create_dir(directory)
+            ensure_file_dir(save_path)
             weights = np.mean(results[2], axis=0)
             weights = np.stack((stayed[0:2], weights))
             weights_loc = save_path + 'weights'
@@ -466,11 +432,7 @@ class Experiment1(object):
 
     @timeit
     def callback(self):
-        myList = []
-        for i in range(330):
-            name = 'pamogk-kernels-brca/{}'.format(i)
-            myList.append(np.loadtxt(name))
-        return np.array(myList)
+        return np.array([np.loadtxt(f'pamogk-kernels-brca/{i}') for i in range(330)])
 
 
 def main():
