@@ -6,9 +6,8 @@ import argparse
 import matplotlib.pyplot as plt
 
 import config
-from gene_mapper import uniprot_mapper
-from lib.sutils import *
-from pathway_reader import cx_pathway_reader as cx_pw
+from pamogk import uniprot_mapper
+from pamogk import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Runs stats visualizations')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path, help='pathway ID list',

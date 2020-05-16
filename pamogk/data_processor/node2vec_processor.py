@@ -1,6 +1,6 @@
 from gensim.models import Word2Vec
 
-from lib import node2vec
+from pamogk import node2vec
 
 '''
 TODO: migrate to https://github.com/eliorc/node2vec

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-from lib.sutils import ensure_file_dir, safe_create_dir
+from pamogk import ensure_file_dir, safe_create_dir
 
 sns.set()
 

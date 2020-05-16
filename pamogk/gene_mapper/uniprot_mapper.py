@@ -6,7 +6,7 @@ import numpy as np
 import requests
 
 import config
-from pathway_reader import cx_pathway_reader
+from pamogk import cx_pathway_reader
 
 UNIPROT_DOMAIN = 'www.uniprot.org'
 UNIPROT_HOST = f'https://{UNIPROT_DOMAIN}'

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import config
-from lib.sutils import ensure_file_dir
+from pamogk import ensure_file_dir
 
 '''
     This file is to process som file which has type of .maf

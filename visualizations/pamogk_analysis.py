@@ -8,8 +8,7 @@ from lifelines import KaplanMeierFitter
 from lifelines.statistics import multivariate_logrank_test
 
 import config
-from data_processor import rnaseq_processor as rp
-from lib.sutils import *
+from pamogk import rnaseq_processor as rp
 
 parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
 parser.add_argument('--rnaSeq-data', '-r', metavar='file-path', dest='rnaseq_data', type=Path, help='RnaSeq Data',

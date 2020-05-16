@@ -11,10 +11,9 @@ numpy
 gensim
 plotly
 """
-import networkx as nx
 
 import config
-from lib.sutils import *
+from pamogk import *
 from . import kgml_pathway_reader
 
 

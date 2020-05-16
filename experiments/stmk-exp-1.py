@@ -4,12 +4,11 @@ import argparse
 import json
 
 import config
-from data_processor import node2vec_processor
-from gene_mapper import uniprot_mapper
-from kernels import center_product_kernel
-from kernels.lmkkmeans_train import lmkkmeans_train
-from lib.sutils import *
-from pathway_reader import cx_pathway_reader as cx_pw
+from pamogk import node2vec_processor
+from pamogk import uniprot_mapper
+from pamogk import center_product_kernel
+from pamogk import lmkkmeans_train
+from pamogk import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,

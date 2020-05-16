@@ -4,11 +4,10 @@ import collections as coll
 import json
 import pdb
 
-import networkx as nx
 import requests
 
 import config
-from lib.sutils import *
+from pamogk import *
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
@@ -224,7 +223,7 @@ def get_all_pws_paradigm():
             edges.append(r)
         with open(f'../data/paradigm/{pw_id}.tsv', 'w') as f:
             f.write('\n'.join('\t'.join(r) for r in lines))
-    with open('../data/paradigm/pws.tsv', 'w') as f:
+    with open('../../data/paradigm/pws.tsv', 'w') as f:
         f.write('\n'.join('\t'.join(r) for r in nodes) + '\n')
         f.write('\n'.join('\t'.join(r) for r in edges))
 

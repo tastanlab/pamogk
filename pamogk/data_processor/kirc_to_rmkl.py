@@ -5,7 +5,7 @@ import csv
 from pathlib import Path
 
 import config
-from lib.sutils import ensure_file_dir
+from pamogk import ensure_file_dir
 
 KIRC_DATA_DIR = config.DATA_DIR / 'kirc_data'
 

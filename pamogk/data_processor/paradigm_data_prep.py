@@ -6,10 +6,8 @@ import collections
 import pdb
 
 import config
-from data_processor import rnaseq_processor as rp
-from data_processor import synapse_rppa_processor as rpp
-from gene_mapper import uniprot_mapper
-from lib.sutils import *
+from pamogk import rnaseq_processor as rp, synapse_rppa_processor as rpp
+from pamogk import uniprot_mapper
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,

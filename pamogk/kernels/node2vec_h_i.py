@@ -4,8 +4,7 @@ import numpy as np
 
 
 class Graph():
-    def __init__(self, nx_G, is_directed, p, q, debug=False):
-        self.debug = debug
+    def __init__(self, nx_G, is_directed, p, q):
         self.G = nx_G
         self.is_directed = is_directed
         self.p = p
@@ -42,14 +41,16 @@ class Graph():
         Repeatedly simulate random walks from each node.
         """
         G = self.G
-        walks = []
+        walks = {}
         nodes = list(G.nodes())
-        if self.debug: print('Walk iteration:')
+        for node in nodes:
+            walks[node] = []
+        print('Walk iteration:')
         for walk_iter in range(num_walks):
-            if self.debug: print(str(walk_iter + 1), '/', str(num_walks))
+            print(f'{walk_iter + 1}/{num_walks}')
             random.shuffle(nodes)
             for node in nodes:
-                walks.append(self.node2vec_walk(walk_length=walk_length, start_node=node))
+                walks[node].append(self.node2vec_walk(walk_length=walk_length, start_node=node))
 
         return walks
 
@@ -64,11 +65,11 @@ class Graph():
         unnormalized_probs = []
         for dst_nbr in sorted(G.neighbors(dst)):
             if dst_nbr == src:
-                unnormalized_probs.append(G[dst][dst_nbr]['weight'] / p)
+                unnormalized_probs.append(1 / p)
             elif G.has_edge(dst_nbr, src):
-                unnormalized_probs.append(G[dst][dst_nbr]['weight'])
+                unnormalized_probs.append(1)
             else:
-                unnormalized_probs.append(G[dst][dst_nbr]['weight'] / q)
+                unnormalized_probs.append(1 / q)
         norm_const = sum(unnormalized_probs)
         normalized_probs = [float(u_prob) / norm_const for u_prob in unnormalized_probs]
 
@@ -83,7 +84,7 @@ class Graph():
 
         alias_nodes = {}
         for node in G.nodes():
-            unnormalized_probs = [G[node][nbr]['weight'] for nbr in sorted(G.neighbors(node))]
+            unnormalized_probs = [1 for nbr in sorted(G.neighbors(node))]
             norm_const = sum(unnormalized_probs)
             normalized_probs = [float(u_prob) / norm_const for u_prob in unnormalized_probs]
             alias_nodes[node] = alias_setup(normalized_probs)
@@ -149,5 +150,3 @@ def alias_draw(J, q):
         return kk
     else:
         return J[kk]
-
-# accessed:2020-02-18 20:00:07.529926

@@ -1,20 +1,4 @@
-import os
-from pathlib import Path
-
-from lib.sutils import log
-
-# if mosek env var is not given check custom valid paths
-MOSEK_LIC_FILE_ENV = 'MOSEKLM_LICENSE_FILE'
-if MOSEK_LIC_FILE_ENV not in os.environ:
-    for p in ['~/mosek/mosek.lic', '~/.mosek/mosek.lic', '~/.mosek.lic']:
-        _p = Path(p).expanduser()
-        if _p.exists():
-            _p = str(_p)
-            os.environ[MOSEK_LIC_FILE_ENV] = _p
-            os.putenv(MOSEK_LIC_FILE_ENV, _p)
-            log(f'{MOSEK_LIC_FILE_ENV} not found but mosek file on path:', p)
-            break
-
+import config
 import heapq
 import mosek
 import sys
@@ -140,15 +124,12 @@ def streamprinter(text):
 
 
 def main():
-    v1, v2, v3 = views.getLinearKernel()
-    Kmm = np.stack((v1, v2, v3))
-
-    lmkkmeans_train(Kmm, cluster_count=3, iteration_count=10)
-
-
-if __name__ == '__main__':
     try:
-        main()
+        print(config.MOSEK_LICENCE_FILE_PATH)
+        v1, v2, v3 = views.getLinearKernel()
+        Kmm = np.stack((v1, v2, v3))
+
+        lmkkmeans_train(Kmm, cluster_count=3, iteration_count=10)
     except mosek.MosekException as e:
         print("ERROR: %s" % str(e.errno))
         if e.msg is not None:
@@ -157,3 +138,7 @@ if __name__ == '__main__':
             traceback.print_exc()
             print("\t%s" % e.msg)
         sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()

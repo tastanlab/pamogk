@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import networkx as nx
 
-from lib.sutils import *
+from pamogk.lib.sutils import *
 
 
 # options are raise, warn, print (default)

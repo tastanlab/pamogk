@@ -3,9 +3,8 @@
 import argparse
 
 import config
-from data_processor import rnaseq_processor as rp
-from gene_mapper import uniprot_mapper
-from lib.sutils import *
+from pamogk import rnaseq_processor as rp
+from pamogk import uniprot_mapper
 
 parser = argparse.ArgumentParser(description='Run rMKL-LLP')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,

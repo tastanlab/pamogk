@@ -18,7 +18,6 @@ from Bio.KEGG.KGML import KGML_parser
 from Bio.KEGG.KGML.KGML_pathway import Relation
 
 import config
-from lib.sutils import *
 
 HOST = 'http://rest.kegg.jp'
 
