@@ -1,7 +1,7 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 
-from .. import config
+from pamogk import config
 
 
 def plot(nx_g, title, auto_open=False):

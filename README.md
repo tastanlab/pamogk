@@ -34,11 +34,10 @@ You can either place the license file under user's home directory in a folder na
 $HOME/mosek/mosec.lic # *nix/macOS users
 %USERPROFILE%\mosek\mosek.lic # windows users
 ```
-We also extend default paths with some custom paths.
-
-You can check `pamogk.config.MOSEK_SUPPORTED_PATHS` to see a list of supported paths.
-
 Other option is to set the `MOSEKLM_LICENSE_FILE` environment variable to your license file location.
+
+We also look for the license file paths in some custom paths (by overwriting `MOSEKLM_LICENSE_FILE` if not present).
+You can check `pamogk.config.MOSEK_SUPPORTED_PATHS` to see a list of supported paths.
 
 For more information:
 

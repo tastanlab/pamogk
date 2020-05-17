@@ -1,8 +1,6 @@
 import argparse
 
-import matplotlib.pyplot as plt
 import pandas
-import scipy as scip
 
 from pamogk import config
 from ..gene_mapper import uniprot_mapper
@@ -177,7 +175,8 @@ def calc_kernel_from_similarity(similarityMatrix):
     distanceMatrix = 1 - similarityMatrix
     sigmasqList = [0.2, 0.5, 1, 5]
     sigmasq = sigmasqList[1]
-    return scip.exp(-np.square(distanceMatrix) / (2 * sigmasq))
+    # it was scipt.exp but they should be doing the same thing
+    return np.exp(-np.square(distanceMatrix) / (2 * sigmasq))
 
 
 @timeit
@@ -199,31 +198,11 @@ def calc_kernel_from_pathways(neighbor_mappings, patients, id_mapper):
     return kernel_res
 
 
-def loadKernel(fileLoc):
-    data = pandas.read_csv(fileLoc, delimiter=" ", dtype=np.float64)
+def load_kernel(file_loc):
+    data = pandas.read_csv(file_loc, delimiter=" ", dtype=np.float64)
     return np.array(data).reshape((165, 417, 417))
 
 
 def isPSD(A, tol=1e-8):
     E, V = np.linalg.eigh(A)
     return np.all(E >= -tol)
-
-
-conf_def = 0.1
-patient_map = read_data()
-
-# Patient ve mutated genleri yaziyor
-patients = preprocess_patient_data(patient_map)
-
-# Pathwayler geldi graphlar ile
-all_pw_map = read_pathways()
-
-# list of neigbor of genes for all pathways
-neighbor_mappings, id_mapper = get_neighbors_for_all_pathways(all_pw_map, conf_def)
-
-#
-kernels = calc_kernel_from_pathways(neighbor_mappings, patients, id_mapper)
-for i in range(1):
-    print(isPSD(kernels[i]))
-    plt.imshow(kernels[i], cmap='hot')
-    plt.savefig(f'{i}.png')

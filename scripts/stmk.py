@@ -14,10 +14,11 @@ import plotly.io as pio
 from sklearn import cluster
 from sklearn.manifold import TSNE
 
-import config
-from pamogk import node2vec_processor
-from pamogk import print_args
-from pamogk import cx_pathway_reader, network_plotter
+from pamogk import config
+from pamogk.data_processor import node2vec_processor
+from pamogk.lib.sutils import print_args
+from pamogk.pathway_reader import cx_pathway_reader
+from visualizations import network_plotter
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('pathways', metavar='pathway-id', type=str, nargs='+', help='pathway ID list',
