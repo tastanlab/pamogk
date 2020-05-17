@@ -7,9 +7,10 @@ import math
 from sklearn import preprocessing
 from sklearn.metrics.pairwise import rbf_kernel
 
-import config
-from pamogk import rnaseq_processor as rp, synapse_rppa_processor as rpp
-from pamogk import lmkkmeans_train
+from pamogk import config
+from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
+from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
+from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,

@@ -10,7 +10,7 @@ from pamogk import config
 from pamogk import label_mapper
 from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
 from pamogk.gene_mapper import uniprot_mapper
-from pamogk.kernels import lmkkmeans_train
+from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
 from pamogk.lib.sutils import *
 from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 

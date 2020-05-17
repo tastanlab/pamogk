@@ -2,14 +2,16 @@
 # -*- coding: utf-8 -*-
 import argparse
 
-import config
-import label_mapper
+import networkx as nx
+
 import pamogk
-from pamogk import rnaseq_processor as rp
-from pamogk import uniprot_mapper
-from pamogk import lmkkmeans_train
-from pamogk import *
-from pamogk import cx_pathway_reader as cx_pw
+from pamogk import config
+from pamogk import label_mapper
+from pamogk.data_processor import rnaseq_processor as rp
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
+from pamogk.lib.sutils import *
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,

@@ -4,12 +4,13 @@ from .lib.sutils import *
 
 ROOT_DIR = Path(__file__).resolve().parent
 LIB_DIR = ROOT_DIR / 'lib'
-DATA_DIR = ROOT_DIR / 'data'
+DATA_DIR = ROOT_DIR.parent / 'data'
 
 # if mosek env var is not given check custom valid paths
 _MOSEK_LIC_FILE_ENV = 'MOSEKLM_LICENSE_FILE'
+MOSEK_SUPPORTED_PATHS = ['~/mosek/mosek.lic', '~/.mosek/mosek.lic', '~/.mosek.lic']
 if _MOSEK_LIC_FILE_ENV not in os.environ:
-    for p in ['~/mosek/mosek.lic', '~/.mosek/mosek.lic', '~/.mosek.lic']:
+    for p in MOSEK_SUPPORTED_PATHS:
         _p = Path(p).expanduser()
         if _p.exists():
             _p = str(_p)

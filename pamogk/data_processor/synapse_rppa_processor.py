@@ -5,7 +5,7 @@ import pandas as pd
 
 from .. import config
 
-RPPA_DATA_DIR = config.DATA_DIR / 'rppa_converter'
+RPPA_DATA_DIR = config.DATA_DIR / 'rppa'
 
 
 def prune_proteins(data):
