@@ -4,7 +4,7 @@ import networkx as nx
 
 from pamogk.lib.sutils import *
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 # options are raise, warn, print (default)
 # np.seterr(all='raise')
 
