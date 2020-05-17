@@ -5,10 +5,10 @@ import argparse
 
 import matplotlib.pyplot as plt
 
-import config
-from gene_mapper import uniprot_mapper
-from lib.sutils import *
-from pathway_reader import cx_pathway_reader as cx_pw
+from pamogk import config
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
+from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Runs stats visualizations')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path, help='pathway ID list',

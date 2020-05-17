@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 import argparse
 
-import config
-from data_processor import rnaseq_processor as rp
-from gene_mapper import uniprot_mapper
-from lib.sutils import *
+from pamogk import config
+from pamogk.data_processor import rnaseq_processor as rp
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run rMKL-LLP')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
@@ -37,7 +37,7 @@ class Experiment1(object):
         self.exp_data_dir = config.DATA_DIR / 'pamogk' / exp_subdir
         safe_create_dir(self.exp_data_dir)
 
-        self.exp_result_dir = config.ROOT_DIR / '..' / 'results'
+        self.exp_result_dir = config.ROOT_DIR.parent / 'results'
         safe_create_dir(self.exp_result_dir)
         # change log and create log file
         change_log_path(self.exp_data_dir / f'log-run={args.rid}.log')

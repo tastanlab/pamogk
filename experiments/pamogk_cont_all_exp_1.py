@@ -4,18 +4,18 @@
 import argparse
 import collections
 
+# see https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
 import matlab.engine
 import networkx as nx
 
-import config
-import label_mapper
 import pamogk
-from data_processor import rnaseq_processor as rp
-from data_processor import synapse_rppa_processor as rpp
-from gene_mapper import uniprot_mapper
-from kernels.lmkkmeans_train import lmkkmeans_train
-from lib.sutils import *
-from pathway_reader import cx_pathway_reader as cx_pw
+from pamogk import config
+from pamogk import label_mapper
+from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
+from pamogk.lib.sutils import *
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
@@ -413,7 +413,7 @@ class Experiment1(object):
         if mkkm_and_kkmeans_save_path.exists():
             print('mkkm-mr and kk-means already calculated')
         else:
-            matlab_folder = config.ROOT_DIR / 'pamogk_matlab'
+            matlab_folder = config.ROOT_DIR.parent / 'pamogk_matlab'
             npy_matlab_folder1 = matlab_folder / 'npy-matlab'
             snf_matlab_folder = matlab_folder / 'SNFmatlab'
             npy_matlab_folder2 = npy_matlab_folder1 / 'npy-matlab'
