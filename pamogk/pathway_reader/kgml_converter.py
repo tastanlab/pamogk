@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-import and use methods
-
-Packages required:
-requests
-biopython
-networkx
-numpy
-gensim
-plotly
-"""
-
 import networkx as nx
 
 from . import kgml_pathway_reader
