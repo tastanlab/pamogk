@@ -14,7 +14,9 @@ or you can download the master branch from:
 ## Python Environment
 Project mainly uses python, but some of the plot generation codes use matlab or output html files (plotly.js). Also some libraries might be dependent on operating system. In our tests we used Debian 12.04LTS and macOS Catalina.
 
-The cleanest way to start installation is first setting up a virtual environment of your choice. Some suggestions:
+The cleanest way to start installation is first setting up a virtual environment of your choice. We strongly suggest [pipenv](https://github.com/pypa/pipenv#installation) because of version locking feature.
+
+But here are some other virtual envs:
 
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)
 * [virtualenv/venv](https://docs.python.org/3/library/venv.html)

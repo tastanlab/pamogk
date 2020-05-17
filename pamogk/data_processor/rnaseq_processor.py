@@ -1,6 +1,6 @@
 import pandas as pd
 
-import config
+from .. import config
 
 
 def process(filename):

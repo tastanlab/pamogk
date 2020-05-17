@@ -5,8 +5,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-import config
-from pamogk import ensure_file_dir
+from .. import config
+from ..lib.sutils import ensure_file_dir
 
 '''
     This file is to process som file which has type of .maf

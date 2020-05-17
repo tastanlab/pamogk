@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-
 import matplotlib.pyplot as plt
-import numpy as np
 import seaborn as sns
 
-from pamogk import ensure_file_dir, safe_create_dir
+from pamogk.lib.sutils import *
 
 sns.set()
 

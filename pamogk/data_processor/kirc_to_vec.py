@@ -3,9 +3,9 @@ import csv
 
 from gensim.models.keyedvectors import KeyedVectors
 
-import config
-from pamogk import uniprot_mapper as um
-from pamogk import cx_pathway_reader
+from .. import config
+from ..gene_mapper import uniprot_mapper as um
+from ..pathway_reader import cx_pathway_reader
 
 '''
 Calling get_n2v_representations() returns vectors for each patient.

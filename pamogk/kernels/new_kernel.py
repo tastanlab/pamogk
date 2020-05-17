@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import pandas
 import scipy as scip
 
-import config
-import pamogk as n2v
-from pamogk import uniprot_mapper
-from pamogk import cx_pathway_reader as cx_pw
+from pamogk import config
+from ..gene_mapper import uniprot_mapper
+from ..kernels import node2vec_h_i_k as n2v
+from ..lib.sutils import *
+from ..pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path, help='pathway ID list',

@@ -12,9 +12,11 @@ gensim
 plotly
 """
 
-import config
-from pamogk import *
+import networkx as nx
+
 from . import kgml_pathway_reader
+from .. import config
+from ..lib.sutils import *
 
 
 @timeit

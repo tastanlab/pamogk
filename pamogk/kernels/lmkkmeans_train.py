@@ -1,4 +1,4 @@
-import config
+from .. import config
 import heapq
 import mosek
 import sys

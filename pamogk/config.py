@@ -1,9 +1,6 @@
-from pamogk.lib.sutils import *
-
 import os
-from pathlib import Path
 
-from pamogk.lib.sutils import log
+from .lib.sutils import *
 
 ROOT_DIR = Path(__file__).resolve().parent
 LIB_DIR = ROOT_DIR / 'lib'

@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import pandas as pd
 
-import config
+from .. import config
 
 RPPA_DATA_DIR = config.DATA_DIR / 'rppa_converter'
 

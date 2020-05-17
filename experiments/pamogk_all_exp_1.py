@@ -3,15 +3,16 @@
 
 import argparse
 import collections
+import networkx as nx
 
-import config
-import label_mapper
 import pamogk
-from pamogk import rnaseq_processor as rp, synapse_rppa_processor as rpp
-from pamogk import uniprot_mapper
-from pamogk import lmkkmeans_train
-from pamogk import *
-from pamogk import cx_pathway_reader as cx_pw
+from pamogk import config
+from pamogk import label_mapper
+from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.kernels import lmkkmeans_train
+from pamogk.lib.sutils import *
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,

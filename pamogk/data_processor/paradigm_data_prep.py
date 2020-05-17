@@ -5,9 +5,10 @@ import argparse
 import collections
 import pdb
 
-import config
-from pamogk import rnaseq_processor as rp, synapse_rppa_processor as rpp
-from pamogk import uniprot_mapper
+from .. import config
+from ..data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
+from ..gene_mapper import uniprot_mapper
+from ..lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
@@ -16,7 +17,8 @@ parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnase
 parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
                     help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
 parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
-                    help='som mut pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
+                    help='som mut pathway ID list',
+                    default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 args = parser.parse_args()
 print_args(args)
 
@@ -191,7 +193,7 @@ def main():
     som_patients = exp.read_som_data()
 
     # Find intersect
-    rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients = exp\
+    rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients = exp \
         .find_intersection_patients(rs_GE, rs_pat_ids, rp_GE, rp_pat_ids, som_patients)
 
     # Kernel part

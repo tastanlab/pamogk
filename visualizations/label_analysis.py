@@ -16,8 +16,9 @@ import pandas as pd
 from lifelines import KaplanMeierFitter
 from lifelines.statistics import multivariate_logrank_test
 
-import config
+from pamogk import config
 from . import report_creator as rc
+from pamogk.lib.sutils import *
 
 KERNELS = ['pamogk-all']
 METHODS = ['mkkm', 'kmeans']

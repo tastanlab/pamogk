@@ -15,7 +15,7 @@ import networkx as nx
 import numpy as np
 from gensim.models import Word2Vec
 
-import pamogk as n2v
+from ..kernels import node2vec_h_i as n2v
 
 
 def parse_args():

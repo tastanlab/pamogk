@@ -4,10 +4,11 @@ import collections as coll
 import json
 import pdb
 
+import networkx as nx
 import requests
 
-import config
-from pamogk import *
+from .. import config
+from ..lib.sutils import *
 
 HOST = 'http://www.ndexbio.org/v2'
 NCI_USER_ID = '301a91c6-a37b-11e4-bda0-000c29202374'
