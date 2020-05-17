@@ -14,7 +14,7 @@ with open('Pipfile') as f:
     pkg_list = sep + sep.join(required_packages)
     print("Required packages:" + pkg_list)
 
-print(setuptools.find_packages())
+print('Packages to export:', setuptools.find_packages())
 
 setup(
     name='pamogk',
