@@ -23,8 +23,7 @@ parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_p
                     help='Somatic Patient data file (relative to data dir, otherwise use absolute path)',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 
-args = parser.parse_args()
-print_args(args)
+args = {}
 
 
 class Experiment1(object):
@@ -310,7 +309,13 @@ class Experiment1(object):
         return np.array([np.loadtxt(f'pamogk-kernels-brca/{i}') for i in range(330)])
 
 
-def main():
+def main(*nargs):
+    global args
+    if __name__ == '__main__':  # if running directly use command line arguments
+        args = parser.parse_args()
+    else:  # otherwise use user given arguments
+        args = parser.parse_args(nargs)
+
     gammas = ['median2']
     for g in gammas:
         exp = Experiment1(gamma=g)

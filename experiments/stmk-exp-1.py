@@ -3,12 +3,14 @@
 import argparse
 import json
 
-import config
-from pamogk import node2vec_processor
-from pamogk import uniprot_mapper
-from pamogk import center_product_kernel
-from pamogk import lmkkmeans_train
-from pamogk import cx_pathway_reader as cx_pw
+from pamogk import config
+from pamogk.data_processor import node2vec_processor
+from pamogk.gene_mapper import uniprot_mapper
+from pamogk.kernels import center_product_kernel
+from pamogk.kernels import lmkkmeans_train
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
+from pamogk.lib.sutils import *
+
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
@@ -30,9 +32,7 @@ parser.add_argument('--surv-dist', '-s', dest='surv_dist', type=float,
 parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutated gene percentage in range [0, 1]',
                     default=0.4)
 
-args = parser.parse_args()
-print_args(args)
-
+args = {}
 
 class Experiment1(object):
     def __init__(self):
@@ -131,7 +131,15 @@ class Experiment1(object):
         save_np_data(self.exp_result_dir / f'stmk-exp-1-run={args.rid}', **kwargs)
 
 
-def main():
+def main(*nargs):
+    global args
+    if __name__ == '__main__': # if running directly use command line arguments
+        args = parser.parse_args()
+    else: # otherwise use user given arguments
+        args = parser.parse_args(nargs)
+
+    print_args(args)
+
     exp = Experiment1()
 
     patient_map = exp.read_data()

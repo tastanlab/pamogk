@@ -13,8 +13,7 @@ parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_d
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 
-args = parser.parse_args()
-print_args(args)
+args = {}
 
 
 class Experiment1(object):
@@ -74,17 +73,27 @@ class Experiment1(object):
         return GE, uni_ids
 
 
-exp = Experiment1()
+def main(*nargs):
+    global args
+    if __name__ == '__main__': # if running directly use command line arguments
+        args = parser.parse_args()
+    else: # otherwise use user given arguments
+        args = parser.parse_args(nargs)
 
-GE, pat_ids, ent_ids = exp.read_data()
+    exp = Experiment1()
 
-GE, uni_ids = exp.preprocess_patient_data(GE, ent_ids)
+    GE, pat_ids, ent_ids = exp.read_data()
 
-with open('../ids.txt', 'w') as f:
-    f.write('\n'.join(pat_ids))
+    GE, uni_ids = exp.preprocess_patient_data(GE, ent_ids)
 
-import scipy.io
+    with open('../ids.txt', 'w') as f:
+        f.write('\n'.join(pat_ids))
 
-scipy.io.savemat('../file.mat', {'data': GE})
+    import scipy.io
 
-log('Finished')
+    scipy.io.savemat('../file.mat', {'data': GE})
+
+    log('Finished')
+
+if __name__ == '__main__':
+    main()

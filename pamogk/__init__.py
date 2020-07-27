@@ -2,9 +2,13 @@
 # -*- coding: utf-8 -*-
 import networkx as nx
 
+__all__ = ['lib', 'data_processor', 'gene_mapper', 'kernels', 'pathway_reader']
+
 from pamogk.lib.sutils import *
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
+
+
 # options are raise, warn, print (default)
 # np.seterr(all='raise')
 

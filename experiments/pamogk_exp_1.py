@@ -20,8 +20,7 @@ parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_d
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)
 
-args = parser.parse_args()
-print_args(args)
+args = {}
 
 
 class Experiment1(object):
@@ -184,7 +183,13 @@ class Experiment1(object):
         save_np_data(self.exp_result_dir / f'pamogk-exp-1-run={args.rid}', **kwargs)
 
 
-def main():
+def main(*nargs):
+    global args
+    if __name__ == '__main__':  # if running directly use command line arguments
+        args = parser.parse_args()
+    else:  # otherwise use user given arguments
+        args = parser.parse_args(nargs)
+
     exp = Experiment1()
 
     ge, pat_ids, ent_ids = exp.read_data()

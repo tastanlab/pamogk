@@ -21,9 +21,9 @@ parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnase
 parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
                     help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
 parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
-                    help='som mut pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
-args = parser.parse_args()
-print_args(args)
+                    help='som mut pathway ID list',
+                    default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
+args = {}
 
 
 class Experiment1(object):
@@ -33,8 +33,12 @@ class Experiment1(object):
         ----------
         label: {1} str
             label for over/under expressed
-        smoothing_alpha: {0}
+        smoothing_alpha: {0.05} float
             smoothing parameter for smoothing out mutations
+        normalization: {True} bool
+            normalization
+        drop_percent: {0.05} float
+            drop percent
         """
         self.label = label
         self.smoothing_alpha = smoothing_alpha
@@ -433,7 +437,15 @@ class Experiment1(object):
         return np.array([np.loadtxt(f'pamogk-kernels-brca/{i}') for i in range(330)])
 
 
-def main():
+def main(*nargs):
+    # if running directly use command line arguments
+    if __name__ == '__main__':
+        args = parser.parse_args()
+    else:  # otherwise use user given arguments
+        args = parser.parse_args(nargs)
+
+    print_args(args)
+
     for a in [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         exp = Experiment1(smoothing_alpha=a, drop_percent=1)
 
