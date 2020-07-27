@@ -75,9 +75,9 @@ class Experiment1(object):
 
 def main(*nargs):
     global args
-    if __name__ == '__main__': # if running directly use command line arguments
+    if __name__ == '__main__':  # if running directly use command line arguments
         args = parser.parse_args()
-    else: # otherwise use user given arguments
+    else:  # otherwise use user given arguments
         args = parser.parse_args(nargs)
 
     exp = Experiment1()
@@ -94,6 +94,7 @@ def main(*nargs):
     scipy.io.savemat('../file.mat', {'data': GE})
 
     log('Finished')
+
 
 if __name__ == '__main__':
     main()

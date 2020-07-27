@@ -9,6 +9,7 @@ import matlab.engine
 import networkx as nx
 
 import pamogk
+import pamogk.kernels.pamogk
 from pamogk import config
 from pamogk import label_mapper
 from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
@@ -360,18 +361,18 @@ class Experiment1(object):
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            over_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-oe-' + self.label,
-                                              alpha=self.smoothing_alpha,
-                                              normalization=self.normalization)
+            over_exp_kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-oe-' + self.label,
+                                                             alpha=self.smoothing_alpha,
+                                                             normalization=self.normalization)
             logr(f'Calculating oe pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         # calculate kernel matrices for under expressed genes
         under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            under_exp_kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-ue-' + self.label,
-                                               alpha=self.smoothing_alpha,
-                                               normalization=self.normalization)
+            under_exp_kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-ue-' + self.label,
+                                                              alpha=self.smoothing_alpha,
+                                                              normalization=self.normalization)
             logr(f'Calculating ue pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
@@ -391,8 +392,8 @@ class Experiment1(object):
         kms = np.zeros((num_pw, num_pat, num_pat))
         pat_ids = np.array([pat['pat_id'] for pat in patients])
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            kms[ind] = pamogk.kernel(pat_ids, pw, label_key='label-som', alpha=self.smoothing_alpha,
-                                     normalization=self.normalization)
+            kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-som', alpha=self.smoothing_alpha,
+                                                    normalization=self.normalization)
             logr(f'Calculating som mut pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 

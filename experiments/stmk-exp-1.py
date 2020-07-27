@@ -11,7 +11,6 @@ from pamogk.kernels import lmkkmeans_train
 from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 from pamogk.lib.sutils import *
 
-
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
 parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
                     help='Patient data file (if relative searched under data folder)',
@@ -33,6 +32,7 @@ parser.add_argument('--mut-dist', '-m', dest='mut_dist', type=float, help='Mutat
                     default=0.4)
 
 args = {}
+
 
 class Experiment1(object):
     def __init__(self):
@@ -133,9 +133,9 @@ class Experiment1(object):
 
 def main(*nargs):
     global args
-    if __name__ == '__main__': # if running directly use command line arguments
+    if __name__ == '__main__':  # if running directly use command line arguments
         args = parser.parse_args()
-    else: # otherwise use user given arguments
+    else:  # otherwise use user given arguments
         args = parser.parse_args(nargs)
 
     print_args(args)

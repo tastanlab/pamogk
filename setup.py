@@ -18,7 +18,7 @@ print('Packages to export:', setuptools.find_packages())
 
 setup(
     name='pamogk',
-    version='0.1.3',
+    version='0.1.4',
     packages=setuptools.find_packages(),
     install_requires=required_packages,
     license='Creative Commons Attribution-Noncommercial-Share Alike license',
