@@ -16,9 +16,10 @@
 """
 
 import csv
-from pathlib import Path
 
 import numpy as np
+
+from .. import config
 
 CANCER_TYPES = ['BLCA', 'BRCA', 'COAD', 'GBM', 'HNSC', 'KIRC', 'LAML', 'LUAD', 'LUSC', 'OV', 'READ', 'UCEC']
 
@@ -124,11 +125,10 @@ def report_all_cancer_types(dir_path):
         print_report(report)
 
 
-ROOT_DIR = Path('/home/yitepeli/ForExp/')
 CANCER_TYPE = 'OV'
 
-FILEPATH = ROOT_DIR / CANCER_TYPE / 'clinical'
+FILEPATH = config.ROOT_DIR / CANCER_TYPE / 'clinical'
 rep = process_one_clinical_somatic(FILEPATH)
-write_to_file(rep, '../data/ov_data/ov_clinical_data.csv')
+write_to_file(rep, config.DATA_DIR / 'ov_data' / 'ov_clinical_data.csv')
 
 # report_all_cancer_types(DATA_DIR)

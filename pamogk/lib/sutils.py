@@ -113,7 +113,7 @@ def print_args(args):
     m = max(len(k) for k in arg_dict.keys())
     log('Running args:')
     for k, v in arg_dict.items():
-        print(f'  {k} {" " * (m - len(k))}: {v}')
+        log(f'  {k} {" " * (m - len(k))}: {v}')
 
 
 def simplify_pat_ids(data):

@@ -1,3 +1,5 @@
+import pdb
+
 import numpy as np
 
 
@@ -49,7 +51,7 @@ def mark_cont_label_on_pathways(name, pid, pw_map, uni_ids, gene_vals):
             nd = pw.nodes[n]
             if label_field not in nd:
                 pw.add_node(n, **{label_field: {}})
-            intersect_values = gene_vals[[len(set(nd['uniprot-ids']).intersection(g)) > 0 for g in uni_ids]]
+            intersect_values = gene_vals[[len(set(nd['uniprotids']).intersection(g)) > 0 for g in uni_ids]]
             if len(intersect_values) > 0:
                 if 'oe' in name:
                     nd[label_field][pid] = max(0, max(intersect_values))

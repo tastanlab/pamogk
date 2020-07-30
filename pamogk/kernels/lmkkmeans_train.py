@@ -10,7 +10,7 @@ from sklearn.cluster import KMeans
 
 def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
     if iteration_count < 1:
-        raise ValueError(f'iteracation_count cannot be non positive give: {iteration_count}')
+        raise ValueError(f'iteration_count cannot be non positive give: {iteration_count}')
     N = Km.shape[1]
     P = Km.shape[0]
     Theta = np.zeros((N, P))
@@ -20,6 +20,7 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
     K_Theta = calculate_localized_kernel_theta(Km, Theta)
     objective = np.zeros((iteration_count, 1))
 
+    H = None
     for it in range(iteration_count):
         eig, H = np.linalg.eig(K_Theta)
         maxIndexes = heapq.nlargest(cluster_count, range(eig.shape[0]), eig.take)
@@ -45,8 +46,10 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         objective[it] = np.trace(H_con @ K_Theta @ H) - np.trace(K_Theta)
         print()
 
+    if H is None:
+        raise ValueError('No iterations compeleted causing H to be invalid')
     tempH = (npML.repmat(np.sqrt((H ** 2).sum(axis=1)), cluster_count, 1)).transpose()  #
-    H_normalized = np.divide(H, tempH, out=np.zeros_like(H), where=tempH != 0)
+    H_normalized = np.real(np.divide(H, tempH, out=np.zeros_like(H), where=tempH != 0))
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000).fit_predict(H_normalized)
     return clustering, H_normalized
 
