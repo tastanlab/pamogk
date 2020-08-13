@@ -1,5 +1,3 @@
-import pdb
-
 import networkx as nx
 
 from pamogk.lib.sutils import *
@@ -30,16 +28,16 @@ def kernel(pat_ids, pathway, label_key, alpha=0.5, epsilon=1e-6, normalization=F
     pat_ind = {}
     for ind, pid in enumerate(pat_ids): pat_ind[pid] = ind
     # extract labels of nodes of graphs
-    mutations = np.zeros([num_pat, len(pathway.nodes)], dtype=float)
+    mutations = np.zeros([num_pat, len(pathway.nodes)], dtype=np.float)
     for nid in pathway.nodes:
         nd = pathway.nodes[nid]
         for pid, lb in nd[label_key].items():
             if pid in pat_ind.keys():
                 try:
-                    mutations[pat_ind[pid], nid] = lb
-                except:
-                    pdb.set_trace()
-                    raise
+                    _lb = float(lb)
+                except ValueError:
+                    _lb = 1
+                mutations[pat_ind[pid], nid] = _lb
 
     # extract the adjacency matrix on the order of nodes we have
     adj_mat = nx.to_numpy_array(pathway, nodelist=pathway.nodes)
@@ -70,12 +68,7 @@ def kernel(pat_ids, pathway, label_key, alpha=0.5, epsilon=1e-6, normalization=F
             tmp_md = mutations[:, ind]
             # calculate similarities of patients based on the current pathway
             tmp_km = tmp_md @ np.transpose(tmp_md)
-            try:
-                km += tmp_km  # update the main kernel matrix
-            except:
-                print(type(km), type(tmp_km))
-                pdb.set_trace()
-                raise
+            km += tmp_km  # update the main kernel matrix
 
     # normalize the kernel matrix if normalization is true
     if normalization == True: km = normalize_kernel_matrix(km)
@@ -112,7 +105,7 @@ def normalize_kernel_matrix(km):
     kmD = np.array(np.diag(km))
     kmD[kmD == 0] = 1
     D = np.diag(1 / np.sqrt(kmD))
-    norm_km = D @ km @ D  # K_ij / sqrt(K_ii * K_jj)
+    norm_km = np.linalg.multi_dot([D, km, D.T])  # K_ij / sqrt(K_ii * K_jj)
     return np.nan_to_num(norm_km)  # replace NaN with 0
 
 

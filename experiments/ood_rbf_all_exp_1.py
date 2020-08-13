@@ -180,7 +180,7 @@ class Experiment1(object):
         else:
             data_med = data
 
-        g = np.nansum(np.multiply(data_med, data_med), axis=1).reshape((size1, 1))
+        g = np.nansum(np.multiply(data_med, data_med), axis=1, keepdims=True)
         q = np.tile(g, (1, size1))
         r = np.tile(g.T, (size1, 1))
         dists = q + r - np.matmul(data_med, data_med.T) * 2

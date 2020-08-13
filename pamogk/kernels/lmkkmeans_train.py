@@ -47,9 +47,11 @@ def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):
         print()
 
     if H is None:
-        raise ValueError('No iterations compeleted causing H to be invalid')
-    tempH = (npML.repmat(np.sqrt((H ** 2).sum(axis=1)), cluster_count, 1)).transpose()  #
-    H_normalized = np.real(np.divide(H, tempH, out=np.zeros_like(H), where=tempH != 0))
+        raise ValueError('No iterations completed causing H to be invalid')
+    # normalize vector lengths
+    tempH = np.linalg.norm(H, axis=1, keepdims=True)
+    tempH[tempH == 0] = 1
+    H_normalized = H / tempH
     clustering = KMeans(n_clusters=cluster_count, max_iter=1000).fit_predict(H_normalized)
     return clustering, H_normalized
 
@@ -129,6 +131,7 @@ def streamprinter(text):
 def main():
     try:
         print(config.MOSEK_LICENCE_FILE_PATH)
+        # TODO generate some example kernels
         v1, v2, v3 = views.getLinearKernel()
         Kmm = np.stack((v1, v2, v3))
 

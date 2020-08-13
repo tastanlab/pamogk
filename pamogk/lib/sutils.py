@@ -1,3 +1,4 @@
+import argparse
 import csv
 import time
 from datetime import datetime
@@ -92,14 +93,32 @@ def log(*args, **kwargs):
         log_f.flush()
 
 
-def save_np_data(path, *args, **kwargs):
+def ensure_suffix(path, suffix='.npz'):
+    if isinstance(path, Path):
+        return path.with_suffix(suffix)
+    if isinstance(path, str):
+        if path[-len(suffix):] != suffix:
+            return path + suffix
+        return path
+    raise TypeError('path must be either pathlib.Path or str')
+
+def save_np_data(path, data=None, **kwargs):
     if len(kwargs) == 0:
-        kwargs = {'data': args[0]}
-    np.savez_compressed(path + '.npz', **kwargs)
+        if data is None:
+            raise ValueError('Either data or kwargs must be given')
+        kwargs = {'data': data}
+    path = ensure_suffix(path)
+    np.savez_compressed(path, **kwargs)
 
 
 def load_np_data(path, key='data'):
-    return np.load(path + '.npz')[key]
+    path = ensure_suffix(path)
+    return np.load(path)[key]
+
+
+def np_data_exists(path):
+    path = ensure_suffix(path)
+    return Path(path).exists()
 
 
 def save_csv(path, rows):
@@ -128,3 +147,24 @@ def get_safe_path_obj(file_path):
         else:
             raise TypeError(f'Type of file_path must be either str or pathlib.Path but given {ftype}')
     return file_path
+
+
+def str2bool(v):
+    """
+    This is useful for the case of giving boolean parameters
+    Parameters
+    ----------
+    v
+
+    Returns
+    -------
+
+    """
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')

@@ -15,4 +15,4 @@ while flag
         flag =0;
     end
 end
-H_normalized = H./ repmat(sqrt(sum(H.^2, 2)), 1,cluster_count);
+H_normalized = H./ repmat(sqrt(sum(H.^2, 2)), 1, size(H, 2));

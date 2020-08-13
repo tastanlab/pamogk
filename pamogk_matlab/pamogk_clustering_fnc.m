@@ -1,40 +1,33 @@
-function e = pamogk_clustering_fnc(folder_name,numclass, drop_percent, typ)
+function e = pamogk_clustering_fnc(folder_name, numclass, drop_percent)
 
 warning off
-numclass = double(numclass)
+numclass = double(numclass);
 
-folder_name = strcat(folder_name,"");
-type = strcat(typ,"-");
-if strcmp(type,'-')
-   type='';
+ROOT_DIR = strcat(folder_name,"");
+
+if ~exist(ROOT_DIR+"/rnaseq-kms", "dir")
+   mkdir(ROOT_DIR+"/rnaseq-kms");
+   KH_rs_fn = unzip(ROOT_DIR + "/rnaseq-kms.npz",ROOT_DIR+"/rnaseq-kms");
+end
+if ~exist(ROOT_DIR+"/rppa-kms", "dir")
+   mkdir(ROOT_DIR+"/rppa-kms");
+   KH_rp_fn = unzip(ROOT_DIR + "/rppa-kms.npz",ROOT_DIR+"/rppa-kms");
+end
+if ~exist(ROOT_DIR+"/som-kms", "dir")
+  mkdir(ROOT_DIR+"/som-kms");
+  KH_som_fn = unzip(ROOT_DIR + "/som-kms.npz", ROOT_DIR+"/som-kms");
 end
 
-if ~exist(folder_name+"/rnaseq-"+type+"kms", "dir")
-   mkdir(folder_name+"/rnaseq-"+type+"kms");
-   KH_rs_fn = unzip(folder_name + "/rnaseq-"+type+"kms.npz",folder_name+"/rnaseq-"+type+"kms");
-end
-if ~exist(folder_name+"/rppa-"+type+"kms", "dir")
-   mkdir(folder_name+"/rppa-"+type+"kms");
-   KH_rp_fn = unzip(folder_name + "/rppa-"+type+"kms.npz",folder_name+"/rppa-"+type+"kms");
-end
-if ~exist(folder_name+"/som-kms", "dir")
-  mkdir(folder_name+"/som-kms");
-  KH_som_fn = unzip(folder_name + "/som-kms.npz",folder_name+"/som-kms");
-end
-folder_spec= strcat(typ,"_");
-if strcmp(folder_spec,'_')
-   folder_spec='';
-end
-folderNameOut = folder_name+"/labels_"+folder_spec+"dropped"+num2str(drop_percent); 
+folderNameOut = ROOT_DIR+"/labels_dropped_"+num2str(drop_percent);
 if ~exist(folderNameOut, "dir")
    mkdir(folderNameOut); 
 end
 
-KH_rs = readNPY(folder_name + "/rnaseq-"+type+"kms/kms.npy");
+KH_rs = readNPY(ROOT_DIR + "/rnaseq-kms/kms.npy");
 numker_rs = size(KH_rs,1);
-KH_rp = readNPY(folder_name + "/rppa-"+type+"kms/kms.npy");
+KH_rp = readNPY(ROOT_DIR + "/rppa-kms/kms.npy");
 numker_rp = size(KH_rp,1);
-KH_som = readNPY(folder_name + "/som-kms/kms.npy");
+KH_som = readNPY(ROOT_DIR + "/som-kms/kms.npy");
 numker_som = size(KH_som,1);
 
 numsample = size(KH_rs,3);
@@ -68,30 +61,21 @@ csvwrite(name_dropped, dropped)
 
 K = 20;%number of neighbors, usually (10~30)
 T = 20; %Number of Iterations, usually (10~20)
-KH= permute(KH, [2 3 1]);
-
 
 snf_kmeans_loc = folderNameOut+"/pamogk-snf-kmeans-"+int2str(numclass)+"lab";
 snf_spectral_loc = folderNameOut+"/pamogk-snf-spectral-"+int2str(numclass)+"lab";
 
-if ~exist(snf_kmeans_loc, 'file')
-  W = SNF(KH_SNF_cell, K, T);
-  [H_normalized_snf] = mykernelkmeans(W,numclass);
-  km_snf = untitled(H_normalized_snf,numclass);
-  csvwrite(snf_kmeans_loc,km_snf)
-end
-if ~exist(snf_spectral_loc, 'file')
-  W = SNF(KH_SNF_cell, K, T);
-  group = SpectralClustering(W,numclass);
-  csvwrite(snf_spectral_loc,group)
-end
+W = SNF(KH_SNF_cell, K, T);
+[H_normalized_snf] = mykernelkmeans(W, numclass);
+km_snf = normalized_kmeans(H_normalized_snf, numclass);
+csvwrite(snf_kmeans_loc,km_snf)
+
+group = SpectralClustering(W, numclass);
+csvwrite(snf_spectral_loc,group)
 
 kmeans_name = folderNameOut+"/pamogk-kmeans-"+int2str(numclass)+"lab";
-if exist(kmeans_name, 'file')
-   e=0
-   return
-end
 
+KH= permute(KH, [2 3 1]);
 KH = kcenter(KH);
 KH = knorm(KH);
 %numclass = length(unique(Y));
@@ -103,17 +87,17 @@ M = calculateM(KH);
 %%%%%%%%---Average---%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %kmeans_name = folderNameOut+"/pamogk-kmeans-"+int2str(numclass)+"lab";
 [H_normalized1] = mykernelkmeans(avgKer,numclass);
-indx = untitled(H_normalized1,numclass);
+indx = normalized_kmeans(H_normalized1,numclass);
 csvwrite(kmeans_name,indx)
 
 %%%%%%%%%%---AAAI-16----%%%%%%%%
-lambdaset2 = 2.^[-15:3:15];
-lambdasetname = [-15:3:15];
+lambdaset2 = 2.^(-15:3:15);
+lambdasetname = -15:3:15;
 %lambdaset2 = 2.^[5:2:6];
 %lambdaset2 = 2.^[0];
 for il =1:length(lambdaset2)
     [H_normalized2,gamma2,obj2] = myregmultikernelclustering(KH,M,numclass,lambdaset2(il));
-    indx2 = untitled(H_normalized2,numclass);
+    indx2 = normalized_kmeans(H_normalized2,numclass);
     name = strcat(folderNameOut+"/pamogk-mkkm-"+int2str(numclass)+"lab-loglambda="+ num2str(lambdasetname(il)));
     csvwrite(name,indx2)
     name_gamma = strcat(folderNameOut+"/pamogk-mkkm-"+int2str(numclass)+"lab-loglambda="+ num2str(lambdasetname(il))+"weights");

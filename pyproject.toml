@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "pamogk"
+version = "0.1.1"
+description = "PAMOGK"
+authors = ["Fma <fmakdemir@users.noreply.github.com>"]
+readme = 'README.md'
+keywords = ['pamogk', 'multi view kernel clustering']
+repository = 'https://github.com/tastanlab/pamogk'
+homepage = 'https://github.com/tastanlab/pamogk'
+
+[tool.poetry.dependencies]
+python = "^3.7"
+biopython = ">=1.76"
+gensim = ">=3.8.0"
+networkx = ">=2.4.0"
+numpy = ">=1.18.0"
+pandas = ">=1.0.0"
+requests = ">=2.23.0"
+scikit-learn = ">=0.23.0"
+mosek = ">=9.2.0"
+snfpy = "*"
+scipy = "^1.5.2"
+mkkm_mr = "^0.2.1"
+snf_simple = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+lifelines = "*"
+matplotlib = "*"
+plotly = "*"
+scipy = "*"
+seaborn = "*"
+toml = "*"
+twine = "*"
+bump2version = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

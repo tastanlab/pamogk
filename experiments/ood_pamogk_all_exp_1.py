@@ -3,17 +3,15 @@
 
 import argparse
 import collections
-import pdb
 
 import networkx as nx
 
-import pamogk
-import pamogk.kernels.pamogk
 from pamogk import config
 from pamogk import label_mapper
 from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
 from pamogk.gene_mapper import uniprot_mapper
 from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
+from pamogk.kernels.pamogk import kernel
 from pamogk.lib.sutils import *
 from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
@@ -36,7 +34,10 @@ parser.add_argument('--drop-percent', '-p', metavar='drop-percent', dest='drop_p
                     help='Drop percentage in range of 0-100', default=1)
 parser.add_argument('--threshold', '-t', metavar='threshold', dest='threshold', type=float,
                     help='Cut off threshold', default=1.96)
-parser.add_argument('--normalization', '-n', dest='normalization', type=bool, default=True, help='Normalization')
+parser.add_argument('--continuous', '-c', metavar='bool', dest='continuous', type=str2bool,
+                    help='Whether to produce continuous values for under/over expressed', default=1.96)
+parser.add_argument('--normalize-kernels', '-nk', dest='kernel_normalization', type=str2bool,
+                    help='Kernel Normalization')
 
 args = {}
 
@@ -52,15 +53,16 @@ class Experiment1(object):
         self.args = args
         self.label = args.label
         self.smoothing_alpha = args.smoothing_alpha
-        self.normalization = args.normalization
+        self.kernel_normalization = args.kernel_normalization
         self.drop_percent = args.drop_percent
+        self.threshold = args.threshold
 
-        param_suffix = f'-label={self.label}-smoothing_alpha={self.smoothing_alpha}-norm={self.normalization}'
+        param_suffix = f'-label={self.label}-smoothing_alpha={self.smoothing_alpha}-kr_norm={self.kernel_normalization}'
         if args.run_id is not None:
             param_suffix += f'-run_id={args.run_id}'
         exp_subdir = self.__class__.__name__ + param_suffix
 
-        self.exp_data_dir = config.DATA_DIR / 'pamogk_kirc_all' / exp_subdir
+        self.exp_data_dir = config.DATA_DIR / 'pamogk_kirc' / exp_subdir
 
         safe_create_dir(self.exp_data_dir)
         # change log and create log file
@@ -78,7 +80,7 @@ class Experiment1(object):
         # Real Data #
         # process RNA-seq expression data
 
-        gene_exp, gene_name_map = rp.process(self.args.rnaseq_patient_data)
+        gene_exp, gene_name_map = rp.process(self.args.rnaseq_patient_data, self.args.continuous, self.args.threshold)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -90,7 +92,7 @@ class Experiment1(object):
         # Real Data #
         # process RNA-seq expression data
 
-        gene_exp = rpp.process(self.args.rppa_patient_data)
+        gene_exp = rpp.process(self.args.rppa_patient_data, self.args.continuous, self.args.threshold)
 
         # convert entrez gene id to uniprot id
         pat_ids = gene_exp.columns.values  # patient TCGA ids
@@ -118,10 +120,6 @@ class Experiment1(object):
                     patients[pat_id].add(ent_id)
 
         return collections.OrderedDict(sorted(patients.items()))
-
-    @staticmethod
-    def find_intersection_lists(list1, list2, list3):
-        return set(list1).intersection(list2, list3)
 
     @timeit
     def find_intersection_patients(self, rs_GE, rs_pat, rp_GE, rp_pat, som_pat):
@@ -204,7 +202,7 @@ class Experiment1(object):
     @timeit
     def restore_rnaseq_pathways(self, all_pw_map):
         num_pw = len(all_pw_map)
-        res_pw_map = {}
+        res_pw_map = collections.OrderedDict()
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_rnaseq_pw_path(pw_id)
             logr(f'Loading over/under rnaseq expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
@@ -215,7 +213,7 @@ class Experiment1(object):
     @timeit
     def restore_rppa_pathways(self, all_pw_map):
         num_pw = len(all_pw_map)
-        res_pw_map = {}
+        res_pw_map = collections.OrderedDict()
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_rppa_pw_path(pw_id)
             logr(f'Loading over/under rppa expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
@@ -226,7 +224,7 @@ class Experiment1(object):
     @timeit
     def restore_som_pathways(self, all_pw_map):
         num_pw = len(all_pw_map)
-        res_pw_map = {}
+        res_pw_map = collections.OrderedDict()
         for ind, pw_id in enumerate(all_pw_map.keys()):
             path = self.get_som_pw_path(pw_id)
             logr(f'Loading somatic mutation data {ind + 1:3}/{num_pw} pw_id={pw_id}')
@@ -284,15 +282,25 @@ class Experiment1(object):
         # if there are missing ones calculate all of them
         log('RnaSeq Over and under expressed patient pathway labeling')
         for ind, pid in enumerate(pat_ids):
-            log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-            gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
-            genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-            label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
+            if self.args.continuous:
+                gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
+                log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
+                label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
+                label_mapper.mark_extra_label_on_pathways(f'oe-{self.label}', pid, all_pw_map, 'oe', self.threshold)
 
-            log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-            gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
-            genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-            label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
+                log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
+                label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
+                label_mapper.mark_extra_label_on_pathways(f'ue-{self.label}', pid, all_pw_map, 'ue', self.threshold)
+            else:
+                log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
+                gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
+                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
+                label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
+
+                log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
+                gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
+                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
+                label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
 
         self.save_rnaseq_pathways(all_pw_map)
         return all_pw_map
@@ -320,15 +328,25 @@ class Experiment1(object):
         # if there are missing ones calculate all of them
         log('RPPA Over and under expressed patient pathway labeling')
         for ind, pid in enumerate(pat_ids):
-            log(f'Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-            gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
-            genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-            label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
+            if self.args.continuous:
+                gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
+                log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
+                label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
+                label_mapper.mark_extra_label_on_pathways('oe-' + self.label, pid, all_pw_map, 'oe', self.threshold)
 
-            log(f'Checking patient for rppa under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-            gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
-            genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-            label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
+                log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
+                label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
+                label_mapper.mark_extra_label_on_pathways('ue-' + self.label, pid, all_pw_map, 'ue', self.threshold)
+            else:
+                log(f'Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
+                gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
+                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
+                label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
+
+                log(f'Checking patient for rppa under-expressed {ind + 1:4}/{num_pat} pid={pid}')
+                gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
+                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
+                label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
 
         self.save_rppa_pathways(all_pw_map)
         return all_pw_map
@@ -370,18 +388,16 @@ class Experiment1(object):
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            over_exp_kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-oe',
-                                                             alpha=self.smoothing_alpha,
-                                                             normalization=self.normalization)
+            over_exp_kms[ind] = kernel(pat_ids, pw, label_key='label-oe', alpha=self.smoothing_alpha,
+                                       normalization=self.kernel_normalization)
             logr(f'Calculating oe pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
         # calculate kernel matrices for under expressed genes
         under_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            under_exp_kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-ue',
-                                                              alpha=self.smoothing_alpha,
-                                                              normalization=self.normalization)
+            under_exp_kms[ind] = kernel(pat_ids, pw, label_key='label-ue', alpha=self.smoothing_alpha,
+                                        normalization=self.kernel_normalization)
             logr(f'Calculating ue pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
@@ -401,8 +417,8 @@ class Experiment1(object):
         kms = np.zeros((num_pw, num_pat, num_pat))
         pat_ids = np.array([pat['pat_id'] for pat in patients])
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
-            kms[ind] = pamogk.kernels.pamogk.kernel(pat_ids, pw, label_key='label-som', alpha=self.smoothing_alpha,
-                                                    normalization=self.normalization)
+            kms[ind] = kernel(pat_ids, pw, label_key='label-som', alpha=self.smoothing_alpha,
+                              normalization=self.kernel_normalization)
             logr(f'Calculating som mut pathway kernel {ind + 1:4}/{num_pat} pw_id={pw_id}')
         log()
 
@@ -424,11 +440,7 @@ class Experiment1(object):
         log(f'kernel_count={kernels.shape[0]} valid_kernel_count={valid_kernels.shape[0]}')
         labels, h_weights = lmkkmeans_train(valid_kernels, cluster_count=cluster, iteration_count=5)
         ensure_file_dir(save_path)
-        log('-' * 40)
-        log('h_weights:', h_weights)
-        log('-' * 40)
         weights = np.mean(h_weights, axis=0)
-        log('weights:', weights)
         np.savetxt(f'{save_path}-weights', weights, delimiter=',')
         np.save(f'{save_path}-valid-kernels', valid_kernels)
         np.save(save_path, labels)

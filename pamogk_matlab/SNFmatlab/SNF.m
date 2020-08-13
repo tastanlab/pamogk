@@ -42,7 +42,7 @@ for ITER=1:t
 end
 
 W = Wsum/C;
-W = W./repmat(sum(W,2),1,n);;
+W = W./repmat(sum(W,2),1,n);
 W = (W +W'+eye(n))/2;
 end
 
@@ -54,12 +54,11 @@ W = W+ALPHA*eye(length(W));
 W = (W +W')/2;
 end
 
-function newW = FindDominateSet(W,K)
+function newW = FindDominateSet(W,K) 
 [m,n]=size(W);
-[YW,IW1] = sort(W,2,'descend');
-clear YW;
+[~,IW1] = sort(W,2,'descend');
 newW=zeros(m,n);
-temp=repmat((1:n)',1,K);
+temp=repmat((1:m)',1,K);
 I1=(IW1(:,1:K)-1)*m+temp;
 newW(I1(:))=W(I1(:));
 newW=newW./repmat(sum(newW,2),1,n);

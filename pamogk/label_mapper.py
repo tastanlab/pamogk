@@ -1,5 +1,3 @@
-import pdb
-
 import numpy as np
 
 
@@ -61,7 +59,7 @@ def mark_cont_label_on_pathways(name, pid, pw_map, uni_ids, gene_vals):
                     nd[label_field][pid] = max(intersect_values.max(), intersect_values.min(), key=abs)
 
 
-def mark_extra_label_on_pathways(name, pid, pw_map, old_label_name, thold=1.96):
+def mark_extra_label_on_pathways(name, pid, pw_map, old_label_name, threshold=1.96):
     """Marks new labels on pathways using old_labels
 
     Parameters
@@ -74,8 +72,8 @@ def mark_extra_label_on_pathways(name, pid, pw_map, old_label_name, thold=1.96):
         patient label mapping
     old_label_name: string
         old label name that will be used for new label
-    thold: float
-        threshold of new label. If abs(old_label)<thold then new label=0 same otherwise - default value is 1.96
+    threshold: float
+        threshold of new label. If abs(old_label)<threshold then new label=0 same otherwise - default value is 1.96
     """
     label_field = f'label-{name}'
     old_label_field = f'label-{old_label_name}'
@@ -92,7 +90,7 @@ def mark_extra_label_on_pathways(name, pid, pw_map, old_label_name, thold=1.96):
                 elif pid in nd[ue_label_field].keys():
                     nd[label_field][pid] = nd[ue_label_field][pid]
             else:
-                if pid in nd[old_label_field].keys() and abs(nd[old_label_field][pid]) < thold:
+                if pid in nd[old_label_field].keys() and abs(nd[old_label_field][pid]) < threshold:
                     nd[label_field][pid] = 0
                 elif pid in nd[old_label_field].keys():
                     nd[label_field][pid] = nd[old_label_field][pid]

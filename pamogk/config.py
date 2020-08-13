@@ -6,9 +6,9 @@ ROOT_DIR = os.environ.get('PAMOGK_ROOT_DIR', None)
 if ROOT_DIR is not None:
     ROOT_DIR = Path(ROOT_DIR)
 
-if not ROOT_DIR.exists() or not ROOT_DIR.is_dir():
-    log('Invalid PAMOGK_ROOT_DIR environment variable please set PAMOGK_ROOT_DIR to root of data and result folder')
-    ROOT_DIR = Path(__file__).resolve().parent
+if ROOT_DIR is None or not ROOT_DIR.exists() or not ROOT_DIR.is_dir():
+    log('Invalid PAMOGK_ROOT_DIR environment variable. Please set PAMOGK_ROOT_DIR to root of data and result folder')
+    ROOT_DIR = Path(__file__).resolve().parent.parent
     log('set PAMOGK_ROOT_DIR to ', ROOT_DIR)
 
 log(f'PAMOGK_ROOT_DIR={ROOT_DIR}')
