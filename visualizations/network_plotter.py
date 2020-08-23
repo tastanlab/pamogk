@@ -23,7 +23,7 @@ def plot(nx_g, title, auto_open=False):
                 x=[n['x'] for n in nodes],
                 y=[n['y'] for n in nodes],
                 mode='markers+text',
-                text=[n['n'] + '-' + n['type'] for n in nodes],
+                text=[f"{n['n']}-{n['type']}" for n in nodes],
                 textposition='bottom center',
                 marker=marker)
         ],

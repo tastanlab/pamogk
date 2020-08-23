@@ -102,7 +102,8 @@ def ensure_suffix(path, suffix='.npz'):
         return path
     raise TypeError('path must be either pathlib.Path or str')
 
-def save_np_data(path, data=None, **kwargs):
+
+def np_save_npz(path, data=None, **kwargs):
     if len(kwargs) == 0:
         if data is None:
             raise ValueError('Either data or kwargs must be given')
@@ -111,14 +112,25 @@ def save_np_data(path, data=None, **kwargs):
     np.savez_compressed(path, **kwargs)
 
 
-def load_np_data(path, key='data'):
-    path = ensure_suffix(path)
-    return np.load(path)[key]
+def np_load_data(path, key=None):
+    """
+    Loads numpy data from npz files
+    Parameters
+    ----------
+    path
+    key: str 'data'
+    If given loads data in that key, if None is given loads all of the data in npz
 
+    Returns
+    -------
 
-def np_data_exists(path):
-    path = ensure_suffix(path)
-    return Path(path).exists()
+    """
+    data = np.load(path)
+    if key is not None:
+        if key not in data:
+            log(f'Given key={key} is not in loaded data on path={path}')
+        return data[key]
+    return data
 
 
 def save_csv(path, rows):
@@ -127,8 +139,13 @@ def save_csv(path, rows):
         csvWriter.writerows(rows)
 
 
-def print_args(args):
-    arg_dict = vars(args)
+def print_args(args, ignore_keys=None):
+    if ignore_keys is None:
+        ignore_keys = ['self']
+    arg_dict = args
+    if type(args) is argparse.Namespace:
+        arg_dict = vars(args)
+    arg_dict = dict((k, v) for k, v in arg_dict.items() if k not in ignore_keys)
     m = max(len(k) for k in arg_dict.keys())
     log('Running args:')
     for k, v in arg_dict.items():

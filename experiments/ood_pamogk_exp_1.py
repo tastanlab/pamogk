@@ -181,7 +181,7 @@ class Experiment1(object):
         return lmkkmeans_train(kernels)
 
     def save_results(self, **kwargs):
-        save_np_data(self.exp_result_dir / f'pamogk-exp-1-run={args.rid}', **kwargs)
+        np_save_npz(self.exp_result_dir / f'pamogk-exp-1-run={args.rid}', **kwargs)
 
 
 def main(*nargs):

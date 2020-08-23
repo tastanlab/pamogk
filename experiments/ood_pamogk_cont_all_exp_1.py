@@ -334,11 +334,11 @@ class Experiment1(object):
                 gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
                 log(f'Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
                 label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways('oe-' + self.label, pid, all_pw_map, 'oe', self.threshold)
+                label_mapper.mark_extra_label_on_pathways(f'oe-{self.label}', pid, all_pw_map, 'oe', self.threshold)
 
                 log(f'Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
                 label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways('ue-' + self.label, pid, all_pw_map, 'ue', self.threshold)
+                label_mapper.mark_extra_label_on_pathways(f'ue-{self.label}', pid, all_pw_map, 'ue', self.threshold)
             else:
                 log(f'Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
                 gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
@@ -386,7 +386,7 @@ class Experiment1(object):
         num_pat = pat_ids.shape[0]
         num_pw = len(all_pw_map)
         kms_path = self.exp_data_dir / f'{kms_file_name}-{self.label}.npz'
-        if kms_path.exists(): return np.load(kms_path)['kms']
+        if kms_path.exists(): return np_load_data(kms_path, key='kms')
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
@@ -414,7 +414,7 @@ class Experiment1(object):
         num_pat = len(patients)
         num_pw = len(all_pw_map)
         kms_path = self.exp_data_dir / 'som-kms.npz'
-        if kms_path.exists(): return np.load(kms_path)['kms']
+        if kms_path.exists(): return np_load_data(kms_path, key='kms')
         # calculate kernel matrices for over expressed genes
         kms = np.zeros((num_pw, num_pat, num_pat))
         pat_ids = np.array([pat['pat_id'] for pat in patients])

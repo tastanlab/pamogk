@@ -154,12 +154,7 @@ def draw_hist_for_kernels(kernels, threshold, hist_type, out_file):
     plt.savefig(out_file)
 
 
-# Function that returns kernels from npz file.
-def get_npz_kernels(kms_path):
-    return np.load(kms_path)['kms']
-
-
-def process_infile(figure_type, process_type, in_file, extra):
+def process_kernel_file(figure_type, process_type, in_file, extra):
     """
     Helper function to return the output_file name and kernels given that figure_type, process_type,
      kernel_file_loc and extra parameter if needed.
@@ -182,34 +177,34 @@ def process_infile(figure_type, process_type, in_file, extra):
     elif figure_type == 'heatmaps':
         out_file = out_folder / kernel_type
     ensure_file_dir(out_file)
-    kernels = get_npz_kernels(in_file)
+    kernels = np_load_data(in_file, key='kms')
     return out_file, kernels
 
 
 # Rest is just helper functions to draw all figures in just one function.
 def histogram_var(in_file):
-    out_file, kernels = process_infile('histograms', 'variance', in_file, 0)
+    out_file, kernels = process_kernel_file('histograms', 'variance', in_file, 0)
     draw_hist_for_kernels(kernels, 0, 'variance', out_file)
 
 
 def histogram_count(in_file, threshold):
-    out_file, kernels = process_infile('histograms', 'count', in_file, threshold)
+    out_file, kernels = process_kernel_file('histograms', 'count', in_file, threshold)
     draw_hist_for_kernels(kernels, threshold, 'count', out_file)
 
 
 def histogram_freq(in_file, threshold):
-    out_file, kernels = process_infile('histograms', 'frequency', in_file, threshold)
+    out_file, kernels = process_kernel_file('histograms', 'frequency', in_file, threshold)
     draw_hist_for_kernels(kernels, threshold, 'frequency', out_file)
 
 
 def histogram_special(in_file, bin_no):
-    out_folder, kernels = process_infile('histograms', 'special1', in_file, bin_no)
+    out_folder, kernels = process_kernel_file('histograms', 'special1', in_file, bin_no)
     safe_create_dir(out_folder)
     draw_special1_hist_for_kernels(kernels, bin_no, out_folder)
 
 
 def heatmap_kernel(in_file):
-    out_folder, kernels = process_infile('heatmaps', '', in_file, 0)
+    out_folder, kernels = process_kernel_file('heatmaps', '', in_file, 0)
     safe_create_dir(out_folder)
     draw_heatmaps(kernels, out_folder)
 

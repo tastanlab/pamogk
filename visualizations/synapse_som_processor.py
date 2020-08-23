@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def draw_hist(pat_dict):
     count_mutated_genes = []
     for patient in pat_dict.keys():

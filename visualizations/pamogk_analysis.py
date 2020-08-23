@@ -74,7 +74,7 @@ class Experiment1(object):
                 patients[i]['status'] = clinical_data[patients[i]['pat_id']][0]
                 patients[i]['days'] = clinical_data[patients[i]['pat_id']][1]
             else:
-                print('Patient ' + str(patients[i]['pat_id']) + ' will be deleted')
+                print(f"Patient {patients[i]['pat_id']} will be deleted")
                 del_index.append(i)
 
         return np.delete(patients, del_index)
@@ -95,7 +95,7 @@ class Experiment1(object):
             indexes = [index for index in range(len(patients)) if labels[index] == i]
             pat_no.append(str(len(indexes)))
             kmf = KaplanMeierFitter()
-            kmf.fit(days[indexes], status[indexes], label='Cluster' + str(i))
+            kmf.fit(days[indexes], status[indexes], label=f'Cluster{i}')
             kmf.plot(ax=ax, color=colors[idx], ci_show=False, show_censors=True,
                      censor_styles={'ms': 4, 'mew': 0.2, 'marker': '|'})
 

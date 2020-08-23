@@ -20,6 +20,7 @@ from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 from sklearn.cluster import KMeans, SpectralClustering
 
 # see https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
+from pamogk.result_processor.label_analysis import LabelAnalysis
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--run-id', '-rid', metavar='run-id', dest='run_id', type=str, help='Unique Run ID')
@@ -134,10 +135,6 @@ class Experiment1(object):
                     patients[pat_id].add(ent_id)
 
         return collections.OrderedDict(sorted(patients.items()))
-
-    @staticmethod
-    def find_intersection_lists(list1, list2, list3):
-        return set(list1).intersection(list2, list3)
 
     @timeit
     def find_intersection_patients(self, rs_GE, rs_pat, rp_GE, rp_pat, som_pat):
@@ -348,11 +345,11 @@ class Experiment1(object):
                 gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
                 logr(f'RPPA Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
                 label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways('oe-' + self.label, pid, all_pw_map, 'oe', self.threshold)
+                label_mapper.mark_extra_label_on_pathways(f'oe-{self.label}', pid, all_pw_map, 'oe', self.threshold)
 
                 logr(f'RPPA Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
                 label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways('ue-' + self.label, pid, all_pw_map, 'ue', self.threshold)
+                label_mapper.mark_extra_label_on_pathways(f'ue-{self.label}', pid, all_pw_map, 'ue', self.threshold)
             else:
                 logr(f'RPPA Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
                 gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
@@ -402,7 +399,7 @@ class Experiment1(object):
         num_pat = pat_ids.shape[0]
         num_pw = len(all_pw_map)
         kms_path = self.kernel_dir / f'{kms_file_name}.npz'
-        if kms_path.exists(): return np.load(kms_path)['kms']
+        if kms_path.exists(): return np_load_data(kms_path, key='kms')
         # calculate kernel matrices for over expressed genes
         over_exp_kms = np.zeros((num_pw, num_pat, num_pat))
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):  # for each pathway
@@ -430,7 +427,7 @@ class Experiment1(object):
         num_pat = len(patients)
         num_pw = len(all_pw_map)
         kms_path = self.kernel_dir / 'som-kms.npz'
-        if kms_path.exists(): return np.load(kms_path)['kms']
+        if kms_path.exists(): return np_load_data(kms_path, key='kms')
         # calculate kernel matrices for over expressed genes
         kms = np.zeros((num_pw, num_pat, num_pat))
         pat_ids = np.array([pat['pat_id'] for pat in patients])
@@ -460,11 +457,11 @@ class Experiment1(object):
         # KMeans
         labels = self.kmeans_cluster(W, n_clusters)
 
-        save_np_data(self.result_dir / f'pamogk-snf-kmeans-k={n_clusters}', labels=labels)
+        np_save_npz(self.result_dir / f'pamogk-snf-kmeans-k={n_clusters}', labels=labels)
 
         # Spectral
         labels = SpectralClustering(n_clusters, affinity='precomputed').fit_predict(W)
-        save_np_data(self.result_dir / f'pamogk-snf-spectral-k={n_clusters}', labels=labels)
+        np_save_npz(self.result_dir / f'pamogk-snf-spectral-k={n_clusters}', labels=labels)
 
         KH = mkkm_mr.lib.kernel_centralize(kernels)
         KH = mkkm_mr.lib.kernel_normalize(KH)
@@ -474,7 +471,7 @@ class Experiment1(object):
 
         H = mkkm_mr.lib.kernel_kmeans_iter(avgKer, n_clusters)
         labels = self.kmeans_cluster(H, n_clusters)
-        save_np_data(self.result_dir / f'pamogk-kmeans-k={n_clusters}.csv', labels=labels)
+        np_save_npz(self.result_dir / f'pamogk-kmeans-k={n_clusters}.csv', labels=labels)
 
         # AAAI - 16 - MKKM-MR
         M = mkkm_mr.lib.calM(KH)
@@ -485,7 +482,7 @@ class Experiment1(object):
             [H, weights, obj] = mkkm_mr.mkkm_mr(KH, M, n_clusters, lambda_)
             labels = self.kmeans_cluster(H, n_clusters)
             out_file = self.result_dir / f'pamogk-mkkm-k={n_clusters}-loglambda={lambda_log}'
-            save_np_data(out_file, labels=labels, weights=weights, obj=obj)
+            np_save_npz(out_file, labels=labels, weights=weights, obj=obj)
 
     def cluster_discrete(self, kernels, n_clusters):
         save_path = self.result_dir / f'labels_dropped={self.drop_percent}' / f'pamogk-all-lmkkmeans-k={n_clusters}'
@@ -496,7 +493,7 @@ class Experiment1(object):
 
         labels, weights = lmkkmeans_train(kernels, cluster_count=n_clusters, iteration_count=5)
         ensure_file_dir(save_path)
-        save_np_data(f'{save_path}-weights', labels=labels, weights=weights)
+        np_save_npz(f'{save_path}-weights', labels=labels, weights=weights)
         return labels, weights
 
     @timeit
@@ -549,9 +546,12 @@ class Experiment1(object):
 
         log(f'kernel_count={kernels.shape[0]} valid_kernel_count={valid_kernels.shape[0]}')
 
-        for k in [2, 3, 4, 5]:
+        cluster_sizes = [2, 3, 4, 5]
+        for k in cluster_sizes:
             log(f'Running clustering for k={k}')
             self.cluster(valid_kernels, k)
+
+        LabelAnalysis(self.data_dir, methods=['mkkm', 'kmeans'], cluster_sizes=cluster_sizes)
 
 
 def create_experiment(*nargs):
