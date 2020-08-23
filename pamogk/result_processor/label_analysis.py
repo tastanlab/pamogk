@@ -24,14 +24,14 @@ parser = argparse.ArgumentParser(description='Evaluate labels')
 parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data_path', type=str2path,
                     help='Clinical Data', default=default_clinical_data_path)
 parser.add_argument('--show-conf-int', '-ci', dest='show_ci', action='store_true', help='Show Confidence Intervals')
-parser.add_argument('--exp-data-dir', '-e', metavar='directory', dest='exp_data_dir', type=str2path,
+parser.add_argument('--results-dir', '-r', metavar='directory', dest='results_dir', type=str2path,
                     help='Experiment Data Dir', default=example_exp_path)
 
 args = None
 
 
 class LabelAnalysis(object):
-    def __init__(self, exp_data_dir, show_ci=False, clinical_data_path=default_clinical_data_path, methods=None,
+    def __init__(self, results_dir, show_ci=False, clinical_data_path=default_clinical_data_path, methods=None,
                  cluster_sizes=None, log2_lambdas=None):
         if log2_lambdas is None:
             log2_lambdas = list(range(-15, 16, 3))
@@ -41,10 +41,10 @@ class LabelAnalysis(object):
             methods = ['mkkm', 'kmeans']
         print_args(locals())
 
-        self.exp_data_dir = Path(exp_data_dir)
+        self.res_dir = Path(results_dir)
+        self.exp_data_dir = self.res_dir.parent
         self.show_ci = show_ci
-        self.res_dir = self.exp_data_dir / 'results'
-        self.fig_dir = self.exp_data_dir / 'figures'
+        self.fig_dir = self.res_dir / 'figures'
         self.exports_path = self.fig_dir / 'exports.json'
         self.log2_lambdas = log2_lambdas
         self.cluster_sizes = cluster_sizes
@@ -213,29 +213,29 @@ class LabelAnalysis(object):
         result_inds = log2_lmbds_str.copy()
 
         for method in self.methods:
-            result_inds.append(method)
+            if method != 'mkkm':
+                result_inds.append(method)
 
         result_df = pd.DataFrame(columns=self.cluster_sizes, index=result_inds)
 
         for method in self.methods:
             for label in self.cluster_sizes:
                 # compare dataframe
-                label_i = int(label)
-                comp_df = pd.DataFrame(columns=list(range(1, label_i + 1)), index=log2_lmbds_str)
+                comp_df = pd.DataFrame(columns=list(range(1, label+1)), index=log2_lmbds_str)
                 if method == 'mkkm':
                     for (log2_lmbd, log2_lmbd_str) in zip(self.log2_lambdas, log2_lmbds_str):
                         res, vs_res = self.process_label_file(f'pamogk-{method}-k={label}-log2_lambda={log2_lmbd}')
                         result_df.loc[log2_lmbd_str][label] = f'{res:.2e}'
                         comp_df.loc[log2_lmbd_str] = vs_res
 
-                    self.df_to_latex_table(comp_df, f'latex_table_1v_{label_i - 1}.tex')
-                    self.df_to_csv(comp_df, f'results_1v_{label_i - 1}')
+                    self.df_to_latex_table(comp_df, f'logrank-test-k={label}.tex')
+                    self.df_to_csv(comp_df, f'logrank-test-k={label}')
                 else:
                     res, vs_res = self.process_label_file(f'pamogk-{method}-k={label}')
                     result_df.loc[method][label] = f'{res:.2e}'
 
         self.df_to_latex_table(result_df, 'latex_table')
-        self.df_to_csv(result_df, 'results')
+        self.df_to_csv(result_df, 'multivariate-logrank-test')
         with open(self.exports_path, 'w') as f:
             json.dump(self.exported_files, f)
         log(f'Finished label analysis with exported files on path={self.exports_path}')

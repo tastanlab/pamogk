@@ -38,7 +38,7 @@ parser.add_argument('--label', '-m', metavar='label', dest='label', type=str, de
 # used values: [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 parser.add_argument('--smoothing-alpha', '-a', metavar='alpha', dest='smoothing_alpha', type=float, default=0.01,
                     help='Smoothing alpha in range of 0-1')
-parser.add_argument('--drop-percent', '-p', metavar='drop-percent', dest='drop_percent', type=float, default=1,
+parser.add_argument('--drop-percent', '-p', metavar='drop-percent', dest='drop_percent', type=int, default=1,
                     help='Drop percentage in range of 0-100')
 parser.add_argument('--threshold', '-t', metavar='threshold', dest='threshold', type=float, default=1.96,
                     help='Cut off threshold')
@@ -554,7 +554,7 @@ class Experiment1(object):
             log(f'Running clustering for k={k}')
             self.cluster(valid_kernels, k)
 
-        self.label_analyzer = LabelAnalysis(exp_data_dir=self.data_dir, methods=['mkkm', 'kmeans'],
+        self.label_analyzer = LabelAnalysis(results_dir=self.result_dir, methods=['mkkm', 'kmeans'],
                                             cluster_sizes=cluster_sizes, log2_lambdas=self.log2_lambdas)
         self.label_analyzer.run()
 
