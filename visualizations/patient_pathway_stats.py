@@ -11,7 +11,7 @@ from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Runs stats visualizations')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path, help='pathway ID list',
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str2path, help='pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')
 parser.add_argument('--node2vec-p', '-p', metavar='p', dest='p', type=float, help='Node2Vec p value', default=1)

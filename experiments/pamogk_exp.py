@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import collections
-# import sys
-# sys.path.insert(0, '/Users/fma/dev/bilkent/research/snf')
-# sys.path.insert(0, '/Users/fma/dev/bilkent/research/mkkm-mr')
 
-from snf_simple import SNF
 import mkkm_mr
 import networkx as nx
+from sklearn.cluster import KMeans, SpectralClustering
+from snf_simple import SNF
+
 from pamogk import config
 from pamogk import label_mapper
 from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
@@ -17,19 +16,21 @@ from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
 from pamogk.kernels.pamogk import kernel
 from pamogk.lib.sutils import *
 from pamogk.pathway_reader import cx_pathway_reader as cx_pw
-from sklearn.cluster import KMeans, SpectralClustering
-
 # see https://www.mathworks.com/help/matlab/matlab_external/install-the-matlab-engine-for-python.html
 from pamogk.result_processor.label_analysis import LabelAnalysis
 
+# import sys
+# sys.path.insert(0, '/Users/fma/dev/bilkent/research/snf')
+# sys.path.insert(0, '/Users/fma/dev/bilkent/research/mkkm-mr')
+
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--run-id', '-rid', metavar='run-id', dest='run_id', type=str, help='Unique Run ID')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str2path,
                     help='rnaseq pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str2path,
                     help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str2path,
                     help='som mut pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--label', '-m', metavar='label', dest='label', type=str, default='th196',
@@ -62,6 +63,7 @@ class Experiment1(object):
         self.kernel_normalization = args.kernel_normalization
         self.drop_percent = args.drop_percent
         self.threshold = args.threshold
+        self.log2_lambdas = list(range(-15, 16, 3))
 
         # these are kernel related params
 
@@ -75,6 +77,8 @@ class Experiment1(object):
         self.data_dir = config.DATA_DIR / 'pamogk_kirc' / exp_subdir / param_dir
         self.result_dir = self.data_dir / ('results' + run_suffix)
         self.kernel_dir = self.data_dir / 'kernels'
+
+        self.label_analyzer = None
 
         # this will create with all roots
         safe_create_dir(self.result_dir)
@@ -475,13 +479,12 @@ class Experiment1(object):
 
         # AAAI - 16 - MKKM-MR
         M = mkkm_mr.lib.calM(KH)
-        lambdas_log = list(range(-15, 16, 3))
-        lambdas = np.power(2., lambdas_log)
-        for lambda_log, lambda_ in zip(lambdas_log, lambdas):
-            log(f'running for n_clusters={n_clusters} lambda_log={lambda_log}')
+        lambdas = np.power(2., self.log2_lambdas)
+        for log2_lambda, lambda_ in zip(self.log2_lambdas, lambdas):
+            log(f'running for n_clusters={n_clusters} log2_lambda={log2_lambda}')
             [H, weights, obj] = mkkm_mr.mkkm_mr(KH, M, n_clusters, lambda_)
             labels = self.kmeans_cluster(H, n_clusters)
-            out_file = self.result_dir / f'pamogk-mkkm-k={n_clusters}-loglambda={lambda_log}'
+            out_file = self.result_dir / f'pamogk-mkkm-k={n_clusters}-log2_lambda={log2_lambda}'
             np_save_npz(out_file, labels=labels, weights=weights, obj=obj)
 
     def cluster_discrete(self, kernels, n_clusters):
@@ -551,7 +554,9 @@ class Experiment1(object):
             log(f'Running clustering for k={k}')
             self.cluster(valid_kernels, k)
 
-        LabelAnalysis(self.data_dir, methods=['mkkm', 'kmeans'], cluster_sizes=cluster_sizes)
+        self.label_analyzer = LabelAnalysis(exp_data_dir=self.data_dir, methods=['mkkm', 'kmeans'],
+                                            cluster_sizes=cluster_sizes, log2_lambdas=self.log2_lambdas)
+        self.label_analyzer.run()
 
 
 def create_experiment(*nargs):

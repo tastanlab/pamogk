@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import argparse
 
 from pamogk import config
 from pamogk.data_processor import rnaseq_processor as rp
@@ -8,7 +7,7 @@ from pamogk.gene_mapper import uniprot_mapper
 from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run rMKL-LLP')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str2path,
                     help='Patient data file (if relative searched under data folder)',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--run-id', '-r', metavar='run-id', dest='rid', type=str, help='Run ID', default=None)

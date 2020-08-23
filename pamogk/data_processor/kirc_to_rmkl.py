@@ -10,7 +10,7 @@ from ..lib.sutils import ensure_file_dir
 KIRC_DATA_DIR = config.DATA_DIR / 'kirc_data'
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=Path, help='Somatic Data',
+parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=str2path, help='Somatic Data',
                     default=KIRC_DATA_DIR / 'kirc_somatic_mutation_data.csv')
 
 

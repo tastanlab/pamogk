@@ -11,4 +11,4 @@ __all__ = [
     'pathway_reader',
 ]
 
-__version__ = '1.0.0'
+__version__ = '2.0.0'

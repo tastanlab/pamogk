@@ -15,7 +15,7 @@ from pamogk.lib.sutils import *
 from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str2path,
                     help='Patient data file (if relative searched under data folder)',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
 parser.add_argument('--disable-cache', '-c', dest='cache', action='store_false', help='disables intermediate caches')

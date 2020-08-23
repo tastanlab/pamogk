@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import argparse
 import collections
 import math
 
@@ -13,13 +12,13 @@ from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
 from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str2path,
                     help='RNAseq Patient data file (relative to data dir, otherwise use absolute path)',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str2path,
                     help='RPPA Patient data file (relative to data dir, otherwise use absolute path)',
                     default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str2path,
                     help='Somatic Patient data file (relative to data dir, otherwise use absolute path)',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 

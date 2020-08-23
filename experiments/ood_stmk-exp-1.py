@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import argparse
 import json
 
 from pamogk import config
@@ -8,11 +7,11 @@ from pamogk.data_processor import node2vec_processor
 from pamogk.gene_mapper import uniprot_mapper
 from pamogk.kernels import center_product_kernel
 from pamogk.kernels import lmkkmeans_train
-from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 from pamogk.lib.sutils import *
+from pamogk.pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path,
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str2path,
                     help='Patient data file (if relative searched under data folder)',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 parser.add_argument('--debug', action='store_true', dest='debug', help='Enable Debug Mode')

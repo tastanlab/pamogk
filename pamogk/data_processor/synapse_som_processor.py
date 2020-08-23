@@ -23,7 +23,7 @@ from ..lib.sutils import ensure_file_dir
 # CancerTypes = ['BLCA','BRCA','COAD','GBM','HNSC','KIRC','LAML','LUAD','LUSC','OV','READ','UCEC']
 CANCER_TYPES = ['BLCA', 'COAD', 'GBM', 'HNSC', 'LAML', 'LUAD', 'LUSC', 'OV', 'READ', 'UCEC']
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=Path, help='Somatic Data',
+parser.add_argument('--somatic-data', '-r', metavar='file-path', dest='somatic_data', type=str2path, help='Somatic Data',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 
 args = parser.parse_args()

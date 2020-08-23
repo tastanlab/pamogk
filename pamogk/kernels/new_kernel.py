@@ -9,7 +9,7 @@ from ..lib.sutils import *
 from ..pathway_reader import cx_pathway_reader as cx_pw
 
 parser = argparse.ArgumentParser(description='Run SPK algorithms on pathways')
-parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=Path, help='pathway ID list',
+parser.add_argument('--patient-data', '-f', metavar='file-path', dest='patient_data', type=str2path, help='pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 
 args = parser.parse_args()

@@ -12,11 +12,11 @@ from pamogk.data_processor import rnaseq_processor as rp
 from pamogk.lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK algorithms on pathways')
-parser.add_argument('--rnaSeq-data', '-r', metavar='file-path', dest='rnaseq_data', type=Path, help='RnaSeq Data',
+parser.add_argument('--rnaSeq-data', '-r', metavar='file-path', dest='rnaseq_data', type=str2path, help='RnaSeq Data',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=Path, help='Clinical Data',
+parser.add_argument('--clinical-data', '-c', metavar='file-path', dest='clinical_data', type=str2path, help='Clinical Data',
                     default=config.DATA_DIR / 'kirc_data/kirc_clinical_data.csv')
-parser.add_argument('--label-data', '-l', metavar='file-path', dest='label_data', type=Path, help='Label Data',
+parser.add_argument('--label-data', '-l', metavar='file-path', dest='label_data', type=str2path, help='Label Data',
                     default=config.ROOT_DIR / 'experiments/label_data/pamogk-2lab-5it-lmkkmeans.txt')
 
 args = parser.parse_args()

@@ -11,12 +11,12 @@ from ..gene_mapper import uniprot_mapper
 from ..lib.sutils import *
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=Path,
+parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str2path,
                     help='rnaseq pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=Path,
+parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str2path,
                     help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data/kirc_rppa_data')
-parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=Path,
+parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str2path,
                     help='som mut pathway ID list',
                     default=config.DATA_DIR / 'kirc_data/kirc_somatic_mutation_data.csv')
 args = parser.parse_args()

@@ -185,3 +185,20 @@ def str2bool(v):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
+def str2path(v):
+    """
+    Just a wrapper for
+    Parameters
+    ----------
+    v
+
+    Returns
+    -------
+
+    """
+    try:
+        return Path(v)
+    except TypeError:
+        raise argparse.ArgumentTypeError('Invalid path provided')
