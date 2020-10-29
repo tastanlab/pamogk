@@ -202,3 +202,17 @@ def str2path(v):
         return Path(v)
     except TypeError:
         raise argparse.ArgumentTypeError('Invalid path provided')
+
+
+def add_to_map_set(s, k, v):
+    if k not in s:
+        s[k] = {v}
+    else:
+        s[k].add(v)
+
+
+def add_to_map_list(s, k, v):
+    if k not in s:
+        s[k] = [v]
+    else:
+        s[k].append(v)
