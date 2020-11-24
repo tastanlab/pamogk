@@ -619,6 +619,14 @@ class Experiment1(object):
         return labels, weights
 
     @timeit
+    def cluster_multiple(self, kernels, cluster_sizes):
+        if type(cluster_sizes) != list:
+            raise TypeError('Cluster sizes must be a list')
+        for k in cluster_sizes:
+            log(f'Running clustering for k={k}')
+            self.cluster(kernels, k)
+
+    @timeit
     def cluster(self, kernels, n_clusters):
         if self.args.continuous:
             return self.cluster_cont(kernels, n_clusters)
@@ -648,9 +656,7 @@ class Experiment1(object):
         log(f'kernel_count={kernels.shape[0]} valid_kernel_count={valid_kernels.shape[0]}')
 
         cluster_sizes = [2, 3, 4, 5]
-        for k in cluster_sizes:
-            log(f'Running clustering for k={k}')
-            self.cluster(valid_kernels, k)
+        self.cluster_multiple(kernels, cluster_sizes)
 
         self.label_analyzer = LabelAnalysis(results_dir=self.result_dir, methods=['mkkm', 'kmeans'],
                                             cluster_sizes=cluster_sizes, log2_lambdas=self.log2_lambdas)

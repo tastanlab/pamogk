@@ -1,7 +1,19 @@
 PAMOGK
 =====
+# Usage
+pamogk is released as a python dependency on [PyPI](https://pypi.org/project/pamogk/)
 
-# Installation
+If you will use the framework to construct your own experiments you can install it as a python dependency depending on your environment:
+
+```bash
+pip install pamogk # global package
+pipenv add pamogk # pipenv
+poetry add pamogk # poetry
+```
+
+You can check out the experiments folder for how to construct your own pipeline. `ood_` prefix refers to _out of date_ experiments, you can use them for reference but they might be broken.
+
+# Development Setup
 
 ## Getting the Code Base
 You can either checkout the code base through git:
@@ -15,11 +27,11 @@ or you can download the master branch from:
 Project mainly uses python, but some of the plot generation codes use matlab or output html files (plotly.js). Also some
  libraries might be dependent on operating system. In our tests we used Debian 12.04LTS and macOS Catalina.
 
-First install `pipenv` using the instructions given:
+First install `poetry` using the instructions given:
 
-> https://github.com/pypa/pipenv#installation
+> https://python-poetry.org/docs/#installation
 
-We are using [pipenv](https://github.com/pypa/pipenv#installation) because of version locking and predictive builds.
+We are using [poetry](https://python-poetry.org/docs/) because of version locking, predictive builds, and its speed vs [pipenv](https://github.com/pypa/pipenv#installation).
 
 ## Setting up MOSEK
 We are using [MOSEK Optimizer API](https://docs.mosek.com/9.1/pythonapi/index.html) for optimizing view weights, and in
@@ -46,14 +58,16 @@ For more information:
 ## Dependencies
 Install dependencies with:
 ```bash
-pipenv install
+poetry install
 ```
 
 ## Required Environment Variables
-You can add a `.env` file that will be loaded by `pipenv`
+You should add project root to the python path with (where `PROJECT_PATH` is the absolute path of the project):
+```bash
+export PYTHONPATH="${PYTHONPATH}:${PROJECT_PATH}"
+```
 
-Also please don't forget to export `MOSEKLM_LICENSE_FILE` variable as well if you are using a path other
-than `$HOME/mosek/mosek.lic`:
+Also please don't forget to export `MOSEKLM_LICENSE_FILE` variable as well if you are using a path other than `$HOME/mosek/mosek.lic`:
 
 ```bash
 # required for experiment running
@@ -77,14 +91,14 @@ MOSEKLM_LICENSE_FILE=$MY_MOSEK_LICENSE_FILE_PATH
 
 # Experiments
 ## Running Experiments
-You should run experiments either by starting a pipenv environment shell by:
+You should run experiments either by starting a virtual environment shell by:
 ```bash
-pipenv shell
+poetry shell
 ```
 
-or through pipenv with:
+or through poetry with:
 ```bash
-pipenv run experiments/pamogk_all_exp_1.py
+poetry run python experiments/pamogk_all_exp_1.py
 ```
 This ensures that experiments are run with correct environment.
 
