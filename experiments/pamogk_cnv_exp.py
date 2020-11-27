@@ -35,8 +35,8 @@ parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_p
                     help='som mut gene ID list',
                     default=config.DATA_DIR / 'kirc_data' / 'kirc_somatic_mutation_data.csv')
 parser.add_argument('--cnv-patient-data', metavar='file-path', dest='cnv_patient_data', type=str2path,
-                    help='CNV matrix',
-                    default=config.DATA_DIR / 'copy-number-variation' / 'KIRC.focal_score_by_genes-tcga_entrez.csv')
+                    help='CNV data with uniprot mappings',
+                    default=config.DATA_DIR / 'copy-number-variation' / 'KIRC.focal_score_by_genes-tcga_uniprot.csv')
 parser.add_argument('--label', '-m', metavar='label', dest='label', type=str, default='th196',
                     help='Label value that will be smoothed')
 # used values: [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
@@ -171,6 +171,7 @@ class Experiment1(object):
                     else:
                         patients[pat_id]['gain'].append(ent_id)
 
+        # self.preprocess_cnv_patient_data(patients)
         return collections.OrderedDict(sorted(patients.items()))
 
     @timeit
@@ -238,16 +239,13 @@ class Experiment1(object):
         return res
 
     @timeit
-    def preprocess_cnv_patient_data(self, patients, is_pos=True):
+    def preprocess_cnv_patient_data(self, patients):
         # get the dictionary of gene id mappers
         uni2ent, ent2uni = uniprot_mapper.json_to_dict()
 
-        res = []
-        for pat_id, patient in patients.items():
+        for patient in patients.values():
             for cnv_type, ent_ids in patient.items():
                 patient[cnv_type] = [uid for eid in ent_ids if eid in ent2uni for uid in ent2uni[eid]]
-
-        return res
 
     @timeit
     def read_pathways(self):

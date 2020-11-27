@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import collections
-import pdb
 
 import mkkm_mr
 import networkx as nx
@@ -11,7 +10,6 @@ from snf_simple import SNF
 
 from pamogk import config
 from pamogk import label_mapper
-from pamogk.data_processor import rnaseq_processor as rp, synapse_rppa_processor as rpp
 from pamogk.gene_mapper import uniprot_mapper
 from pamogk.kernels.lmkkmeans_train import lmkkmeans_train
 from pamogk.kernels.pamogk import kernel
@@ -26,17 +24,12 @@ from pamogk.result_processor.label_analysis import LabelAnalysis
 
 parser = argparse.ArgumentParser(description='Run PAMOGK-mut algorithms on pathways')
 parser.add_argument('--run-id', '-rid', metavar='run-id', dest='run_id', type=str, help='Unique Run ID')
-parser.add_argument('--rs-patient-data', '-rs', metavar='file-path', dest='rnaseq_patient_data', type=str2path,
-                    help='rnaseq pathway ID list',
-                    default=config.DATA_DIR / 'kirc_data' / 'unc.edu_KIRC_IlluminaHiSeq_RNASeqV2.geneExp.whitelist_tumor.txt')
-parser.add_argument('--rp-patient-data', '-rp', metavar='file-path', dest='rppa_patient_data', type=str2path,
-                    help='rppa pathway ID list', default=config.DATA_DIR / 'kirc_data' / 'kirc_rppa_data')
 parser.add_argument('--som-patient-data', '-s', metavar='file-path', dest='som_patient_data', type=str2path,
                     help='som mut gene ID list',
                     default=config.DATA_DIR / 'kirc_data' / 'kirc_somatic_mutation_data.csv')
 parser.add_argument('--cnv-patient-data', metavar='file-path', dest='cnv_patient_data', type=str2path,
-                    help='CNV matrix',
-                    default=config.DATA_DIR / 'copy-number-variation' / 'KIRC.focal_score_by_genes-tcga_entrez.csv')
+                    help='CNV data with uniprot gene ids already mapped',
+                    default=config.DATA_DIR / 'copy-number-variation' / 'KIRC.focal_score_by_genes-tcga_uniprot.csv')
 parser.add_argument('--label', '-m', metavar='label', dest='label', type=str, default='th196',
                     help='Label value that will be smoothed')
 # used values: [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
@@ -91,38 +84,10 @@ class Experiment1(object):
         change_log_path(self.data_dir / 'run.log')
         log('exp_data_dir:', self.data_dir)
 
-        self.get_rnaseq_pw_path = lambda \
-                pw_id: self.kernel_dir / f'rnaseq-over-under-expressed-pw_id={pw_id}.gpickle'
-        self.get_rppa_pw_path = lambda \
-                pw_id: self.kernel_dir / f'rppa-over-under-expressed-pw_id={pw_id}.gpickle'
         self.get_som_pw_path = lambda \
                 pw_id: self.kernel_dir / f'pamogk-som-expressed-pw_id={pw_id}.gpickle'
         self.get_cnv_pw_path = lambda \
                 pw_id, cnv_type: self.kernel_dir / f'pamogk-cnv-{cnv_type}-pw_id={pw_id}.gpickle'
-
-    @timeit
-    def read_rnaseq_data(self):
-        # Real Data #
-        # process RNA-seq expression data
-
-        gene_exp, gene_name_map = rp.process(self.args.rnaseq_patient_data, self.args.continuous, self.args.threshold)
-
-        # convert entrez gene id to uniprot id
-        pat_ids = gene_exp.columns.values  # patient TCGA ids
-        ent_ids = gene_exp.index.values  # gene entrez ids
-        return gene_exp.values, pat_ids, ent_ids
-
-    @timeit
-    def read_rppa_data(self):
-        # Real Data #
-        # process RNA-seq expression data
-
-        gene_exp = rpp.process(self.args.rppa_patient_data, self.args.continuous, self.args.threshold)
-
-        # convert entrez gene id to uniprot id
-        pat_ids = gene_exp.columns.values  # patient TCGA ids
-        ent_ids = gene_exp.index.values  # gene entrez ids
-        return gene_exp.values, pat_ids, ent_ids
 
     @timeit
     def read_som_data(self):
@@ -171,6 +136,9 @@ class Experiment1(object):
                     else:
                         patients[pat_id]['gain'].append(ent_id)
 
+        # map gene ids to uniprot
+        self.preprocess_cnv_patient_data(patients)
+        # return as key ordered dict
         return collections.OrderedDict(sorted(patients.items()))
 
     @timeit
@@ -205,22 +173,6 @@ class Experiment1(object):
         return rs_GE, rs_pat, rp_GE, rp_pat, som_pat, cnv_pat
 
     @timeit
-    def preprocess_seq_patient_data(self, GE, all_ent_ids):
-        # get the dictionary of gene id mappers
-        uni2ent, ent2uni = uniprot_mapper.json_to_dict()
-
-        found_ent_ids = [eid in ent2uni for eid in all_ent_ids]
-        ent_ids = np.array([eid for eid in all_ent_ids if eid in ent2uni])
-        uni_ids = np.array([ent2uni[eid] for eid in ent_ids], dtype=object)
-
-        log('uni_ids:', len(uni_ids))
-        log('miss_ent_ids:', len(all_ent_ids) - sum(found_ent_ids))
-
-        # prune genes whose uniprot id is not found
-        GE = GE[found_ent_ids]
-        return GE, uni_ids
-
-    @timeit
     def preprocess_som_patient_data(self, patients):
         # get the dictionary of gene id mappers
         uni2ent, ent2uni = uniprot_mapper.json_to_dict()
@@ -238,55 +190,24 @@ class Experiment1(object):
         return res
 
     @timeit
-    def preprocess_cnv_patient_data(self, patients, is_pos=True):
+    def preprocess_cnv_patient_data(self, patients):
         # get the dictionary of gene id mappers
         uni2ent, ent2uni = uniprot_mapper.json_to_dict()
 
-        res = []
-        for pat_id, patient in patients.items():
+        for patient in patients.values():
             for cnv_type, ent_ids in patient.items():
                 patient[cnv_type] = [uid for eid in ent_ids if eid in ent2uni for uid in ent2uni[eid]]
-
-        return res
 
     @timeit
     def read_pathways(self):
         # get all pathways
         return cx_pw.read_pathways()
 
-    def rnaseq_pathways_save_valid(self, all_pw_map):
-        return np.all([self.get_rnaseq_pw_path(pw_id).exists() for pw_id in all_pw_map])
-
-    def rppa_pathways_save_valid(self, all_pw_map):
-        return np.all([self.get_rppa_pw_path(pw_id).exists() for pw_id in all_pw_map])
-
     def som_pathways_save_valid(self, all_pw_map):
         return np.all([self.get_som_pw_path(pw_id).exists() for pw_id in all_pw_map])
 
     def cnv_pathways_save_valid(self, all_pw_map, cnv_type):
         return np.all([self.get_cnv_pw_path(pw_id, cnv_type).exists() for pw_id in all_pw_map])
-
-    @timeit
-    def restore_rnaseq_pathways(self, all_pw_map):
-        num_pw = len(all_pw_map)
-        res_pw_map = collections.OrderedDict()
-        for ind, pw_id in enumerate(all_pw_map.keys()):
-            path = self.get_rnaseq_pw_path(pw_id)
-            logr(f'Loading over/under rnaseq expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
-            res_pw_map[pw_id] = nx.read_gpickle(path)
-        log()
-        return res_pw_map
-
-    @timeit
-    def restore_rppa_pathways(self, all_pw_map):
-        num_pw = len(all_pw_map)
-        res_pw_map = collections.OrderedDict()
-        for ind, pw_id in enumerate(all_pw_map.keys()):
-            path = self.get_rppa_pw_path(pw_id)
-            logr(f'Loading over/under rppa expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
-            res_pw_map[pw_id] = nx.read_gpickle(path)
-        log()
-        return res_pw_map
 
     @timeit
     def restore_som_pathways(self, all_pw_map):
@@ -311,24 +232,6 @@ class Experiment1(object):
         return res_pw_map
 
     @timeit
-    def save_rnaseq_pathways(self, all_pw_map):
-        num_pw = len(all_pw_map)
-        for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
-            path = self.get_rnaseq_pw_path(pw_id)
-            logr(f'Saving over/under rnaseq expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
-            nx.write_gpickle(pw, path)
-        log()
-
-    @timeit
-    def save_rppa_pathways(self, all_pw_map):
-        num_pw = len(all_pw_map)
-        for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
-            path = self.get_rppa_pw_path(pw_id)
-            logr(f'Saving over/under rppa expressed data {ind + 1:3}/{num_pw} pw_id={pw_id}')
-            nx.write_gpickle(pw, path)
-        log()
-
-    @timeit
     def save_som_pathways(self, all_pw_map):
         num_pw = len(all_pw_map)
         for ind, (pw_id, pw) in enumerate(all_pw_map.items()):
@@ -345,100 +248,6 @@ class Experiment1(object):
             logr(f'Saving cnv {cnv_type} data {ind + 1:3}/{num_pw} pw_id={pw_id}')
             nx.write_gpickle(pw, path)
         log()
-
-    @timeit
-    def label_rnaseq_patient_genes(self, all_pw_map, pat_ids, GE, uni_ids):
-        """Labels all patients with matching level of expression
-
-        Parameters
-        ----------
-        all_pw_map: :obj:`list` of :obj:`networkx.classes.graph.Graph`
-            a dictionary of all pathways we are using
-        pat_ids: :obj:`list` of :obj:`str`
-            list of patient ids
-        GE: :obj:`numpy.ndarray`
-            Gene expression data array in shape of genes by patients
-        uni_ids: :obj:`numpy.ndarray`
-            mapping from uniprot to gene
-        """
-        # check if we already stored all over/under expression pathway data if so restore them
-        if self.rnaseq_pathways_save_valid(all_pw_map):
-            return self.restore_rnaseq_pathways(all_pw_map)
-
-        num_pat = pat_ids.shape[0]
-        # if there are missing ones calculate all of them
-        log('RNAseq Over and under expressed patient pathway labeling')
-        for ind, pid in enumerate(pat_ids):
-            if self.args.continuous:
-                gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
-                logr(f'RNAseq Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-                label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways(f'oe-{self.label}', pid, all_pw_map, 'oe', self.threshold)
-
-                logr(f'RNAseq Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-                label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways(f'ue-{self.label}', pid, all_pw_map, 'ue', self.threshold)
-            else:
-                logr(f'RNAseq Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-                gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
-                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-                label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
-
-                logr(f'RNAseq Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-                gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
-                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-                label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
-        log()
-
-        self.save_rnaseq_pathways(all_pw_map)
-        return all_pw_map
-
-    @timeit
-    def label_rppa_patient_genes(self, all_pw_map, pat_ids, GE, uni_ids):
-        """Labels all patients with matching level of expression
-
-        Parameters
-        ----------
-        all_pw_map: :obj:`list` of :obj:`networkx.classes.graph.Graph`
-            a dictionary of all pathways we are using
-        pat_ids: :obj:`list` of :obj:`str`
-            list of patient ids
-        GE: :obj:`numpy.ndarray`
-            Gene expression data array in shape of genes by patients
-        uni_ids: :obj:`numpy.ndarray`
-            mapping from uniprot to gene
-        """
-        # check if we already stored all over/under expression pathway data if so restore them
-        if self.rppa_pathways_save_valid(all_pw_map):
-            return self.restore_rppa_pathways(all_pw_map)
-
-        num_pat = pat_ids.shape[0]
-        # if there are missing ones calculate all of them
-        log('RPPA Over and under expressed patient pathway labeling')
-        for ind, pid in enumerate(pat_ids):
-            if self.args.continuous:
-                gene_vals = (GE[..., pat_ids == pid]).flatten()  # over expressed genes
-                logr(f'RPPA Checking patient for over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-                label_mapper.mark_cont_label_on_pathways('oe', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways(f'oe-{self.label}', pid, all_pw_map, 'oe', self.threshold)
-
-                logr(f'RPPA Checking patient for under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-                label_mapper.mark_cont_label_on_pathways('ue', pid, all_pw_map, uni_ids, gene_vals)
-                label_mapper.mark_extra_label_on_pathways(f'ue-{self.label}', pid, all_pw_map, 'ue', self.threshold)
-            else:
-                logr(f'RPPA Checking patient for rppa over-expressed  {ind + 1:4}/{num_pat} pid={pid}')
-                gene_ind = (GE[..., pat_ids == pid] == 1).flatten()  # over expressed genes
-                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-                label_mapper.mark_label_on_pathways('oe', pid, all_pw_map, genes, self.label)
-
-                logr(f'RPPA Checking patient for rppa under-expressed {ind + 1:4}/{num_pat} pid={pid}')
-                gene_ind = (GE[..., pat_ids == pid] == -1).flatten()  # under expressed genes
-                genes = uni_ids[gene_ind]  # get uniprot gene ids from indices
-                label_mapper.mark_label_on_pathways('ue', pid, all_pw_map, genes, self.label)
-        log()
-
-        self.save_rppa_pathways(all_pw_map)
-        return all_pw_map
 
     def label_som_patient_genes(self, all_pw_map, patients):
         """Labels all patients with matching level of expression
