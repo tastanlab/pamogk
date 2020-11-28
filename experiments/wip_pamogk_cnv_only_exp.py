@@ -142,23 +142,13 @@ class Experiment1(object):
         return collections.OrderedDict(sorted(patients.items()))
 
     @timeit
-    def find_intersection_patients(self, rs_GE, rs_pat, rp_GE, rp_pat, som_pat, cnv_pat):
-        rs_pat_list = simplify_pat_ids(rs_pat)
-        rp_pat_list = simplify_pat_ids(rp_pat)
+    def find_intersection_patients(self, som_pat, cnv_pat):
         som_pat_list = simplify_pat_ids(som_pat.keys())
         cnv_pat_list = simplify_pat_ids(cnv_pat.keys())
 
-        intersection_list = list(set(rs_pat_list).intersection(rp_pat_list, som_pat_list, cnv_pat_list))
+        intersection_list = list(set(som_pat_list).intersection(cnv_pat_list))
         intersection_list.sort()
         save_csv(self.data_dir / 'patients.csv', [[pid] for pid in intersection_list])
-
-        def clean_patient_list_and_ge_data(patients, ge, intersect):
-            pat_list = simplify_pat_ids(patients)
-            to_del = [idx for idx, value in enumerate(pat_list) if value not in intersect]
-            return np.delete(patients, to_del), np.delete(ge, to_del, axis=1)
-
-        rs_pat, rs_GE = clean_patient_list_and_ge_data(rs_pat, rs_GE, intersection_list)
-        rp_pat, rp_GE = clean_patient_list_and_ge_data(rp_pat, rp_GE, intersection_list)
 
         def clean_mapping(s, intersect):
             ns = {}
@@ -170,7 +160,7 @@ class Experiment1(object):
         som_pat = clean_mapping(som_pat, intersection_list)
         cnv_pat = clean_mapping(cnv_pat, intersection_list)
 
-        return rs_GE, rs_pat, rp_GE, rp_pat, som_pat, cnv_pat
+        return som_pat, cnv_pat
 
     @timeit
     def preprocess_som_patient_data(self, patients):
@@ -444,8 +434,17 @@ class Experiment1(object):
 
     @timeit
     def run(self):
+        # Somatic mutation data
+        som_patients = self.read_som_data()
+
         # Copy Number Variation Data
         cnv_patients = self.read_cnv_data()
+
+        # Find intersect
+        # we don't really use somatic data but return it in case we add it, intersect generated patient.csv that
+        # is used by label mapper
+        intersect = self.find_intersection_patients(som_patients, cnv_patients)
+        som_patients, cnv_patients = intersect
 
         # CNV loss/gain Data
         all_cnv_pw_map = self.read_pathways()
