@@ -33,6 +33,29 @@ First install `poetry` using the instructions given:
 
 We are using [poetry](https://python-poetry.org/docs/) because of version locking, predictive builds, and its speed vs [pipenv](https://github.com/pypa/pipenv#installation).
 
+# Matlab Engine for legacy experiments
+
+You can install matlab engine for project poetry environment using the following command (for python 3.8 matlab MUST be 2020b or later):
+
+```bash
+# example for MacOS and Matlab 2020b
+CD $PAMOGK_ROOT_DIR # where your project root is
+poetry shell
+poetry install
+/Applications/MATLAB_R2020b.app/bin/matlab -nodisplay -nosplash -nodesktop -r "cd (fullfile(matlabroot,'extern','engines','python'));system('python setup.py install');exit"
+```
+
+You should change matlab executable path depending on your installation but running matlab from command line ensures that
+the `matlab.engine` package is installed in correct python environment. Otherwise you might install it to global python environment which will not be detected by poetry environment.
+
+If you see a version parsing error from poetry you can edit the matlab engine version in the file found with following command:
+
+```bash
+ls $(poetry env info -p)/lib/python3.8/site-packages/matlabengineforpython-*.egg-info
+```
+
+You can prepend `1.0.0.` to the version that should be of format `R2020b`
+
 ## Setting up MOSEK
 We are using [MOSEK Optimizer API](https://docs.mosek.com/9.1/pythonapi/index.html) for optimizing view weights, and in
 order to use MOSEK you will need a license file. MOSEK provides free certificates for academic purposes and free trial

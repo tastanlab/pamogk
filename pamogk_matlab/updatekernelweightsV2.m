@@ -19,6 +19,8 @@ beq = 1;
 lb  = zeros(nbkernel,1);
 ub =  ones(nbkernel,1);
 
+%options = optimset('Display', 'off');
+%[gamma,obj]= quadprog(H,f,A,b,Aeq,beq,lb,ub,[], 'quadprog', options);
 [gamma,obj]= quadprog(H,f,A,b,Aeq,beq,lb,ub);
 gamma(gamma<1e-6)=0;
 gamma = gamma/sum(gamma);

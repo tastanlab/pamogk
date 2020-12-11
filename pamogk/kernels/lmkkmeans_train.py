@@ -1,11 +1,11 @@
-from .. import config
 import heapq
-import mosek
 import sys
 
+import mosek
 import numpy as np
-import numpy.matlib as npML
 from sklearn.cluster import KMeans
+
+from .. import config
 
 
 def lmkkmeans_train(Km, iteration_count=2, cluster_count=10):

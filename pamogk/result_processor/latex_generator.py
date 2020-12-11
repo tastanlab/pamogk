@@ -8,12 +8,17 @@ def pandas_to_latex_table(df, row_name, col_name, file_path):
 
     # col setup
     table_str_full += '\\begin{tabular}{|p{2cm}|' + 'p{2cm}|' * col_size + '}\n\\hline\n'
-    table_str_full += f'\\textbf{{${row_name}$/${col_name}$}}' + ' & \\textbf{0}' * len(col_headers) + ' \\\\ \\hline\n'
+    table_str_full += f'\\textbf{{${row_name}$/${col_name}$}}' + ''.join([f' & \\textbf{{{c}}}' for c in col_headers]) + ' \\\\ \\hline\n'
 
     # rows
-    for row_header in row_headers:
-        table_str_row_value = ' & '.join(str(df[col_header][row_header]) for col_header in col_headers)
-        table_str_full += '\\textbf{0} & ' + table_str_row_value + ' \\\\ \\hline \n'
+    for rh in row_headers:
+        table_str_row_value = ' & '.join(str(df[col_header][rh]) for col_header in col_headers)
+        table_str_rh = rh
+        try:
+            table_str_rh = f'{pow(2, int(rh)):.2e}'
+        except:
+            pass
+        table_str_full += '\\textbf{' + table_str_rh + '} & ' + table_str_row_value + ' \\\\ \\hline \n'
 
     # end
     table_str_full += '\\end{tabular}\n\\caption{}\n\\label{tab:}\n\\end{table}\n'
